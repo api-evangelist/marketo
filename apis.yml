@@ -14,7 +14,7 @@ apis:
   - name: Marketo REST API
     description: >-
       Marketo exposes a REST API which allows for remote execution of many of
-      the system’s capabilities.  From creating programs to bulk lead import,
+      the system's capabilities.  From creating programs to bulk lead import,
       there are a large number of options which allow fine-grained control of a
       Marketo instance.
     image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
