@@ -35,7 +35,6 @@ apis:
           https://developers.marketo.com/rest-api/marketo-integration-best-practices/
       - type: Performance
         url: https://developers.marketo.com/performance/
-    overlays: []
     aid: marketo:marketo-rest-api
 common:
   - type: Portal
