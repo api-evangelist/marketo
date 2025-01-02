@@ -1,5 +1,4 @@
 # Marketo (marketo)
-
 Marketo develops and sells marketing automation software for account-based
 marketing and other marketing services and products, including SEO and content
 creation.
@@ -20,32 +19,12 @@ creation.
 
 ## APIs
 
-### Marketo REST API
+### Marketo Engage Rest API
+Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
 
-Marketo exposes a REST API which allows for remote execution of many of
-the system's capabilities.  From creating programs to bulk lead import,
-there are a large number of options which allow fine-grained control of a
-Marketo instance.
-
-**Human URL:** [https://developers.marketo.com/rest-api/](https://developers.marketo.com/rest-api/)
-
-**Base URL:** [https://api.example.com](https://api.example.com)
+**Human URL:** [https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api](https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api)
 
 
-#### Tags:
-
- - No Tags
-
-#### Properties
-
-- [Documentation](https://developers.marketo.com/rest-api/)
-- [Swagger](
-https://developers.marketo.com/rest-api/endpoint-reference/download-swagger-definition/)
-- [Authentication](https://developers.marketo.com/rest-api/authentication/)
-- [Errors](https://developers.marketo.com/rest-api/error-codes/)
-- [Best Practices](
-https://developers.marketo.com/rest-api/marketo-integration-best-practices/)
-- [Performance](https://developers.marketo.com/performance/)
 
 ## Common Properties
 
