@@ -1,7 +1,10 @@
 openapi: 3.0.1
 info:
   title: Marketo Engage Rest API
-  description: Marketo Engage Rest API
+  description: >-
+    Marketo exposes a REST API which allows for remote execution of many of the
+    systems capabilities. From creating programs to bulk lead import, there are
+    many options which allow fine-grained control of a Marketo instance.
   termsOfService: https://www.adobe.com/legal.html
   contact:
     name: Adobe Developer Relations
@@ -59,6 +62,9 @@ paths:
   /rest/asset/v1/channel/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Channel
         - Channels
       summary: Get Channel by Name
       description: >-
@@ -82,6 +88,8 @@ paths:
   /rest/asset/v1/channels.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Channels
       summary: Get Channels
       description: >-
@@ -111,6 +119,9 @@ paths:
   /rest/asset/v1/email/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Get Email by Name
       description: >-
@@ -149,6 +160,9 @@ paths:
   /rest/asset/v1/email/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Get Email By Id
       description: >-
@@ -180,6 +194,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Update Email Metadata
       description: >-
@@ -212,6 +229,10 @@ paths:
   /rest/asset/v1/email/{id}/approveDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Approve
         - Emails
       summary: Approve Email Draft
       description: >-
@@ -236,6 +257,9 @@ paths:
   /rest/asset/v1/email/{id}/clone.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Clone Email
       description: 'Clones the target email. Required Permissions: Read-Write Assets'
@@ -266,6 +290,9 @@ paths:
   /rest/asset/v1/email/{id}/content.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Get Email Content
       description: >-
@@ -297,6 +324,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailContentResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Update Email Content
       description: 'Updates the content of an email. Required Permissions: Read-Write Assets'
@@ -327,6 +357,10 @@ paths:
   /rest/asset/v1/email/{id}/content/rearrange.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
         - Emails
       summary: Rearrange Email Modules
       description: >-
@@ -361,6 +395,11 @@ paths:
   /rest/asset/v1/email/{id}/content/{htmlId}.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
+        - .Json
         - Emails
       summary: Update Email Content Section
       description: >-
@@ -399,6 +438,11 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/add.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
+        - Modules
         - Emails
       summary: Add Email Module
       description: >-
@@ -444,6 +488,11 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
+        - Modules
         - Emails
       summary: Delete Module
       description: >-
@@ -474,6 +523,11 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
+        - Modules
         - Emails
       summary: Duplicate Email Module
       description: >-
@@ -510,6 +564,11 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/rename.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Content
+        - Modules
         - Emails
       summary: Rename Email Module
       description: 'Renames a module. Required Permissions: Read-Write Assets'
@@ -544,6 +603,9 @@ paths:
   /rest/asset/v1/email/{id}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Delete Email
       description: 'Deletes the target email. Required Permissions: Read-Write Assets'
@@ -566,6 +628,10 @@ paths:
   /rest/asset/v1/email/{id}/discardDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Discard
         - Emails
       summary: Discard Email Draft
       description: >-
@@ -590,6 +656,11 @@ paths:
   /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Dynamic
+        - Content
         - Emails
       summary: Get Email Dynamic Content
       description: >-
@@ -627,6 +698,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailDynamicContentResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Dynamic
+        - Content
         - Emails
       summary: Update Email Dynamic Content Section
       description: >-
@@ -665,6 +741,10 @@ paths:
   /rest/asset/v1/email/{id}/sendSample.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Send
         - Emails
       summary: Send Sample Email
       description: >-
@@ -698,6 +778,9 @@ paths:
   /rest/asset/v1/email/{id}/unapprove.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Unapprove Email
       description: >-
@@ -722,6 +805,11 @@ paths:
   /rest/asset/v1/email/{id}/variable/{name}.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Variable
+        - Name
         - Emails
       summary: Update Email Variable
       description: >-
@@ -760,6 +848,9 @@ paths:
   /rest/asset/v1/email/{id}/variables.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
         - Emails
       summary: Get Email Variables
       description: >-
@@ -784,6 +875,10 @@ paths:
   /rest/asset/v1/email/ccFields.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Cc
         - Emails
       summary: Get Email CC Fields
       description: >-
@@ -800,7 +895,11 @@ paths:
   /rest/asset/v1/emailTemplate/byName.json:
     get:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Get Email Template by Name
       description: >-
         Retrieves and email template record by the given name. Required
@@ -831,7 +930,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}.json:
     get:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Get Email Template by Id
       description: >-
         Returns an email template record by its id. Required Permissions:
@@ -862,7 +965,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Update Email Template Metadata
       description: >-
         Updates the metadata for the designated email template. Required
@@ -894,7 +1001,12 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/approveDraft.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Approve
+        - Email  Templates
       summary: Approve Email Template Draft
       description: >-
         Approves the current draft of the email template. Required Permissions:
@@ -918,7 +1030,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/clone.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Clone Email Template
       description: >-
         Clones the designated email template. Required Permissions: Read-Write
@@ -950,7 +1066,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/content:
     get:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Content
       summary: Get Email Template Content by Id
       description: >-
         Returns the content for a given email template. Required Permissions:
@@ -982,7 +1102,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/content.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Update Email Template Content
       description: >-
         Updates the content of the given email template. Required Permissions:
@@ -1014,7 +1138,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/delete.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Delete Email Template
       description: >-
         Deletes the designated email template. Required Permissions: Read-Write
@@ -1038,7 +1166,12 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/discardDraft.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Discard
+        - Email  Templates
       summary: Discard Email Template Draft
       description: >-
         Discards the current draft of the email template. Required Permissions:
@@ -1062,7 +1195,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/unapprove.json:
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Template
+        - Email  Templates
       summary: Unapprove Email Template Draft
       description: >-
         Unapproves the current approved version of the Email Template. Required
@@ -1086,7 +1223,10 @@ paths:
   /rest/asset/v1/emailTemplates.json:
     get:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Email  Templates
       summary: Get Email Templates
       description: >-
         Returns a list of email template records accessible in the target
@@ -1122,7 +1262,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
     post:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Email  Templates
       summary: Create Email Template
       description: 'Creates a new email template. Required Permissions: Read-Write Assets'
       operationId: createEmailTemplateUsingPOST
@@ -1144,7 +1287,12 @@ paths:
   /rest/asset/v1/emailTemplates/{id}/usedBy.json:
     get:
       tags:
-        - Email Templates
+        - Rest
+        - Assets
+        - Email
+        - Templates
+        - Used
+        - Email  Templates
       summary: Get Email Template Used By
       description: >-
         Returns a list of email records which depend on a given email template.
@@ -1180,6 +1328,8 @@ paths:
   /rest/asset/v1/emails.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Emails
       summary: Get Emails
       description: >-
@@ -1241,6 +1391,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailResponse'
     post:
       tags:
+        - Rest
+        - Assets
         - Emails
       summary: Create Email
       description: 'Creates a new email asset. Required Permissions: Read-Write Assets'
@@ -1263,6 +1415,10 @@ paths:
   /rest/asset/v1/email/{id}/fullContent.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Full
         - Emails
       summary: Get Email Full Content
       description: >-
@@ -1313,6 +1469,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfGetEmailFullContentResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Email
+        - Full
         - Emails
       summary: Update Email Full Content
       description: >-
@@ -1345,6 +1505,9 @@ paths:
   /rest/asset/v1/file/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - File
         - Files
       summary: Get File by Name
       description: >-
@@ -1368,6 +1531,9 @@ paths:
   /rest/asset/v1/file/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - File
         - Files
       summary: Get File by Id
       description: >-
@@ -1392,7 +1558,10 @@ paths:
   /rest/asset/v1/file/{id}/content.json:
     post:
       tags:
-        - File Contents
+        - Rest
+        - Assets
+        - File
+        - File  Contents
       summary: Update File Content
       description: >-
         Replaces the current content of the file with the included payload.
@@ -1424,6 +1593,8 @@ paths:
   /rest/asset/v1/files.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Files
       summary: Get Files
       description: >-
@@ -1459,6 +1630,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFileResponse'
     post:
       tags:
+        - Rest
+        - Assets
         - Files
       summary: Create File
       description: >-
@@ -1483,6 +1656,9 @@ paths:
   /rest/asset/v1/folder/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Folders
       summary: Get Folder by Name
       description: >-
@@ -1521,6 +1697,9 @@ paths:
   /rest/asset/v1/folder/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Folders
       summary: Get Folder by Id
       description: >-
@@ -1554,6 +1733,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFolderResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Folders
       summary: Update Folder Metadata
       description: >-
@@ -1586,6 +1768,9 @@ paths:
   /rest/asset/v1/folder/{id}/content.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Folders
       summary: Get Folder Contents
       description: >-
@@ -1631,6 +1816,9 @@ paths:
   /rest/asset/v1/folder/{id}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Folders
       summary: Delete Folder
       description: >-
@@ -1671,6 +1859,9 @@ paths:
   /rest/asset/v1/folder/{id}/tokens.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Tokens
       summary: Get Tokens by Folder Id
       description: >-
@@ -1703,6 +1894,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfTokenResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Tokens
       summary: Create Token
       description: >-
@@ -1735,6 +1929,9 @@ paths:
   /rest/asset/v1/folder/{id}/tokens/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Folder
         - Tokens
       summary: Delete Token by Name
       description: >-
@@ -1767,6 +1964,8 @@ paths:
   /rest/asset/v1/folders.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Folders
       summary: Get Folders
       description: >-
@@ -1811,6 +2010,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFolderResponse'
     post:
       tags:
+        - Rest
+        - Assets
         - Folders
       summary: Create Folder
       description: 'Creates a new folder. Required Permissions: Read-Write Assets'
@@ -1833,6 +2034,9 @@ paths:
   /rest/asset/v1/form/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Form
         - Forms
       summary: Get Form by Name
       description: >-
@@ -1871,7 +2075,10 @@ paths:
   /rest/asset/v1/form/fields.json:
     get:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Form  Fields
       summary: Get Available Form Fields
       description: >-
         Retrieves a list of all valid fields for use in forms. Required
@@ -1900,7 +2107,12 @@ paths:
   /rest/asset/v1/form/programMemberFields.json:
     get:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Program
+        - Member
+        - Form  Fields
       summary: Get Available Form Program Member Fields
       description: >-
         Retrieves a list of all valid Program Member fields for use in forms.
@@ -1929,7 +2141,13 @@ paths:
   /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Forms
+        - Field
+        - Fields
+        - Form  Fields
       summary: Add Form Field Visibility Rules
       description: >-
         Adds a visibility rule to the target form field. Required Permissions:
@@ -1967,6 +2185,9 @@ paths:
   /rest/asset/v1/form/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Form
         - Forms
       summary: Get Form By Id
       description: >-
@@ -1998,6 +2219,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
         - Forms
       summary: Update Form Metadata
       description: >-
@@ -2030,6 +2254,10 @@ paths:
   /rest/asset/v1/form/{id}/approveDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Approve
         - Forms
       summary: Approve Form Draft
       description: >-
@@ -2054,6 +2282,9 @@ paths:
   /rest/asset/v1/form/{id}/clone.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
         - Forms
       summary: Clone Form
       description: 'Clones the target form. Required Permissions: Read-Write Assets'
@@ -2084,6 +2315,9 @@ paths:
   /rest/asset/v1/form/{id}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
         - Forms
       summary: Delete Form
       description: >-
@@ -2109,6 +2343,10 @@ paths:
   /rest/asset/v1/form/{id}/discardDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Discard
         - Forms
       summary: Discard Form Draft
       description: >-
@@ -2133,7 +2371,12 @@ paths:
   /rest/asset/v1/form/{id}/field/{fieldId}.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Field
+        - Fields
+        - Form  Fields
       summary: Update Form Field
       description: >-
         Updates the configuration for that target field. Required Permissions:
@@ -2171,7 +2414,12 @@ paths:
   /rest/asset/v1/form/{id}/field/{fieldId}/delete.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Field
+        - Fields
+        - Form  Fields
       summary: Delete Form Field
       description: 'Deletes a field from a form. Required Permissions: Read-Write Assets'
       operationId: deleteFormFieldUsingPOST
@@ -2199,7 +2447,11 @@ paths:
   /rest/asset/v1/form/{id}/fieldSet.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Field
+        - Form  Fields
       summary: Add Fieldset to Form
       description: >-
         Adds a field set to the target form. Required Permissions: Read-Write
@@ -2231,7 +2483,13 @@ paths:
   /rest/asset/v1/form/{id}/fieldSet/{fieldSetId}/field/{fieldId}/delete.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Field
+        - Set
+        - Fields
+        - Form  Fields
       summary: Delete Field from Fieldset
       description: >-
         Removes the target field from the fieldset. Required Permissions:
@@ -2267,7 +2525,10 @@ paths:
   /rest/asset/v1/form/{id}/fields.json:
     get:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Form  Fields
       summary: Get Fields for Form
       description: >-
         Retrieves the list of fields in the target form. Required Permissions:
@@ -2298,7 +2559,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Form  Fields
       summary: Add Field to Form
       description: 'Adds a field to a form. Required Permissions: Read-Write Assets'
       operationId: addFieldToAFormUsingPOST
@@ -2328,7 +2592,10 @@ paths:
   /rest/asset/v1/form/{id}/reArrange.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Form  Fields
       summary: Update Field Positions
       description: >-
         Reorders the list of fields in a form. Required Permissions: Read-Write
@@ -2360,7 +2627,10 @@ paths:
   /rest/asset/v1/form/{id}/richText.json:
     post:
       tags:
-        - Form Fields
+        - Rest
+        - Assets
+        - Form
+        - Text.json
       summary: Add Rich Text Field
       description: >-
         Adds a rich-text type field to the form. Required Permissions:
@@ -2392,6 +2662,10 @@ paths:
   /rest/asset/v1/form/{id}/submitButton.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Submit
         - Forms
       summary: Update Submit Button
       description: >-
@@ -2424,6 +2698,10 @@ paths:
   /rest/asset/v1/form/{id}/thankYouPage.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Thank
         - Forms
       summary: Get Thank You Page by Form Id
       description: >-
@@ -2455,6 +2733,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfThankYouPageResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Thank
         - Forms
       summary: Update Thank You Page
       description: >-
@@ -2489,6 +2771,8 @@ paths:
   /rest/asset/v1/forms.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Forms
       summary: Get Forms
       description: >-
@@ -2531,6 +2815,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormResponse'
     post:
       tags:
+        - Rest
+        - Assets
         - Forms
       summary: Create Form
       description: 'Creates a new form. Required Permissions: Read-Write Assets'
@@ -2553,6 +2839,10 @@ paths:
   /rest/asset/v1/form/{id}/usedBy.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Form
+        - Used
         - Forms
       summary: Get Form Used By
       description: >-
@@ -2589,7 +2879,11 @@ paths:
   /rest/asset/v1/landingPage/byName.json:
     get:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Get Landing Page by Name
       description: >-
         Returns the landing page record for the given name. Required
@@ -2632,7 +2926,11 @@ paths:
   /rest/asset/v1/landingPage/{id}.json:
     get:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Get Landing Page by Id
       description: >-
         Returns the landing record for the given id. Required Permissions:
@@ -2663,7 +2961,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageResponse'
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Update Landing Page Metadata
       description: >-
         Updates the metadata for the targe landing page. Required Permissions:
@@ -2695,7 +2997,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/approveDraft.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Approve
+        - Landing  Pages
       summary: Approve Landing Page Draft
       description: >-
         Approves the current draft of the landing page. Required Permissions:
@@ -2719,7 +3026,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/clone.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Clone Landing Page
       description: 'Clones the target landing page. Required Permissions: Read-Write Assets'
       operationId: cloneLandingPageUsingPOST
@@ -2749,7 +3060,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/content.json:
     get:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Page  Content
       summary: Get Landing Page Content
       description: >-
         Retrieves the list of content sections in the target landing page.
@@ -2780,7 +3095,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageContentResponse'
     post:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Page  Content
       summary: Add Landing Page Content Section
       description: >-
         Adds a content section to the target landing page. Parameters must be
@@ -2813,7 +3132,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/content/{contentId}.json:
     post:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Content
+        - Landing  Page  Content
       summary: Update Landing Page Content Section
       description: >-
         Updates a content section the landing page. Parameters must be sent as
@@ -2852,7 +3176,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/content/{contentId}/delete.json:
     post:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Content
+        - Landing  Page  Content
       summary: Delete Landing Page Content Section
       description: >-
         Removes the target content section from the parent landing page.
@@ -2882,7 +3211,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/delete.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Delete Landing Page
       description: 'Deletes the target landing page. Required Permissions: Read-Write Assets'
       operationId: deleteLandingPageByIdUsingPOST
@@ -2904,7 +3237,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/discardDraft.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Discard
+        - Landing  Pages
       summary: Discard Landing Page Draft
       description: >-
         Discards the current draft of the landing page. Required Permissions:
@@ -2928,7 +3266,13 @@ paths:
   /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json:
     get:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Dynamic
+        - Content
+        - Landing  Page  Content
       summary: Get Landing Page Dynamic Content
       description: >-
         Retrieves the dynamic content from the target section. Required
@@ -2958,7 +3302,13 @@ paths:
                   #/components/schemas/ResponseOfLandingPageDynamicContentResponse
     post:
       tags:
-        - Landing Page Content
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Dynamic
+        - Content
+        - Landing  Page  Content
       summary: Update Landing Page Dynamic Content Section
       description: >-
         Updates the content of the target dynamic content section. Required
@@ -2996,7 +3346,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/unapprove.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Unapprove Landing Page
       description: >-
         Unapproves the landing page, reverting it to a draft-only state.
@@ -3020,7 +3374,13 @@ paths:
   /rest/asset/v1/landingPage/{id}/variable/{variableId}.json:
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Variable
+        - Variables
+        - Landing  Pages
       summary: Update Landing Page Variable
       description: >-
         Updates the value of the given variable. Required Permissions:
@@ -3057,7 +3417,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/variables.json:
     get:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Pages
       summary: Get Landing Page Variables
       operationId: getVariablesUsingGET
       parameters:
@@ -3086,7 +3450,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/byName.json:
     get:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Get Landing Page Template by Name
       description: >-
         Retrieves the landing page template record for the given name. Required
@@ -3109,7 +3478,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}.json:
     get:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Get Landing Page Template by Id
       description: >-
         Retrieves the record for the target landing page template. Required
@@ -3140,7 +3514,12 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Update Landing Page Template Metadata
       description: >-
         Updates the metadata for the target landing page template. Required
@@ -3172,7 +3551,13 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json:
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Approve
+        - Landing  Page  Templates
       summary: Approve Landing Page Template Draft
       description: >-
         Approves the current landing page template draft. This will delete the
@@ -3197,7 +3582,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/clone.json:
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Clone Landing Page Template
       description: >-
         Clones the target landing page template. Required Permissions:
@@ -3229,7 +3619,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/content.json:
     get:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Get Landing Page Template Content
       description: >-
         Retrieves the content of the target landing page. Required Permissions:
@@ -3260,7 +3655,12 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateGetContentResponse'
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Update Landing Page Template Content
       description: >-
         Updates the content for the target landing page template. This update is
@@ -3297,7 +3697,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/delete.json:
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Delete Landing Page Template
       description: >-
         Deletes the target landing page template. Required Permissions:
@@ -3321,7 +3726,13 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json:
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Discard
+        - Landing  Page  Templates
       summary: Discard Landing Page Template Draft
       description: >-
         Discrads the current draft of the landing page template. Required
@@ -3345,7 +3756,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/unapprove.json:
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Template
+        - Landing  Page  Templates
       summary: Unapprove Landing Page Template
       description: >-
         Unapproves the landing page template and reverts it to a draft-only
@@ -3369,7 +3785,11 @@ paths:
   /rest/asset/v1/landingPageTemplates.json:
     get:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Page  Templates
       summary: Get Landing Page Templates
       description: >-
         Retrieves the list of accessible landing page templates from the target
@@ -3412,7 +3832,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
     post:
       tags:
-        - Landing Page Templates
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Page  Templates
       summary: Create Landing Page Template
       description: >-
         Creates a new landing page template. Required Permissions: Read-Write
@@ -3436,7 +3860,10 @@ paths:
   /rest/asset/v1/landingPages.json:
     get:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Landing  Pages
       summary: Get Landing Pages
       description: >-
         Retrieves a list of accessible landing pages from the target instance.
@@ -3479,7 +3906,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageResponse'
     post:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Landing  Pages
       summary: Create Landing Page
       description: 'Creates a new landing page. Required Permissions: Read-Write Assets'
       operationId: createLandingPageUsingPOST
@@ -3501,7 +3931,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/fullContent.json:
     get:
       tags:
-        - Landing Pages
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Full
+        - Landing  Pages
       summary: Get Landing Page Full Content
       description: >-
         Returns the serialized HTML version of the landing page. Required
@@ -3543,7 +3978,10 @@ paths:
   /rest/asset/v1/redirectRules.json:
     get:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Redirect
+        - Landing  Page  Redirect  Rules
       summary: Get Landing Page Redirect Rules
       description: >-
         Retrieves a list of landing page redirect rules from the target
@@ -3602,7 +4040,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Redirect
+        - Landing  Page  Redirect  Rules
       summary: Create Landing Page Redirect Rule
       description: >-
         Create a new landing page redirect rule. Required Permissions: Read
@@ -3626,7 +4067,11 @@ paths:
   /rest/asset/v1/redirectRule/{id}.json:
     get:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Redirect
+        - Rules
+        - Landing  Page  Redirect  Rules
       summary: Get Landing Page Redirect Rule by Id
       description: >-
         Retrieves the landing page redirect rule record. Required Permissions:
@@ -3649,7 +4094,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Redirect
+        - Rules
+        - Landing  Page  Redirect  Rules
       summary: Update Landing Page Redirect Rule
       description: >-
         Update an existing landing page redirect rule. Required Permissions:
@@ -3681,7 +4130,11 @@ paths:
   /rest/asset/v1/redirectRule/{id}/delete.json:
     post:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Redirect
+        - Rules
+        - Landing  Page  Redirect  Rules
       summary: Delete Landing Page Redirect Rule
       description: >-
         Delete a landing page redirect rule. Required Permissions: Read Write
@@ -3705,7 +4158,11 @@ paths:
   /rest/asset/v1/landingPageDomains.json:
     get:
       tags:
-        - Landing Page Redirect Rules
+        - Rest
+        - Assets
+        - Landing
+        - Page
+        - Landing  Page  Redirect  Rules
       summary: Get Landing Page Domains
       description: >-
         Retrieves a list of landing page domain and domain aliases. Required
@@ -3736,6 +4193,9 @@ paths:
   /rest/asset/v1/program/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Get Program by Name
       description: >-
@@ -3769,6 +4229,9 @@ paths:
   /rest/asset/v1/program/byTag.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Get Programs by Tag
       description: >-
@@ -3810,6 +4273,9 @@ paths:
   /rest/asset/v1/program/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Get Program by Id
       description: >-
@@ -3833,6 +4299,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfProgramResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Update Program Metadata
       description: >-
@@ -3865,6 +4334,9 @@ paths:
   /rest/asset/v1/program/{programId}/smartList.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Get Smart List by Program Id
       description: >-
@@ -3894,6 +4366,9 @@ paths:
   /rest/asset/v1/program/{id}/approve.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Approve Program
       description: >-
@@ -3918,6 +4393,9 @@ paths:
   /rest/asset/v1/program/{id}/clone.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Clone Program
       description: 'Clones the target program. Required Permissions: Read-Write Assets'
@@ -3948,6 +4426,9 @@ paths:
   /rest/asset/v1/program/{id}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Delete Program
       description: >-
@@ -3972,6 +4453,9 @@ paths:
   /rest/asset/v1/program/{id}/unapprove.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Program
         - Programs
       summary: Unapprove Program
       description: >-
@@ -3996,6 +4480,8 @@ paths:
   /rest/asset/v1/programs.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Programs
       summary: Get Programs
       description: >-
@@ -4052,6 +4538,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfBrowseAllPrograms'
     post:
       tags:
+        - Rest
+        - Assets
         - Programs
       summary: Create Program
       description: 'Creates a new program. Required Permissions: Read-Write Assets'
@@ -4074,6 +4562,8 @@ paths:
   /rest/asset/v1/segmentation.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Segments
       summary: Get Segmentations
       description: >-
@@ -4099,6 +4589,9 @@ paths:
   /rest/asset/v1/segmentation/{id}/segments.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Segments.json
         - Segments
       summary: Get Segments For Segmentation
       description: >-
@@ -4143,7 +4636,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}.json:
     get:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Get Smart Campaign by Id
       description: >-
         Returns the smart campaign for the given id. Required Permissions:
@@ -4166,7 +4663,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Update Smart Campaign
       description: >-
         Update the smart campaign for the given id. Required Permissions:
@@ -4198,7 +4699,11 @@ paths:
   /rest/asset/v1/smartCampaign/byName.json:
     get:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Get Smart Campaign by Name
       description: >-
         Returns the smart campaign for the given name. Required Permissions:
@@ -4221,7 +4726,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/smartList.json:
     get:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Get Smart List by Smart Campaign Id
       description: >-
         Retrieves a Smart List record by its Smart Campaign id. Required
@@ -4250,7 +4759,10 @@ paths:
   /rest/asset/v1/smartCampaigns.json:
     get:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Smart  Campaigns
       summary: Get Smart Campaigns
       description: >-
         Retrieves all smart campaigns. Required Permissions: Read-Only Assets,
@@ -4308,7 +4820,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Smart  Campaigns
       summary: Create Smart Campaign
       description: 'Creates a new smart campaign. Required Permissions: Read-Write Assets'
       operationId: createSmartCampaignUsingPOST
@@ -4330,7 +4845,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/activate.json:
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Activate Smart Campaign
       description: >-
         Activates a trigger smart campaign. Required Permissions: Activate
@@ -4354,7 +4873,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/deactivate.json:
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Deactivate Smart Campaign
       description: >-
         Deactivates a trigger smart campaign. Required Permissions: Deactivate
@@ -4378,7 +4901,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/clone.json:
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Clone Smart Campaign
       description: 'Clones a smart campaign. Required Permissions: Read-Write Assets'
       operationId: cloneSmartCampaignUsingPOST
@@ -4408,7 +4935,11 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/delete.json:
     post:
       tags:
-        - Smart Campaigns
+        - Rest
+        - Assets
+        - Smart
+        - Campaigns
+        - Smart  Campaigns
       summary: Delete Smart Campaign
       description: 'Deletes a smart campaign. Required Permissions: Read-Write Assets'
       operationId: deleteSmartCampaignUsingPOST
@@ -4430,6 +4961,9 @@ paths:
   /rest/asset/v1/snippet/{id}.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - .Json
         - Snippets
       summary: Get Snippet by Id
       description: >-
@@ -4461,6 +4995,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - .Json
         - Snippets
       summary: Update Snippet Metadata
       description: >-
@@ -4493,6 +5030,9 @@ paths:
   /rest/asset/v1/snippet/{id}/approveDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Approve
         - Snippets
       summary: Approve Snippet Draft
       description: >-
@@ -4517,6 +5057,9 @@ paths:
   /rest/asset/v1/snippet/{id}/clone.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Clone.json
         - Snippets
       summary: Clone Snippet
       description: 'Clones the target snippet. Required Permissions: Read-Write Assets'
@@ -4547,6 +5090,9 @@ paths:
   /rest/asset/v1/snippet/{id}/content.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Content.json
         - Snippets
       summary: Get Snippet Content
       description: >-
@@ -4578,6 +5124,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetContentResponse'
     post:
       tags:
+        - Rest
+        - Assets
+        - Content.json
         - Snippets
       summary: Update Snippet Content
       description: >-
@@ -4618,6 +5167,9 @@ paths:
   /rest/asset/v1/snippet/{id}/delete.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Delete.json
         - Snippets
       summary: Delete Snippet
       description: >-
@@ -4642,6 +5194,9 @@ paths:
   /rest/asset/v1/snippet/{id}/discardDraft.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Discard
         - Snippets
       summary: Discard Snippet Draft
       description: >-
@@ -4666,6 +5221,9 @@ paths:
   /rest/asset/v1/snippet/{id}/dynamicContent.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Dynamic
         - Snippets
       summary: Get Dynamic Content
       description: >-
@@ -4698,6 +5256,11 @@ paths:
   /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Dynamic
+        - Content
+        - Segments
         - Snippets
       summary: Update Snippet Dynamic Content
       description: >-
@@ -4737,6 +5300,9 @@ paths:
   /rest/asset/v1/snippet/{id}/unapprove.json:
     post:
       tags:
+        - Rest
+        - Assets
+        - Unapprove.json
         - Snippets
       summary: Unapprove Snippet
       description: >-
@@ -4762,6 +5328,8 @@ paths:
   /rest/asset/v1/snippets.json:
     get:
       tags:
+        - Rest
+        - Assets
         - Snippets
       summary: Get Snippets
       description: >-
@@ -4798,6 +5366,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetResponse'
     post:
       tags:
+        - Rest
+        - Assets
         - Snippets
       summary: Create Snippet
       description: 'Creates a new snippet. Required Permissions: Read-Write Assets'
@@ -4820,6 +5390,10 @@ paths:
   /rest/asset/v1/tagType/byName.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Tag
+        - Type
         - Tags
       summary: Get Tag By Name
       description: >-
@@ -4844,7 +5418,11 @@ paths:
   /rest/asset/v1/smartList/{id}.json:
     get:
       tags:
-        - Smart Lists
+        - Rest
+        - Assets
+        - Smart
+        - Id
+        - Smart  Lists
       summary: Get Smart List by Id
       description: >-
         Retrieves a Smart List record by its id. Required Permissions:
@@ -4873,7 +5451,10 @@ paths:
   /rest/asset/v1/smartList/byName.json:
     get:
       tags:
-        - Smart Lists
+        - Rest
+        - Assets
+        - Smart
+        - Name.json
       summary: Get Smart List by Name
       description: >-
         Retrieves a Smart List record by its name. Required Permissions:
@@ -4896,7 +5477,11 @@ paths:
   /rest/asset/v1/smartList/{id}/delete.json:
     post:
       tags:
-        - Smart Lists
+        - Rest
+        - Assets
+        - Smart
+        - Id
+        - Smart  Lists
       summary: Delete Smart List
       description: >-
         Deletes the designated Smart List. Required Permissions: Read-Write
@@ -4920,7 +5505,10 @@ paths:
   /rest/asset/v1/smartLists.json:
     get:
       tags:
-        - Smart Lists
+        - Rest
+        - Assets
+        - Smart
+        - Smart  Lists
       summary: Get Smart Lists
       description: >-
         Retrieves a list of user created Smart List records. Required
@@ -4974,7 +5562,11 @@ paths:
   /rest/asset/v1/smartList/{id}/clone.json:
     post:
       tags:
-        - Smart Lists
+        - Rest
+        - Assets
+        - Smart
+        - Id
+        - Smart  Lists
       summary: Clone Smart List
       description: 'Clones the designated Smart List. Required Permissions: Read-Write Asset'
       operationId: cloneSmartListUsingPOST
@@ -5004,7 +5596,11 @@ paths:
   /rest/asset/v1/staticList/{id}.json:
     get:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Id
+        - Static  Lists
       summary: Get Static List by Id
       description: >-
         Retrieves a Static List record by its id. Required Permissions:
@@ -5027,7 +5623,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Id
+        - Static  Lists
       summary: Update Static List Metadata
       description: >-
         Updates the metadata of a static list asset. Required Permissions:
@@ -5059,7 +5659,10 @@ paths:
   /rest/asset/v1/staticLists.json:
     get:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Static  Lists
       summary: Get Static Lists
       description: >-
         Retrieves a list of Static List records. Required Permissions:
@@ -5112,7 +5715,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Static  Lists
       summary: Create Static List
       description: 'Creates a new Static List. Required Permissions: Read-Write Assets'
       operationId: createStaticListUsingPOST
@@ -5134,7 +5740,10 @@ paths:
   /rest/asset/v1/staticList/byName.json:
     get:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Name.json
       summary: Get Static List by Name
       description: >-
         Retrieves a Static List record by its name. Required Permissions:
@@ -5157,7 +5766,11 @@ paths:
   /rest/asset/v1/staticList/{id}/delete.json:
     post:
       tags:
-        - Static Lists
+        - Rest
+        - Assets
+        - Static
+        - Id
+        - Static  Lists
       summary: Delete Static List
       description: >-
         Deletes the designated Static List. Required Permissions: Read-Write
@@ -5181,6 +5794,9 @@ paths:
   /rest/asset/v1/tagTypes.json:
     get:
       tags:
+        - Rest
+        - Assets
+        - Tag
         - Tags
       summary: Get Tag Types
       description: >-
