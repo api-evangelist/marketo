@@ -17,79 +17,76 @@ apis:
       there are many options which allow fine-grained control of a Marketo
       instance.
     tags:
-      - Rest
+      - .Json
+      - Approve
       - Assets
+      - Campaigns
+      - Cc
       - Channel
       - Channels
-      - Email
-      - Emails
-      - Approve
-      - Content
-      - .Json
-      - Modules
-      - Discard
-      - Dynamic
-      - Send
-      - Variable
-      - Name
-      - Cc
-      - Template
-      - Email  Templates
-      - Templates
-      - Used
-      - Full
-      - File
-      - Files
-      - File  Contents
-      - Folder
-      - Folders
-      - Tokens
-      - Form
-      - Forms
-      - Form  Fields
-      - Program
-      - Member
-      - Field
-      - Fields
-      - Set
-      - Text.json
-      - Submit
-      - Thank
-      - Landing
-      - Page
-      - Landing  Pages
-      - Landing  Page  Content
-      - Variables
-      - Landing  Page  Templates
-      - Redirect
-      - Landing  Page  Redirect  Rules
-      - Rules
-      - Programs
-      - Segments
-      - Segments.json
-      - Smart
-      - Campaigns
-      - Smart  Campaigns
-      - Snippets
       - Clone.json
+      - Content
       - Content.json
       - Delete.json
-      - Unapprove.json
-      - Tag
-      - Type
-      - Tags
+      - Discard
+      - Dynamic
+      - Email
+      - Email  Templates
+      - Emails
+      - Field
+      - Fields
+      - File
+      - File  Contents
+      - Files
+      - Folder
+      - Folders
+      - Form
+      - Form  Fields
+      - Forms
+      - Full
       - Id
-      - Smart  Lists
+      - Landing
+      - Landing  Page  Content
+      - Landing  Page  Redirect  Rules
+      - Landing  Page  Templates
+      - Landing  Pages
+      - Member
+      - Modules
+      - Name
       - Name.json
+      - Page
+      - Program
+      - Programs
+      - Redirect
+      - Rest
+      - Rules
+      - Segments
+      - Segments.json
+      - Send
+      - Set
+      - Smart
+      - Smart  Campaigns
+      - Smart  Lists
+      - Snippets
       - Static
       - Static  Lists
+      - Submit
+      - Template
+      - Templates
+      - Text.json
+      - Thank
+      - Tokens
+      - Type
+      - Unapprove.json
+      - Used
+      - Variable
+      - Variables
 name: Marketo
 tags:
-  - Marketing
   - Automation
+  - Marketing
   - Marketing Automation
-image: 
-  https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 common:
   - url: https://developers.marketo.com/
     type: Portal

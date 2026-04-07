@@ -18,54 +18,87 @@ info:
 servers:
   - url: https://localhost:8080/
 tags:
+  - name: .Json
+  - name: Approve
+  - name: Assets
+  - name: Campaigns
+  - name: Cc
+  - name: Channel
   - name: Channels
     description: Channel Controller
-  - name: Email Templates
-    description: Email Template Controller
+  - name: Clone.json
+  - name: Content
+  - name: Content.json
+  - name: Delete.json
+  - name: Discard
+  - name: Dynamic
+  - name: Email
+  - name: Email  Templates
   - name: Emails
     description: Email Controller
-  - name: File Contents
-    description: File Content Controller
+  - name: Field
+  - name: Fields
+  - name: File
+  - name: File  Contents
   - name: Files
     description: File Controller
+  - name: Folder
   - name: Folders
     description: Folder Controller
-  - name: Form Fields
-    description: Form Field Controller
+  - name: Form
+  - name: Form  Fields
   - name: Forms
     description: Form Controller
-  - name: Landing Page Content
-    description: Landing Page Content Controller
-  - name: Landing Pages
-    description: Landing Page Controller
-  - name: Landing Page Redirect Rules
-    description: Landing Page Redirect Rule Controller
-  - name: Landing Page Templates
-    description: Landing Page Templates
+  - name: Full
+  - name: Id
+  - name: Landing
+  - name: Landing  Page  Content
+  - name: Landing  Page  Redirect  Rules
+  - name: Landing  Page  Templates
+  - name: Landing  Pages
+  - name: Member
+  - name: Modules
+  - name: Name
+  - name: Name.json
+  - name: Page
+  - name: Program
   - name: Programs
     description: Program Controller
+  - name: Redirect
+  - name: Rest
+  - name: Rules
   - name: Segments
     description: Segment Controller
-  - name: Smart Campaigns
-    description: Smart Campaign Controller
-  - name: Smart Lists
-    description: Smart List Controller
+  - name: Segments.json
+  - name: Send
+  - name: Set
+  - name: Smart
+  - name: Smart  Campaigns
+  - name: Smart  Lists
   - name: Snippets
     description: Snippet Controller
-  - name: Static Lists
-    description: Static List Controller
-  - name: Tags
-    description: Tag Controller
+  - name: Static
+  - name: Static  Lists
+  - name: Submit
+  - name: Template
+  - name: Templates
+  - name: Text.json
+  - name: Thank
   - name: Tokens
     description: Token Controller
+  - name: Type
+  - name: Unapprove.json
+  - name: Used
+  - name: Variable
+  - name: Variables
 paths:
   /rest/asset/v1/channel/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Channel
         - Channels
+        - Rest
       summary: Marketo Get Channel by Name
       description: >-
         Retrieves channels based on the provided name. Required Permissions:
@@ -88,9 +121,9 @@ paths:
   /rest/asset/v1/channels.json:
     get:
       tags:
-        - Rest
         - Assets
         - Channels
+        - Rest
       summary: Marketo Get Channels
       description: >-
         Retrieves all channels. Required Permissions: Read-Only Assets,
@@ -119,10 +152,10 @@ paths:
   /rest/asset/v1/email/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Get Email by Name
       description: >-
         Returns an email records based on the given name. Required Permissions:
@@ -160,10 +193,10 @@ paths:
   /rest/asset/v1/email/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Get Email By Id
       description: >-
         Returns an email records by its id. Required Permissions: Read-Only
@@ -194,10 +227,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Update Email Metadata
       description: >-
         Updates the metadata of an email asset. Required Permissions: Read-Write
@@ -229,11 +262,11 @@ paths:
   /rest/asset/v1/email/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
+        - Approve
         - Assets
         - Email
-        - Approve
         - Emails
+        - Rest
       summary: Marketo Approve Email Draft
       description: >-
         Approves the current draft of an email. Required Permissions: Approve
@@ -257,10 +290,10 @@ paths:
   /rest/asset/v1/email/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Clone Email
       description: 'Clones the target email. Required Permissions: Read-Write Assets'
       operationId: cloneEmailUsingPOST
@@ -290,10 +323,10 @@ paths:
   /rest/asset/v1/email/{id}/content.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Get Email Content
       description: >-
         Returns the content of the designated email. Required Permissions:
@@ -324,10 +357,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailContentResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Update Email Content
       description: 'Updates the content of an email. Required Permissions: Read-Write Assets'
       operationId: updateEmailContentUsingPOST
@@ -357,11 +390,11 @@ paths:
   /rest/asset/v1/email/{id}/content/rearrange.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Content
+        - Email
         - Emails
+        - Rest
       summary: Marketo Rearrange Email Modules
       description: >-
         Rearranges the modules in an email. Required Permissions: Read-Write
@@ -395,12 +428,12 @@ paths:
   /rest/asset/v1/email/{id}/content/{htmlId}.json:
     post:
       tags:
-        - Rest
-        - Assets
-        - Email
-        - Content
         - .Json
+        - Assets
+        - Content
+        - Email
         - Emails
+        - Rest
       summary: Marketo Update Email Content Section
       description: >-
         Updates the content in the given section. Required Permissions:
@@ -438,12 +471,12 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/add.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Content
-        - Modules
+        - Email
         - Emails
+        - Modules
+        - Rest
       summary: Marketo Add Email Module
       description: >-
         Adds a new module to an email, with the given id. Required Permissions:
@@ -488,12 +521,12 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Content
-        - Modules
+        - Email
         - Emails
+        - Modules
+        - Rest
       summary: Marketo Delete Module
       description: >-
         Deletes the given module from the email. Required Permissions:
@@ -523,12 +556,12 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Content
-        - Modules
+        - Email
         - Emails
+        - Modules
+        - Rest
       summary: Marketo Duplicate Email Module
       description: >-
         Creates a copy of the designated module in an email. Required
@@ -564,12 +597,12 @@ paths:
   /rest/asset/v1/email/{id}/content/{moduleId}/rename.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Content
-        - Modules
+        - Email
         - Emails
+        - Modules
+        - Rest
       summary: Marketo Rename Email Module
       description: 'Renames a module. Required Permissions: Read-Write Assets'
       operationId: renameUsingPOST
@@ -603,10 +636,10 @@ paths:
   /rest/asset/v1/email/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Delete Email
       description: 'Deletes the target email. Required Permissions: Read-Write Assets'
       operationId: deleteEmailUsingPOST
@@ -628,11 +661,11 @@ paths:
   /rest/asset/v1/email/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
         - Discard
+        - Email
         - Emails
+        - Rest
       summary: Marketo Discard Email Draft
       description: >-
         Discards the current draft of an email. Required Permissions: Read-Write
@@ -656,12 +689,12 @@ paths:
   /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Email
-        - Dynamic
         - Content
+        - Dynamic
+        - Email
         - Emails
+        - Rest
       summary: Marketo Get Email Dynamic Content
       description: >-
         Retrieves the dyanmic content record for the given section. Required
@@ -698,12 +731,12 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailDynamicContentResponse'
     post:
       tags:
-        - Rest
         - Assets
-        - Email
-        - Dynamic
         - Content
+        - Dynamic
+        - Email
         - Emails
+        - Rest
       summary: Marketo Update Email Dynamic Content Section
       description: >-
         Updates dynamic content in the given section. Required Permissions:
@@ -741,11 +774,11 @@ paths:
   /rest/asset/v1/email/{id}/sendSample.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Send
         - Emails
+        - Rest
+        - Send
       summary: Marketo Send Sample Email
       description: >-
         Sends a sample email to the given email address. Leads may be
@@ -778,10 +811,10 @@ paths:
   /rest/asset/v1/email/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Unapprove Email
       description: >-
         Unapproves the email and reverts it to a draft-only state. Required
@@ -805,12 +838,12 @@ paths:
   /rest/asset/v1/email/{id}/variable/{name}.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Variable
-        - Name
         - Emails
+        - Name
+        - Rest
+        - Variable
       summary: Marketo Update Email Variable
       description: >-
         Updates the value of a given variable in an email. Required Permissions:
@@ -848,10 +881,10 @@ paths:
   /rest/asset/v1/email/{id}/variables.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
         - Emails
+        - Rest
       summary: Marketo Get Email Variables
       description: >-
         Returns a list of the available variables in an email. Required
@@ -875,11 +908,11 @@ paths:
   /rest/asset/v1/email/ccFields.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Email
         - Cc
+        - Email
         - Emails
+        - Rest
       summary: Marketo Get Email CC Fields
       description: >-
         Returns the set of fields enabled for Email CC in the target instance.
@@ -895,11 +928,11 @@ paths:
   /rest/asset/v1/emailTemplate/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Get Email Template by Name
       description: >-
         Retrieves and email template record by the given name. Required
@@ -930,11 +963,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Get Email Template by Id
       description: >-
         Returns an email template record by its id. Required Permissions:
@@ -965,11 +998,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Update Email Template Metadata
       description: >-
         Updates the metadata for the designated email template. Required
@@ -1001,12 +1034,12 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
+        - Approve
         - Assets
         - Email
-        - Template
-        - Approve
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Approve Email Template Draft
       description: >-
         Approves the current draft of the email template. Required Permissions:
@@ -1030,11 +1063,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Clone Email Template
       description: >-
         Clones the designated email template. Required Permissions: Read-Write
@@ -1066,11 +1099,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/content:
     get:
       tags:
-        - Rest
         - Assets
-        - Email
-        - Template
         - Content
+        - Email
+        - Rest
+        - Template
       summary: Marketo Get Email Template Content by Id
       description: >-
         Returns the content for a given email template. Required Permissions:
@@ -1102,11 +1135,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/content.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Update Email Template Content
       description: >-
         Updates the content of the given email template. Required Permissions:
@@ -1138,11 +1171,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Delete Email Template
       description: >-
         Deletes the designated email template. Required Permissions: Read-Write
@@ -1166,12 +1199,12 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Email
-        - Template
         - Discard
+        - Email
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Discard Email Template Draft
       description: >-
         Discards the current draft of the email template. Required Permissions:
@@ -1195,11 +1228,11 @@ paths:
   /rest/asset/v1/emailTemplate/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Template
         - Email  Templates
+        - Rest
+        - Template
       summary: Marketo Unapprove Email Template Draft
       description: >-
         Unapproves the current approved version of the Email Template. Required
@@ -1223,10 +1256,10 @@ paths:
   /rest/asset/v1/emailTemplates.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
         - Email  Templates
+        - Rest
       summary: Marketo Get Email Templates
       description: >-
         Returns a list of email template records accessible in the target
@@ -1262,10 +1295,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Email
         - Email  Templates
+        - Rest
       summary: Marketo Create Email Template
       description: 'Creates a new email template. Required Permissions: Read-Write Assets'
       operationId: createEmailTemplateUsingPOST
@@ -1287,12 +1320,12 @@ paths:
   /rest/asset/v1/emailTemplates/{id}/usedBy.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
+        - Email  Templates
+        - Rest
         - Templates
         - Used
-        - Email  Templates
       summary: Marketo Get Email Template Used By
       description: >-
         Returns a list of email records which depend on a given email template.
@@ -1328,9 +1361,9 @@ paths:
   /rest/asset/v1/emails.json:
     get:
       tags:
-        - Rest
         - Assets
         - Emails
+        - Rest
       summary: Marketo Get Emails
       description: >-
         Returns a list of emails matching the given filter parameters. Required
@@ -1391,9 +1424,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Emails
+        - Rest
       summary: Marketo Create Email
       description: 'Creates a new email asset. Required Permissions: Read-Write Assets'
       operationId: createEmailUsingPOST
@@ -1415,11 +1448,11 @@ paths:
   /rest/asset/v1/email/{id}/fullContent.json:
     get:
       tags:
-        - Rest
         - Assets
         - Email
-        - Full
         - Emails
+        - Full
+        - Rest
       summary: Marketo Get Email Full Content
       description: >-
         Returns the serialized HTML version of the email. Required Permissions:
@@ -1469,11 +1502,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfGetEmailFullContentResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Email
-        - Full
         - Emails
+        - Full
+        - Rest
       summary: Marketo Update Email Full Content
       description: >-
         Replaces the HTML of an Email that has had its relationship broken from
@@ -1505,10 +1538,10 @@ paths:
   /rest/asset/v1/file/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - File
         - Files
+        - Rest
       summary: Marketo Get File by Name
       description: >-
         Returns files records for the given name. Required Permissions:
@@ -1531,10 +1564,10 @@ paths:
   /rest/asset/v1/file/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - File
         - Files
+        - Rest
       summary: Marketo Get File by Id
       description: >-
         Returns the file record for the given id. Required Permissions:
@@ -1558,10 +1591,10 @@ paths:
   /rest/asset/v1/file/{id}/content.json:
     post:
       tags:
-        - Rest
         - Assets
         - File
         - File  Contents
+        - Rest
       summary: Marketo Update File Content
       description: >-
         Replaces the current content of the file with the included payload.
@@ -1593,9 +1626,9 @@ paths:
   /rest/asset/v1/files.json:
     get:
       tags:
-        - Rest
         - Assets
         - Files
+        - Rest
       summary: Marketo Get Files
       description: >-
         Returns the files from the given folder. Required Permissions: Read-Only
@@ -1630,9 +1663,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFileResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Files
+        - Rest
       summary: Marketo Create File
       description: >-
         Creates a new file from the included payload. Required Permissions:
@@ -1656,10 +1689,10 @@ paths:
   /rest/asset/v1/folder/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Folder
         - Folders
+        - Rest
       summary: Marketo Get Folder by Name
       description: >-
         Returns a folder record for the given name. Required Permissions:
@@ -1697,10 +1730,10 @@ paths:
   /rest/asset/v1/folder/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Folder
         - Folders
+        - Rest
       summary: Marketo Get Folder by Id
       description: >-
         Returns the folder record with the given id. Required Permissions:
@@ -1733,10 +1766,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFolderResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Folder
         - Folders
+        - Rest
       summary: Marketo Update Folder Metadata
       description: >-
         Updates the metadata for a given folder. Required Permissions:
@@ -1768,10 +1801,10 @@ paths:
   /rest/asset/v1/folder/{id}/content.json:
     get:
       tags:
-        - Rest
         - Assets
         - Folder
         - Folders
+        - Rest
       summary: Marketo Get Folder Contents
       description: >-
         Returns records for the contents of a given folder. Required
@@ -1816,10 +1849,10 @@ paths:
   /rest/asset/v1/folder/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Folder
         - Folders
+        - Rest
       summary: Marketo Delete Folder
       description: >-
         Deletes the designated folder. Deletion will fail if the folder has
@@ -1859,9 +1892,9 @@ paths:
   /rest/asset/v1/folder/{id}/tokens.json:
     get:
       tags:
-        - Rest
         - Assets
         - Folder
+        - Rest
         - Tokens
       summary: Marketo Get Tokens by Folder Id
       description: >-
@@ -1894,9 +1927,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfTokenResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Folder
+        - Rest
         - Tokens
       summary: Marketo Create Token
       description: >-
@@ -1929,9 +1962,9 @@ paths:
   /rest/asset/v1/folder/{id}/tokens/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Folder
+        - Rest
         - Tokens
       summary: Marketo Delete Token by Name
       description: >-
@@ -1964,9 +1997,9 @@ paths:
   /rest/asset/v1/folders.json:
     get:
       tags:
-        - Rest
         - Assets
         - Folders
+        - Rest
       summary: Marketo Get Folders
       description: >-
         Retrieves child folders from within a given root folder. Required
@@ -2010,9 +2043,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfFolderResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Folders
+        - Rest
       summary: Marketo Create Folder
       description: 'Creates a new folder. Required Permissions: Read-Write Assets'
       operationId: createFolderUsingPOST
@@ -2034,10 +2067,10 @@ paths:
   /rest/asset/v1/form/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
         - Forms
+        - Rest
       summary: Marketo Get Form by Name
       description: >-
         Retrieves a form record by its name. Required Permissions: Read-Only
@@ -2075,10 +2108,10 @@ paths:
   /rest/asset/v1/form/fields.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
         - Form  Fields
+        - Rest
       summary: Marketo Get Available Form Fields
       description: >-
         Retrieves a list of all valid fields for use in forms. Required
@@ -2107,12 +2140,12 @@ paths:
   /rest/asset/v1/form/programMemberFields.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
-        - Program
-        - Member
         - Form  Fields
+        - Member
+        - Program
+        - Rest
       summary: Marketo Get Available Form Program Member Fields
       description: >-
         Retrieves a list of all valid Program Member fields for use in forms.
@@ -2141,13 +2174,13 @@ paths:
   /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
-        - Forms
         - Field
         - Fields
+        - Form
         - Form  Fields
+        - Forms
+        - Rest
       summary: Marketo Add Form Field Visibility Rules
       description: >-
         Adds a visibility rule to the target form field. Required Permissions:
@@ -2185,10 +2218,10 @@ paths:
   /rest/asset/v1/form/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
         - Forms
+        - Rest
       summary: Marketo Get Form By Id
       description: >-
         Retrieves a form record by its id. Required Permissions: Read-Only
@@ -2219,10 +2252,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Form
         - Forms
+        - Rest
       summary: Marketo Update Form Metadata
       description: >-
         Updates the metadata of the target form. Required Permissions:
@@ -2254,11 +2287,11 @@ paths:
   /rest/asset/v1/form/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
+        - Approve
         - Assets
         - Form
-        - Approve
         - Forms
+        - Rest
       summary: Marketo Approve Form Draft
       description: >-
         Approves the current draft of the form. This will delete the current
@@ -2282,10 +2315,10 @@ paths:
   /rest/asset/v1/form/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Form
         - Forms
+        - Rest
       summary: Marketo Clone Form
       description: 'Clones the target form. Required Permissions: Read-Write Assets'
       operationId: cloneLpFormsUsingPOST
@@ -2315,10 +2348,10 @@ paths:
   /rest/asset/v1/form/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Form
         - Forms
+        - Rest
       summary: Marketo Delete Form
       description: >-
         Deletes the target form. Forms which are in use by landing pages may not
@@ -2343,11 +2376,11 @@ paths:
   /rest/asset/v1/form/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
         - Discard
+        - Form
         - Forms
+        - Rest
       summary: Marketo Discard Form Draft
       description: >-
         Discards the current draft of the form. Required Permissions: Read-Write
@@ -2371,12 +2404,12 @@ paths:
   /rest/asset/v1/form/{id}/field/{fieldId}.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
         - Field
         - Fields
+        - Form
         - Form  Fields
+        - Rest
       summary: Marketo Update Form Field
       description: >-
         Updates the configuration for that target field. Required Permissions:
@@ -2414,12 +2447,12 @@ paths:
   /rest/asset/v1/form/{id}/field/{fieldId}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
         - Field
         - Fields
+        - Form
         - Form  Fields
+        - Rest
       summary: Marketo Delete Form Field
       description: 'Deletes a field from a form. Required Permissions: Read-Write Assets'
       operationId: deleteFormFieldUsingPOST
@@ -2447,11 +2480,11 @@ paths:
   /rest/asset/v1/form/{id}/fieldSet.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
         - Field
+        - Form
         - Form  Fields
+        - Rest
       summary: Marketo Add Fieldset to Form
       description: >-
         Adds a field set to the target form. Required Permissions: Read-Write
@@ -2483,13 +2516,13 @@ paths:
   /rest/asset/v1/form/{id}/fieldSet/{fieldSetId}/field/{fieldId}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Form
         - Field
-        - Set
         - Fields
+        - Form
         - Form  Fields
+        - Rest
+        - Set
       summary: Marketo Delete Field from Fieldset
       description: >-
         Removes the target field from the fieldset. Required Permissions:
@@ -2525,10 +2558,10 @@ paths:
   /rest/asset/v1/form/{id}/fields.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
         - Form  Fields
+        - Rest
       summary: Marketo Get Fields for Form
       description: >-
         Retrieves the list of fields in the target form. Required Permissions:
@@ -2559,10 +2592,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Form
         - Form  Fields
+        - Rest
       summary: Marketo Add Field to Form
       description: 'Adds a field to a form. Required Permissions: Read-Write Assets'
       operationId: addFieldToAFormUsingPOST
@@ -2592,10 +2625,10 @@ paths:
   /rest/asset/v1/form/{id}/reArrange.json:
     post:
       tags:
-        - Rest
         - Assets
         - Form
         - Form  Fields
+        - Rest
       summary: Marketo Update Field Positions
       description: >-
         Reorders the list of fields in a form. Required Permissions: Read-Write
@@ -2627,9 +2660,9 @@ paths:
   /rest/asset/v1/form/{id}/richText.json:
     post:
       tags:
-        - Rest
         - Assets
         - Form
+        - Rest
         - Text.json
       summary: Marketo Add Rich Text Field
       description: >-
@@ -2662,11 +2695,11 @@ paths:
   /rest/asset/v1/form/{id}/submitButton.json:
     post:
       tags:
-        - Rest
         - Assets
         - Form
-        - Submit
         - Forms
+        - Rest
+        - Submit
       summary: Marketo Update Submit Button
       description: >-
         Updates the submit button configuration for the target form. Required
@@ -2698,11 +2731,11 @@ paths:
   /rest/asset/v1/form/{id}/thankYouPage.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
-        - Thank
         - Forms
+        - Rest
+        - Thank
       summary: Marketo Get Thank You Page by Form Id
       description: >-
         Returns the thank you page configuration for a given form. Required
@@ -2733,11 +2766,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfThankYouPageResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Form
-        - Thank
         - Forms
+        - Rest
+        - Thank
       summary: Marketo Update Thank You Page
       description: >-
         Updates the thank you page configuration for a given form. This update
@@ -2771,9 +2804,9 @@ paths:
   /rest/asset/v1/forms.json:
     get:
       tags:
-        - Rest
         - Assets
         - Forms
+        - Rest
       summary: Marketo Get Forms
       description: >-
         Retrieves a list of accessible form records from the target instance.
@@ -2815,9 +2848,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpFormResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Forms
+        - Rest
       summary: Marketo Create Form
       description: 'Creates a new form. Required Permissions: Read-Write Assets'
       operationId: createLpFormsUsingPOST
@@ -2839,11 +2872,11 @@ paths:
   /rest/asset/v1/form/{id}/usedBy.json:
     get:
       tags:
-        - Rest
         - Assets
         - Form
-        - Used
         - Forms
+        - Rest
+        - Used
       summary: Marketo Get Form Used By
       description: >-
         Returns a list of asset records which depend on a given form. Required
@@ -2879,11 +2912,11 @@ paths:
   /rest/asset/v1/landingPage/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Get Landing Page by Name
       description: >-
         Returns the landing page record for the given name. Required
@@ -2926,11 +2959,11 @@ paths:
   /rest/asset/v1/landingPage/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Get Landing Page by Id
       description: >-
         Returns the landing record for the given id. Required Permissions:
@@ -2961,11 +2994,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Update Landing Page Metadata
       description: >-
         Updates the metadata for the targe landing page. Required Permissions:
@@ -2997,12 +3030,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
+        - Approve
         - Assets
         - Landing
-        - Page
-        - Approve
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Approve Landing Page Draft
       description: >-
         Approves the current draft of the landing page. Required Permissions:
@@ -3026,11 +3059,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Clone Landing Page
       description: 'Clones the target landing page. Required Permissions: Read-Write Assets'
       operationId: cloneLandingPageUsingPOST
@@ -3060,11 +3093,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/content.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Content
       description: >-
         Retrieves the list of content sections in the target landing page.
@@ -3095,11 +3128,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageContentResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Add Landing Page Content Section
       description: >-
         Adds a content section to the target landing page. Parameters must be
@@ -3132,12 +3165,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/content/{contentId}.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
         - Content
+        - Landing
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Update Landing Page Content Section
       description: >-
         Updates a content section the landing page. Parameters must be sent as
@@ -3176,12 +3209,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/content/{contentId}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
         - Content
+        - Landing
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Delete Landing Page Content Section
       description: >-
         Removes the target content section from the parent landing page.
@@ -3211,11 +3244,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Delete Landing Page
       description: 'Deletes the target landing page. Required Permissions: Read-Write Assets'
       operationId: deleteLandingPageByIdUsingPOST
@@ -3237,12 +3270,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
         - Discard
+        - Landing
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Discard Landing Page Draft
       description: >-
         Discards the current draft of the landing page. Required Permissions:
@@ -3266,13 +3299,13 @@ paths:
   /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
-        - Dynamic
         - Content
+        - Dynamic
+        - Landing
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Dynamic Content
       description: >-
         Retrieves the dynamic content from the target section. Required
@@ -3302,13 +3335,13 @@ paths:
                   #/components/schemas/ResponseOfLandingPageDynamicContentResponse
     post:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
-        - Dynamic
         - Content
+        - Dynamic
+        - Landing
         - Landing  Page  Content
+        - Page
+        - Rest
       summary: Marketo Update Landing Page Dynamic Content Section
       description: >-
         Updates the content of the target dynamic content section. Required
@@ -3346,11 +3379,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Unapprove Landing Page
       description: >-
         Unapproves the landing page, reverting it to a draft-only state.
@@ -3374,13 +3407,13 @@ paths:
   /rest/asset/v1/landingPage/{id}/variable/{variableId}.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
+        - Landing  Pages
         - Page
+        - Rest
         - Variable
         - Variables
-        - Landing  Pages
       summary: Marketo Update Landing Page Variable
       description: >-
         Updates the value of the given variable. Required Permissions:
@@ -3417,11 +3450,11 @@ paths:
   /rest/asset/v1/landingPage/{id}/variables.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Variables
       operationId: getVariablesUsingGET
       parameters:
@@ -3450,12 +3483,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Get Landing Page Template by Name
       description: >-
         Retrieves the landing page template record for the given name. Required
@@ -3478,12 +3511,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Get Landing Page Template by Id
       description: >-
         Retrieves the record for the target landing page template. Required
@@ -3514,12 +3547,12 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Update Landing Page Template Metadata
       description: >-
         Updates the metadata for the target landing page template. Required
@@ -3551,13 +3584,13 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
+        - Approve
         - Assets
         - Landing
-        - Page
-        - Template
-        - Approve
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Approve Landing Page Template Draft
       description: >-
         Approves the current landing page template draft. This will delete the
@@ -3582,12 +3615,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Clone Landing Page Template
       description: >-
         Clones the target landing page template. Required Permissions:
@@ -3619,12 +3652,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/content.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Get Landing Page Template Content
       description: >-
         Retrieves the content of the target landing page. Required Permissions:
@@ -3655,12 +3688,12 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateGetContentResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Update Landing Page Template Content
       description: >-
         Updates the content for the target landing page template. This update is
@@ -3697,12 +3730,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Delete Landing Page Template
       description: >-
         Deletes the target landing page template. Required Permissions:
@@ -3726,13 +3759,13 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
-        - Template
         - Discard
+        - Landing
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Discard Landing Page Template Draft
       description: >-
         Discrads the current draft of the landing page template. Required
@@ -3756,12 +3789,12 @@ paths:
   /rest/asset/v1/landingPageTemplate/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
-        - Template
         - Landing  Page  Templates
+        - Page
+        - Rest
+        - Template
       summary: Marketo Unapprove Landing Page Template
       description: >-
         Unapproves the landing page template and reverts it to a draft-only
@@ -3785,11 +3818,11 @@ paths:
   /rest/asset/v1/landingPageTemplates.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Page  Templates
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Templates
       description: >-
         Retrieves the list of accessible landing page templates from the target
@@ -3832,11 +3865,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Page  Templates
+        - Page
+        - Rest
       summary: Marketo Create Landing Page Template
       description: >-
         Creates a new landing page template. Required Permissions: Read-Write
@@ -3860,10 +3893,10 @@ paths:
   /rest/asset/v1/landingPages.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
         - Landing  Pages
+        - Rest
       summary: Marketo Get Landing Pages
       description: >-
         Retrieves a list of accessible landing pages from the target instance.
@@ -3906,10 +3939,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Landing
         - Landing  Pages
+        - Rest
       summary: Marketo Create Landing Page
       description: 'Creates a new landing page. Required Permissions: Read-Write Assets'
       operationId: createLandingPageUsingPOST
@@ -3931,12 +3964,12 @@ paths:
   /rest/asset/v1/landingPage/{id}/fullContent.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Landing
-        - Page
         - Full
+        - Landing
         - Landing  Pages
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Full Content
       description: >-
         Returns the serialized HTML version of the landing page. Required
@@ -3978,10 +4011,10 @@ paths:
   /rest/asset/v1/redirectRules.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Redirect
         - Landing  Page  Redirect  Rules
+        - Redirect
+        - Rest
       summary: Marketo Get Landing Page Redirect Rules
       description: >-
         Retrieves a list of landing page redirect rules from the target
@@ -4040,10 +4073,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-        - Rest
         - Assets
-        - Redirect
         - Landing  Page  Redirect  Rules
+        - Redirect
+        - Rest
       summary: Marketo Create Landing Page Redirect Rule
       description: >-
         Create a new landing page redirect rule. Required Permissions: Read
@@ -4067,11 +4100,11 @@ paths:
   /rest/asset/v1/redirectRule/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Redirect
-        - Rules
         - Landing  Page  Redirect  Rules
+        - Redirect
+        - Rest
+        - Rules
       summary: Marketo Get Landing Page Redirect Rule by Id
       description: >-
         Retrieves the landing page redirect rule record. Required Permissions:
@@ -4094,11 +4127,11 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-        - Rest
         - Assets
-        - Redirect
-        - Rules
         - Landing  Page  Redirect  Rules
+        - Redirect
+        - Rest
+        - Rules
       summary: Marketo Update Landing Page Redirect Rule
       description: >-
         Update an existing landing page redirect rule. Required Permissions:
@@ -4130,11 +4163,11 @@ paths:
   /rest/asset/v1/redirectRule/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Redirect
-        - Rules
         - Landing  Page  Redirect  Rules
+        - Redirect
+        - Rest
+        - Rules
       summary: Marketo Delete Landing Page Redirect Rule
       description: >-
         Delete a landing page redirect rule. Required Permissions: Read Write
@@ -4158,11 +4191,11 @@ paths:
   /rest/asset/v1/landingPageDomains.json:
     get:
       tags:
-        - Rest
         - Assets
         - Landing
-        - Page
         - Landing  Page  Redirect  Rules
+        - Page
+        - Rest
       summary: Marketo Get Landing Page Domains
       description: >-
         Retrieves a list of landing page domain and domain aliases. Required
@@ -4193,10 +4226,10 @@ paths:
   /rest/asset/v1/program/byName.json:
     get:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Get Program by Name
       description: >-
         Retrieves the program record for the given name. Required Permissions:
@@ -4229,10 +4262,10 @@ paths:
   /rest/asset/v1/program/byTag.json:
     get:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Get Programs by Tag
       description: >-
         Retrieves a list of programs matching the tag type and tag values given.
@@ -4273,10 +4306,10 @@ paths:
   /rest/asset/v1/program/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Get Program by Id
       description: >-
         Retrieves the program record for the given id. Required Permissions:
@@ -4299,10 +4332,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfProgramResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Update Program Metadata
       description: >-
         Updates the target program's metadata. Required Permissions: Read-Write
@@ -4334,10 +4367,10 @@ paths:
   /rest/asset/v1/program/{programId}/smartList.json:
     get:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Get Smart List by Program Id
       description: >-
         Retrieves a Smart List record by its Email Program id. Required
@@ -4366,10 +4399,10 @@ paths:
   /rest/asset/v1/program/{id}/approve.json:
     post:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Approve Program
       description: >-
         Approves the target program. Only valid for unapproved email programs.
@@ -4393,10 +4426,10 @@ paths:
   /rest/asset/v1/program/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Clone Program
       description: 'Clones the target program. Required Permissions: Read-Write Assets'
       operationId: cloneProgramUsingPOST
@@ -4426,10 +4459,10 @@ paths:
   /rest/asset/v1/program/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Delete Program
       description: >-
         Deletes the target program. The program may not contain any assets which
@@ -4453,10 +4486,10 @@ paths:
   /rest/asset/v1/program/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
         - Program
         - Programs
+        - Rest
       summary: Marketo Unapprove Program
       description: >-
         Unapproves the target program. Only valid for approved email programs.
@@ -4480,9 +4513,9 @@ paths:
   /rest/asset/v1/programs.json:
     get:
       tags:
-        - Rest
         - Assets
         - Programs
+        - Rest
       summary: Marketo Get Programs
       description: >-
         Retrieves the list of accessible programs from the target instance.
@@ -4538,9 +4571,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfBrowseAllPrograms'
     post:
       tags:
-        - Rest
         - Assets
         - Programs
+        - Rest
       summary: Marketo Create Program
       description: 'Creates a new program. Required Permissions: Read-Write Assets'
       operationId: createProgramUsingPOST
@@ -4562,8 +4595,8 @@ paths:
   /rest/asset/v1/segmentation.json:
     get:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Segments
       summary: Marketo Get Segmentations
       description: >-
@@ -4589,10 +4622,10 @@ paths:
   /rest/asset/v1/segmentation/{id}/segments.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Segments.json
+        - Rest
         - Segments
+        - Segments.json
       summary: Marketo Get Segments For Segmentation
       description: >-
         Retrieves a list of segments inside the target segmentation. Required
@@ -4636,10 +4669,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Get Smart Campaign by Id
       description: >-
@@ -4663,10 +4696,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Update Smart Campaign
       description: >-
@@ -4699,10 +4732,10 @@ paths:
   /rest/asset/v1/smartCampaign/byName.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Get Smart Campaign by Name
       description: >-
@@ -4726,10 +4759,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/smartList.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Get Smart List by Smart Campaign Id
       description: >-
@@ -4759,8 +4792,8 @@ paths:
   /rest/asset/v1/smartCampaigns.json:
     get:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Smart
         - Smart  Campaigns
       summary: Marketo Get Smart Campaigns
@@ -4820,8 +4853,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Smart
         - Smart  Campaigns
       summary: Marketo Create Smart Campaign
@@ -4845,10 +4878,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/activate.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Activate Smart Campaign
       description: >-
@@ -4873,10 +4906,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/deactivate.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Deactivate Smart Campaign
       description: >-
@@ -4901,10 +4934,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Clone Smart Campaign
       description: 'Clones a smart campaign. Required Permissions: Read-Write Assets'
@@ -4935,10 +4968,10 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Campaigns
+        - Rest
+        - Smart
         - Smart  Campaigns
       summary: Marketo Delete Smart Campaign
       description: 'Deletes a smart campaign. Required Permissions: Read-Write Assets'
@@ -4961,9 +4994,9 @@ paths:
   /rest/asset/v1/snippet/{id}.json:
     get:
       tags:
-        - Rest
-        - Assets
         - .Json
+        - Assets
+        - Rest
         - Snippets
       summary: Marketo Get Snippet by Id
       description: >-
@@ -4995,9 +5028,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetResponse'
     post:
       tags:
-        - Rest
-        - Assets
         - .Json
+        - Assets
+        - Rest
         - Snippets
       summary: Marketo Update Snippet Metadata
       description: >-
@@ -5030,9 +5063,9 @@ paths:
   /rest/asset/v1/snippet/{id}/approveDraft.json:
     post:
       tags:
-        - Rest
-        - Assets
         - Approve
+        - Assets
+        - Rest
         - Snippets
       summary: Marketo Approve Snippet Draft
       description: >-
@@ -5057,9 +5090,9 @@ paths:
   /rest/asset/v1/snippet/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
         - Clone.json
+        - Rest
         - Snippets
       summary: Marketo Clone Snippet
       description: 'Clones the target snippet. Required Permissions: Read-Write Assets'
@@ -5090,9 +5123,9 @@ paths:
   /rest/asset/v1/snippet/{id}/content.json:
     get:
       tags:
-        - Rest
         - Assets
         - Content.json
+        - Rest
         - Snippets
       summary: Marketo Get Snippet Content
       description: >-
@@ -5124,9 +5157,9 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetContentResponse'
     post:
       tags:
-        - Rest
         - Assets
         - Content.json
+        - Rest
         - Snippets
       summary: Marketo Update Snippet Content
       description: >-
@@ -5167,9 +5200,9 @@ paths:
   /rest/asset/v1/snippet/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
         - Delete.json
+        - Rest
         - Snippets
       summary: Marketo Delete Snippet
       description: >-
@@ -5194,9 +5227,9 @@ paths:
   /rest/asset/v1/snippet/{id}/discardDraft.json:
     post:
       tags:
-        - Rest
         - Assets
         - Discard
+        - Rest
         - Snippets
       summary: Marketo Discard Snippet Draft
       description: >-
@@ -5221,9 +5254,9 @@ paths:
   /rest/asset/v1/snippet/{id}/dynamicContent.json:
     get:
       tags:
-        - Rest
         - Assets
         - Dynamic
+        - Rest
         - Snippets
       summary: Marketo Get Dynamic Content
       description: >-
@@ -5256,10 +5289,10 @@ paths:
   /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Dynamic
         - Content
+        - Dynamic
+        - Rest
         - Segments
         - Snippets
       summary: Marketo Update Snippet Dynamic Content
@@ -5300,10 +5333,10 @@ paths:
   /rest/asset/v1/snippet/{id}/unapprove.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Unapprove.json
+        - Rest
         - Snippets
+        - Unapprove.json
       summary: Marketo Unapprove Snippet
       description: >-
         Unapproves the current version of the snippet. The snippet may not be in
@@ -5328,8 +5361,8 @@ paths:
   /rest/asset/v1/snippets.json:
     get:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Snippets
       summary: Marketo Get Snippets
       description: >-
@@ -5366,8 +5399,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSnippetResponse'
     post:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Snippets
       summary: Marketo Create Snippet
       description: 'Creates a new snippet. Required Permissions: Read-Write Assets'
@@ -5390,11 +5423,9 @@ paths:
   /rest/asset/v1/tagType/byName.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Tag
+        - Rest
         - Type
-        - Tags
       summary: Marketo Get Tag By Name
       description: >-
         Retrieves a tag by its name. This will also return the set of valid
@@ -5418,10 +5449,10 @@ paths:
   /rest/asset/v1/smartList/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Id
+        - Rest
+        - Smart
         - Smart  Lists
       summary: Marketo Get Smart List by Id
       description: >-
@@ -5451,10 +5482,10 @@ paths:
   /rest/asset/v1/smartList/byName.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Name.json
+        - Rest
+        - Smart
       summary: Marketo Get Smart List by Name
       description: >-
         Retrieves a Smart List record by its name. Required Permissions:
@@ -5477,10 +5508,10 @@ paths:
   /rest/asset/v1/smartList/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Id
+        - Rest
+        - Smart
         - Smart  Lists
       summary: Marketo Delete Smart List
       description: >-
@@ -5505,8 +5536,8 @@ paths:
   /rest/asset/v1/smartLists.json:
     get:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Smart
         - Smart  Lists
       summary: Marketo Get Smart Lists
@@ -5562,10 +5593,10 @@ paths:
   /rest/asset/v1/smartList/{id}/clone.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Smart
         - Id
+        - Rest
+        - Smart
         - Smart  Lists
       summary: Marketo Clone Smart List
       description: 'Clones the designated Smart List. Required Permissions: Read-Write Asset'
@@ -5596,10 +5627,10 @@ paths:
   /rest/asset/v1/staticList/{id}.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Static
         - Id
+        - Rest
+        - Static
         - Static  Lists
       summary: Marketo Get Static List by Id
       description: >-
@@ -5623,10 +5654,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-        - Rest
         - Assets
-        - Static
         - Id
+        - Rest
+        - Static
         - Static  Lists
       summary: Marketo Update Static List Metadata
       description: >-
@@ -5659,8 +5690,8 @@ paths:
   /rest/asset/v1/staticLists.json:
     get:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Static
         - Static  Lists
       summary: Marketo Get Static Lists
@@ -5715,8 +5746,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-        - Rest
         - Assets
+        - Rest
         - Static
         - Static  Lists
       summary: Marketo Create Static List
@@ -5740,10 +5771,10 @@ paths:
   /rest/asset/v1/staticList/byName.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Static
         - Name.json
+        - Rest
+        - Static
       summary: Marketo Get Static List by Name
       description: >-
         Retrieves a Static List record by its name. Required Permissions:
@@ -5766,10 +5797,10 @@ paths:
   /rest/asset/v1/staticList/{id}/delete.json:
     post:
       tags:
-        - Rest
         - Assets
-        - Static
         - Id
+        - Rest
+        - Static
         - Static  Lists
       summary: Marketo Delete Static List
       description: >-
@@ -5794,10 +5825,8 @@ paths:
   /rest/asset/v1/tagTypes.json:
     get:
       tags:
-        - Rest
         - Assets
-        - Tag
-        - Tags
+        - Rest
       summary: Marketo Get Tag Types
       description: >-
         Retrieves a list of available tag types. Required Permissions: Read-Only
