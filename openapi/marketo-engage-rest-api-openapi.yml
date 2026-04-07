@@ -66,7 +66,7 @@ paths:
         - Assets
         - Channel
         - Channels
-      summary: Get Channel by Name
+      summary: Marketo Get Channel by Name
       description: >-
         Retrieves channels based on the provided name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -91,7 +91,7 @@ paths:
         - Rest
         - Assets
         - Channels
-      summary: Get Channels
+      summary: Marketo Get Channels
       description: >-
         Retrieves all channels. Required Permissions: Read-Only Assets,
         Read-Write Assets
@@ -123,7 +123,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Get Email by Name
+      summary: Marketo Get Email by Name
       description: >-
         Returns an email records based on the given name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -164,7 +164,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Get Email By Id
+      summary: Marketo Get Email By Id
       description: >-
         Returns an email records by its id. Required Permissions: Read-Only
         Assets, Read-Write Assets
@@ -198,7 +198,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Update Email Metadata
+      summary: Marketo Update Email Metadata
       description: >-
         Updates the metadata of an email asset. Required Permissions: Read-Write
         Assets
@@ -234,7 +234,7 @@ paths:
         - Email
         - Approve
         - Emails
-      summary: Approve Email Draft
+      summary: Marketo Approve Email Draft
       description: >-
         Approves the current draft of an email. Required Permissions: Approve
         Assets
@@ -261,7 +261,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Clone Email
+      summary: Marketo Clone Email
       description: 'Clones the target email. Required Permissions: Read-Write Assets'
       operationId: cloneEmailUsingPOST
       parameters:
@@ -294,7 +294,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Get Email Content
+      summary: Marketo Get Email Content
       description: >-
         Returns the content of the designated email. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -328,7 +328,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Update Email Content
+      summary: Marketo Update Email Content
       description: 'Updates the content of an email. Required Permissions: Read-Write Assets'
       operationId: updateEmailContentUsingPOST
       parameters:
@@ -362,7 +362,7 @@ paths:
         - Email
         - Content
         - Emails
-      summary: Rearrange Email Modules
+      summary: Marketo Rearrange Email Modules
       description: >-
         Rearranges the modules in an email. Required Permissions: Read-Write
         Assets
@@ -401,7 +401,7 @@ paths:
         - Content
         - .Json
         - Emails
-      summary: Update Email Content Section
+      summary: Marketo Update Email Content Section
       description: >-
         Updates the content in the given section. Required Permissions:
         Read-Write Assets
@@ -444,7 +444,7 @@ paths:
         - Content
         - Modules
         - Emails
-      summary: Add Email Module
+      summary: Marketo Add Email Module
       description: >-
         Adds a new module to an email, with the given id. Required Permissions:
         Read-Write Assets
@@ -494,7 +494,7 @@ paths:
         - Content
         - Modules
         - Emails
-      summary: Delete Module
+      summary: Marketo Delete Module
       description: >-
         Deletes the given module from the email. Required Permissions:
         Read-Write Assets
@@ -529,7 +529,7 @@ paths:
         - Content
         - Modules
         - Emails
-      summary: Duplicate Email Module
+      summary: Marketo Duplicate Email Module
       description: >-
         Creates a copy of the designated module in an email. Required
         Permissions: Read-Write Assets
@@ -570,7 +570,7 @@ paths:
         - Content
         - Modules
         - Emails
-      summary: Rename Email Module
+      summary: Marketo Rename Email Module
       description: 'Renames a module. Required Permissions: Read-Write Assets'
       operationId: renameUsingPOST
       parameters:
@@ -607,7 +607,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Delete Email
+      summary: Marketo Delete Email
       description: 'Deletes the target email. Required Permissions: Read-Write Assets'
       operationId: deleteEmailUsingPOST
       parameters:
@@ -633,7 +633,7 @@ paths:
         - Email
         - Discard
         - Emails
-      summary: Discard Email Draft
+      summary: Marketo Discard Email Draft
       description: >-
         Discards the current draft of an email. Required Permissions: Read-Write
         Assets
@@ -662,7 +662,7 @@ paths:
         - Dynamic
         - Content
         - Emails
-      summary: Get Email Dynamic Content
+      summary: Marketo Get Email Dynamic Content
       description: >-
         Retrieves the dyanmic content record for the given section. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -704,7 +704,7 @@ paths:
         - Dynamic
         - Content
         - Emails
-      summary: Update Email Dynamic Content Section
+      summary: Marketo Update Email Dynamic Content Section
       description: >-
         Updates dynamic content in the given section. Required Permissions:
         Read-Write Assets
@@ -746,7 +746,7 @@ paths:
         - Email
         - Send
         - Emails
-      summary: Send Sample Email
+      summary: Marketo Send Sample Email
       description: >-
         Sends a sample email to the given email address. Leads may be
         impersonated to populate data for tokens and dynamic content. Required
@@ -782,7 +782,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Unapprove Email
+      summary: Marketo Unapprove Email
       description: >-
         Unapproves the email and reverts it to a draft-only state. Required
         Permissions: Approve Assets
@@ -811,7 +811,7 @@ paths:
         - Variable
         - Name
         - Emails
-      summary: Update Email Variable
+      summary: Marketo Update Email Variable
       description: >-
         Updates the value of a given variable in an email. Required Permissions:
         Read-Write Assets
@@ -852,7 +852,7 @@ paths:
         - Assets
         - Email
         - Emails
-      summary: Get Email Variables
+      summary: Marketo Get Email Variables
       description: >-
         Returns a list of the available variables in an email. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -880,7 +880,7 @@ paths:
         - Email
         - Cc
         - Emails
-      summary: Get Email CC Fields
+      summary: Marketo Get Email CC Fields
       description: >-
         Returns the set of fields enabled for Email CC in the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -900,7 +900,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Get Email Template by Name
+      summary: Marketo Get Email Template by Name
       description: >-
         Retrieves and email template record by the given name. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -935,7 +935,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Get Email Template by Id
+      summary: Marketo Get Email Template by Id
       description: >-
         Returns an email template record by its id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -970,7 +970,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Update Email Template Metadata
+      summary: Marketo Update Email Template Metadata
       description: >-
         Updates the metadata for the designated email template. Required
         Permissions: Read-Write Assets
@@ -1007,7 +1007,7 @@ paths:
         - Template
         - Approve
         - Email  Templates
-      summary: Approve Email Template Draft
+      summary: Marketo Approve Email Template Draft
       description: >-
         Approves the current draft of the email template. Required Permissions:
         Approve Assets
@@ -1035,7 +1035,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Clone Email Template
+      summary: Marketo Clone Email Template
       description: >-
         Clones the designated email template. Required Permissions: Read-Write
         Assets
@@ -1071,7 +1071,7 @@ paths:
         - Email
         - Template
         - Content
-      summary: Get Email Template Content by Id
+      summary: Marketo Get Email Template Content by Id
       description: >-
         Returns the content for a given email template. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -1107,7 +1107,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Update Email Template Content
+      summary: Marketo Update Email Template Content
       description: >-
         Updates the content of the given email template. Required Permissions:
         Read-Write Assets
@@ -1143,7 +1143,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Delete Email Template
+      summary: Marketo Delete Email Template
       description: >-
         Deletes the designated email template. Required Permissions: Read-Write
         Assets
@@ -1172,7 +1172,7 @@ paths:
         - Template
         - Discard
         - Email  Templates
-      summary: Discard Email Template Draft
+      summary: Marketo Discard Email Template Draft
       description: >-
         Discards the current draft of the email template. Required Permissions:
         Read-Write Assets
@@ -1200,7 +1200,7 @@ paths:
         - Email
         - Template
         - Email  Templates
-      summary: Unapprove Email Template Draft
+      summary: Marketo Unapprove Email Template Draft
       description: >-
         Unapproves the current approved version of the Email Template. Required
         Permissions: Approve Assets
@@ -1227,7 +1227,7 @@ paths:
         - Assets
         - Email
         - Email  Templates
-      summary: Get Email Templates
+      summary: Marketo Get Email Templates
       description: >-
         Returns a list of email template records accessible in the target
         instance. Required Permissions: Read-Only Assets, Read-Write Assets
@@ -1266,7 +1266,7 @@ paths:
         - Assets
         - Email
         - Email  Templates
-      summary: Create Email Template
+      summary: Marketo Create Email Template
       description: 'Creates a new email template. Required Permissions: Read-Write Assets'
       operationId: createEmailTemplateUsingPOST
       requestBody:
@@ -1293,7 +1293,7 @@ paths:
         - Templates
         - Used
         - Email  Templates
-      summary: Get Email Template Used By
+      summary: Marketo Get Email Template Used By
       description: >-
         Returns a list of email records which depend on a given email template.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -1331,7 +1331,7 @@ paths:
         - Rest
         - Assets
         - Emails
-      summary: Get Emails
+      summary: Marketo Get Emails
       description: >-
         Returns a list of emails matching the given filter parameters. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -1394,7 +1394,7 @@ paths:
         - Rest
         - Assets
         - Emails
-      summary: Create Email
+      summary: Marketo Create Email
       description: 'Creates a new email asset. Required Permissions: Read-Write Assets'
       operationId: createEmailUsingPOST
       requestBody:
@@ -1420,7 +1420,7 @@ paths:
         - Email
         - Full
         - Emails
-      summary: Get Email Full Content
+      summary: Marketo Get Email Full Content
       description: >-
         Returns the serialized HTML version of the email. Required Permissions:
         Read-Only Assets, Read-Write Assets. If leadId is passed in the request:
@@ -1474,7 +1474,7 @@ paths:
         - Email
         - Full
         - Emails
-      summary: Update Email Full Content
+      summary: Marketo Update Email Full Content
       description: >-
         Replaces the HTML of an Email that has had its relationship broken from
         its template. Required Permissions: Read-Write Assets
@@ -1509,7 +1509,7 @@ paths:
         - Assets
         - File
         - Files
-      summary: Get File by Name
+      summary: Marketo Get File by Name
       description: >-
         Returns files records for the given name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -1535,7 +1535,7 @@ paths:
         - Assets
         - File
         - Files
-      summary: Get File by Id
+      summary: Marketo Get File by Id
       description: >-
         Returns the file record for the given id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -1562,7 +1562,7 @@ paths:
         - Assets
         - File
         - File  Contents
-      summary: Update File Content
+      summary: Marketo Update File Content
       description: >-
         Replaces the current content of the file with the included payload.
         Required Permissions: Read-Write Assets
@@ -1596,7 +1596,7 @@ paths:
         - Rest
         - Assets
         - Files
-      summary: Get Files
+      summary: Marketo Get Files
       description: >-
         Returns the files from the given folder. Required Permissions: Read-Only
         Assets, Read-Write Assets
@@ -1633,7 +1633,7 @@ paths:
         - Rest
         - Assets
         - Files
-      summary: Create File
+      summary: Marketo Create File
       description: >-
         Creates a new file from the included payload. Required Permissions:
         Read-Write Assets
@@ -1660,7 +1660,7 @@ paths:
         - Assets
         - Folder
         - Folders
-      summary: Get Folder by Name
+      summary: Marketo Get Folder by Name
       description: >-
         Returns a folder record for the given name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -1701,7 +1701,7 @@ paths:
         - Assets
         - Folder
         - Folders
-      summary: Get Folder by Id
+      summary: Marketo Get Folder by Id
       description: >-
         Returns the folder record with the given id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -1737,7 +1737,7 @@ paths:
         - Assets
         - Folder
         - Folders
-      summary: Update Folder Metadata
+      summary: Marketo Update Folder Metadata
       description: >-
         Updates the metadata for a given folder. Required Permissions:
         Read-Write Assets
@@ -1772,7 +1772,7 @@ paths:
         - Assets
         - Folder
         - Folders
-      summary: Get Folder Contents
+      summary: Marketo Get Folder Contents
       description: >-
         Returns records for the contents of a given folder. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -1820,7 +1820,7 @@ paths:
         - Assets
         - Folder
         - Folders
-      summary: Delete Folder
+      summary: Marketo Delete Folder
       description: >-
         Deletes the designated folder. Deletion will fail if the folder has
         content. Required Permissions: Read-Write Assets
@@ -1863,7 +1863,7 @@ paths:
         - Assets
         - Folder
         - Tokens
-      summary: Get Tokens by Folder Id
+      summary: Marketo Get Tokens by Folder Id
       description: >-
         Retrieves the list of available My Tokens in the target folder. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -1898,7 +1898,7 @@ paths:
         - Assets
         - Folder
         - Tokens
-      summary: Create Token
+      summary: Marketo Create Token
       description: >-
         Create or update a token in the parent folder. Required Permissions:
         Read-Write Assets
@@ -1933,7 +1933,7 @@ paths:
         - Assets
         - Folder
         - Tokens
-      summary: Delete Token by Name
+      summary: Marketo Delete Token by Name
       description: >-
         Deletes a token with the given name from the parent folder. Required
         Permissions: Read-Write Assets
@@ -1967,7 +1967,7 @@ paths:
         - Rest
         - Assets
         - Folders
-      summary: Get Folders
+      summary: Marketo Get Folders
       description: >-
         Retrieves child folders from within a given root folder. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -2013,7 +2013,7 @@ paths:
         - Rest
         - Assets
         - Folders
-      summary: Create Folder
+      summary: Marketo Create Folder
       description: 'Creates a new folder. Required Permissions: Read-Write Assets'
       operationId: createFolderUsingPOST
       requestBody:
@@ -2038,7 +2038,7 @@ paths:
         - Assets
         - Form
         - Forms
-      summary: Get Form by Name
+      summary: Marketo Get Form by Name
       description: >-
         Retrieves a form record by its name. Required Permissions: Read-Only
         Assets, Read-Write Assets
@@ -2079,7 +2079,7 @@ paths:
         - Assets
         - Form
         - Form  Fields
-      summary: Get Available Form Fields
+      summary: Marketo Get Available Form Fields
       description: >-
         Retrieves a list of all valid fields for use in forms. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -2113,7 +2113,7 @@ paths:
         - Program
         - Member
         - Form  Fields
-      summary: Get Available Form Program Member Fields
+      summary: Marketo Get Available Form Program Member Fields
       description: >-
         Retrieves a list of all valid Program Member fields for use in forms.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -2148,7 +2148,7 @@ paths:
         - Field
         - Fields
         - Form  Fields
-      summary: Add Form Field Visibility Rules
+      summary: Marketo Add Form Field Visibility Rules
       description: >-
         Adds a visibility rule to the target form field. Required Permissions:
         Read-Write Assets
@@ -2189,7 +2189,7 @@ paths:
         - Assets
         - Form
         - Forms
-      summary: Get Form By Id
+      summary: Marketo Get Form By Id
       description: >-
         Retrieves a form record by its id. Required Permissions: Read-Only
         Assets, Read-Write Assets
@@ -2223,7 +2223,7 @@ paths:
         - Assets
         - Form
         - Forms
-      summary: Update Form Metadata
+      summary: Marketo Update Form Metadata
       description: >-
         Updates the metadata of the target form. Required Permissions:
         Read-Write Assets
@@ -2259,7 +2259,7 @@ paths:
         - Form
         - Approve
         - Forms
-      summary: Approve Form Draft
+      summary: Marketo Approve Form Draft
       description: >-
         Approves the current draft of the form. This will delete the current
         approved version of the form. Required Permissions: Approve Assets
@@ -2286,7 +2286,7 @@ paths:
         - Assets
         - Form
         - Forms
-      summary: Clone Form
+      summary: Marketo Clone Form
       description: 'Clones the target form. Required Permissions: Read-Write Assets'
       operationId: cloneLpFormsUsingPOST
       parameters:
@@ -2319,7 +2319,7 @@ paths:
         - Assets
         - Form
         - Forms
-      summary: Delete Form
+      summary: Marketo Delete Form
       description: >-
         Deletes the target form. Forms which are in use by landing pages may not
         be deleted until they are removed from all landing pages. Required
@@ -2348,7 +2348,7 @@ paths:
         - Form
         - Discard
         - Forms
-      summary: Discard Form Draft
+      summary: Marketo Discard Form Draft
       description: >-
         Discards the current draft of the form. Required Permissions: Read-Write
         Assets
@@ -2377,7 +2377,7 @@ paths:
         - Field
         - Fields
         - Form  Fields
-      summary: Update Form Field
+      summary: Marketo Update Form Field
       description: >-
         Updates the configuration for that target field. Required Permissions:
         Read-Write Assets
@@ -2420,7 +2420,7 @@ paths:
         - Field
         - Fields
         - Form  Fields
-      summary: Delete Form Field
+      summary: Marketo Delete Form Field
       description: 'Deletes a field from a form. Required Permissions: Read-Write Assets'
       operationId: deleteFormFieldUsingPOST
       parameters:
@@ -2452,7 +2452,7 @@ paths:
         - Form
         - Field
         - Form  Fields
-      summary: Add Fieldset to Form
+      summary: Marketo Add Fieldset to Form
       description: >-
         Adds a field set to the target form. Required Permissions: Read-Write
         Assets
@@ -2490,7 +2490,7 @@ paths:
         - Set
         - Fields
         - Form  Fields
-      summary: Delete Field from Fieldset
+      summary: Marketo Delete Field from Fieldset
       description: >-
         Removes the target field from the fieldset. Required Permissions:
         Read-Write Assets
@@ -2529,7 +2529,7 @@ paths:
         - Assets
         - Form
         - Form  Fields
-      summary: Get Fields for Form
+      summary: Marketo Get Fields for Form
       description: >-
         Retrieves the list of fields in the target form. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -2563,7 +2563,7 @@ paths:
         - Assets
         - Form
         - Form  Fields
-      summary: Add Field to Form
+      summary: Marketo Add Field to Form
       description: 'Adds a field to a form. Required Permissions: Read-Write Assets'
       operationId: addFieldToAFormUsingPOST
       parameters:
@@ -2596,7 +2596,7 @@ paths:
         - Assets
         - Form
         - Form  Fields
-      summary: Update Field Positions
+      summary: Marketo Update Field Positions
       description: >-
         Reorders the list of fields in a form. Required Permissions: Read-Write
         Assets
@@ -2631,7 +2631,7 @@ paths:
         - Assets
         - Form
         - Text.json
-      summary: Add Rich Text Field
+      summary: Marketo Add Rich Text Field
       description: >-
         Adds a rich-text type field to the form. Required Permissions:
         Read-Write Assets
@@ -2667,7 +2667,7 @@ paths:
         - Form
         - Submit
         - Forms
-      summary: Update Submit Button
+      summary: Marketo Update Submit Button
       description: >-
         Updates the submit button configuration for the target form. Required
         Permissions: Read-Write Assets
@@ -2703,7 +2703,7 @@ paths:
         - Form
         - Thank
         - Forms
-      summary: Get Thank You Page by Form Id
+      summary: Marketo Get Thank You Page by Form Id
       description: >-
         Returns the thank you page configuration for a given form. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -2738,7 +2738,7 @@ paths:
         - Form
         - Thank
         - Forms
-      summary: Update Thank You Page
+      summary: Marketo Update Thank You Page
       description: >-
         Updates the thank you page configuration for a given form. This update
         is destructive and the resulting draft will not have any memory of the
@@ -2774,7 +2774,7 @@ paths:
         - Rest
         - Assets
         - Forms
-      summary: Get Forms
+      summary: Marketo Get Forms
       description: >-
         Retrieves a list of accessible form records from the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -2818,7 +2818,7 @@ paths:
         - Rest
         - Assets
         - Forms
-      summary: Create Form
+      summary: Marketo Create Form
       description: 'Creates a new form. Required Permissions: Read-Write Assets'
       operationId: createLpFormsUsingPOST
       requestBody:
@@ -2844,7 +2844,7 @@ paths:
         - Form
         - Used
         - Forms
-      summary: Get Form Used By
+      summary: Marketo Get Form Used By
       description: >-
         Returns a list of asset records which depend on a given form. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -2884,7 +2884,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Get Landing Page by Name
+      summary: Marketo Get Landing Page by Name
       description: >-
         Returns the landing page record for the given name. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -2931,7 +2931,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Get Landing Page by Id
+      summary: Marketo Get Landing Page by Id
       description: >-
         Returns the landing record for the given id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -2966,7 +2966,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Update Landing Page Metadata
+      summary: Marketo Update Landing Page Metadata
       description: >-
         Updates the metadata for the targe landing page. Required Permissions:
         Read-Write Assets
@@ -3003,7 +3003,7 @@ paths:
         - Page
         - Approve
         - Landing  Pages
-      summary: Approve Landing Page Draft
+      summary: Marketo Approve Landing Page Draft
       description: >-
         Approves the current draft of the landing page. Required Permissions:
         Approve Assets
@@ -3031,7 +3031,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Clone Landing Page
+      summary: Marketo Clone Landing Page
       description: 'Clones the target landing page. Required Permissions: Read-Write Assets'
       operationId: cloneLandingPageUsingPOST
       parameters:
@@ -3065,7 +3065,7 @@ paths:
         - Landing
         - Page
         - Landing  Page  Content
-      summary: Get Landing Page Content
+      summary: Marketo Get Landing Page Content
       description: >-
         Retrieves the list of content sections in the target landing page.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -3100,7 +3100,7 @@ paths:
         - Landing
         - Page
         - Landing  Page  Content
-      summary: Add Landing Page Content Section
+      summary: Marketo Add Landing Page Content Section
       description: >-
         Adds a content section to the target landing page. Parameters must be
         sent as application/x-www-form-urlencoded (not JSON). Required
@@ -3138,7 +3138,7 @@ paths:
         - Page
         - Content
         - Landing  Page  Content
-      summary: Update Landing Page Content Section
+      summary: Marketo Update Landing Page Content Section
       description: >-
         Updates a content section the landing page. Parameters must be sent as
         application/x-www-form-urlencoded (not JSON). Required Permissions:
@@ -3182,7 +3182,7 @@ paths:
         - Page
         - Content
         - Landing  Page  Content
-      summary: Delete Landing Page Content Section
+      summary: Marketo Delete Landing Page Content Section
       description: >-
         Removes the target content section from the parent landing page.
         Required Permissions: Read-Write Assets
@@ -3216,7 +3216,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Delete Landing Page
+      summary: Marketo Delete Landing Page
       description: 'Deletes the target landing page. Required Permissions: Read-Write Assets'
       operationId: deleteLandingPageByIdUsingPOST
       parameters:
@@ -3243,7 +3243,7 @@ paths:
         - Page
         - Discard
         - Landing  Pages
-      summary: Discard Landing Page Draft
+      summary: Marketo Discard Landing Page Draft
       description: >-
         Discards the current draft of the landing page. Required Permissions:
         Read-Write Assets
@@ -3273,7 +3273,7 @@ paths:
         - Dynamic
         - Content
         - Landing  Page  Content
-      summary: Get Landing Page Dynamic Content
+      summary: Marketo Get Landing Page Dynamic Content
       description: >-
         Retrieves the dynamic content from the target section. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -3309,7 +3309,7 @@ paths:
         - Dynamic
         - Content
         - Landing  Page  Content
-      summary: Update Landing Page Dynamic Content Section
+      summary: Marketo Update Landing Page Dynamic Content Section
       description: >-
         Updates the content of the target dynamic content section. Required
         Permissions: Read-Write Assets
@@ -3351,7 +3351,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Unapprove Landing Page
+      summary: Marketo Unapprove Landing Page
       description: >-
         Unapproves the landing page, reverting it to a draft-only state.
         Required Permissions: Approve Assets
@@ -3381,7 +3381,7 @@ paths:
         - Variable
         - Variables
         - Landing  Pages
-      summary: Update Landing Page Variable
+      summary: Marketo Update Landing Page Variable
       description: >-
         Updates the value of the given variable. Required Permissions:
         Read-Write Assets
@@ -3422,7 +3422,7 @@ paths:
         - Landing
         - Page
         - Landing  Pages
-      summary: Get Landing Page Variables
+      summary: Marketo Get Landing Page Variables
       operationId: getVariablesUsingGET
       parameters:
         - name: id
@@ -3456,7 +3456,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Get Landing Page Template by Name
+      summary: Marketo Get Landing Page Template by Name
       description: >-
         Retrieves the landing page template record for the given name. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -3484,7 +3484,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Get Landing Page Template by Id
+      summary: Marketo Get Landing Page Template by Id
       description: >-
         Retrieves the record for the target landing page template. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -3520,7 +3520,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Update Landing Page Template Metadata
+      summary: Marketo Update Landing Page Template Metadata
       description: >-
         Updates the metadata for the target landing page template. Required
         Permissions: Read-Write Assets
@@ -3558,7 +3558,7 @@ paths:
         - Template
         - Approve
         - Landing  Page  Templates
-      summary: Approve Landing Page Template Draft
+      summary: Marketo Approve Landing Page Template Draft
       description: >-
         Approves the current landing page template draft. This will delete the
         current approved version of the template if there is one. Required
@@ -3588,7 +3588,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Clone Landing Page Template
+      summary: Marketo Clone Landing Page Template
       description: >-
         Clones the target landing page template. Required Permissions:
         Read-Write Assets
@@ -3625,7 +3625,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Get Landing Page Template Content
+      summary: Marketo Get Landing Page Template Content
       description: >-
         Retrieves the content of the target landing page. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -3661,7 +3661,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Update Landing Page Template Content
+      summary: Marketo Update Landing Page Template Content
       description: >-
         Updates the content for the target landing page template. This update is
         destructive for the draft version of the template. Required Permissions:
@@ -3703,7 +3703,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Delete Landing Page Template
+      summary: Marketo Delete Landing Page Template
       description: >-
         Deletes the target landing page template. Required Permissions:
         Read-Write Assets
@@ -3733,7 +3733,7 @@ paths:
         - Template
         - Discard
         - Landing  Page  Templates
-      summary: Discard Landing Page Template Draft
+      summary: Marketo Discard Landing Page Template Draft
       description: >-
         Discrads the current draft of the landing page template. Required
         Permissions: Read-Write Assets
@@ -3762,7 +3762,7 @@ paths:
         - Page
         - Template
         - Landing  Page  Templates
-      summary: Unapprove Landing Page Template
+      summary: Marketo Unapprove Landing Page Template
       description: >-
         Unapproves the landing page template and reverts it to a draft-only
         state. Required Permissions: Approve Assets
@@ -3790,7 +3790,7 @@ paths:
         - Landing
         - Page
         - Landing  Page  Templates
-      summary: Get Landing Page Templates
+      summary: Marketo Get Landing Page Templates
       description: >-
         Retrieves the list of accessible landing page templates from the target
         instance. Required Permissions: Read-Only Assets, Read-Write Assets
@@ -3837,7 +3837,7 @@ paths:
         - Landing
         - Page
         - Landing  Page  Templates
-      summary: Create Landing Page Template
+      summary: Marketo Create Landing Page Template
       description: >-
         Creates a new landing page template. Required Permissions: Read-Write
         Assets
@@ -3864,7 +3864,7 @@ paths:
         - Assets
         - Landing
         - Landing  Pages
-      summary: Get Landing Pages
+      summary: Marketo Get Landing Pages
       description: >-
         Retrieves a list of accessible landing pages from the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -3910,7 +3910,7 @@ paths:
         - Assets
         - Landing
         - Landing  Pages
-      summary: Create Landing Page
+      summary: Marketo Create Landing Page
       description: 'Creates a new landing page. Required Permissions: Read-Write Assets'
       operationId: createLandingPageUsingPOST
       requestBody:
@@ -3937,7 +3937,7 @@ paths:
         - Page
         - Full
         - Landing  Pages
-      summary: Get Landing Page Full Content
+      summary: Marketo Get Landing Page Full Content
       description: >-
         Returns the serialized HTML version of the landing page. Required
         Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in
@@ -3982,7 +3982,7 @@ paths:
         - Assets
         - Redirect
         - Landing  Page  Redirect  Rules
-      summary: Get Landing Page Redirect Rules
+      summary: Marketo Get Landing Page Redirect Rules
       description: >-
         Retrieves a list of landing page redirect rules from the target
         instance. Required Permissions: Read Only Redirect Rules, Read Write
@@ -4044,7 +4044,7 @@ paths:
         - Assets
         - Redirect
         - Landing  Page  Redirect  Rules
-      summary: Create Landing Page Redirect Rule
+      summary: Marketo Create Landing Page Redirect Rule
       description: >-
         Create a new landing page redirect rule. Required Permissions: Read
         Write Redirect Rules
@@ -4072,7 +4072,7 @@ paths:
         - Redirect
         - Rules
         - Landing  Page  Redirect  Rules
-      summary: Get Landing Page Redirect Rule by Id
+      summary: Marketo Get Landing Page Redirect Rule by Id
       description: >-
         Retrieves the landing page redirect rule record. Required Permissions:
         Read Only Redirect Rules, Read Write Redirect Rules
@@ -4099,7 +4099,7 @@ paths:
         - Redirect
         - Rules
         - Landing  Page  Redirect  Rules
-      summary: Update Landing Page Redirect Rule
+      summary: Marketo Update Landing Page Redirect Rule
       description: >-
         Update an existing landing page redirect rule. Required Permissions:
         Read Write Redirect Rules
@@ -4135,7 +4135,7 @@ paths:
         - Redirect
         - Rules
         - Landing  Page  Redirect  Rules
-      summary: Delete Landing Page Redirect Rule
+      summary: Marketo Delete Landing Page Redirect Rule
       description: >-
         Delete a landing page redirect rule. Required Permissions: Read Write
         Redirect Rules
@@ -4163,7 +4163,7 @@ paths:
         - Landing
         - Page
         - Landing  Page  Redirect  Rules
-      summary: Get Landing Page Domains
+      summary: Marketo Get Landing Page Domains
       description: >-
         Retrieves a list of landing page domain and domain aliases. Required
         Permissions: Read Only Redirect Rules, Read Write Redirect Rules
@@ -4197,7 +4197,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Get Program by Name
+      summary: Marketo Get Program by Name
       description: >-
         Retrieves the program record for the given name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -4233,7 +4233,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Get Programs by Tag
+      summary: Marketo Get Programs by Tag
       description: >-
         Retrieves a list of programs matching the tag type and tag values given.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -4277,7 +4277,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Get Program by Id
+      summary: Marketo Get Program by Id
       description: >-
         Retrieves the program record for the given id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -4303,7 +4303,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Update Program Metadata
+      summary: Marketo Update Program Metadata
       description: >-
         Updates the target program's metadata. Required Permissions: Read-Write
         Assets
@@ -4338,7 +4338,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Get Smart List by Program Id
+      summary: Marketo Get Smart List by Program Id
       description: >-
         Retrieves a Smart List record by its Email Program id. Required
         Permissions: Read-Asset or Read-Write Asset
@@ -4370,7 +4370,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Approve Program
+      summary: Marketo Approve Program
       description: >-
         Approves the target program. Only valid for unapproved email programs.
         Required Permissions: Read-Write Assets
@@ -4397,7 +4397,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Clone Program
+      summary: Marketo Clone Program
       description: 'Clones the target program. Required Permissions: Read-Write Assets'
       operationId: cloneProgramUsingPOST
       parameters:
@@ -4430,7 +4430,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Delete Program
+      summary: Marketo Delete Program
       description: >-
         Deletes the target program. The program may not contain any assets which
         are in use outside the program. Required Permissions: Read-Write Assets
@@ -4457,7 +4457,7 @@ paths:
         - Assets
         - Program
         - Programs
-      summary: Unapprove Program
+      summary: Marketo Unapprove Program
       description: >-
         Unapproves the target program. Only valid for approved email programs.
         Required Permissions: Read-Write Assets
@@ -4483,7 +4483,7 @@ paths:
         - Rest
         - Assets
         - Programs
-      summary: Get Programs
+      summary: Marketo Get Programs
       description: >-
         Retrieves the list of accessible programs from the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -4541,7 +4541,7 @@ paths:
         - Rest
         - Assets
         - Programs
-      summary: Create Program
+      summary: Marketo Create Program
       description: 'Creates a new program. Required Permissions: Read-Write Assets'
       operationId: createProgramUsingPOST
       requestBody:
@@ -4565,7 +4565,7 @@ paths:
         - Rest
         - Assets
         - Segments
-      summary: Get Segmentations
+      summary: Marketo Get Segmentations
       description: >-
         Retrieves a list of accessible segmentations for the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -4593,7 +4593,7 @@ paths:
         - Assets
         - Segments.json
         - Segments
-      summary: Get Segments For Segmentation
+      summary: Marketo Get Segments For Segmentation
       description: >-
         Retrieves a list of segments inside the target segmentation. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -4641,7 +4641,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Get Smart Campaign by Id
+      summary: Marketo Get Smart Campaign by Id
       description: >-
         Returns the smart campaign for the given id. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -4668,7 +4668,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Update Smart Campaign
+      summary: Marketo Update Smart Campaign
       description: >-
         Update the smart campaign for the given id. Required Permissions:
         Read-Write Assets
@@ -4704,7 +4704,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Get Smart Campaign by Name
+      summary: Marketo Get Smart Campaign by Name
       description: >-
         Returns the smart campaign for the given name. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -4731,7 +4731,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Get Smart List by Smart Campaign Id
+      summary: Marketo Get Smart List by Smart Campaign Id
       description: >-
         Retrieves a Smart List record by its Smart Campaign id. Required
         Permissions: Read-Asset or Read-Write Asset
@@ -4763,7 +4763,7 @@ paths:
         - Assets
         - Smart
         - Smart  Campaigns
-      summary: Get Smart Campaigns
+      summary: Marketo Get Smart Campaigns
       description: >-
         Retrieves all smart campaigns. Required Permissions: Read-Only Assets,
         Read-Write Assets
@@ -4824,7 +4824,7 @@ paths:
         - Assets
         - Smart
         - Smart  Campaigns
-      summary: Create Smart Campaign
+      summary: Marketo Create Smart Campaign
       description: 'Creates a new smart campaign. Required Permissions: Read-Write Assets'
       operationId: createSmartCampaignUsingPOST
       requestBody:
@@ -4850,7 +4850,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Activate Smart Campaign
+      summary: Marketo Activate Smart Campaign
       description: >-
         Activates a trigger smart campaign. Required Permissions: Activate
         Campaign
@@ -4878,7 +4878,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Deactivate Smart Campaign
+      summary: Marketo Deactivate Smart Campaign
       description: >-
         Deactivates a trigger smart campaign. Required Permissions: Deactivate
         Campaign
@@ -4906,7 +4906,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Clone Smart Campaign
+      summary: Marketo Clone Smart Campaign
       description: 'Clones a smart campaign. Required Permissions: Read-Write Assets'
       operationId: cloneSmartCampaignUsingPOST
       parameters:
@@ -4940,7 +4940,7 @@ paths:
         - Smart
         - Campaigns
         - Smart  Campaigns
-      summary: Delete Smart Campaign
+      summary: Marketo Delete Smart Campaign
       description: 'Deletes a smart campaign. Required Permissions: Read-Write Assets'
       operationId: deleteSmartCampaignUsingPOST
       parameters:
@@ -4965,7 +4965,7 @@ paths:
         - Assets
         - .Json
         - Snippets
-      summary: Get Snippet by Id
+      summary: Marketo Get Snippet by Id
       description: >-
         Retrieves the target snippet record. Required Permissions: Read-Only
         Assets, Read-Write Assets
@@ -4999,7 +4999,7 @@ paths:
         - Assets
         - .Json
         - Snippets
-      summary: Update Snippet Metadata
+      summary: Marketo Update Snippet Metadata
       description: >-
         Updates the metadata of the snippet. Required Permissions: Read-Write
         Assets
@@ -5034,7 +5034,7 @@ paths:
         - Assets
         - Approve
         - Snippets
-      summary: Approve Snippet Draft
+      summary: Marketo Approve Snippet Draft
       description: >-
         Approves the current draft of the snippet. Required Permissions: Approve
         Assets
@@ -5061,7 +5061,7 @@ paths:
         - Assets
         - Clone.json
         - Snippets
-      summary: Clone Snippet
+      summary: Marketo Clone Snippet
       description: 'Clones the target snippet. Required Permissions: Read-Write Assets'
       operationId: cloneSnippetUsingPOST
       parameters:
@@ -5094,7 +5094,7 @@ paths:
         - Assets
         - Content.json
         - Snippets
-      summary: Get Snippet Content
+      summary: Marketo Get Snippet Content
       description: >-
         Retrieves the content of the target snippet. Required Permissions:
         Read-Only Assets, Read-Write Assets
@@ -5128,7 +5128,7 @@ paths:
         - Assets
         - Content.json
         - Snippets
-      summary: Update Snippet Content
+      summary: Marketo Update Snippet Content
       description: >-
         Updates the content of the target snippet. Required Permissions:
         Read-Write Assets
@@ -5171,7 +5171,7 @@ paths:
         - Assets
         - Delete.json
         - Snippets
-      summary: Delete Snippet
+      summary: Marketo Delete Snippet
       description: >-
         Deletes the target snippet. The snippet may not be in use by emails or
         landing pages. Required Permissions: Read-Write Assets
@@ -5198,7 +5198,7 @@ paths:
         - Assets
         - Discard
         - Snippets
-      summary: Discard Snippet Draft
+      summary: Marketo Discard Snippet Draft
       description: >-
         Discards the current draft of the snippet. Required Permissions:
         Read-Write Assets
@@ -5225,7 +5225,7 @@ paths:
         - Assets
         - Dynamic
         - Snippets
-      summary: Get Dynamic Content
+      summary: Marketo Get Dynamic Content
       description: >-
         Gets the list of dynamic content sections for the snippet. Required
         Permissions: Read-Only Assets, Read-Write Assets
@@ -5262,7 +5262,7 @@ paths:
         - Content
         - Segments
         - Snippets
-      summary: Update Snippet Dynamic Content
+      summary: Marketo Update Snippet Dynamic Content
       description: >-
         Updates the target dynamic content section. Required Permissions:
         Read-Write Assets
@@ -5304,7 +5304,7 @@ paths:
         - Assets
         - Unapprove.json
         - Snippets
-      summary: Unapprove Snippet
+      summary: Marketo Unapprove Snippet
       description: >-
         Unapproves the current version of the snippet. The snippet may not be in
         use. The snippet will be reverted to a draft-only state. Required
@@ -5331,7 +5331,7 @@ paths:
         - Rest
         - Assets
         - Snippets
-      summary: Get Snippets
+      summary: Marketo Get Snippets
       description: >-
         Retrieves a list of accessible snippets from the target instance.
         Required Permissions: Read-Only Assets, Read-Write Assets
@@ -5369,7 +5369,7 @@ paths:
         - Rest
         - Assets
         - Snippets
-      summary: Create Snippet
+      summary: Marketo Create Snippet
       description: 'Creates a new snippet. Required Permissions: Read-Write Assets'
       operationId: createSnippetUsingPOST
       requestBody:
@@ -5395,7 +5395,7 @@ paths:
         - Tag
         - Type
         - Tags
-      summary: Get Tag By Name
+      summary: Marketo Get Tag By Name
       description: >-
         Retrieves a tag by its name. This will also return the set of valid
         values for the tag. Required Permissions: Read-Only Assets, Read-Write
@@ -5423,7 +5423,7 @@ paths:
         - Smart
         - Id
         - Smart  Lists
-      summary: Get Smart List by Id
+      summary: Marketo Get Smart List by Id
       description: >-
         Retrieves a Smart List record by its id. Required Permissions:
         Read-Asset or Read-Write Asset
@@ -5455,7 +5455,7 @@ paths:
         - Assets
         - Smart
         - Name.json
-      summary: Get Smart List by Name
+      summary: Marketo Get Smart List by Name
       description: >-
         Retrieves a Smart List record by its name. Required Permissions:
         Read-Asset or Read-Write Asset
@@ -5482,7 +5482,7 @@ paths:
         - Smart
         - Id
         - Smart  Lists
-      summary: Delete Smart List
+      summary: Marketo Delete Smart List
       description: >-
         Deletes the designated Smart List. Required Permissions: Read-Write
         Asset
@@ -5509,7 +5509,7 @@ paths:
         - Assets
         - Smart
         - Smart  Lists
-      summary: Get Smart Lists
+      summary: Marketo Get Smart Lists
       description: >-
         Retrieves a list of user created Smart List records. Required
         Permissions: Read-Asset or Read-Write Asset
@@ -5567,7 +5567,7 @@ paths:
         - Smart
         - Id
         - Smart  Lists
-      summary: Clone Smart List
+      summary: Marketo Clone Smart List
       description: 'Clones the designated Smart List. Required Permissions: Read-Write Asset'
       operationId: cloneSmartListUsingPOST
       parameters:
@@ -5601,7 +5601,7 @@ paths:
         - Static
         - Id
         - Static  Lists
-      summary: Get Static List by Id
+      summary: Marketo Get Static List by Id
       description: >-
         Retrieves a Static List record by its id. Required Permissions:
         Read-Asset or Read-Write Asset
@@ -5628,7 +5628,7 @@ paths:
         - Static
         - Id
         - Static  Lists
-      summary: Update Static List Metadata
+      summary: Marketo Update Static List Metadata
       description: >-
         Updates the metadata of a static list asset. Required Permissions:
         Read-Write Assets
@@ -5663,7 +5663,7 @@ paths:
         - Assets
         - Static
         - Static  Lists
-      summary: Get Static Lists
+      summary: Marketo Get Static Lists
       description: >-
         Retrieves a list of Static List records. Required Permissions:
         Read-Asset or Read-Write Asset
@@ -5719,7 +5719,7 @@ paths:
         - Assets
         - Static
         - Static  Lists
-      summary: Create Static List
+      summary: Marketo Create Static List
       description: 'Creates a new Static List. Required Permissions: Read-Write Assets'
       operationId: createStaticListUsingPOST
       requestBody:
@@ -5744,7 +5744,7 @@ paths:
         - Assets
         - Static
         - Name.json
-      summary: Get Static List by Name
+      summary: Marketo Get Static List by Name
       description: >-
         Retrieves a Static List record by its name. Required Permissions:
         Read-Asset or Read-Write Asset
@@ -5771,7 +5771,7 @@ paths:
         - Static
         - Id
         - Static  Lists
-      summary: Delete Static List
+      summary: Marketo Delete Static List
       description: >-
         Deletes the designated Static List. Required Permissions: Read-Write
         Asset
@@ -5798,7 +5798,7 @@ paths:
         - Assets
         - Tag
         - Tags
-      summary: Get Tag Types
+      summary: Marketo Get Tag Types
       description: >-
         Retrieves a list of available tag types. Required Permissions: Read-Only
         Assets, Read-Write Assets
