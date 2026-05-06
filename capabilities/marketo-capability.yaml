@@ -1,0 +1,3096 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating
+    programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  tags:
+  - Marketo
+  - API
+  created: '2026-05-06'
+  modified: '2026-05-06'
+capability:
+  consumes:
+  - type: http
+    namespace: marketo
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API HTTP API.
+    resources:
+    - name: rest-asset-v1-channel-byname-json
+      path: /rest/asset/v1/channel/byName.json
+      operations:
+      - name: getchannelbynameusingget
+        method: GET
+        description: Marketo Get Channel by Name
+        inputParameters:
+        - name: Name
+          in: query
+          type: string
+          required: true
+          description: Name of channel to retrieve
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-channels-json
+      path: /rest/asset/v1/channels.json
+      operations:
+      - name: getallchannelsusingget
+        method: GET
+        description: Marketo Get Channels
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-byname-json
+      path: /rest/asset/v1/email/byName.json
+      operations:
+      - name: getemailbynameusingget
+        method: GET
+        description: Marketo Get Email by Name
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the email
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-json
+      path: /rest/asset/v1/email/{id}.json
+      operations:
+      - name: getemailbyidusingget
+        method: GET
+        description: Marketo Get Email By Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateemailusingpost
+        method: POST
+        description: Marketo Update Email Metadata
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-approvedraft-json
+      path: /rest/asset/v1/email/{id}/approveDraft.json
+      operations:
+      - name: approvedraftusingpost
+        method: POST
+        description: Marketo Approve Email Draft
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-clone-json
+      path: /rest/asset/v1/email/{id}/clone.json
+      operations:
+      - name: cloneemailusingpost
+        method: POST
+        description: Marketo Clone Email
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-json
+      path: /rest/asset/v1/email/{id}/content.json
+      operations:
+      - name: getemailcontentbyidusingget
+        method: GET
+        description: Marketo Get Email Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateemailcontentusingpost
+        method: POST
+        description: Marketo Update Email Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-rearrange-json
+      path: /rest/asset/v1/email/{id}/content/rearrange.json
+      operations:
+      - name: rearrangemodulesusingpost
+        method: POST
+        description: Marketo Rearrange Email Modules
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-htmlid-json
+      path: /rest/asset/v1/email/{id}/content/{htmlId}.json
+      operations:
+      - name: updateemailcomponentcontentusingpost
+        method: POST
+        description: Marketo Update Email Content Section
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: htmlId
+          in: path
+          type: string
+          required: true
+          description: htmlId
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-moduleid-add-json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/add.json
+      operations:
+      - name: addmoduleusingpost
+        method: POST
+        description: Marketo Add Email Module
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: moduleId
+          in: path
+          type: string
+          required: true
+          description: moduleId
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the module
+        - name: index
+          in: query
+          type: integer
+          required: true
+          description: Index of the module. Determines the order of the module in the email.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-moduleid-delete-j
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/delete.json
+      operations:
+      - name: deletemoduleusingpost
+        method: POST
+        description: Marketo Delete Module
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: moduleId
+          in: path
+          type: string
+          required: true
+          description: moduleId
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-moduleid-duplicat
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json
+      operations:
+      - name: duplicatemoduleusingpost
+        method: POST
+        description: Marketo Duplicate Email Module
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: moduleId
+          in: path
+          type: string
+          required: true
+          description: moduleId
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the new module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-content-moduleid-rename-j
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/rename.json
+      operations:
+      - name: renameusingpost
+        method: POST
+        description: Marketo Rename Email Module
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: moduleId
+          in: path
+          type: string
+          required: true
+          description: moduleId
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: New module name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-delete-json
+      path: /rest/asset/v1/email/{id}/delete.json
+      operations:
+      - name: deleteemailusingpost
+        method: POST
+        description: Marketo Delete Email
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-discarddraft-json
+      path: /rest/asset/v1/email/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost
+        method: POST
+        description: Marketo Discard Email Draft
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-dynamiccontent-contentid-
+      path: /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json
+      operations:
+      - name: getemaildynamiccontentusingget
+        method: GET
+        description: Marketo Get Email Dynamic Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of email
+        - name: contentId
+          in: path
+          type: string
+          required: true
+          description: Id of email dynamic content section
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateemaildynamiccontentusingpost
+        method: POST
+        description: Marketo Update Email Dynamic Content Section
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of email
+        - name: contentId
+          in: path
+          type: string
+          required: true
+          description: Id of email dynamic content section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-sendsample-json
+      path: /rest/asset/v1/email/{id}/sendSample.json
+      operations:
+      - name: sendsampleemailusingpost
+        method: POST
+        description: Marketo Send Sample Email
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-unapprove-json
+      path: /rest/asset/v1/email/{id}/unapprove.json
+      operations:
+      - name: unapprovedraftusingpost
+        method: POST
+        description: Marketo Unapprove Email
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-variable-name-json
+      path: /rest/asset/v1/email/{id}/variable/{name}.json
+      operations:
+      - name: updatevariableusingpost
+        method: POST
+        description: Marketo Update Email Variable
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: name
+          in: path
+          type: string
+          required: true
+          description: name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-variables-json
+      path: /rest/asset/v1/email/{id}/variables.json
+      operations:
+      - name: getemailvariablesusingget
+        method: GET
+        description: Marketo Get Email Variables
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-ccfields-json
+      path: /rest/asset/v1/email/ccFields.json
+      operations:
+      - name: getemailccfieldsusingget
+        method: GET
+        description: Marketo Get Email CC Fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-byname-json
+      path: /rest/asset/v1/emailTemplate/byName.json
+      operations:
+      - name: gettemplatebynameusingget
+        method: GET
+        description: Marketo Get Email Template by Name
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: name
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-json
+      path: /rest/asset/v1/emailTemplate/{id}.json
+      operations:
+      - name: gettemplatebyidusingget
+        method: GET
+        description: Marketo Get Email Template by Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updateemailtemplateusingpost
+        method: POST
+        description: Marketo Update Email Template Metadata
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-approvedraft-json
+      path: /rest/asset/v1/emailTemplate/{id}/approveDraft.json
+      operations:
+      - name: approvedraftusingpost-1
+        method: POST
+        description: Marketo Approve Email Template Draft
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-clone-json
+      path: /rest/asset/v1/emailTemplate/{id}/clone.json
+      operations:
+      - name: clonetemplateusingpost
+        method: POST
+        description: Marketo Clone Email Template
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-content
+      path: /rest/asset/v1/emailTemplate/{id}/content
+      operations:
+      - name: gettemplatecontentbyidusingget
+        method: GET
+        description: Marketo Get Email Template Content by Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-content-json
+      path: /rest/asset/v1/emailTemplate/{id}/content.json
+      operations:
+      - name: updateemailtemplatecontentusingpost
+        method: POST
+        description: Marketo Update Email Template Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-delete-json
+      path: /rest/asset/v1/emailTemplate/{id}/delete.json
+      operations:
+      - name: deletetemplateusingpost
+        method: POST
+        description: Marketo Delete Email Template
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-discarddraft-json
+      path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost-1
+        method: POST
+        description: Marketo Discard Email Template Draft
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplate-id-unapprove-json
+      path: /rest/asset/v1/emailTemplate/{id}/unapprove.json
+      operations:
+      - name: unapprovedraftusingpost-1
+        method: POST
+        description: Marketo Unapprove Email Template Draft
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplates-json
+      path: /rest/asset/v1/emailTemplates.json
+      operations:
+      - name: getemailtemplatesusingget
+        method: GET
+        description: Marketo Get Email Templates
+        inputParameters:
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createemailtemplateusingpost
+        method: POST
+        description: Marketo Create Email Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emailtemplates-id-usedby-json
+      path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
+      operations:
+      - name: getemailtemplateusedbyusingget
+        method: GET
+        description: Marketo Get Email Template Used By
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the email template
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-emails-json
+      path: /rest/asset/v1/emails.json
+      operations:
+      - name: getemailusingget
+        method: GET
+        description: Marketo Get Emails
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of emails to return. Max 200, default 20
+        - name: earliestUpdatedAt
+          in: query
+          type: string
+          description: Exclude emails prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetim
+        - name: latestUpdatedAt
+          in: query
+          type: string
+          description: Exclude emails after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createemailusingpost
+        method: POST
+        description: Marketo Create Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id-fullcontent-json
+      path: /rest/asset/v1/email/{id}/fullContent.json
+      operations:
+      - name: getemailfullcontentusingget
+        method: GET
+        description: Marketo Get Email Full Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the email
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not.
+        - name: leadId
+          in: query
+          type: integer
+          description: The lead id to impersonate. Email is rendered as though it was received by this lead.
+        - name: type
+          in: query
+          type: string
+          description: Email content type to return. Default is HTML.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createemailfullcontentusingpost
+        method: POST
+        description: Marketo Update Email Full Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-file-byname-json
+      path: /rest/asset/v1/file/byName.json
+      operations:
+      - name: getfilebynameusingget
+        method: GET
+        description: Marketo Get File by Name
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the file
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-file-id-json
+      path: /rest/asset/v1/file/{id}.json
+      operations:
+      - name: getfilebyidusingget
+        method: GET
+        description: Marketo Get File by Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id for file in database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-file-id-content-json
+      path: /rest/asset/v1/file/{id}/content.json
+      operations:
+      - name: updatecontentusingpost
+        method: POST
+        description: Marketo Update File Content
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id for file in database
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-files-json
+      path: /rest/asset/v1/files.json
+      operations:
+      - name: getfilesusingget
+        method: GET
+        description: Marketo Get Files
+        inputParameters:
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging. Default 0
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of files to return. Max 200, default 20
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfileusingpost
+        method: POST
+        description: Marketo Create File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-byname-json
+      path: /rest/asset/v1/folder/byName.json
+      operations:
+      - name: getfolderbynameusingget
+        method: GET
+        description: Marketo Get Folder by Name
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the folder. Not applicable for Programs
+        - name: type
+          in: query
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+        - name: root
+          in: query
+          type: string
+          description: Parent folder reference
+        - name: workSpace
+          in: query
+          type: string
+          description: Name of the workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-id-json
+      path: /rest/asset/v1/folder/{id}.json
+      operations:
+      - name: getfolderbyidusingget
+        method: GET
+        description: Marketo Get Folder by Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the folder to retrieve
+        - name: type
+          in: query
+          type: string
+          required: true
+          description: Type of folder. 'Folder' or 'Program'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: updatefolderusingpost
+        method: POST
+        description: Marketo Update Folder Metadata
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the folder to update
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-id-content-json
+      path: /rest/asset/v1/folder/{id}/content.json
+      operations:
+      - name: getfoldercontentusingget
+        method: GET
+        description: Marketo Get Folder Contents
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the folder to retrieve
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: type
+          in: query
+          type: string
+          required: true
+          description: Type of folder. 'Folder' or 'Program'. Default is 'Folder'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-id-delete-json
+      path: /rest/asset/v1/folder/{id}/delete.json
+      operations:
+      - name: deletefolderusingpost
+        method: POST
+        description: Marketo Delete Folder
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the folder to delete
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-id-tokens-json
+      path: /rest/asset/v1/folder/{id}/tokens.json
+      operations:
+      - name: gettokensbyfolderidusingget
+        method: GET
+        description: Marketo Get Tokens by Folder Id
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        - name: folderType
+          in: query
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: addtokentofolderusingpost
+        method: POST
+        description: Marketo Create Token
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: Id of the folder to which the token will be associated with
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folder-id-tokens-delete-json
+      path: /rest/asset/v1/folder/{id}/tokens/delete.json
+      operations:
+      - name: deletetokenbynameusingpost
+        method: POST
+        description: Marketo Delete Token by Name
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          required: true
+          description: id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-folders-json
+      path: /rest/asset/v1/folders.json
+      operations:
+      - name: getfolderusingget
+        method: GET
+        description: Marketo Get Folders
+        inputParameters:
+        - name: root
+          in: query
+          type: string
+          description: Parent folder reference
+        - name: maxDepth
+          in: query
+          type: integer
+          description: Maximum folder depth to traverse, Default 2
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of folders to return. Default 20, maximum 200
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging. Default 0
+        - name: workSpace
+          in: query
+          type: string
+          description: Name of the workspace
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createfolderusingpost
+        method: POST
+        description: Marketo Create Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-form-byname-json
+      path: /rest/asset/v1/form/byName.json
+      operations:
+      - name: getlpformbynameusingget
+        method: GET
+        description: Marketo Get Form by Name
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          required: true
+          description: Name of the form
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-form-fields-json
+      path: /rest/asset/v1/form/fields.json
+      operations:
+      - name: getallfieldsusingget
+        method: GET
+        description: Marketo Get Available Form Fields
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of fields to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-form-programmemberfields-json
+      path: /rest/asset/v1/form/programMemberFields.json
+      operations:
+      - name: getallprogrammemberfieldsusingget
+        method: GET
+        description: Marketo Get Available Form Program Member Fields
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of fields to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-form-formid-field-fieldid-visibili
+      path: /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json
+      operations:
+      - name: addformfieldvisibilityruleusingpost
+        method: POST
+        description: Marketo Add Form Field Visibility Rules
+        inputParameters:
+        - name: formId
+          in: path
+          type: integer
+          required: true
+          description: formId
+        - name: fieldId
+          in: path
+          type: string
+          required: true
+          description: fieldId
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    port: 8080
+    namespace: marketo-rest
+    description: REST adapter for Marketo Engage Rest API.
+    resources:
+    - path: /rest/asset/v1/channel/byName.json
+      name: getchannelbynameusingget
+      operations:
+      - method: GET
+        name: getchannelbynameusingget
+        description: Marketo Get Channel by Name
+        call: marketo.getchannelbynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/channels.json
+      name: getallchannelsusingget
+      operations:
+      - method: GET
+        name: getallchannelsusingget
+        description: Marketo Get Channels
+        call: marketo.getallchannelsusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/byName.json
+      name: getemailbynameusingget
+      operations:
+      - method: GET
+        name: getemailbynameusingget
+        description: Marketo Get Email by Name
+        call: marketo.getemailbynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}.json
+      name: getemailbyidusingget
+      operations:
+      - method: GET
+        name: getemailbyidusingget
+        description: Marketo Get Email By Id
+        call: marketo.getemailbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}.json
+      name: updateemailusingpost
+      operations:
+      - method: POST
+        name: updateemailusingpost
+        description: Marketo Update Email Metadata
+        call: marketo.updateemailusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/approveDraft.json
+      name: approvedraftusingpost
+      operations:
+      - method: POST
+        name: approvedraftusingpost
+        description: Marketo Approve Email Draft
+        call: marketo.approvedraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/clone.json
+      name: cloneemailusingpost
+      operations:
+      - method: POST
+        name: cloneemailusingpost
+        description: Marketo Clone Email
+        call: marketo.cloneemailusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content.json
+      name: getemailcontentbyidusingget
+      operations:
+      - method: GET
+        name: getemailcontentbyidusingget
+        description: Marketo Get Email Content
+        call: marketo.getemailcontentbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content.json
+      name: updateemailcontentusingpost
+      operations:
+      - method: POST
+        name: updateemailcontentusingpost
+        description: Marketo Update Email Content
+        call: marketo.updateemailcontentusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/rearrange.json
+      name: rearrangemodulesusingpost
+      operations:
+      - method: POST
+        name: rearrangemodulesusingpost
+        description: Marketo Rearrange Email Modules
+        call: marketo.rearrangemodulesusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/{htmlId}.json
+      name: updateemailcomponentcontentusingpost
+      operations:
+      - method: POST
+        name: updateemailcomponentcontentusingpost
+        description: Marketo Update Email Content Section
+        call: marketo.updateemailcomponentcontentusingpost
+        with:
+          id: rest.id
+          htmlId: rest.htmlId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/{moduleId}/add.json
+      name: addmoduleusingpost
+      operations:
+      - method: POST
+        name: addmoduleusingpost
+        description: Marketo Add Email Module
+        call: marketo.addmoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/{moduleId}/delete.json
+      name: deletemoduleusingpost
+      operations:
+      - method: POST
+        name: deletemoduleusingpost
+        description: Marketo Delete Module
+        call: marketo.deletemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json
+      name: duplicatemoduleusingpost
+      operations:
+      - method: POST
+        name: duplicatemoduleusingpost
+        description: Marketo Duplicate Email Module
+        call: marketo.duplicatemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/content/{moduleId}/rename.json
+      name: renameusingpost
+      operations:
+      - method: POST
+        name: renameusingpost
+        description: Marketo Rename Email Module
+        call: marketo.renameusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/delete.json
+      name: deleteemailusingpost
+      operations:
+      - method: POST
+        name: deleteemailusingpost
+        description: Marketo Delete Email
+        call: marketo.deleteemailusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/discardDraft.json
+      name: discarddraftusingpost
+      operations:
+      - method: POST
+        name: discarddraftusingpost
+        description: Marketo Discard Email Draft
+        call: marketo.discarddraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json
+      name: getemaildynamiccontentusingget
+      operations:
+      - method: GET
+        name: getemaildynamiccontentusingget
+        description: Marketo Get Email Dynamic Content
+        call: marketo.getemaildynamiccontentusingget
+        with:
+          id: rest.id
+          contentId: rest.contentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json
+      name: updateemaildynamiccontentusingpost
+      operations:
+      - method: POST
+        name: updateemaildynamiccontentusingpost
+        description: Marketo Update Email Dynamic Content Section
+        call: marketo.updateemaildynamiccontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/sendSample.json
+      name: sendsampleemailusingpost
+      operations:
+      - method: POST
+        name: sendsampleemailusingpost
+        description: Marketo Send Sample Email
+        call: marketo.sendsampleemailusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/unapprove.json
+      name: unapprovedraftusingpost
+      operations:
+      - method: POST
+        name: unapprovedraftusingpost
+        description: Marketo Unapprove Email
+        call: marketo.unapprovedraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/variable/{name}.json
+      name: updatevariableusingpost
+      operations:
+      - method: POST
+        name: updatevariableusingpost
+        description: Marketo Update Email Variable
+        call: marketo.updatevariableusingpost
+        with:
+          id: rest.id
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/variables.json
+      name: getemailvariablesusingget
+      operations:
+      - method: GET
+        name: getemailvariablesusingget
+        description: Marketo Get Email Variables
+        call: marketo.getemailvariablesusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/ccFields.json
+      name: getemailccfieldsusingget
+      operations:
+      - method: GET
+        name: getemailccfieldsusingget
+        description: Marketo Get Email CC Fields
+        call: marketo.getemailccfieldsusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/byName.json
+      name: gettemplatebynameusingget
+      operations:
+      - method: GET
+        name: gettemplatebynameusingget
+        description: Marketo Get Email Template by Name
+        call: marketo.gettemplatebynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}.json
+      name: gettemplatebyidusingget
+      operations:
+      - method: GET
+        name: gettemplatebyidusingget
+        description: Marketo Get Email Template by Id
+        call: marketo.gettemplatebyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}.json
+      name: updateemailtemplateusingpost
+      operations:
+      - method: POST
+        name: updateemailtemplateusingpost
+        description: Marketo Update Email Template Metadata
+        call: marketo.updateemailtemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/approveDraft.json
+      name: approvedraftusingpost-1
+      operations:
+      - method: POST
+        name: approvedraftusingpost-1
+        description: Marketo Approve Email Template Draft
+        call: marketo.approvedraftusingpost-1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/clone.json
+      name: clonetemplateusingpost
+      operations:
+      - method: POST
+        name: clonetemplateusingpost
+        description: Marketo Clone Email Template
+        call: marketo.clonetemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/content
+      name: gettemplatecontentbyidusingget
+      operations:
+      - method: GET
+        name: gettemplatecontentbyidusingget
+        description: Marketo Get Email Template Content by Id
+        call: marketo.gettemplatecontentbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/content.json
+      name: updateemailtemplatecontentusingpost
+      operations:
+      - method: POST
+        name: updateemailtemplatecontentusingpost
+        description: Marketo Update Email Template Content
+        call: marketo.updateemailtemplatecontentusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/delete.json
+      name: deletetemplateusingpost
+      operations:
+      - method: POST
+        name: deletetemplateusingpost
+        description: Marketo Delete Email Template
+        call: marketo.deletetemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
+      name: discarddraftusingpost-1
+      operations:
+      - method: POST
+        name: discarddraftusingpost-1
+        description: Marketo Discard Email Template Draft
+        call: marketo.discarddraftusingpost-1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplate/{id}/unapprove.json
+      name: unapprovedraftusingpost-1
+      operations:
+      - method: POST
+        name: unapprovedraftusingpost-1
+        description: Marketo Unapprove Email Template Draft
+        call: marketo.unapprovedraftusingpost-1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplates.json
+      name: getemailtemplatesusingget
+      operations:
+      - method: GET
+        name: getemailtemplatesusingget
+        description: Marketo Get Email Templates
+        call: marketo.getemailtemplatesusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplates.json
+      name: createemailtemplateusingpost
+      operations:
+      - method: POST
+        name: createemailtemplateusingpost
+        description: Marketo Create Email Template
+        call: marketo.createemailtemplateusingpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
+      name: getemailtemplateusedbyusingget
+      operations:
+      - method: GET
+        name: getemailtemplateusedbyusingget
+        description: Marketo Get Email Template Used By
+        call: marketo.getemailtemplateusedbyusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emails.json
+      name: getemailusingget
+      operations:
+      - method: GET
+        name: getemailusingget
+        description: Marketo Get Emails
+        call: marketo.getemailusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/emails.json
+      name: createemailusingpost
+      operations:
+      - method: POST
+        name: createemailusingpost
+        description: Marketo Create Email
+        call: marketo.createemailusingpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/fullContent.json
+      name: getemailfullcontentusingget
+      operations:
+      - method: GET
+        name: getemailfullcontentusingget
+        description: Marketo Get Email Full Content
+        call: marketo.getemailfullcontentusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/email/{id}/fullContent.json
+      name: createemailfullcontentusingpost
+      operations:
+      - method: POST
+        name: createemailfullcontentusingpost
+        description: Marketo Update Email Full Content
+        call: marketo.createemailfullcontentusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/file/byName.json
+      name: getfilebynameusingget
+      operations:
+      - method: GET
+        name: getfilebynameusingget
+        description: Marketo Get File by Name
+        call: marketo.getfilebynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/file/{id}.json
+      name: getfilebyidusingget
+      operations:
+      - method: GET
+        name: getfilebyidusingget
+        description: Marketo Get File by Id
+        call: marketo.getfilebyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/file/{id}/content.json
+      name: updatecontentusingpost
+      operations:
+      - method: POST
+        name: updatecontentusingpost
+        description: Marketo Update File Content
+        call: marketo.updatecontentusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/files.json
+      name: getfilesusingget
+      operations:
+      - method: GET
+        name: getfilesusingget
+        description: Marketo Get Files
+        call: marketo.getfilesusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/files.json
+      name: createfileusingpost
+      operations:
+      - method: POST
+        name: createfileusingpost
+        description: Marketo Create File
+        call: marketo.createfileusingpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/byName.json
+      name: getfolderbynameusingget
+      operations:
+      - method: GET
+        name: getfolderbynameusingget
+        description: Marketo Get Folder by Name
+        call: marketo.getfolderbynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}.json
+      name: getfolderbyidusingget
+      operations:
+      - method: GET
+        name: getfolderbyidusingget
+        description: Marketo Get Folder by Id
+        call: marketo.getfolderbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}.json
+      name: updatefolderusingpost
+      operations:
+      - method: POST
+        name: updatefolderusingpost
+        description: Marketo Update Folder Metadata
+        call: marketo.updatefolderusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}/content.json
+      name: getfoldercontentusingget
+      operations:
+      - method: GET
+        name: getfoldercontentusingget
+        description: Marketo Get Folder Contents
+        call: marketo.getfoldercontentusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}/delete.json
+      name: deletefolderusingpost
+      operations:
+      - method: POST
+        name: deletefolderusingpost
+        description: Marketo Delete Folder
+        call: marketo.deletefolderusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}/tokens.json
+      name: gettokensbyfolderidusingget
+      operations:
+      - method: GET
+        name: gettokensbyfolderidusingget
+        description: Marketo Get Tokens by Folder Id
+        call: marketo.gettokensbyfolderidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}/tokens.json
+      name: addtokentofolderusingpost
+      operations:
+      - method: POST
+        name: addtokentofolderusingpost
+        description: Marketo Create Token
+        call: marketo.addtokentofolderusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folder/{id}/tokens/delete.json
+      name: deletetokenbynameusingpost
+      operations:
+      - method: POST
+        name: deletetokenbynameusingpost
+        description: Marketo Delete Token by Name
+        call: marketo.deletetokenbynameusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folders.json
+      name: getfolderusingget
+      operations:
+      - method: GET
+        name: getfolderusingget
+        description: Marketo Get Folders
+        call: marketo.getfolderusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/folders.json
+      name: createfolderusingpost
+      operations:
+      - method: POST
+        name: createfolderusingpost
+        description: Marketo Create Folder
+        call: marketo.createfolderusingpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/form/byName.json
+      name: getlpformbynameusingget
+      operations:
+      - method: GET
+        name: getlpformbynameusingget
+        description: Marketo Get Form by Name
+        call: marketo.getlpformbynameusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/form/fields.json
+      name: getallfieldsusingget
+      operations:
+      - method: GET
+        name: getallfieldsusingget
+        description: Marketo Get Available Form Fields
+        call: marketo.getallfieldsusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/form/programMemberFields.json
+      name: getallprogrammemberfieldsusingget
+      operations:
+      - method: GET
+        name: getallprogrammemberfieldsusingget
+        description: Marketo Get Available Form Program Member Fields
+        call: marketo.getallprogrammemberfieldsusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json
+      name: addformfieldvisibilityruleusingpost
+      operations:
+      - method: POST
+        name: addformfieldvisibilityruleusingpost
+        description: Marketo Add Form Field Visibility Rules
+        call: marketo.addformfieldvisibilityruleusingpost
+        with:
+          formId: rest.formId
+          fieldId: rest.fieldId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: marketo-mcp
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API for AI agent use.
+    tools:
+    - name: getchannelbynameusingget
+      description: Marketo Get Channel by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getchannelbynameusingget
+      with:
+        Name: tools.Name
+      inputParameters:
+      - name: Name
+        type: string
+        description: Name of channel to retrieve
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getallchannelsusingget
+      description: Marketo Get Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getallchannelsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      inputParameters:
+      - name: maxReturn
+        type: integer
+        description: Maximum number of channels to return. Max 200, default 20
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailbynameusingget
+      description: Marketo Get Email by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailbynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+        folder: tools.folder
+      inputParameters:
+      - name: name
+        type: string
+        description: Name of the email
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      - name: folder
+        type: string
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailbyidusingget
+      description: Marketo Get Email By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemailusingpost
+      description: Marketo Update Email Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemailusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approvedraftusingpost
+      description: Marketo Approve Email Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.approvedraftusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cloneemailusingpost
+      description: Marketo Clone Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.cloneemailusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailcontentbyidusingget
+      description: Marketo Get Email Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailcontentbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemailcontentusingpost
+      description: Marketo Update Email Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemailcontentusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: rearrangemodulesusingpost
+      description: Marketo Rearrange Email Modules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.rearrangemodulesusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemailcomponentcontentusingpost
+      description: Marketo Update Email Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemailcomponentcontentusingpost
+      with:
+        id: tools.id
+        htmlId: tools.htmlId
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: htmlId
+        type: string
+        description: htmlId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: addmoduleusingpost
+      description: Marketo Add Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.addmoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+        index: tools.index
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: moduleId
+        type: string
+        description: moduleId
+        required: true
+      - name: name
+        type: string
+        description: Name of the module
+        required: true
+      - name: index
+        type: integer
+        description: Index of the module. Determines the order of the module in the email.
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletemoduleusingpost
+      description: Marketo Delete Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.deletemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: moduleId
+        type: string
+        description: moduleId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: duplicatemoduleusingpost
+      description: Marketo Duplicate Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.duplicatemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: moduleId
+        type: string
+        description: moduleId
+        required: true
+      - name: name
+        type: string
+        description: Name of the new module
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: renameusingpost
+      description: Marketo Rename Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.renameusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: moduleId
+        type: string
+        description: moduleId
+        required: true
+      - name: name
+        type: string
+        description: New module name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deleteemailusingpost
+      description: Marketo Delete Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.deleteemailusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: discarddraftusingpost
+      description: Marketo Discard Email Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.discarddraftusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemaildynamiccontentusingget
+      description: Marketo Get Email Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemaildynamiccontentusingget
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        status: tools.status
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of email
+        required: true
+      - name: contentId
+        type: string
+        description: Id of email dynamic content section
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemaildynamiccontentusingpost
+      description: Marketo Update Email Dynamic Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemaildynamiccontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of email
+        required: true
+      - name: contentId
+        type: string
+        description: Id of email dynamic content section
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: sendsampleemailusingpost
+      description: Marketo Send Sample Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.sendsampleemailusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the email
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unapprovedraftusingpost
+      description: Marketo Unapprove Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.unapprovedraftusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatevariableusingpost
+      description: Marketo Update Email Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updatevariableusingpost
+      with:
+        id: tools.id
+        name: tools.name
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: name
+        type: string
+        description: name
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailvariablesusingget
+      description: Marketo Get Email Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailvariablesusingget
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailccfieldsusingget
+      description: Marketo Get Email CC Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailccfieldsusingget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettemplatebynameusingget
+      description: Marketo Get Email Template by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.gettemplatebynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+      inputParameters:
+      - name: name
+        type: string
+        description: name
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettemplatebyidusingget
+      description: Marketo Get Email Template by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.gettemplatebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemailtemplateusingpost
+      description: Marketo Update Email Template Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemailtemplateusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: approvedraftusingpost-1
+      description: Marketo Approve Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.approvedraftusingpost-1
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clonetemplateusingpost
+      description: Marketo Clone Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.clonetemplateusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettemplatecontentbyidusingget
+      description: Marketo Get Email Template Content by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.gettemplatecontentbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updateemailtemplatecontentusingpost
+      description: Marketo Update Email Template Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updateemailtemplatecontentusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletetemplateusingpost
+      description: Marketo Delete Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.deletetemplateusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: discarddraftusingpost-1
+      description: Marketo Discard Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.discarddraftusingpost-1
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unapprovedraftusingpost-1
+      description: Marketo Unapprove Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.unapprovedraftusingpost-1
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailtemplatesusingget
+      description: Marketo Get Email Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailtemplatesusingget
+      with:
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+        status: tools.status
+      inputParameters:
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      - name: maxReturn
+        type: integer
+        description: Maximum number of channels to return. Max 200, default 20
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createemailtemplateusingpost
+      description: Marketo Create Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.createemailtemplateusingpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailtemplateusedbyusingget
+      description: Marketo Get Email Template Used By
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailtemplateusedbyusingget
+      with:
+        id: tools.id
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the email template
+        required: true
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      - name: maxReturn
+        type: integer
+        description: Maximum number of channels to return. Max 200, default 20
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailusingget
+      description: Marketo Get Emails
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailusingget
+      with:
+        status: tools.status
+        folder: tools.folder
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+        earliestUpdatedAt: tools.earliestUpdatedAt
+        latestUpdatedAt: tools.latestUpdatedAt
+      inputParameters:
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      - name: folder
+        type: string
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      - name: maxReturn
+        type: integer
+        description: Maximum number of emails to return. Max 200, default 20
+      - name: earliestUpdatedAt
+        type: string
+        description: Exclude emails prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetim
+      - name: latestUpdatedAt
+        type: string
+        description: Exclude emails after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createemailusingpost
+      description: Marketo Create Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.createemailusingpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getemailfullcontentusingget
+      description: Marketo Get Email Full Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getemailfullcontentusingget
+      with:
+        id: tools.id
+        status: tools.status
+        leadId: tools.leadId
+        type: tools.type
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the email
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not.
+      - name: leadId
+        type: integer
+        description: The lead id to impersonate. Email is rendered as though it was received by this lead.
+      - name: type
+        type: string
+        description: Email content type to return. Default is HTML.
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createemailfullcontentusingpost
+      description: Marketo Update Email Full Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.createemailfullcontentusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the email
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfilebynameusingget
+      description: Marketo Get File by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfilebynameusingget
+      with:
+        name: tools.name
+      inputParameters:
+      - name: name
+        type: string
+        description: Name of the file
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfilebyidusingget
+      description: Marketo Get File by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfilebyidusingget
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id for file in database
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatecontentusingpost
+      description: Marketo Update File Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updatecontentusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id for file in database
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfilesusingget
+      description: Marketo Get Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfilesusingget
+      with:
+        folder: tools.folder
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      inputParameters:
+      - name: folder
+        type: string
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      - name: offset
+        type: integer
+        description: Integer offset for paging. Default 0
+      - name: maxReturn
+        type: integer
+        description: Maximum number of files to return. Max 200, default 20
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createfileusingpost
+      description: Marketo Create File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.createfileusingpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfolderbynameusingget
+      description: Marketo Get Folder by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfolderbynameusingget
+      with:
+        name: tools.name
+        type: tools.type
+        root: tools.root
+        workSpace: tools.workSpace
+      inputParameters:
+      - name: name
+        type: string
+        description: Name of the folder. Not applicable for Programs
+        required: true
+      - name: type
+        type: string
+        description: Type of folder. 'Folder' or 'Program'
+      - name: root
+        type: string
+        description: Parent folder reference
+      - name: workSpace
+        type: string
+        description: Name of the workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfolderbyidusingget
+      description: Marketo Get Folder by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfolderbyidusingget
+      with:
+        id: tools.id
+        type: tools.type
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the folder to retrieve
+        required: true
+      - name: type
+        type: string
+        description: Type of folder. 'Folder' or 'Program'
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: updatefolderusingpost
+      description: Marketo Update Folder Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.updatefolderusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the folder to update
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfoldercontentusingget
+      description: Marketo Get Folder Contents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfoldercontentusingget
+      with:
+        id: tools.id
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        type: tools.type
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the folder to retrieve
+        required: true
+      - name: maxReturn
+        type: integer
+        description: Maximum number of channels to return. Max 200, default 20
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      - name: type
+        type: string
+        description: Type of folder. 'Folder' or 'Program'. Default is 'Folder'
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletefolderusingpost
+      description: Marketo Delete Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.deletefolderusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the folder to delete
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: gettokensbyfolderidusingget
+      description: Marketo Get Tokens by Folder Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.gettokensbyfolderidusingget
+      with:
+        id: tools.id
+        folderType: tools.folderType
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      - name: folderType
+        type: string
+        description: Type of folder. 'Folder' or 'Program'
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: addtokentofolderusingpost
+      description: Marketo Create Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.addtokentofolderusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: Id of the folder to which the token will be associated with
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deletetokenbynameusingpost
+      description: Marketo Delete Token by Name
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.deletetokenbynameusingpost
+      with:
+        id: tools.id
+      inputParameters:
+      - name: id
+        type: integer
+        description: id
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getfolderusingget
+      description: Marketo Get Folders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getfolderusingget
+      with:
+        root: tools.root
+        maxDepth: tools.maxDepth
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        workSpace: tools.workSpace
+      inputParameters:
+      - name: root
+        type: string
+        description: Parent folder reference
+      - name: maxDepth
+        type: integer
+        description: Maximum folder depth to traverse, Default 2
+      - name: maxReturn
+        type: integer
+        description: Maximum number of folders to return. Default 20, maximum 200
+      - name: offset
+        type: integer
+        description: Integer offset for paging. Default 0
+      - name: workSpace
+        type: string
+        description: Name of the workspace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: createfolderusingpost
+      description: Marketo Create Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.createfolderusingpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getlpformbynameusingget
+      description: Marketo Get Form by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getlpformbynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+        folder: tools.folder
+      inputParameters:
+      - name: name
+        type: string
+        description: Name of the form
+        required: true
+      - name: status
+        type: string
+        description: Status filter for draft or approved versions
+      - name: folder
+        type: string
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getallfieldsusingget
+      description: Marketo Get Available Form Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getallfieldsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      inputParameters:
+      - name: maxReturn
+        type: integer
+        description: Maximum number of fields to return. Max 200, default 20
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: getallprogrammemberfieldsusingget
+      description: Marketo Get Available Form Program Member Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: marketo.getallprogrammemberfieldsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      inputParameters:
+      - name: maxReturn
+        type: integer
+        description: Maximum number of fields to return. Max 200, default 20
+      - name: offset
+        type: integer
+        description: Integer offset for paging
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: addformfieldvisibilityruleusingpost
+      description: Marketo Add Form Field Visibility Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: marketo.addformfieldvisibilityruleusingpost
+      with:
+        formId: tools.formId
+        fieldId: tools.fieldId
+      inputParameters:
+      - name: formId
+        type: integer
+        description: formId
+        required: true
+      - name: fieldId
+        type: string
+        description: fieldId
+        required: true
+      outputParameters:
+      - type: object
+        mapping: $.
