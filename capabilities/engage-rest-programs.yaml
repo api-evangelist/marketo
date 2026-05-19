@@ -1,0 +1,557 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Programs
+  description: 'Marketo Engage Rest API — Programs. 11 operations. Lead operation: Marketo Get Program by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Programs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-programs
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Programs business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-program-byName.json
+      path: /rest/asset/v1/program/byName.json
+      operations:
+      - name: getprogrambynameusingget
+        method: GET
+        description: Marketo Get Program by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the program
+          required: true
+        - name: includeTags
+          in: query
+          type: boolean
+          description: Set true to populate program tags
+        - name: includeCosts
+          in: query
+          type: boolean
+          description: Set true to populate program costs
+    - name: rest-asset-v1-program-byTag.json
+      path: /rest/asset/v1/program/byTag.json
+      operations:
+      - name: getprogramlistbytagusingget
+        method: GET
+        description: Marketo Get Programs by Tag
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: tagType
+          in: query
+          type: string
+          description: Type of program tag
+          required: true
+        - name: tagValue
+          in: query
+          type: string
+          description: Value of the tag
+          required: true
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+    - name: rest-asset-v1-program-id}.json
+      path: /rest/asset/v1/program/{id}.json
+      operations:
+      - name: getprogrambyidusingget
+        method: GET
+        description: Marketo Get Program by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+      - name: updateprogramusingpost
+        method: POST
+        description: Marketo Update Program Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-program-id-approve.json
+      path: /rest/asset/v1/program/{id}/approve.json
+      operations:
+      - name: approveprogramusingpost
+        method: POST
+        description: Marketo Approve Program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-program-id-clone.json
+      path: /rest/asset/v1/program/{id}/clone.json
+      operations:
+      - name: cloneprogramusingpost
+        method: POST
+        description: Marketo Clone Program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-program-id-delete.json
+      path: /rest/asset/v1/program/{id}/delete.json
+      operations:
+      - name: deleteprogramusingpost
+        method: POST
+        description: Marketo Delete Program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-program-id-unapprove.json
+      path: /rest/asset/v1/program/{id}/unapprove.json
+      operations:
+      - name: unapproveprogramusingpost
+        method: POST
+        description: Marketo Unapprove Program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-program-programId-smartList.json
+      path: /rest/asset/v1/program/{programId}/smartList.json
+      operations:
+      - name: getsmartlistbyprogramidusingget
+        method: GET
+        description: Marketo Get Smart List by Program Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: programId
+          in: path
+          type: integer
+          description: Id for the email program containing smart list to retrieve
+          required: true
+        - name: includeRules
+          in: query
+          type: boolean
+          description: Set true to populate smart list rules. Default false
+    - name: rest-asset-v1-programs.json
+      path: /rest/asset/v1/programs.json
+      operations:
+      - name: browseprogramsusingget
+        method: GET
+        description: Marketo Get Programs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: filterType
+          in: query
+          type: string
+          description: Optional filter. Requires filterValues
+        - name: earliestUpdatedAt
+          in: query
+          type: string
+          description: Exclude programs prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datet
+        - name: latestUpdatedAt
+          in: query
+          type: string
+          description: Exclude programs after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime
+      - name: createprogramusingpost
+        method: POST
+        description: Marketo Create Program
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-programs-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Programs. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/program/byname-json
+      name: rest-asset-v1-program-byname-json
+      description: REST surface for rest-asset-v1-program-byName.json.
+      operations:
+      - method: GET
+        name: getprogrambynameusingget
+        description: Marketo Get Program by Name
+        call: engage-rest-programs.getprogrambynameusingget
+        with:
+          name: rest.name
+          includeTags: rest.includeTags
+          includeCosts: rest.includeCosts
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/bytag-json
+      name: rest-asset-v1-program-bytag-json
+      description: REST surface for rest-asset-v1-program-byTag.json.
+      operations:
+      - method: GET
+        name: getprogramlistbytagusingget
+        description: Marketo Get Programs by Tag
+        call: engage-rest-programs.getprogramlistbytagusingget
+        with:
+          tagType: rest.tagType
+          tagValue: rest.tagValue
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/id-json
+      name: rest-asset-v1-program-id-json
+      description: REST surface for rest-asset-v1-program-id}.json.
+      operations:
+      - method: GET
+        name: getprogrambyidusingget
+        description: Marketo Get Program by Id
+        call: engage-rest-programs.getprogrambyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateprogramusingpost
+        description: Marketo Update Program Metadata
+        call: engage-rest-programs.updateprogramusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/{id}/approve-json
+      name: rest-asset-v1-program-id-approve-json
+      description: REST surface for rest-asset-v1-program-id-approve.json.
+      operations:
+      - method: POST
+        name: approveprogramusingpost
+        description: Marketo Approve Program
+        call: engage-rest-programs.approveprogramusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/{id}/clone-json
+      name: rest-asset-v1-program-id-clone-json
+      description: REST surface for rest-asset-v1-program-id-clone.json.
+      operations:
+      - method: POST
+        name: cloneprogramusingpost
+        description: Marketo Clone Program
+        call: engage-rest-programs.cloneprogramusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/{id}/delete-json
+      name: rest-asset-v1-program-id-delete-json
+      description: REST surface for rest-asset-v1-program-id-delete.json.
+      operations:
+      - method: POST
+        name: deleteprogramusingpost
+        description: Marketo Delete Program
+        call: engage-rest-programs.deleteprogramusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/{id}/unapprove-json
+      name: rest-asset-v1-program-id-unapprove-json
+      description: REST surface for rest-asset-v1-program-id-unapprove.json.
+      operations:
+      - method: POST
+        name: unapproveprogramusingpost
+        description: Marketo Unapprove Program
+        call: engage-rest-programs.unapproveprogramusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/program/{programid}/smartlist-json
+      name: rest-asset-v1-program-programid-smartlist-json
+      description: REST surface for rest-asset-v1-program-programId-smartList.json.
+      operations:
+      - method: GET
+        name: getsmartlistbyprogramidusingget
+        description: Marketo Get Smart List by Program Id
+        call: engage-rest-programs.getsmartlistbyprogramidusingget
+        with:
+          programId: rest.programId
+          includeRules: rest.includeRules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/programs-json
+      name: rest-asset-v1-programs-json
+      description: REST surface for rest-asset-v1-programs.json.
+      operations:
+      - method: GET
+        name: browseprogramsusingget
+        description: Marketo Get Programs
+        call: engage-rest-programs.browseprogramsusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+          filterType: rest.filterType
+          earliestUpdatedAt: rest.earliestUpdatedAt
+          latestUpdatedAt: rest.latestUpdatedAt
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createprogramusingpost
+        description: Marketo Create Program
+        call: engage-rest-programs.createprogramusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-programs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Programs. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-program-name
+      description: Marketo Get Program by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-programs.getprogrambynameusingget
+      with:
+        name: tools.name
+        includeTags: tools.includeTags
+        includeCosts: tools.includeCosts
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-programs-tag
+      description: Marketo Get Programs by Tag
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-programs.getprogramlistbytagusingget
+      with:
+        tagType: tools.tagType
+        tagValue: tools.tagValue
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-program-id
+      description: Marketo Get Program by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-programs.getprogrambyidusingget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-program-metadata
+      description: Marketo Update Program Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.updateprogramusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-program
+      description: Marketo Approve Program
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.approveprogramusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-program
+      description: Marketo Clone Program
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.cloneprogramusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-program
+      description: Marketo Delete Program
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.deleteprogramusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-unapprove-program
+      description: Marketo Unapprove Program
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.unapproveprogramusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-smart-list-program
+      description: Marketo Get Smart List by Program Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-programs.getsmartlistbyprogramidusingget
+      with:
+        programId: tools.programId
+        includeRules: tools.includeRules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-programs
+      description: Marketo Get Programs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-programs.browseprogramsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        filterType: tools.filterType
+        earliestUpdatedAt: tools.earliestUpdatedAt
+        latestUpdatedAt: tools.latestUpdatedAt
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-program
+      description: Marketo Create Program
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-programs.createprogramusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,396 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Folders
+  description: 'Marketo Engage Rest API — Folders. 7 operations. Lead operation: Marketo Get Folder by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Folders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-folders
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Folders business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-folder-byName.json
+      path: /rest/asset/v1/folder/byName.json
+      operations:
+      - name: getfolderbynameusingget
+        method: GET
+        description: Marketo Get Folder by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the folder. Not applicable for Programs
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+        - name: root
+          in: query
+          type: string
+          description: Parent folder reference
+        - name: workSpace
+          in: query
+          type: string
+          description: Name of the workspace
+    - name: rest-asset-v1-folder-id}.json
+      path: /rest/asset/v1/folder/{id}.json
+      operations:
+      - name: getfolderbyidusingget
+        method: GET
+        description: Marketo Get Folder by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the folder to retrieve
+          required: true
+        - name: type
+          in: query
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+          required: true
+      - name: updatefolderusingpost
+        method: POST
+        description: Marketo Update Folder Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the folder to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-folder-id-content.json
+      path: /rest/asset/v1/folder/{id}/content.json
+      operations:
+      - name: getfoldercontentusingget
+        method: GET
+        description: Marketo Get Folder Contents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the folder to retrieve
+          required: true
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: type
+          in: query
+          type: string
+          description: Type of folder. 'Folder' or 'Program'. Default is 'Folder'
+          required: true
+    - name: rest-asset-v1-folder-id-delete.json
+      path: /rest/asset/v1/folder/{id}/delete.json
+      operations:
+      - name: deletefolderusingpost
+        method: POST
+        description: Marketo Delete Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the folder to delete
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-folders.json
+      path: /rest/asset/v1/folders.json
+      operations:
+      - name: getfolderusingget
+        method: GET
+        description: Marketo Get Folders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: root
+          in: query
+          type: string
+          description: Parent folder reference
+        - name: maxDepth
+          in: query
+          type: integer
+          description: Maximum folder depth to traverse, Default 2
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of folders to return. Default 20, maximum 200
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging. Default 0
+        - name: workSpace
+          in: query
+          type: string
+          description: Name of the workspace
+      - name: createfolderusingpost
+        method: POST
+        description: Marketo Create Folder
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-folders-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Folders. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/folder/byname-json
+      name: rest-asset-v1-folder-byname-json
+      description: REST surface for rest-asset-v1-folder-byName.json.
+      operations:
+      - method: GET
+        name: getfolderbynameusingget
+        description: Marketo Get Folder by Name
+        call: engage-rest-folders.getfolderbynameusingget
+        with:
+          name: rest.name
+          type: rest.type
+          root: rest.root
+          workSpace: rest.workSpace
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/folder/id-json
+      name: rest-asset-v1-folder-id-json
+      description: REST surface for rest-asset-v1-folder-id}.json.
+      operations:
+      - method: GET
+        name: getfolderbyidusingget
+        description: Marketo Get Folder by Id
+        call: engage-rest-folders.getfolderbyidusingget
+        with:
+          id: rest.id
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatefolderusingpost
+        description: Marketo Update Folder Metadata
+        call: engage-rest-folders.updatefolderusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/folder/{id}/content-json
+      name: rest-asset-v1-folder-id-content-json
+      description: REST surface for rest-asset-v1-folder-id-content.json.
+      operations:
+      - method: GET
+        name: getfoldercontentusingget
+        description: Marketo Get Folder Contents
+        call: engage-rest-folders.getfoldercontentusingget
+        with:
+          id: rest.id
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/folder/{id}/delete-json
+      name: rest-asset-v1-folder-id-delete-json
+      description: REST surface for rest-asset-v1-folder-id-delete.json.
+      operations:
+      - method: POST
+        name: deletefolderusingpost
+        description: Marketo Delete Folder
+        call: engage-rest-folders.deletefolderusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/folders-json
+      name: rest-asset-v1-folders-json
+      description: REST surface for rest-asset-v1-folders.json.
+      operations:
+      - method: GET
+        name: getfolderusingget
+        description: Marketo Get Folders
+        call: engage-rest-folders.getfolderusingget
+        with:
+          root: rest.root
+          maxDepth: rest.maxDepth
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+          workSpace: rest.workSpace
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createfolderusingpost
+        description: Marketo Create Folder
+        call: engage-rest-folders.createfolderusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-folders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Folders. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-folder-name
+      description: Marketo Get Folder by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-folders.getfolderbynameusingget
+      with:
+        name: tools.name
+        type: tools.type
+        root: tools.root
+        workSpace: tools.workSpace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-folder-id
+      description: Marketo Get Folder by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-folders.getfolderbyidusingget
+      with:
+        id: tools.id
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-folder-metadata
+      description: Marketo Update Folder Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-folders.updatefolderusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-folder-contents
+      description: Marketo Get Folder Contents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-folders.getfoldercontentusingget
+      with:
+        id: tools.id
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-folder
+      description: Marketo Delete Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-folders.deletefolderusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-folders
+      description: Marketo Get Folders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-folders.getfolderusingget
+      with:
+        root: tools.root
+        maxDepth: tools.maxDepth
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        workSpace: tools.workSpace
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-folder
+      description: Marketo Create Folder
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-folders.createfolderusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

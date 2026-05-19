@@ -1,0 +1,287 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Discard
+  description: 'Marketo Engage Rest API — Discard. 6 operations. Lead operation: Marketo Discard Email Draft. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Discard
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-discard
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Discard business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-email-id-discardDraft.json
+      path: /rest/asset/v1/email/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost
+        method: POST
+        description: Marketo Discard Email Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-discardDraft.json
+      path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost1
+        method: POST
+        description: Marketo Discard Email Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-form-id-discardDraft.json
+      path: /rest/asset/v1/form/{id}/discardDraft.json
+      operations:
+      - name: discardformbyidusingpost
+        method: POST
+        description: Marketo Discard Form Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPage-id-discardDraft.json
+      path: /rest/asset/v1/landingPage/{id}/discardDraft.json
+      operations:
+      - name: discardlandingpagebyidusingpost
+        method: POST
+        description: Marketo Discard Landing Page Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-discardDraft.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost2
+        method: POST
+        description: Marketo Discard Landing Page Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-snippet-id-discardDraft.json
+      path: /rest/asset/v1/snippet/{id}/discardDraft.json
+      operations:
+      - name: discardsnippetusingpost
+        method: POST
+        description: Marketo Discard Snippet Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-discard-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Discard. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/email/{id}/discarddraft-json
+      name: rest-asset-v1-email-id-discarddraft-json
+      description: REST surface for rest-asset-v1-email-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost
+        description: Marketo Discard Email Draft
+        call: engage-rest-discard.discarddraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/discarddraft-json
+      name: rest-asset-v1-emailtemplate-id-discarddraft-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost1
+        description: Marketo Discard Email Template Draft
+        call: engage-rest-discard.discarddraftusingpost1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/discarddraft-json
+      name: rest-asset-v1-form-id-discarddraft-json
+      description: REST surface for rest-asset-v1-form-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discardformbyidusingpost
+        description: Marketo Discard Form Draft
+        call: engage-rest-discard.discardformbyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/discarddraft-json
+      name: rest-asset-v1-landingpage-id-discarddraft-json
+      description: REST surface for rest-asset-v1-landingPage-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discardlandingpagebyidusingpost
+        description: Marketo Discard Landing Page Draft
+        call: engage-rest-discard.discardlandingpagebyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/discarddraft-json
+      name: rest-asset-v1-landingpagetemplate-id-discarddraft-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost2
+        description: Marketo Discard Landing Page Template Draft
+        call: engage-rest-discard.discarddraftusingpost2
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/snippet/{id}/discarddraft-json
+      name: rest-asset-v1-snippet-id-discarddraft-json
+      description: REST surface for rest-asset-v1-snippet-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discardsnippetusingpost
+        description: Marketo Discard Snippet Draft
+        call: engage-rest-discard.discardsnippetusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-discard-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Discard. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-discard-email-draft
+      description: Marketo Discard Email Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discarddraftusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-email-template-draft
+      description: Marketo Discard Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discarddraftusingpost1
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-form-draft
+      description: Marketo Discard Form Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discardformbyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-landing-page-draft
+      description: Marketo Discard Landing Page Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discardlandingpagebyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-landing-page-template
+      description: Marketo Discard Landing Page Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discarddraftusingpost2
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-snippet-draft
+      description: Marketo Discard Snippet Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-discard.discardsnippetusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

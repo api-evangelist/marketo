@@ -1,0 +1,125 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Thank
+  description: 'Marketo Engage Rest API — Thank. 2 operations. Lead operation: Marketo Get Thank You Page by Form Id. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Thank
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-thank
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Thank business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-form-id-thankYouPage.json
+      path: /rest/asset/v1/form/{id}/thankYouPage.json
+      operations:
+      - name: getthankyoupagebyidusingget
+        method: GET
+        description: Marketo Get Thank You Page by Form Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updatethankyoupagebyidusingpost
+        method: POST
+        description: Marketo Update Thank You Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-thank-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Thank. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/form/{id}/thankyoupage-json
+      name: rest-asset-v1-form-id-thankyoupage-json
+      description: REST surface for rest-asset-v1-form-id-thankYouPage.json.
+      operations:
+      - method: GET
+        name: getthankyoupagebyidusingget
+        description: Marketo Get Thank You Page by Form Id
+        call: engage-rest-thank.getthankyoupagebyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatethankyoupagebyidusingpost
+        description: Marketo Update Thank You Page
+        call: engage-rest-thank.updatethankyoupagebyidusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-thank-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Thank. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: marketo-get-thank-you-page
+      description: Marketo Get Thank You Page by Form Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-thank.getthankyoupagebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-thank-you-page
+      description: Marketo Update Thank You Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-thank.updatethankyoupagebyidusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

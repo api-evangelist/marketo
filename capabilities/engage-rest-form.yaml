@@ -1,0 +1,1095 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Form
+  description: 'Marketo Engage Rest API — Form. 22 operations. Lead operation: Marketo Get Form by Name. Self-contained Naftiko
+    capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Form
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-form
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Form business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-form-byName.json
+      path: /rest/asset/v1/form/byName.json
+      operations:
+      - name: getlpformbynameusingget
+        method: GET
+        description: Marketo Get Form by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the form
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+    - name: rest-asset-v1-form-fields.json
+      path: /rest/asset/v1/form/fields.json
+      operations:
+      - name: getallfieldsusingget
+        method: GET
+        description: Marketo Get Available Form Fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of fields to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+    - name: rest-asset-v1-form-programMemberFields.json
+      path: /rest/asset/v1/form/programMemberFields.json
+      operations:
+      - name: getallprogrammemberfieldsusingget
+        method: GET
+        description: Marketo Get Available Form Program Member Fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of fields to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+    - name: rest-asset-v1-form-formId-field-fieldId-visibility.json
+      path: /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json
+      operations:
+      - name: addformfieldvisibilityruleusingpost
+        method: POST
+        description: Marketo Add Form Field Visibility Rules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: formId
+          in: path
+          type: integer
+          description: formId
+          required: true
+        - name: fieldId
+          in: path
+          type: string
+          description: fieldId
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id}.json
+      path: /rest/asset/v1/form/{id}.json
+      operations:
+      - name: getlpformbyidusingget
+        method: GET
+        description: Marketo Get Form By Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateformsusingpost
+        method: POST
+        description: Marketo Update Form Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-approveDraft.json
+      path: /rest/asset/v1/form/{id}/approveDraft.json
+      operations:
+      - name: approvefromusingpost
+        method: POST
+        description: Marketo Approve Form Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-form-id-clone.json
+      path: /rest/asset/v1/form/{id}/clone.json
+      operations:
+      - name: clonelpformsusingpost
+        method: POST
+        description: Marketo Clone Form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-form-id-delete.json
+      path: /rest/asset/v1/form/{id}/delete.json
+      operations:
+      - name: deleteformbyidusingpost
+        method: POST
+        description: Marketo Delete Form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-form-id-discardDraft.json
+      path: /rest/asset/v1/form/{id}/discardDraft.json
+      operations:
+      - name: discardformbyidusingpost
+        method: POST
+        description: Marketo Discard Form Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-form-id-field-fieldId}.json
+      path: /rest/asset/v1/form/{id}/field/{fieldId}.json
+      operations:
+      - name: updateformfieldusingpost
+        method: POST
+        description: Marketo Update Form Field
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: fieldId
+          in: path
+          type: string
+          description: fieldId
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-field-fieldId-delete.json
+      path: /rest/asset/v1/form/{id}/field/{fieldId}/delete.json
+      operations:
+      - name: deleteformfieldusingpost
+        method: POST
+        description: Marketo Delete Form Field
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: fieldId
+          in: path
+          type: string
+          description: fieldId
+          required: true
+    - name: rest-asset-v1-form-id-fieldSet.json
+      path: /rest/asset/v1/form/{id}/fieldSet.json
+      operations:
+      - name: addfieldsetusingpost
+        method: POST
+        description: Marketo Add Fieldset to Form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-fieldSet-fieldSetId-field-fieldId-delete.json
+      path: /rest/asset/v1/form/{id}/fieldSet/{fieldSetId}/field/{fieldId}/delete.json
+      operations:
+      - name: deleteformfieldfromfieldsetusingpost
+        method: POST
+        description: Marketo Delete Field from Fieldset
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: fieldSetId
+          in: path
+          type: string
+          description: fieldSetId
+          required: true
+        - name: fieldId
+          in: path
+          type: string
+          description: fieldId
+          required: true
+    - name: rest-asset-v1-form-id-fields.json
+      path: /rest/asset/v1/form/{id}/fields.json
+      operations:
+      - name: getformfieldbyformvidusingget
+        method: GET
+        description: Marketo Get Fields for Form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: addfieldtoaformusingpost
+        method: POST
+        description: Marketo Add Field to Form
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-reArrange.json
+      path: /rest/asset/v1/form/{id}/reArrange.json
+      operations:
+      - name: updatefieldpositionsusingpost
+        method: POST
+        description: Marketo Update Field Positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-form-id-richText.json
+      path: /rest/asset/v1/form/{id}/richText.json
+      operations:
+      - name: addrichtextfieldusingpost
+        method: POST
+        description: Marketo Add Rich Text Field
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-submitButton.json
+      path: /rest/asset/v1/form/{id}/submitButton.json
+      operations:
+      - name: updateformsubmitbuttonusingpost
+        method: POST
+        description: Marketo Update Submit Button
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-thankYouPage.json
+      path: /rest/asset/v1/form/{id}/thankYouPage.json
+      operations:
+      - name: getthankyoupagebyidusingget
+        method: GET
+        description: Marketo Get Thank You Page by Form Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updatethankyoupagebyidusingpost
+        method: POST
+        description: Marketo Update Thank You Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-form-id-usedBy.json
+      path: /rest/asset/v1/form/{id}/usedBy.json
+      operations:
+      - name: getformusedbyusingget
+        method: GET
+        description: Marketo Get Form Used By
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the form
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of assets to return. Max 200, default 20
+  exposes:
+  - type: rest
+    namespace: engage-rest-form-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Form. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/form/byname-json
+      name: rest-asset-v1-form-byname-json
+      description: REST surface for rest-asset-v1-form-byName.json.
+      operations:
+      - method: GET
+        name: getlpformbynameusingget
+        description: Marketo Get Form by Name
+        call: engage-rest-form.getlpformbynameusingget
+        with:
+          name: rest.name
+          status: rest.status
+          folder: rest.folder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/fields-json
+      name: rest-asset-v1-form-fields-json
+      description: REST surface for rest-asset-v1-form-fields.json.
+      operations:
+      - method: GET
+        name: getallfieldsusingget
+        description: Marketo Get Available Form Fields
+        call: engage-rest-form.getallfieldsusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/programmemberfields-json
+      name: rest-asset-v1-form-programmemberfields-json
+      description: REST surface for rest-asset-v1-form-programMemberFields.json.
+      operations:
+      - method: GET
+        name: getallprogrammemberfieldsusingget
+        description: Marketo Get Available Form Program Member Fields
+        call: engage-rest-form.getallprogrammemberfieldsusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{formid}/field/{fieldid}/visibility-json
+      name: rest-asset-v1-form-formid-field-fieldid-visibility-json
+      description: REST surface for rest-asset-v1-form-formId-field-fieldId-visibility.json.
+      operations:
+      - method: POST
+        name: addformfieldvisibilityruleusingpost
+        description: Marketo Add Form Field Visibility Rules
+        call: engage-rest-form.addformfieldvisibilityruleusingpost
+        with:
+          formId: rest.formId
+          fieldId: rest.fieldId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/id-json
+      name: rest-asset-v1-form-id-json
+      description: REST surface for rest-asset-v1-form-id}.json.
+      operations:
+      - method: GET
+        name: getlpformbyidusingget
+        description: Marketo Get Form By Id
+        call: engage-rest-form.getlpformbyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateformsusingpost
+        description: Marketo Update Form Metadata
+        call: engage-rest-form.updateformsusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/approvedraft-json
+      name: rest-asset-v1-form-id-approvedraft-json
+      description: REST surface for rest-asset-v1-form-id-approveDraft.json.
+      operations:
+      - method: POST
+        name: approvefromusingpost
+        description: Marketo Approve Form Draft
+        call: engage-rest-form.approvefromusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/clone-json
+      name: rest-asset-v1-form-id-clone-json
+      description: REST surface for rest-asset-v1-form-id-clone.json.
+      operations:
+      - method: POST
+        name: clonelpformsusingpost
+        description: Marketo Clone Form
+        call: engage-rest-form.clonelpformsusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/delete-json
+      name: rest-asset-v1-form-id-delete-json
+      description: REST surface for rest-asset-v1-form-id-delete.json.
+      operations:
+      - method: POST
+        name: deleteformbyidusingpost
+        description: Marketo Delete Form
+        call: engage-rest-form.deleteformbyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/discarddraft-json
+      name: rest-asset-v1-form-id-discarddraft-json
+      description: REST surface for rest-asset-v1-form-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discardformbyidusingpost
+        description: Marketo Discard Form Draft
+        call: engage-rest-form.discardformbyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/field/fieldid-json
+      name: rest-asset-v1-form-id-field-fieldid-json
+      description: REST surface for rest-asset-v1-form-id-field-fieldId}.json.
+      operations:
+      - method: POST
+        name: updateformfieldusingpost
+        description: Marketo Update Form Field
+        call: engage-rest-form.updateformfieldusingpost
+        with:
+          id: rest.id
+          fieldId: rest.fieldId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/field/{fieldid}/delete-json
+      name: rest-asset-v1-form-id-field-fieldid-delete-json
+      description: REST surface for rest-asset-v1-form-id-field-fieldId-delete.json.
+      operations:
+      - method: POST
+        name: deleteformfieldusingpost
+        description: Marketo Delete Form Field
+        call: engage-rest-form.deleteformfieldusingpost
+        with:
+          id: rest.id
+          fieldId: rest.fieldId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/fieldset-json
+      name: rest-asset-v1-form-id-fieldset-json
+      description: REST surface for rest-asset-v1-form-id-fieldSet.json.
+      operations:
+      - method: POST
+        name: addfieldsetusingpost
+        description: Marketo Add Fieldset to Form
+        call: engage-rest-form.addfieldsetusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/fieldset/{fieldsetid}/field/{fieldid}/delete-json
+      name: rest-asset-v1-form-id-fieldset-fieldsetid-field-fieldid-delete-json
+      description: REST surface for rest-asset-v1-form-id-fieldSet-fieldSetId-field-fieldId-delete.json.
+      operations:
+      - method: POST
+        name: deleteformfieldfromfieldsetusingpost
+        description: Marketo Delete Field from Fieldset
+        call: engage-rest-form.deleteformfieldfromfieldsetusingpost
+        with:
+          id: rest.id
+          fieldSetId: rest.fieldSetId
+          fieldId: rest.fieldId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/fields-json
+      name: rest-asset-v1-form-id-fields-json
+      description: REST surface for rest-asset-v1-form-id-fields.json.
+      operations:
+      - method: GET
+        name: getformfieldbyformvidusingget
+        description: Marketo Get Fields for Form
+        call: engage-rest-form.getformfieldbyformvidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addfieldtoaformusingpost
+        description: Marketo Add Field to Form
+        call: engage-rest-form.addfieldtoaformusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/rearrange-json
+      name: rest-asset-v1-form-id-rearrange-json
+      description: REST surface for rest-asset-v1-form-id-reArrange.json.
+      operations:
+      - method: POST
+        name: updatefieldpositionsusingpost
+        description: Marketo Update Field Positions
+        call: engage-rest-form.updatefieldpositionsusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/richtext-json
+      name: rest-asset-v1-form-id-richtext-json
+      description: REST surface for rest-asset-v1-form-id-richText.json.
+      operations:
+      - method: POST
+        name: addrichtextfieldusingpost
+        description: Marketo Add Rich Text Field
+        call: engage-rest-form.addrichtextfieldusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/submitbutton-json
+      name: rest-asset-v1-form-id-submitbutton-json
+      description: REST surface for rest-asset-v1-form-id-submitButton.json.
+      operations:
+      - method: POST
+        name: updateformsubmitbuttonusingpost
+        description: Marketo Update Submit Button
+        call: engage-rest-form.updateformsubmitbuttonusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/thankyoupage-json
+      name: rest-asset-v1-form-id-thankyoupage-json
+      description: REST surface for rest-asset-v1-form-id-thankYouPage.json.
+      operations:
+      - method: GET
+        name: getthankyoupagebyidusingget
+        description: Marketo Get Thank You Page by Form Id
+        call: engage-rest-form.getthankyoupagebyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatethankyoupagebyidusingpost
+        description: Marketo Update Thank You Page
+        call: engage-rest-form.updatethankyoupagebyidusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/usedby-json
+      name: rest-asset-v1-form-id-usedby-json
+      description: REST surface for rest-asset-v1-form-id-usedBy.json.
+      operations:
+      - method: GET
+        name: getformusedbyusingget
+        description: Marketo Get Form Used By
+        call: engage-rest-form.getformusedbyusingget
+        with:
+          id: rest.id
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-form-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Form. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: marketo-get-form-name
+      description: Marketo Get Form by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getlpformbynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+        folder: tools.folder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-available-form-fields
+      description: Marketo Get Available Form Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getallfieldsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-available-form-program
+      description: Marketo Get Available Form Program Member Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getallprogrammemberfieldsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-form-field-visibility
+      description: Marketo Add Form Field Visibility Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.addformfieldvisibilityruleusingpost
+      with:
+        formId: tools.formId
+        fieldId: tools.fieldId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-form-id
+      description: Marketo Get Form By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getlpformbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-form-metadata
+      description: Marketo Update Form Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.updateformsusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-form-draft
+      description: Marketo Approve Form Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.approvefromusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-form
+      description: Marketo Clone Form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.clonelpformsusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-form
+      description: Marketo Delete Form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.deleteformbyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-form-draft
+      description: Marketo Discard Form Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.discardformbyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-form-field
+      description: Marketo Update Form Field
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.updateformfieldusingpost
+      with:
+        id: tools.id
+        fieldId: tools.fieldId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-form-field
+      description: Marketo Delete Form Field
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.deleteformfieldusingpost
+      with:
+        id: tools.id
+        fieldId: tools.fieldId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-fieldset-form
+      description: Marketo Add Fieldset to Form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.addfieldsetusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-field-fieldset
+      description: Marketo Delete Field from Fieldset
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.deleteformfieldfromfieldsetusingpost
+      with:
+        id: tools.id
+        fieldSetId: tools.fieldSetId
+        fieldId: tools.fieldId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-fields-form
+      description: Marketo Get Fields for Form
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getformfieldbyformvidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-field-form
+      description: Marketo Add Field to Form
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.addfieldtoaformusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-field-positions
+      description: Marketo Update Field Positions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.updatefieldpositionsusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-rich-text-field
+      description: Marketo Add Rich Text Field
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.addrichtextfieldusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-submit-button
+      description: Marketo Update Submit Button
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.updateformsubmitbuttonusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-thank-you-page
+      description: Marketo Get Thank You Page by Form Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getthankyoupagebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-thank-you-page
+      description: Marketo Update Thank You Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-form.updatethankyoupagebyidusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-form-used
+      description: Marketo Get Form Used By
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-form.getformusedbyusingget
+      with:
+        id: tools.id
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      outputParameters:
+      - type: object
+        mapping: $.

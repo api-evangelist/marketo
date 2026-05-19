@@ -1,0 +1,84 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Clone.json
+  description: 'Marketo Engage Rest API — Clone.json. 1 operations. Lead operation: Marketo Clone Snippet. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Clone.json
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-clone-json
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Clone.json business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-snippet-id-clone.json
+      path: /rest/asset/v1/snippet/{id}/clone.json
+      operations:
+      - name: clonesnippetusingpost
+        method: POST
+        description: Marketo Clone Snippet
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+  exposes:
+  - type: rest
+    namespace: engage-rest-clone-json-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Clone.json. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/snippet/{id}/clone-json
+      name: rest-asset-v1-snippet-id-clone-json
+      description: REST surface for rest-asset-v1-snippet-id-clone.json.
+      operations:
+      - method: POST
+        name: clonesnippetusingpost
+        description: Marketo Clone Snippet
+        call: engage-rest-clone-json.clonesnippetusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-clone-json-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Clone.json. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-clone-snippet
+      description: Marketo Clone Snippet
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-clone-json.clonesnippetusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

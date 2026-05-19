@@ -1,0 +1,147 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Variable
+  description: 'Marketo Engage Rest API — Variable. 2 operations. Lead operation: Marketo Update Email Variable. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Variable
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-variable
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Variable business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-email-id-variable-name}.json
+      path: /rest/asset/v1/email/{id}/variable/{name}.json
+      operations:
+      - name: updatevariableusingpost
+        method: POST
+        description: Marketo Update Email Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: name
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-landingPage-id-variable-variableId}.json
+      path: /rest/asset/v1/landingPage/{id}/variable/{variableId}.json
+      operations:
+      - name: updatelandingpagevariableusingpost
+        method: POST
+        description: Marketo Update Landing Page Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: variableId
+          in: path
+          type: string
+          description: variableId
+          required: true
+        - name: value
+          in: query
+          type: integer
+          description: New value of the variable
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-variable-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Variable. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/email/{id}/variable/name-json
+      name: rest-asset-v1-email-id-variable-name-json
+      description: REST surface for rest-asset-v1-email-id-variable-name}.json.
+      operations:
+      - method: POST
+        name: updatevariableusingpost
+        description: Marketo Update Email Variable
+        call: engage-rest-variable.updatevariableusingpost
+        with:
+          id: rest.id
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/variable/variableid-json
+      name: rest-asset-v1-landingpage-id-variable-variableid-json
+      description: REST surface for rest-asset-v1-landingPage-id-variable-variableId}.json.
+      operations:
+      - method: POST
+        name: updatelandingpagevariableusingpost
+        description: Marketo Update Landing Page Variable
+        call: engage-rest-variable.updatelandingpagevariableusingpost
+        with:
+          id: rest.id
+          variableId: rest.variableId
+          value: rest.value
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-variable-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Variable. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-update-email-variable
+      description: Marketo Update Email Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-variable.updatevariableusingpost
+      with:
+        id: tools.id
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-variable
+      description: Marketo Update Landing Page Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-variable.updatelandingpagevariableusingpost
+      with:
+        id: tools.id
+        variableId: tools.variableId
+        value: tools.value
+      outputParameters:
+      - type: object
+        mapping: $.

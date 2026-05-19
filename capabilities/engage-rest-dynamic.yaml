@@ -1,0 +1,341 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Dynamic
+  description: 'Marketo Engage Rest API — Dynamic. 6 operations. Lead operation: Marketo Get Email Dynamic Content. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Dynamic
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-dynamic
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Dynamic business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-email-id-dynamicContent-contentId}.json
+      path: /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json
+      operations:
+      - name: getemaildynamiccontentusingget
+        method: GET
+        description: Marketo Get Email Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of email
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of email dynamic content section
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateemaildynamiccontentusingpost
+        method: POST
+        description: Marketo Update Email Dynamic Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of email
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of email dynamic content section
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPage-id-dynamicContent-contentId}.json
+      path: /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json
+      operations:
+      - name: getlandingpagedynamiccontentsusingget
+        method: GET
+        description: Marketo Get Landing Page Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of landing page dynamic content section
+          required: true
+      - name: updatelandingpagedynamiccontentusingpost
+        method: POST
+        description: Marketo Update Landing Page Dynamic Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of the landing page dynamic content
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-snippet-id-dynamicContent.json
+      path: /rest/asset/v1/snippet/{id}/dynamicContent.json
+      operations:
+      - name: getdynamiccontentusingget
+        method: GET
+        description: Marketo Get Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+    - name: rest-asset-v1-snippet-id-dynamicContent-segmentId}.json
+      path: /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json
+      operations:
+      - name: updatedynamiccontentusingpost
+        method: POST
+        description: Marketo Update Snippet Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: segmentId
+          in: path
+          type: integer
+          description: segmentId
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-dynamic-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Dynamic. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/email/{id}/dynamiccontent/contentid-json
+      name: rest-asset-v1-email-id-dynamiccontent-contentid-json
+      description: REST surface for rest-asset-v1-email-id-dynamicContent-contentId}.json.
+      operations:
+      - method: GET
+        name: getemaildynamiccontentusingget
+        description: Marketo Get Email Dynamic Content
+        call: engage-rest-dynamic.getemaildynamiccontentusingget
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateemaildynamiccontentusingpost
+        description: Marketo Update Email Dynamic Content Section
+        call: engage-rest-dynamic.updateemaildynamiccontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/dynamiccontent/contentid-json
+      name: rest-asset-v1-landingpage-id-dynamiccontent-contentid-json
+      description: REST surface for rest-asset-v1-landingPage-id-dynamicContent-contentId}.json.
+      operations:
+      - method: GET
+        name: getlandingpagedynamiccontentsusingget
+        description: Marketo Get Landing Page Dynamic Content
+        call: engage-rest-dynamic.getlandingpagedynamiccontentsusingget
+        with:
+          id: rest.id
+          contentId: rest.contentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatelandingpagedynamiccontentusingpost
+        description: Marketo Update Landing Page Dynamic Content Section
+        call: engage-rest-dynamic.updatelandingpagedynamiccontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/snippet/{id}/dynamiccontent-json
+      name: rest-asset-v1-snippet-id-dynamiccontent-json
+      description: REST surface for rest-asset-v1-snippet-id-dynamicContent.json.
+      operations:
+      - method: GET
+        name: getdynamiccontentusingget
+        description: Marketo Get Dynamic Content
+        call: engage-rest-dynamic.getdynamiccontentusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/snippet/{id}/dynamiccontent/segmentid-json
+      name: rest-asset-v1-snippet-id-dynamiccontent-segmentid-json
+      description: REST surface for rest-asset-v1-snippet-id-dynamicContent-segmentId}.json.
+      operations:
+      - method: POST
+        name: updatedynamiccontentusingpost
+        description: Marketo Update Snippet Dynamic Content
+        call: engage-rest-dynamic.updatedynamiccontentusingpost
+        with:
+          id: rest.id
+          segmentId: rest.segmentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-dynamic-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Dynamic. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-email-dynamic-content
+      description: Marketo Get Email Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-dynamic.getemaildynamiccontentusingget
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-dynamic-content
+      description: Marketo Update Email Dynamic Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-dynamic.updateemaildynamiccontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-dynamic
+      description: Marketo Get Landing Page Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-dynamic.getlandingpagedynamiccontentsusingget
+      with:
+        id: tools.id
+        contentId: tools.contentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-dynamic
+      description: Marketo Update Landing Page Dynamic Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-dynamic.updatelandingpagedynamiccontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-dynamic-content
+      description: Marketo Get Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-dynamic.getdynamiccontentusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-snippet-dynamic-content
+      description: Marketo Update Snippet Dynamic Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-dynamic.updatedynamiccontentusingpost
+      with:
+        id: tools.id
+        segmentId: tools.segmentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

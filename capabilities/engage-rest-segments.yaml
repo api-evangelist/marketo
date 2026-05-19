@@ -1,0 +1,192 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Segments
+  description: 'Marketo Engage Rest API — Segments. 3 operations. Lead operation: Marketo Get Segmentations. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Segments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-segments
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Segments business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-segmentation.json
+      path: /rest/asset/v1/segmentation.json
+      operations:
+      - name: getsegmentationusingget
+        method: GET
+        description: Marketo Get Segmentations
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+    - name: rest-asset-v1-segmentation-id-segments.json
+      path: /rest/asset/v1/segmentation/{id}/segments.json
+      operations:
+      - name: getsegmentsforsegmentationusingget
+        method: GET
+        description: Marketo Get Segments For Segmentation
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+    - name: rest-asset-v1-snippet-id-dynamicContent-segmentId}.json
+      path: /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json
+      operations:
+      - name: updatedynamiccontentusingpost
+        method: POST
+        description: Marketo Update Snippet Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: segmentId
+          in: path
+          type: integer
+          description: segmentId
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-segments-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Segments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/segmentation-json
+      name: rest-asset-v1-segmentation-json
+      description: REST surface for rest-asset-v1-segmentation.json.
+      operations:
+      - method: GET
+        name: getsegmentationusingget
+        description: Marketo Get Segmentations
+        call: engage-rest-segments.getsegmentationusingget
+        with:
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/segmentation/{id}/segments-json
+      name: rest-asset-v1-segmentation-id-segments-json
+      description: REST surface for rest-asset-v1-segmentation-id-segments.json.
+      operations:
+      - method: GET
+        name: getsegmentsforsegmentationusingget
+        description: Marketo Get Segments For Segmentation
+        call: engage-rest-segments.getsegmentsforsegmentationusingget
+        with:
+          id: rest.id
+          status: rest.status
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/snippet/{id}/dynamiccontent/segmentid-json
+      name: rest-asset-v1-snippet-id-dynamiccontent-segmentid-json
+      description: REST surface for rest-asset-v1-snippet-id-dynamicContent-segmentId}.json.
+      operations:
+      - method: POST
+        name: updatedynamiccontentusingpost
+        description: Marketo Update Snippet Dynamic Content
+        call: engage-rest-segments.updatedynamiccontentusingpost
+        with:
+          id: rest.id
+          segmentId: rest.segmentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-segments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Segments. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-segmentations
+      description: Marketo Get Segmentations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-segments.getsegmentationusingget
+      with:
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-segments-segmentation
+      description: Marketo Get Segments For Segmentation
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-segments.getsegmentsforsegmentationusingget
+      with:
+        id: tools.id
+        status: tools.status
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-snippet-dynamic-content
+      description: Marketo Update Snippet Dynamic Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-segments.updatedynamiccontentusingpost
+      with:
+        id: tools.id
+        segmentId: tools.segmentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

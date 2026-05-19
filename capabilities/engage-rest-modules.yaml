@@ -1,0 +1,259 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Modules
+  description: 'Marketo Engage Rest API — Modules. 4 operations. Lead operation: Marketo Add Email Module. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Modules
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-modules
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Modules business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-email-id-content-moduleId-add.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/add.json
+      operations:
+      - name: addmoduleusingpost
+        method: POST
+        description: Marketo Add Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Name of the module
+          required: true
+        - name: index
+          in: query
+          type: integer
+          description: Index of the module. Determines the order of the module in the email.
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-delete.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/delete.json
+      operations:
+      - name: deletemoduleusingpost
+        method: POST
+        description: Marketo Delete Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-duplicate.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json
+      operations:
+      - name: duplicatemoduleusingpost
+        method: POST
+        description: Marketo Duplicate Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Name of the new module
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-rename.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/rename.json
+      operations:
+      - name: renameusingpost
+        method: POST
+        description: Marketo Rename Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: New module name
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-modules-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Modules. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/add-json
+      name: rest-asset-v1-email-id-content-moduleid-add-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-add.json.
+      operations:
+      - method: POST
+        name: addmoduleusingpost
+        description: Marketo Add Email Module
+        call: engage-rest-modules.addmoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+          index: rest.index
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/delete-json
+      name: rest-asset-v1-email-id-content-moduleid-delete-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-delete.json.
+      operations:
+      - method: POST
+        name: deletemoduleusingpost
+        description: Marketo Delete Module
+        call: engage-rest-modules.deletemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/duplicate-json
+      name: rest-asset-v1-email-id-content-moduleid-duplicate-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-duplicate.json.
+      operations:
+      - method: POST
+        name: duplicatemoduleusingpost
+        description: Marketo Duplicate Email Module
+        call: engage-rest-modules.duplicatemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/rename-json
+      name: rest-asset-v1-email-id-content-moduleid-rename-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-rename.json.
+      operations:
+      - method: POST
+        name: renameusingpost
+        description: Marketo Rename Email Module
+        call: engage-rest-modules.renameusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-modules-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Modules. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-add-email-module
+      description: Marketo Add Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-modules.addmoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+        index: tools.index
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-module
+      description: Marketo Delete Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-modules.deletemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-duplicate-email-module
+      description: Marketo Duplicate Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-modules.duplicatemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-rename-email-module
+      description: Marketo Rename Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-modules.renameusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.

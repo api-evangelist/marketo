@@ -1,0 +1,1528 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Landing
+  description: 'Marketo Engage Rest API — Landing. 32 operations. Lead operation: Marketo Get Landing Page by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Landing
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-landing
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Landing business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-landingPage-byName.json
+      path: /rest/asset/v1/landingPage/byName.json
+      operations:
+      - name: getlandingpagebynameusingget
+        method: GET
+        description: Marketo Get Landing Page by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the landing page
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+    - name: rest-asset-v1-landingPage-id}.json
+      path: /rest/asset/v1/landingPage/{id}.json
+      operations:
+      - name: getlandingpagebyidusingget
+        method: GET
+        description: Marketo Get Landing Page by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updatelandingpageusingpost
+        method: POST
+        description: Marketo Update Landing Page Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPage-id-approveDraft.json
+      path: /rest/asset/v1/landingPage/{id}/approveDraft.json
+      operations:
+      - name: approvelandingpageusingpost
+        method: POST
+        description: Marketo Approve Landing Page Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPage-id-clone.json
+      path: /rest/asset/v1/landingPage/{id}/clone.json
+      operations:
+      - name: clonelandingpageusingpost
+        method: POST
+        description: Marketo Clone Landing Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPage-id-content.json
+      path: /rest/asset/v1/landingPage/{id}/content.json
+      operations:
+      - name: getlandingpagecontentusingget
+        method: GET
+        description: Marketo Get Landing Page Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: addlandingpagecontentusingpost
+        method: POST
+        description: Marketo Add Landing Page Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPage-id-content-contentId}.json
+      path: /rest/asset/v1/landingPage/{id}/content/{contentId}.json
+      operations:
+      - name: updatelandingpagecontentusingpost
+        method: POST
+        description: Marketo Update Landing Page Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of landing page content section
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPage-id-content-contentId-delete.json
+      path: /rest/asset/v1/landingPage/{id}/content/{contentId}/delete.json
+      operations:
+      - name: removelandingpagecontentusingpost
+        method: POST
+        description: Marketo Delete Landing Page Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of landing page content section
+          required: true
+    - name: rest-asset-v1-landingPage-id-delete.json
+      path: /rest/asset/v1/landingPage/{id}/delete.json
+      operations:
+      - name: deletelandingpagebyidusingpost
+        method: POST
+        description: Marketo Delete Landing Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPage-id-discardDraft.json
+      path: /rest/asset/v1/landingPage/{id}/discardDraft.json
+      operations:
+      - name: discardlandingpagebyidusingpost
+        method: POST
+        description: Marketo Discard Landing Page Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPage-id-dynamicContent-contentId}.json
+      path: /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json
+      operations:
+      - name: getlandingpagedynamiccontentsusingget
+        method: GET
+        description: Marketo Get Landing Page Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of landing page dynamic content section
+          required: true
+      - name: updatelandingpagedynamiccontentusingpost
+        method: POST
+        description: Marketo Update Landing Page Dynamic Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the landing page
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of the landing page dynamic content
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-landingPage-id-fullContent.json
+      path: /rest/asset/v1/landingPage/{id}/fullContent.json
+      operations:
+      - name: getlandingpagefullcontentusingget
+        method: GET
+        description: Marketo Get Landing Page Full Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the landing page.
+          required: true
+        - name: leadId
+          in: query
+          type: integer
+          description: The lead id to impersonate. Landing page is rendered as though it was viewed by this lead.
+        - name: segmentation
+          in: query
+          type: string
+          description: 'JSON array of of segmentations. Each segmentation must be a JSON object with members ''segmentationId'',
+            and ''segmentId''.<br>Example: [{"segmentationId":1030,"seg'
+    - name: rest-asset-v1-landingPage-id-unapprove.json
+      path: /rest/asset/v1/landingPage/{id}/unapprove.json
+      operations:
+      - name: unapprovelandingpagebyidusingpost
+        method: POST
+        description: Marketo Unapprove Landing Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPage-id-variable-variableId}.json
+      path: /rest/asset/v1/landingPage/{id}/variable/{variableId}.json
+      operations:
+      - name: updatelandingpagevariableusingpost
+        method: POST
+        description: Marketo Update Landing Page Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: variableId
+          in: path
+          type: string
+          description: variableId
+          required: true
+        - name: value
+          in: query
+          type: integer
+          description: New value of the variable
+          required: true
+    - name: rest-asset-v1-landingPage-id-variables.json
+      path: /rest/asset/v1/landingPage/{id}/variables.json
+      operations:
+      - name: getvariablesusingget
+        method: GET
+        description: Marketo Get Landing Page Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the landing page
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+    - name: rest-asset-v1-landingPageDomains.json
+      path: /rest/asset/v1/landingPageDomains.json
+      operations:
+      - name: getlandingpagedomainsusingget
+        method: GET
+        description: Marketo Get Landing Page Domains
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of landing page domains and domain aliases to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+    - name: rest-asset-v1-landingPageTemplate-byName.json
+      path: /rest/asset/v1/landingPageTemplate/byName.json
+      operations:
+      - name: getlandingpagetemplatebynameusingget
+        method: GET
+        description: Marketo Get Landing Page Template by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the landing page template
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id}.json
+      path: /rest/asset/v1/landingPageTemplate/{id}.json
+      operations:
+      - name: getlandingpagetemplatebyidusingget
+        method: GET
+        description: Marketo Get Landing Page Template by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updatelptemplateusingpost
+        method: POST
+        description: Marketo Update Landing Page Template Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-approveDraft.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json
+      operations:
+      - name: approvelandingpagetemplateusingpost
+        method: POST
+        description: Marketo Approve Landing Page Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-clone.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/clone.json
+      operations:
+      - name: clonelptemplateusingpost
+        method: POST
+        description: Marketo Clone Landing Page Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-content.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/content.json
+      operations:
+      - name: getlandingpagetemplatecontentusingget
+        method: GET
+        description: Marketo Get Landing Page Template Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updatelandingpagetemplatecontentusingpost
+        method: POST
+        description: Marketo Update Landing Page Template Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-delete.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/delete.json
+      operations:
+      - name: deletelptemplateusingpost
+        method: POST
+        description: Marketo Delete Landing Page Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-discardDraft.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost2
+        method: POST
+        description: Marketo Discard Landing Page Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPageTemplate-id-unapprove.json
+      path: /rest/asset/v1/landingPageTemplate/{id}/unapprove.json
+      operations:
+      - name: unapprovelandingpagetemplateusingpost
+        method: POST
+        description: Marketo Unapprove Landing Page Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-landingPageTemplates.json
+      path: /rest/asset/v1/landingPageTemplates.json
+      operations:
+      - name: getlandingpagetemplatesusingget
+        method: GET
+        description: Marketo Get Landing Page Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      - name: createlptemplateusingpost
+        method: POST
+        description: Marketo Create Landing Page Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-landingPages.json
+      path: /rest/asset/v1/landingPages.json
+      operations:
+      - name: browselandingpagesusingget
+        method: GET
+        description: Marketo Get Landing Pages
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of landing pages to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+      - name: createlandingpageusingpost
+        method: POST
+        description: Marketo Create Landing Page
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-landing-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Landing. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/landingpage/byname-json
+      name: rest-asset-v1-landingpage-byname-json
+      description: REST surface for rest-asset-v1-landingPage-byName.json.
+      operations:
+      - method: GET
+        name: getlandingpagebynameusingget
+        description: Marketo Get Landing Page by Name
+        call: engage-rest-landing.getlandingpagebynameusingget
+        with:
+          name: rest.name
+          status: rest.status
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/id-json
+      name: rest-asset-v1-landingpage-id-json
+      description: REST surface for rest-asset-v1-landingPage-id}.json.
+      operations:
+      - method: GET
+        name: getlandingpagebyidusingget
+        description: Marketo Get Landing Page by Id
+        call: engage-rest-landing.getlandingpagebyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatelandingpageusingpost
+        description: Marketo Update Landing Page Metadata
+        call: engage-rest-landing.updatelandingpageusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/approvedraft-json
+      name: rest-asset-v1-landingpage-id-approvedraft-json
+      description: REST surface for rest-asset-v1-landingPage-id-approveDraft.json.
+      operations:
+      - method: POST
+        name: approvelandingpageusingpost
+        description: Marketo Approve Landing Page Draft
+        call: engage-rest-landing.approvelandingpageusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/clone-json
+      name: rest-asset-v1-landingpage-id-clone-json
+      description: REST surface for rest-asset-v1-landingPage-id-clone.json.
+      operations:
+      - method: POST
+        name: clonelandingpageusingpost
+        description: Marketo Clone Landing Page
+        call: engage-rest-landing.clonelandingpageusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/content-json
+      name: rest-asset-v1-landingpage-id-content-json
+      description: REST surface for rest-asset-v1-landingPage-id-content.json.
+      operations:
+      - method: GET
+        name: getlandingpagecontentusingget
+        description: Marketo Get Landing Page Content
+        call: engage-rest-landing.getlandingpagecontentusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: addlandingpagecontentusingpost
+        description: Marketo Add Landing Page Content Section
+        call: engage-rest-landing.addlandingpagecontentusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/content/contentid-json
+      name: rest-asset-v1-landingpage-id-content-contentid-json
+      description: REST surface for rest-asset-v1-landingPage-id-content-contentId}.json.
+      operations:
+      - method: POST
+        name: updatelandingpagecontentusingpost
+        description: Marketo Update Landing Page Content Section
+        call: engage-rest-landing.updatelandingpagecontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/content/{contentid}/delete-json
+      name: rest-asset-v1-landingpage-id-content-contentid-delete-json
+      description: REST surface for rest-asset-v1-landingPage-id-content-contentId-delete.json.
+      operations:
+      - method: POST
+        name: removelandingpagecontentusingpost
+        description: Marketo Delete Landing Page Content Section
+        call: engage-rest-landing.removelandingpagecontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/delete-json
+      name: rest-asset-v1-landingpage-id-delete-json
+      description: REST surface for rest-asset-v1-landingPage-id-delete.json.
+      operations:
+      - method: POST
+        name: deletelandingpagebyidusingpost
+        description: Marketo Delete Landing Page
+        call: engage-rest-landing.deletelandingpagebyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/discarddraft-json
+      name: rest-asset-v1-landingpage-id-discarddraft-json
+      description: REST surface for rest-asset-v1-landingPage-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discardlandingpagebyidusingpost
+        description: Marketo Discard Landing Page Draft
+        call: engage-rest-landing.discardlandingpagebyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/dynamiccontent/contentid-json
+      name: rest-asset-v1-landingpage-id-dynamiccontent-contentid-json
+      description: REST surface for rest-asset-v1-landingPage-id-dynamicContent-contentId}.json.
+      operations:
+      - method: GET
+        name: getlandingpagedynamiccontentsusingget
+        description: Marketo Get Landing Page Dynamic Content
+        call: engage-rest-landing.getlandingpagedynamiccontentsusingget
+        with:
+          id: rest.id
+          contentId: rest.contentId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatelandingpagedynamiccontentusingpost
+        description: Marketo Update Landing Page Dynamic Content Section
+        call: engage-rest-landing.updatelandingpagedynamiccontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/fullcontent-json
+      name: rest-asset-v1-landingpage-id-fullcontent-json
+      description: REST surface for rest-asset-v1-landingPage-id-fullContent.json.
+      operations:
+      - method: GET
+        name: getlandingpagefullcontentusingget
+        description: Marketo Get Landing Page Full Content
+        call: engage-rest-landing.getlandingpagefullcontentusingget
+        with:
+          id: rest.id
+          leadId: rest.leadId
+          segmentation: rest.segmentation
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/unapprove-json
+      name: rest-asset-v1-landingpage-id-unapprove-json
+      description: REST surface for rest-asset-v1-landingPage-id-unapprove.json.
+      operations:
+      - method: POST
+        name: unapprovelandingpagebyidusingpost
+        description: Marketo Unapprove Landing Page
+        call: engage-rest-landing.unapprovelandingpagebyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/variable/variableid-json
+      name: rest-asset-v1-landingpage-id-variable-variableid-json
+      description: REST surface for rest-asset-v1-landingPage-id-variable-variableId}.json.
+      operations:
+      - method: POST
+        name: updatelandingpagevariableusingpost
+        description: Marketo Update Landing Page Variable
+        call: engage-rest-landing.updatelandingpagevariableusingpost
+        with:
+          id: rest.id
+          variableId: rest.variableId
+          value: rest.value
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpage/{id}/variables-json
+      name: rest-asset-v1-landingpage-id-variables-json
+      description: REST surface for rest-asset-v1-landingPage-id-variables.json.
+      operations:
+      - method: GET
+        name: getvariablesusingget
+        description: Marketo Get Landing Page Variables
+        call: engage-rest-landing.getvariablesusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagedomains-json
+      name: rest-asset-v1-landingpagedomains-json
+      description: REST surface for rest-asset-v1-landingPageDomains.json.
+      operations:
+      - method: GET
+        name: getlandingpagedomainsusingget
+        description: Marketo Get Landing Page Domains
+        call: engage-rest-landing.getlandingpagedomainsusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/byname-json
+      name: rest-asset-v1-landingpagetemplate-byname-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-byName.json.
+      operations:
+      - method: GET
+        name: getlandingpagetemplatebynameusingget
+        description: Marketo Get Landing Page Template by Name
+        call: engage-rest-landing.getlandingpagetemplatebynameusingget
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/id-json
+      name: rest-asset-v1-landingpagetemplate-id-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id}.json.
+      operations:
+      - method: GET
+        name: getlandingpagetemplatebyidusingget
+        description: Marketo Get Landing Page Template by Id
+        call: engage-rest-landing.getlandingpagetemplatebyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatelptemplateusingpost
+        description: Marketo Update Landing Page Template Metadata
+        call: engage-rest-landing.updatelptemplateusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/approvedraft-json
+      name: rest-asset-v1-landingpagetemplate-id-approvedraft-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-approveDraft.json.
+      operations:
+      - method: POST
+        name: approvelandingpagetemplateusingpost
+        description: Marketo Approve Landing Page Template Draft
+        call: engage-rest-landing.approvelandingpagetemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/clone-json
+      name: rest-asset-v1-landingpagetemplate-id-clone-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-clone.json.
+      operations:
+      - method: POST
+        name: clonelptemplateusingpost
+        description: Marketo Clone Landing Page Template
+        call: engage-rest-landing.clonelptemplateusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/content-json
+      name: rest-asset-v1-landingpagetemplate-id-content-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-content.json.
+      operations:
+      - method: GET
+        name: getlandingpagetemplatecontentusingget
+        description: Marketo Get Landing Page Template Content
+        call: engage-rest-landing.getlandingpagetemplatecontentusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatelandingpagetemplatecontentusingpost
+        description: Marketo Update Landing Page Template Content
+        call: engage-rest-landing.updatelandingpagetemplatecontentusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/delete-json
+      name: rest-asset-v1-landingpagetemplate-id-delete-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-delete.json.
+      operations:
+      - method: POST
+        name: deletelptemplateusingpost
+        description: Marketo Delete Landing Page Template
+        call: engage-rest-landing.deletelptemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/discarddraft-json
+      name: rest-asset-v1-landingpagetemplate-id-discarddraft-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost2
+        description: Marketo Discard Landing Page Template Draft
+        call: engage-rest-landing.discarddraftusingpost2
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplate/{id}/unapprove-json
+      name: rest-asset-v1-landingpagetemplate-id-unapprove-json
+      description: REST surface for rest-asset-v1-landingPageTemplate-id-unapprove.json.
+      operations:
+      - method: POST
+        name: unapprovelandingpagetemplateusingpost
+        description: Marketo Unapprove Landing Page Template
+        call: engage-rest-landing.unapprovelandingpagetemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpagetemplates-json
+      name: rest-asset-v1-landingpagetemplates-json
+      description: REST surface for rest-asset-v1-landingPageTemplates.json.
+      operations:
+      - method: GET
+        name: getlandingpagetemplatesusingget
+        description: Marketo Get Landing Page Templates
+        call: engage-rest-landing.getlandingpagetemplatesusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+          status: rest.status
+          folder: rest.folder
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlptemplateusingpost
+        description: Marketo Create Landing Page Template
+        call: engage-rest-landing.createlptemplateusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/landingpages-json
+      name: rest-asset-v1-landingpages-json
+      description: REST surface for rest-asset-v1-landingPages.json.
+      operations:
+      - method: GET
+        name: browselandingpagesusingget
+        description: Marketo Get Landing Pages
+        call: engage-rest-landing.browselandingpagesusingget
+        with:
+          status: rest.status
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+          folder: rest.folder
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlandingpageusingpost
+        description: Marketo Create Landing Page
+        call: engage-rest-landing.createlandingpageusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-landing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Landing. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-landing-page-name
+      description: Marketo Get Landing Page by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagebynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-id
+      description: Marketo Get Landing Page by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-metadata
+      description: Marketo Update Landing Page Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelandingpageusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-landing-page-draft
+      description: Marketo Approve Landing Page Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.approvelandingpageusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-landing-page
+      description: Marketo Clone Landing Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.clonelandingpageusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-content
+      description: Marketo Get Landing Page Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagecontentusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-landing-page-content
+      description: Marketo Add Landing Page Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.addlandingpagecontentusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-content
+      description: Marketo Update Landing Page Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelandingpagecontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-landing-page-content
+      description: Marketo Delete Landing Page Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.removelandingpagecontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-landing-page
+      description: Marketo Delete Landing Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.deletelandingpagebyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-landing-page-draft
+      description: Marketo Discard Landing Page Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.discardlandingpagebyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-dynamic
+      description: Marketo Get Landing Page Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagedynamiccontentsusingget
+      with:
+        id: tools.id
+        contentId: tools.contentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-dynamic
+      description: Marketo Update Landing Page Dynamic Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelandingpagedynamiccontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-full
+      description: Marketo Get Landing Page Full Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagefullcontentusingget
+      with:
+        id: tools.id
+        leadId: tools.leadId
+        segmentation: tools.segmentation
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-unapprove-landing-page
+      description: Marketo Unapprove Landing Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.unapprovelandingpagebyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-variable
+      description: Marketo Update Landing Page Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelandingpagevariableusingpost
+      with:
+        id: tools.id
+        variableId: tools.variableId
+        value: tools.value
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-variables
+      description: Marketo Get Landing Page Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getvariablesusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-domains
+      description: Marketo Get Landing Page Domains
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagedomainsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-template
+      description: Marketo Get Landing Page Template by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagetemplatebynameusingget
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-template-2
+      description: Marketo Get Landing Page Template by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagetemplatebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-template
+      description: Marketo Update Landing Page Template Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelptemplateusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-landing-page-template
+      description: Marketo Approve Landing Page Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.approvelandingpagetemplateusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-landing-page-template
+      description: Marketo Clone Landing Page Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.clonelptemplateusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-template-3
+      description: Marketo Get Landing Page Template Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagetemplatecontentusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-landing-page-template-2
+      description: Marketo Update Landing Page Template Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.updatelandingpagetemplatecontentusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-landing-page-template
+      description: Marketo Delete Landing Page Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.deletelptemplateusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-landing-page-template
+      description: Marketo Discard Landing Page Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.discarddraftusingpost2
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-unapprove-landing-page-template
+      description: Marketo Unapprove Landing Page Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.unapprovelandingpagetemplateusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-page-templates
+      description: Marketo Get Landing Page Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.getlandingpagetemplatesusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        status: tools.status
+        folder: tools.folder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-landing-page-template
+      description: Marketo Create Landing Page Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.createlptemplateusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-landing-pages
+      description: Marketo Get Landing Pages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-landing.browselandingpagesusingget
+      with:
+        status: tools.status
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+        folder: tools.folder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-landing-page
+      description: Marketo Create Landing Page
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-landing.createlandingpageusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

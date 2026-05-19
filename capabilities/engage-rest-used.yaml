@@ -1,0 +1,143 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Used
+  description: 'Marketo Engage Rest API — Used. 2 operations. Lead operation: Marketo Get Email Template Used By. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Used
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-used
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Used business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-emailTemplates-id-usedBy.json
+      path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
+      operations:
+      - name: getemailtemplateusedbyusingget
+        method: GET
+        description: Marketo Get Email Template Used By
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the email template
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+    - name: rest-asset-v1-form-id-usedBy.json
+      path: /rest/asset/v1/form/{id}/usedBy.json
+      operations:
+      - name: getformusedbyusingget
+        method: GET
+        description: Marketo Get Form Used By
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the form
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of assets to return. Max 200, default 20
+  exposes:
+  - type: rest
+    namespace: engage-rest-used-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Used. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/emailtemplates/{id}/usedby-json
+      name: rest-asset-v1-emailtemplates-id-usedby-json
+      description: REST surface for rest-asset-v1-emailTemplates-id-usedBy.json.
+      operations:
+      - method: GET
+        name: getemailtemplateusedbyusingget
+        description: Marketo Get Email Template Used By
+        call: engage-rest-used.getemailtemplateusedbyusingget
+        with:
+          id: rest.id
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/form/{id}/usedby-json
+      name: rest-asset-v1-form-id-usedby-json
+      description: REST surface for rest-asset-v1-form-id-usedBy.json.
+      operations:
+      - method: GET
+        name: getformusedbyusingget
+        description: Marketo Get Form Used By
+        call: engage-rest-used.getformusedbyusingget
+        with:
+          id: rest.id
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-used-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Used. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: marketo-get-email-template-used
+      description: Marketo Get Email Template Used By
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-used.getemailtemplateusedbyusingget
+      with:
+        id: tools.id
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-form-used
+      description: Marketo Get Form Used By
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-used.getformusedbyusingget
+      with:
+        id: tools.id
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,261 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Static  Lists
+  description: 'Marketo Engage Rest API — Static  Lists. 5 operations. Lead operation: Marketo Get Static List by Id. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Static  Lists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-static-lists
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Static  Lists business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-staticList-id}.json
+      path: /rest/asset/v1/staticList/{id}.json
+      operations:
+      - name: getstaticlistbyidusingget
+        method: GET
+        description: Marketo Get Static List by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the static list to retrieve
+          required: true
+      - name: updatestaticlistusingpost
+        method: POST
+        description: Marketo Update Static List Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of static list to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-staticList-id-delete.json
+      path: /rest/asset/v1/staticList/{id}/delete.json
+      operations:
+      - name: deletestaticlistbyidusingpost
+        method: POST
+        description: Marketo Delete Static List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the static list to delete
+          required: true
+    - name: rest-asset-v1-staticLists.json
+      path: /rest/asset/v1/staticLists.json
+      operations:
+      - name: getstaticlistsusingget
+        method: GET
+        description: Marketo Get Static Lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of static lists to return. Max 200, default 20.
+        - name: earliestUpdatedAt
+          in: query
+          type: string
+          description: Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">D
+        - name: latestUpdatedAt
+          in: query
+          type: string
+          description: Exclude static lists after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Date
+      - name: createstaticlistusingpost
+        method: POST
+        description: Marketo Create Static List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-static-lists-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Static  Lists. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/staticlist/id-json
+      name: rest-asset-v1-staticlist-id-json
+      description: REST surface for rest-asset-v1-staticList-id}.json.
+      operations:
+      - method: GET
+        name: getstaticlistbyidusingget
+        description: Marketo Get Static List by Id
+        call: engage-rest-static-lists.getstaticlistbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatestaticlistusingpost
+        description: Marketo Update Static List Metadata
+        call: engage-rest-static-lists.updatestaticlistusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/staticlist/{id}/delete-json
+      name: rest-asset-v1-staticlist-id-delete-json
+      description: REST surface for rest-asset-v1-staticList-id-delete.json.
+      operations:
+      - method: POST
+        name: deletestaticlistbyidusingpost
+        description: Marketo Delete Static List
+        call: engage-rest-static-lists.deletestaticlistbyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/staticlists-json
+      name: rest-asset-v1-staticlists-json
+      description: REST surface for rest-asset-v1-staticLists.json.
+      operations:
+      - method: GET
+        name: getstaticlistsusingget
+        description: Marketo Get Static Lists
+        call: engage-rest-static-lists.getstaticlistsusingget
+        with:
+          folder: rest.folder
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+          earliestUpdatedAt: rest.earliestUpdatedAt
+          latestUpdatedAt: rest.latestUpdatedAt
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createstaticlistusingpost
+        description: Marketo Create Static List
+        call: engage-rest-static-lists.createstaticlistusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-static-lists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Static  Lists. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-static-list-id
+      description: Marketo Get Static List by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-static-lists.getstaticlistbyidusingget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-static-list-metadata
+      description: Marketo Update Static List Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: engage-rest-static-lists.updatestaticlistusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-static-list
+      description: Marketo Delete Static List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-static-lists.deletestaticlistbyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-static-lists
+      description: Marketo Get Static Lists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-static-lists.getstaticlistsusingget
+      with:
+        folder: tools.folder
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+        earliestUpdatedAt: tools.earliestUpdatedAt
+        latestUpdatedAt: tools.latestUpdatedAt
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-static-list
+      description: Marketo Create Static List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-static-lists.createstaticlistusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

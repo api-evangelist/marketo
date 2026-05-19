@@ -1,0 +1,91 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Variables
+  description: 'Marketo Engage Rest API — Variables. 1 operations. Lead operation: Marketo Update Landing Page Variable. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Variables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-variables
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Variables business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-landingPage-id-variable-variableId}.json
+      path: /rest/asset/v1/landingPage/{id}/variable/{variableId}.json
+      operations:
+      - name: updatelandingpagevariableusingpost
+        method: POST
+        description: Marketo Update Landing Page Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: variableId
+          in: path
+          type: string
+          description: variableId
+          required: true
+        - name: value
+          in: query
+          type: integer
+          description: New value of the variable
+          required: true
+  exposes:
+  - type: rest
+    namespace: engage-rest-variables-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Variables. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/landingpage/{id}/variable/variableid-json
+      name: rest-asset-v1-landingpage-id-variable-variableid-json
+      description: REST surface for rest-asset-v1-landingPage-id-variable-variableId}.json.
+      operations:
+      - method: POST
+        name: updatelandingpagevariableusingpost
+        description: Marketo Update Landing Page Variable
+        call: engage-rest-variables.updatelandingpagevariableusingpost
+        with:
+          id: rest.id
+          variableId: rest.variableId
+          value: rest.value
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-variables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Variables. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-update-landing-page-variable
+      description: Marketo Update Landing Page Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-variables.updatelandingpagevariableusingpost
+      with:
+        id: tools.id
+        variableId: tools.variableId
+        value: tools.value
+      outputParameters:
+      - type: object
+        mapping: $.

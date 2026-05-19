@@ -1,0 +1,384 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Campaigns
+  description: 'Marketo Engage Rest API — Campaigns. 8 operations. Lead operation: Marketo Get Smart Campaign by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Campaigns
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-campaigns
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Campaigns business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-smartCampaign-byName.json
+      path: /rest/asset/v1/smartCampaign/byName.json
+      operations:
+      - name: getsmartcampaignbynameusingget
+        method: GET
+        description: Marketo Get Smart Campaign by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name for the smart campaign
+          required: true
+    - name: rest-asset-v1-smartCampaign-id}.json
+      path: /rest/asset/v1/smartCampaign/{id}.json
+      operations:
+      - name: getsmartcampaignbyidusingget
+        method: GET
+        description: Marketo Get Smart Campaign by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id for the smart campaign
+          required: true
+      - name: updatesmartcampaignusingpost
+        method: POST
+        description: Marketo Update Smart Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id for the smart campaign
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-smartCampaign-id-activate.json
+      path: /rest/asset/v1/smartCampaign/{id}/activate.json
+      operations:
+      - name: activatesmartcampaignusingpost
+        method: POST
+        description: Marketo Activate Smart Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart campaign
+          required: true
+    - name: rest-asset-v1-smartCampaign-id-clone.json
+      path: /rest/asset/v1/smartCampaign/{id}/clone.json
+      operations:
+      - name: clonesmartcampaignusingpost
+        method: POST
+        description: Marketo Clone Smart Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart campaign
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-smartCampaign-id-deactivate.json
+      path: /rest/asset/v1/smartCampaign/{id}/deactivate.json
+      operations:
+      - name: deactivatesmartcampaignusingpost
+        method: POST
+        description: Marketo Deactivate Smart Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart campaign
+          required: true
+    - name: rest-asset-v1-smartCampaign-id-delete.json
+      path: /rest/asset/v1/smartCampaign/{id}/delete.json
+      operations:
+      - name: deletesmartcampaignusingpost
+        method: POST
+        description: Marketo Delete Smart Campaign
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart campaign
+          required: true
+    - name: rest-asset-v1-smartCampaign-id-smartList.json
+      path: /rest/asset/v1/smartCampaign/{id}/smartList.json
+      operations:
+      - name: getsmartlistbysmartcampaignidusingget
+        method: GET
+        description: Marketo Get Smart List by Smart Campaign Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id for the smart campaign containing smart list to retrieve
+          required: true
+        - name: includeRules
+          in: query
+          type: boolean
+          description: Set true to populate smart list rules. Default false
+  exposes:
+  - type: rest
+    namespace: engage-rest-campaigns-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Campaigns. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/smartcampaign/byname-json
+      name: rest-asset-v1-smartcampaign-byname-json
+      description: REST surface for rest-asset-v1-smartCampaign-byName.json.
+      operations:
+      - method: GET
+        name: getsmartcampaignbynameusingget
+        description: Marketo Get Smart Campaign by Name
+        call: engage-rest-campaigns.getsmartcampaignbynameusingget
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/id-json
+      name: rest-asset-v1-smartcampaign-id-json
+      description: REST surface for rest-asset-v1-smartCampaign-id}.json.
+      operations:
+      - method: GET
+        name: getsmartcampaignbyidusingget
+        description: Marketo Get Smart Campaign by Id
+        call: engage-rest-campaigns.getsmartcampaignbyidusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updatesmartcampaignusingpost
+        description: Marketo Update Smart Campaign
+        call: engage-rest-campaigns.updatesmartcampaignusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/{id}/activate-json
+      name: rest-asset-v1-smartcampaign-id-activate-json
+      description: REST surface for rest-asset-v1-smartCampaign-id-activate.json.
+      operations:
+      - method: POST
+        name: activatesmartcampaignusingpost
+        description: Marketo Activate Smart Campaign
+        call: engage-rest-campaigns.activatesmartcampaignusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/{id}/clone-json
+      name: rest-asset-v1-smartcampaign-id-clone-json
+      description: REST surface for rest-asset-v1-smartCampaign-id-clone.json.
+      operations:
+      - method: POST
+        name: clonesmartcampaignusingpost
+        description: Marketo Clone Smart Campaign
+        call: engage-rest-campaigns.clonesmartcampaignusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/{id}/deactivate-json
+      name: rest-asset-v1-smartcampaign-id-deactivate-json
+      description: REST surface for rest-asset-v1-smartCampaign-id-deactivate.json.
+      operations:
+      - method: POST
+        name: deactivatesmartcampaignusingpost
+        description: Marketo Deactivate Smart Campaign
+        call: engage-rest-campaigns.deactivatesmartcampaignusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/{id}/delete-json
+      name: rest-asset-v1-smartcampaign-id-delete-json
+      description: REST surface for rest-asset-v1-smartCampaign-id-delete.json.
+      operations:
+      - method: POST
+        name: deletesmartcampaignusingpost
+        description: Marketo Delete Smart Campaign
+        call: engage-rest-campaigns.deletesmartcampaignusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartcampaign/{id}/smartlist-json
+      name: rest-asset-v1-smartcampaign-id-smartlist-json
+      description: REST surface for rest-asset-v1-smartCampaign-id-smartList.json.
+      operations:
+      - method: GET
+        name: getsmartlistbysmartcampaignidusingget
+        description: Marketo Get Smart List by Smart Campaign Id
+        call: engage-rest-campaigns.getsmartlistbysmartcampaignidusingget
+        with:
+          id: rest.id
+          includeRules: rest.includeRules
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-campaigns-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Campaigns. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-smart-campaign-name
+      description: Marketo Get Smart Campaign by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-campaigns.getsmartcampaignbynameusingget
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-smart-campaign-id
+      description: Marketo Get Smart Campaign by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-campaigns.getsmartcampaignbyidusingget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-smart-campaign
+      description: Marketo Update Smart Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-campaigns.updatesmartcampaignusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-activate-smart-campaign
+      description: Marketo Activate Smart Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-campaigns.activatesmartcampaignusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-smart-campaign
+      description: Marketo Clone Smart Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-campaigns.clonesmartcampaignusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-deactivate-smart-campaign
+      description: Marketo Deactivate Smart Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-campaigns.deactivatesmartcampaignusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-smart-campaign
+      description: Marketo Delete Smart Campaign
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-campaigns.deletesmartcampaignusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-smart-list-smart
+      description: Marketo Get Smart List by Smart Campaign Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-campaigns.getsmartlistbysmartcampaignidusingget
+      with:
+        id: tools.id
+        includeRules: tools.includeRules
+      outputParameters:
+      - type: object
+        mapping: $.

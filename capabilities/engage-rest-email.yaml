@@ -1,0 +1,1794 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Email
+  description: 'Marketo Engage Rest API — Email. 37 operations. Lead operation: Marketo Get Email by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Email
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-email
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Email business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-email-byName.json
+      path: /rest/asset/v1/email/byName.json
+      operations:
+      - name: getemailbynameusingget
+        method: GET
+        description: Marketo Get Email by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: Name of the email
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+    - name: rest-asset-v1-email-ccFields.json
+      path: /rest/asset/v1/email/ccFields.json
+      operations:
+      - name: getemailccfieldsusingget
+        method: GET
+        description: Marketo Get Email CC Fields
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rest-asset-v1-email-id}.json
+      path: /rest/asset/v1/email/{id}.json
+      operations:
+      - name: getemailbyidusingget
+        method: GET
+        description: Marketo Get Email By Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateemailusingpost
+        method: POST
+        description: Marketo Update Email Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-approveDraft.json
+      path: /rest/asset/v1/email/{id}/approveDraft.json
+      operations:
+      - name: approvedraftusingpost
+        method: POST
+        description: Marketo Approve Email Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-email-id-clone.json
+      path: /rest/asset/v1/email/{id}/clone.json
+      operations:
+      - name: cloneemailusingpost
+        method: POST
+        description: Marketo Clone Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-content.json
+      path: /rest/asset/v1/email/{id}/content.json
+      operations:
+      - name: getemailcontentbyidusingget
+        method: GET
+        description: Marketo Get Email Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateemailcontentusingpost
+        method: POST
+        description: Marketo Update Email Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-content-rearrange.json
+      path: /rest/asset/v1/email/{id}/content/rearrange.json
+      operations:
+      - name: rearrangemodulesusingpost
+        method: POST
+        description: Marketo Rearrange Email Modules
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-email-id-content-htmlId}.json
+      path: /rest/asset/v1/email/{id}/content/{htmlId}.json
+      operations:
+      - name: updateemailcomponentcontentusingpost
+        method: POST
+        description: Marketo Update Email Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: htmlId
+          in: path
+          type: string
+          description: htmlId
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-add.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/add.json
+      operations:
+      - name: addmoduleusingpost
+        method: POST
+        description: Marketo Add Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Name of the module
+          required: true
+        - name: index
+          in: query
+          type: integer
+          description: Index of the module. Determines the order of the module in the email.
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-delete.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/delete.json
+      operations:
+      - name: deletemoduleusingpost
+        method: POST
+        description: Marketo Delete Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-duplicate.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json
+      operations:
+      - name: duplicatemoduleusingpost
+        method: POST
+        description: Marketo Duplicate Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: Name of the new module
+          required: true
+    - name: rest-asset-v1-email-id-content-moduleId-rename.json
+      path: /rest/asset/v1/email/{id}/content/{moduleId}/rename.json
+      operations:
+      - name: renameusingpost
+        method: POST
+        description: Marketo Rename Email Module
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: moduleId
+          in: path
+          type: string
+          description: moduleId
+          required: true
+        - name: name
+          in: query
+          type: string
+          description: New module name
+          required: true
+    - name: rest-asset-v1-email-id-delete.json
+      path: /rest/asset/v1/email/{id}/delete.json
+      operations:
+      - name: deleteemailusingpost
+        method: POST
+        description: Marketo Delete Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-email-id-discardDraft.json
+      path: /rest/asset/v1/email/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost
+        method: POST
+        description: Marketo Discard Email Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-email-id-dynamicContent-contentId}.json
+      path: /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json
+      operations:
+      - name: getemaildynamiccontentusingget
+        method: GET
+        description: Marketo Get Email Dynamic Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of email
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of email dynamic content section
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateemaildynamiccontentusingpost
+        method: POST
+        description: Marketo Update Email Dynamic Content Section
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of email
+          required: true
+        - name: contentId
+          in: path
+          type: string
+          description: Id of email dynamic content section
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-fullContent.json
+      path: /rest/asset/v1/email/{id}/fullContent.json
+      operations:
+      - name: getemailfullcontentusingget
+        method: GET
+        description: Marketo Get Email Full Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the email
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not.
+        - name: leadId
+          in: query
+          type: integer
+          description: The lead id to impersonate. Email is rendered as though it was received by this lead.
+        - name: type
+          in: query
+          type: string
+          description: Email content type to return. Default is HTML.
+      - name: createemailfullcontentusingpost
+        method: POST
+        description: Marketo Update Email Full Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the email
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-sendSample.json
+      path: /rest/asset/v1/email/{id}/sendSample.json
+      operations:
+      - name: sendsampleemailusingpost
+        method: POST
+        description: Marketo Send Sample Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the email
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-email-id-unapprove.json
+      path: /rest/asset/v1/email/{id}/unapprove.json
+      operations:
+      - name: unapprovedraftusingpost
+        method: POST
+        description: Marketo Unapprove Email
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-email-id-variable-name}.json
+      path: /rest/asset/v1/email/{id}/variable/{name}.json
+      operations:
+      - name: updatevariableusingpost
+        method: POST
+        description: Marketo Update Email Variable
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: name
+          in: path
+          type: string
+          description: name
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-email-id-variables.json
+      path: /rest/asset/v1/email/{id}/variables.json
+      operations:
+      - name: getemailvariablesusingget
+        method: GET
+        description: Marketo Get Email Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplate-byName.json
+      path: /rest/asset/v1/emailTemplate/byName.json
+      operations:
+      - name: gettemplatebynameusingget
+        method: GET
+        description: Marketo Get Email Template by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: query
+          type: string
+          description: name
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+    - name: rest-asset-v1-emailTemplate-id}.json
+      path: /rest/asset/v1/emailTemplate/{id}.json
+      operations:
+      - name: gettemplatebyidusingget
+        method: GET
+        description: Marketo Get Email Template by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: updateemailtemplateusingpost
+        method: POST
+        description: Marketo Update Email Template Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-approveDraft.json
+      path: /rest/asset/v1/emailTemplate/{id}/approveDraft.json
+      operations:
+      - name: approvedraftusingpost1
+        method: POST
+        description: Marketo Approve Email Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-clone.json
+      path: /rest/asset/v1/emailTemplate/{id}/clone.json
+      operations:
+      - name: clonetemplateusingpost
+        method: POST
+        description: Marketo Clone Email Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-content
+      path: /rest/asset/v1/emailTemplate/{id}/content
+      operations:
+      - name: gettemplatecontentbyidusingget
+        method: GET
+        description: Marketo Get Email Template Content by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+    - name: rest-asset-v1-emailTemplate-id-content.json
+      path: /rest/asset/v1/emailTemplate/{id}/content.json
+      operations:
+      - name: updateemailtemplatecontentusingpost
+        method: POST
+        description: Marketo Update Email Template Content
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: rest-asset-v1-emailTemplate-id-delete.json
+      path: /rest/asset/v1/emailTemplate/{id}/delete.json
+      operations:
+      - name: deletetemplateusingpost
+        method: POST
+        description: Marketo Delete Email Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-discardDraft.json
+      path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
+      operations:
+      - name: discarddraftusingpost1
+        method: POST
+        description: Marketo Discard Email Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplate-id-unapprove.json
+      path: /rest/asset/v1/emailTemplate/{id}/unapprove.json
+      operations:
+      - name: unapprovedraftusingpost1
+        method: POST
+        description: Marketo Unapprove Email Template Draft
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: id
+          required: true
+    - name: rest-asset-v1-emailTemplates.json
+      path: /rest/asset/v1/emailTemplates.json
+      operations:
+      - name: getemailtemplatesusingget
+        method: GET
+        description: Marketo Get Email Templates
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: status
+          in: query
+          type: string
+          description: Status filter for draft or approved versions
+      - name: createemailtemplateusingpost
+        method: POST
+        description: Marketo Create Email Template
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-emailTemplates-id-usedBy.json
+      path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
+      operations:
+      - name: getemailtemplateusedbyusingget
+        method: GET
+        description: Marketo Get Email Template Used By
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the email template
+          required: true
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+  exposes:
+  - type: rest
+    namespace: engage-rest-email-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Email. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/email/byname-json
+      name: rest-asset-v1-email-byname-json
+      description: REST surface for rest-asset-v1-email-byName.json.
+      operations:
+      - method: GET
+        name: getemailbynameusingget
+        description: Marketo Get Email by Name
+        call: engage-rest-email.getemailbynameusingget
+        with:
+          name: rest.name
+          status: rest.status
+          folder: rest.folder
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/ccfields-json
+      name: rest-asset-v1-email-ccfields-json
+      description: REST surface for rest-asset-v1-email-ccFields.json.
+      operations:
+      - method: GET
+        name: getemailccfieldsusingget
+        description: Marketo Get Email CC Fields
+        call: engage-rest-email.getemailccfieldsusingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/id-json
+      name: rest-asset-v1-email-id-json
+      description: REST surface for rest-asset-v1-email-id}.json.
+      operations:
+      - method: GET
+        name: getemailbyidusingget
+        description: Marketo Get Email By Id
+        call: engage-rest-email.getemailbyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateemailusingpost
+        description: Marketo Update Email Metadata
+        call: engage-rest-email.updateemailusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/approvedraft-json
+      name: rest-asset-v1-email-id-approvedraft-json
+      description: REST surface for rest-asset-v1-email-id-approveDraft.json.
+      operations:
+      - method: POST
+        name: approvedraftusingpost
+        description: Marketo Approve Email Draft
+        call: engage-rest-email.approvedraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/clone-json
+      name: rest-asset-v1-email-id-clone-json
+      description: REST surface for rest-asset-v1-email-id-clone.json.
+      operations:
+      - method: POST
+        name: cloneemailusingpost
+        description: Marketo Clone Email
+        call: engage-rest-email.cloneemailusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content-json
+      name: rest-asset-v1-email-id-content-json
+      description: REST surface for rest-asset-v1-email-id-content.json.
+      operations:
+      - method: GET
+        name: getemailcontentbyidusingget
+        description: Marketo Get Email Content
+        call: engage-rest-email.getemailcontentbyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateemailcontentusingpost
+        description: Marketo Update Email Content
+        call: engage-rest-email.updateemailcontentusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/rearrange-json
+      name: rest-asset-v1-email-id-content-rearrange-json
+      description: REST surface for rest-asset-v1-email-id-content-rearrange.json.
+      operations:
+      - method: POST
+        name: rearrangemodulesusingpost
+        description: Marketo Rearrange Email Modules
+        call: engage-rest-email.rearrangemodulesusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/htmlid-json
+      name: rest-asset-v1-email-id-content-htmlid-json
+      description: REST surface for rest-asset-v1-email-id-content-htmlId}.json.
+      operations:
+      - method: POST
+        name: updateemailcomponentcontentusingpost
+        description: Marketo Update Email Content Section
+        call: engage-rest-email.updateemailcomponentcontentusingpost
+        with:
+          id: rest.id
+          htmlId: rest.htmlId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/add-json
+      name: rest-asset-v1-email-id-content-moduleid-add-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-add.json.
+      operations:
+      - method: POST
+        name: addmoduleusingpost
+        description: Marketo Add Email Module
+        call: engage-rest-email.addmoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+          index: rest.index
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/delete-json
+      name: rest-asset-v1-email-id-content-moduleid-delete-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-delete.json.
+      operations:
+      - method: POST
+        name: deletemoduleusingpost
+        description: Marketo Delete Module
+        call: engage-rest-email.deletemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/duplicate-json
+      name: rest-asset-v1-email-id-content-moduleid-duplicate-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-duplicate.json.
+      operations:
+      - method: POST
+        name: duplicatemoduleusingpost
+        description: Marketo Duplicate Email Module
+        call: engage-rest-email.duplicatemoduleusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/content/{moduleid}/rename-json
+      name: rest-asset-v1-email-id-content-moduleid-rename-json
+      description: REST surface for rest-asset-v1-email-id-content-moduleId-rename.json.
+      operations:
+      - method: POST
+        name: renameusingpost
+        description: Marketo Rename Email Module
+        call: engage-rest-email.renameusingpost
+        with:
+          id: rest.id
+          moduleId: rest.moduleId
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/delete-json
+      name: rest-asset-v1-email-id-delete-json
+      description: REST surface for rest-asset-v1-email-id-delete.json.
+      operations:
+      - method: POST
+        name: deleteemailusingpost
+        description: Marketo Delete Email
+        call: engage-rest-email.deleteemailusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/discarddraft-json
+      name: rest-asset-v1-email-id-discarddraft-json
+      description: REST surface for rest-asset-v1-email-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost
+        description: Marketo Discard Email Draft
+        call: engage-rest-email.discarddraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/dynamiccontent/contentid-json
+      name: rest-asset-v1-email-id-dynamiccontent-contentid-json
+      description: REST surface for rest-asset-v1-email-id-dynamicContent-contentId}.json.
+      operations:
+      - method: GET
+        name: getemaildynamiccontentusingget
+        description: Marketo Get Email Dynamic Content
+        call: engage-rest-email.getemaildynamiccontentusingget
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateemaildynamiccontentusingpost
+        description: Marketo Update Email Dynamic Content Section
+        call: engage-rest-email.updateemaildynamiccontentusingpost
+        with:
+          id: rest.id
+          contentId: rest.contentId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/fullcontent-json
+      name: rest-asset-v1-email-id-fullcontent-json
+      description: REST surface for rest-asset-v1-email-id-fullContent.json.
+      operations:
+      - method: GET
+        name: getemailfullcontentusingget
+        description: Marketo Get Email Full Content
+        call: engage-rest-email.getemailfullcontentusingget
+        with:
+          id: rest.id
+          status: rest.status
+          leadId: rest.leadId
+          type: rest.type
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createemailfullcontentusingpost
+        description: Marketo Update Email Full Content
+        call: engage-rest-email.createemailfullcontentusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/sendsample-json
+      name: rest-asset-v1-email-id-sendsample-json
+      description: REST surface for rest-asset-v1-email-id-sendSample.json.
+      operations:
+      - method: POST
+        name: sendsampleemailusingpost
+        description: Marketo Send Sample Email
+        call: engage-rest-email.sendsampleemailusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/unapprove-json
+      name: rest-asset-v1-email-id-unapprove-json
+      description: REST surface for rest-asset-v1-email-id-unapprove.json.
+      operations:
+      - method: POST
+        name: unapprovedraftusingpost
+        description: Marketo Unapprove Email
+        call: engage-rest-email.unapprovedraftusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/variable/name-json
+      name: rest-asset-v1-email-id-variable-name-json
+      description: REST surface for rest-asset-v1-email-id-variable-name}.json.
+      operations:
+      - method: POST
+        name: updatevariableusingpost
+        description: Marketo Update Email Variable
+        call: engage-rest-email.updatevariableusingpost
+        with:
+          id: rest.id
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/email/{id}/variables-json
+      name: rest-asset-v1-email-id-variables-json
+      description: REST surface for rest-asset-v1-email-id-variables.json.
+      operations:
+      - method: GET
+        name: getemailvariablesusingget
+        description: Marketo Get Email Variables
+        call: engage-rest-email.getemailvariablesusingget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/byname-json
+      name: rest-asset-v1-emailtemplate-byname-json
+      description: REST surface for rest-asset-v1-emailTemplate-byName.json.
+      operations:
+      - method: GET
+        name: gettemplatebynameusingget
+        description: Marketo Get Email Template by Name
+        call: engage-rest-email.gettemplatebynameusingget
+        with:
+          name: rest.name
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/id-json
+      name: rest-asset-v1-emailtemplate-id-json
+      description: REST surface for rest-asset-v1-emailTemplate-id}.json.
+      operations:
+      - method: GET
+        name: gettemplatebyidusingget
+        description: Marketo Get Email Template by Id
+        call: engage-rest-email.gettemplatebyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: updateemailtemplateusingpost
+        description: Marketo Update Email Template Metadata
+        call: engage-rest-email.updateemailtemplateusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/approvedraft-json
+      name: rest-asset-v1-emailtemplate-id-approvedraft-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-approveDraft.json.
+      operations:
+      - method: POST
+        name: approvedraftusingpost1
+        description: Marketo Approve Email Template Draft
+        call: engage-rest-email.approvedraftusingpost1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/clone-json
+      name: rest-asset-v1-emailtemplate-id-clone-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-clone.json.
+      operations:
+      - method: POST
+        name: clonetemplateusingpost
+        description: Marketo Clone Email Template
+        call: engage-rest-email.clonetemplateusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/content
+      name: rest-asset-v1-emailtemplate-id-content
+      description: REST surface for rest-asset-v1-emailTemplate-id-content.
+      operations:
+      - method: GET
+        name: gettemplatecontentbyidusingget
+        description: Marketo Get Email Template Content by Id
+        call: engage-rest-email.gettemplatecontentbyidusingget
+        with:
+          id: rest.id
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/content-json
+      name: rest-asset-v1-emailtemplate-id-content-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-content.json.
+      operations:
+      - method: POST
+        name: updateemailtemplatecontentusingpost
+        description: Marketo Update Email Template Content
+        call: engage-rest-email.updateemailtemplatecontentusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/delete-json
+      name: rest-asset-v1-emailtemplate-id-delete-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-delete.json.
+      operations:
+      - method: POST
+        name: deletetemplateusingpost
+        description: Marketo Delete Email Template
+        call: engage-rest-email.deletetemplateusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/discarddraft-json
+      name: rest-asset-v1-emailtemplate-id-discarddraft-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-discardDraft.json.
+      operations:
+      - method: POST
+        name: discarddraftusingpost1
+        description: Marketo Discard Email Template Draft
+        call: engage-rest-email.discarddraftusingpost1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplate/{id}/unapprove-json
+      name: rest-asset-v1-emailtemplate-id-unapprove-json
+      description: REST surface for rest-asset-v1-emailTemplate-id-unapprove.json.
+      operations:
+      - method: POST
+        name: unapprovedraftusingpost1
+        description: Marketo Unapprove Email Template Draft
+        call: engage-rest-email.unapprovedraftusingpost1
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplates-json
+      name: rest-asset-v1-emailtemplates-json
+      description: REST surface for rest-asset-v1-emailTemplates.json.
+      operations:
+      - method: GET
+        name: getemailtemplatesusingget
+        description: Marketo Get Email Templates
+        call: engage-rest-email.getemailtemplatesusingget
+        with:
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+          status: rest.status
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createemailtemplateusingpost
+        description: Marketo Create Email Template
+        call: engage-rest-email.createemailtemplateusingpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/emailtemplates/{id}/usedby-json
+      name: rest-asset-v1-emailtemplates-id-usedby-json
+      description: REST surface for rest-asset-v1-emailTemplates-id-usedBy.json.
+      operations:
+      - method: GET
+        name: getemailtemplateusedbyusingget
+        description: Marketo Get Email Template Used By
+        call: engage-rest-email.getemailtemplateusedbyusingget
+        with:
+          id: rest.id
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-email-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Email. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: marketo-get-email-name
+      description: Marketo Get Email by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailbynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+        folder: tools.folder
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-cc-fields
+      description: Marketo Get Email CC Fields
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailccfieldsusingget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-id
+      description: Marketo Get Email By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-metadata
+      description: Marketo Update Email Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemailusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-email-draft
+      description: Marketo Approve Email Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.approvedraftusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-email
+      description: Marketo Clone Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.cloneemailusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-content
+      description: Marketo Get Email Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailcontentbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-content
+      description: Marketo Update Email Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemailcontentusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-rearrange-email-modules
+      description: Marketo Rearrange Email Modules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.rearrangemodulesusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-content-section
+      description: Marketo Update Email Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemailcomponentcontentusingpost
+      with:
+        id: tools.id
+        htmlId: tools.htmlId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-add-email-module
+      description: Marketo Add Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.addmoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+        index: tools.index
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-module
+      description: Marketo Delete Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.deletemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-duplicate-email-module
+      description: Marketo Duplicate Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.duplicatemoduleusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-rename-email-module
+      description: Marketo Rename Email Module
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.renameusingpost
+      with:
+        id: tools.id
+        moduleId: tools.moduleId
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-email
+      description: Marketo Delete Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.deleteemailusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-email-draft
+      description: Marketo Discard Email Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.discarddraftusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-dynamic-content
+      description: Marketo Get Email Dynamic Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemaildynamiccontentusingget
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-dynamic-content
+      description: Marketo Update Email Dynamic Content Section
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemaildynamiccontentusingpost
+      with:
+        id: tools.id
+        contentId: tools.contentId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-full-content
+      description: Marketo Get Email Full Content
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailfullcontentusingget
+      with:
+        id: tools.id
+        status: tools.status
+        leadId: tools.leadId
+        type: tools.type
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-full-content
+      description: Marketo Update Email Full Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.createemailfullcontentusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-send-sample-email
+      description: Marketo Send Sample Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.sendsampleemailusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-unapprove-email
+      description: Marketo Unapprove Email
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.unapprovedraftusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-variable
+      description: Marketo Update Email Variable
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updatevariableusingpost
+      with:
+        id: tools.id
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-variables
+      description: Marketo Get Email Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailvariablesusingget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-template-name
+      description: Marketo Get Email Template by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.gettemplatebynameusingget
+      with:
+        name: tools.name
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-template-id
+      description: Marketo Get Email Template by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.gettemplatebyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-template-metadata
+      description: Marketo Update Email Template Metadata
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemailtemplateusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-approve-email-template-draft
+      description: Marketo Approve Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.approvedraftusingpost1
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-email-template
+      description: Marketo Clone Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.clonetemplateusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-template-content
+      description: Marketo Get Email Template Content by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.gettemplatecontentbyidusingget
+      with:
+        id: tools.id
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-update-email-template-content
+      description: Marketo Update Email Template Content
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.updateemailtemplatecontentusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-email-template
+      description: Marketo Delete Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.deletetemplateusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-discard-email-template-draft
+      description: Marketo Discard Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.discarddraftusingpost1
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-unapprove-email-template-draft
+      description: Marketo Unapprove Email Template Draft
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.unapprovedraftusingpost1
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-templates
+      description: Marketo Get Email Templates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailtemplatesusingget
+      with:
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+        status: tools.status
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-create-email-template
+      description: Marketo Create Email Template
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-email.createemailtemplateusingpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-email-template-used
+      description: Marketo Get Email Template Used By
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-email.getemailtemplateusedbyusingget
+      with:
+        id: tools.id
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+      outputParameters:
+      - type: object
+        mapping: $.

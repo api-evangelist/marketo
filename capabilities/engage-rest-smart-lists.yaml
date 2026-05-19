@@ -1,0 +1,239 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Smart  Lists
+  description: 'Marketo Engage Rest API — Smart  Lists. 4 operations. Lead operation: Marketo Get Smart List by Id. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Smart  Lists
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-smart-lists
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Smart  Lists business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-smartList-id}.json
+      path: /rest/asset/v1/smartList/{id}.json
+      operations:
+      - name: getsmartlistbyidusingget
+        method: GET
+        description: Marketo Get Smart List by Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart list to retrieve
+          required: true
+        - name: includeRules
+          in: query
+          type: boolean
+          description: Set true to populate smart list rules. Default false
+    - name: rest-asset-v1-smartList-id-clone.json
+      path: /rest/asset/v1/smartList/{id}/clone.json
+      operations:
+      - name: clonesmartlistusingpost
+        method: POST
+        description: Marketo Clone Smart List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of smart list to clone
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: rest-asset-v1-smartList-id-delete.json
+      path: /rest/asset/v1/smartList/{id}/delete.json
+      operations:
+      - name: deletesmartlistbyidusingpost
+        method: POST
+        description: Marketo Delete Smart List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: integer
+          description: Id of the smart list to delete
+          required: true
+    - name: rest-asset-v1-smartLists.json
+      path: /rest/asset/v1/smartLists.json
+      operations:
+      - name: getsmartlistsusingget
+        method: GET
+        description: Marketo Get Smart Lists
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: folder
+          in: query
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of smart lists to return. Max 200, default 20.
+        - name: earliestUpdatedAt
+          in: query
+          type: string
+          description: Exclude smart lists prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Da
+        - name: latestUpdatedAt
+          in: query
+          type: string
+          description: Exclude smart lists after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datet
+  exposes:
+  - type: rest
+    namespace: engage-rest-smart-lists-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Smart  Lists. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/smartlist/id-json
+      name: rest-asset-v1-smartlist-id-json
+      description: REST surface for rest-asset-v1-smartList-id}.json.
+      operations:
+      - method: GET
+        name: getsmartlistbyidusingget
+        description: Marketo Get Smart List by Id
+        call: engage-rest-smart-lists.getsmartlistbyidusingget
+        with:
+          id: rest.id
+          includeRules: rest.includeRules
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartlist/{id}/clone-json
+      name: rest-asset-v1-smartlist-id-clone-json
+      description: REST surface for rest-asset-v1-smartList-id-clone.json.
+      operations:
+      - method: POST
+        name: clonesmartlistusingpost
+        description: Marketo Clone Smart List
+        call: engage-rest-smart-lists.clonesmartlistusingpost
+        with:
+          id: rest.id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartlist/{id}/delete-json
+      name: rest-asset-v1-smartlist-id-delete-json
+      description: REST surface for rest-asset-v1-smartList-id-delete.json.
+      operations:
+      - method: POST
+        name: deletesmartlistbyidusingpost
+        description: Marketo Delete Smart List
+        call: engage-rest-smart-lists.deletesmartlistbyidusingpost
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/smartlists-json
+      name: rest-asset-v1-smartlists-json
+      description: REST surface for rest-asset-v1-smartLists.json.
+      operations:
+      - method: GET
+        name: getsmartlistsusingget
+        description: Marketo Get Smart Lists
+        call: engage-rest-smart-lists.getsmartlistsusingget
+        with:
+          folder: rest.folder
+          offset: rest.offset
+          maxReturn: rest.maxReturn
+          earliestUpdatedAt: rest.earliestUpdatedAt
+          latestUpdatedAt: rest.latestUpdatedAt
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-smart-lists-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Smart  Lists. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-smart-list-id
+      description: Marketo Get Smart List by Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-smart-lists.getsmartlistbyidusingget
+      with:
+        id: tools.id
+        includeRules: tools.includeRules
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-clone-smart-list
+      description: Marketo Clone Smart List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-smart-lists.clonesmartlistusingpost
+      with:
+        id: tools.id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-delete-smart-list
+      description: Marketo Delete Smart List
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: engage-rest-smart-lists.deletesmartlistbyidusingpost
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-smart-lists
+      description: Marketo Get Smart Lists
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-smart-lists.getsmartlistsusingget
+      with:
+        folder: tools.folder
+        offset: tools.offset
+        maxReturn: tools.maxReturn
+        earliestUpdatedAt: tools.earliestUpdatedAt
+        latestUpdatedAt: tools.latestUpdatedAt
+      outputParameters:
+      - type: object
+        mapping: $.

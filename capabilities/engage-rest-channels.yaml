@@ -1,0 +1,124 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Marketo Engage Rest API — Channels
+  description: 'Marketo Engage Rest API — Channels. 2 operations. Lead operation: Marketo Get Channel by Name. Self-contained
+    Naftiko capability covering one Marketo business surface.'
+  tags:
+  - Marketo
+  - Channels
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    MARKETO_API_KEY: MARKETO_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: engage-rest-channels
+    baseUri: https://localhost:8080
+    description: Marketo Engage Rest API — Channels business capability. Self-contained, no shared references.
+    resources:
+    - name: rest-asset-v1-channel-byName.json
+      path: /rest/asset/v1/channel/byName.json
+      operations:
+      - name: getchannelbynameusingget
+        method: GET
+        description: Marketo Get Channel by Name
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Name
+          in: query
+          type: string
+          description: Name of channel to retrieve
+          required: true
+    - name: rest-asset-v1-channels.json
+      path: /rest/asset/v1/channels.json
+      operations:
+      - name: getallchannelsusingget
+        method: GET
+        description: Marketo Get Channels
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: maxReturn
+          in: query
+          type: integer
+          description: Maximum number of channels to return. Max 200, default 20
+        - name: offset
+          in: query
+          type: integer
+          description: Integer offset for paging
+  exposes:
+  - type: rest
+    namespace: engage-rest-channels-rest
+    port: 8080
+    description: REST adapter for Marketo Engage Rest API — Channels. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/asset/v1/channel/byname-json
+      name: rest-asset-v1-channel-byname-json
+      description: REST surface for rest-asset-v1-channel-byName.json.
+      operations:
+      - method: GET
+        name: getchannelbynameusingget
+        description: Marketo Get Channel by Name
+        call: engage-rest-channels.getchannelbynameusingget
+        with:
+          Name: rest.Name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/asset/v1/channels-json
+      name: rest-asset-v1-channels-json
+      description: REST surface for rest-asset-v1-channels.json.
+      operations:
+      - method: GET
+        name: getallchannelsusingget
+        description: Marketo Get Channels
+        call: engage-rest-channels.getallchannelsusingget
+        with:
+          maxReturn: rest.maxReturn
+          offset: rest.offset
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: engage-rest-channels-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Marketo Engage Rest API — Channels. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: marketo-get-channel-name
+      description: Marketo Get Channel by Name
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-channels.getchannelbynameusingget
+      with:
+        Name: tools.Name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: marketo-get-channels
+      description: Marketo Get Channels
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: engage-rest-channels.getallchannelsusingget
+      with:
+        maxReturn: tools.maxReturn
+        offset: tools.offset
+      outputParameters:
+      - type: object
+        mapping: $.
