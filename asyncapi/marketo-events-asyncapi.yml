@@ -1,0 +1,362 @@
+asyncapi: '2.6.0'
+info:
+  title: Marketo Engage Events
+  version: '1.0.0'
+  description: |
+    AsyncAPI 2.6 description of the two event-shaped surfaces Marketo Engage
+    (Adobe) exposes to integrators:
+
+      1. Outbound Webhooks fired from Smart Campaign "Call Webhook" flow
+         steps. Marketo issues an HTTP GET or POST to a customer-configured
+         URL. The request URL, headers, and payload are author-defined
+         templates that resolve Lead, Trigger, Campaign, Program, and System
+         tokens at send time, so the body is not a fixed schema. Subscribers
+         optionally return a JSON or XML response that Marketo writes back
+         into lead fields via "Response Mappings"; only HTTP 2xx responses
+         are honored. Service timeout is 30 seconds. Webhook flow steps are
+         only valid inside Trigger campaigns.
+
+      2. The Activities REST API, which integrators poll to consume
+         lead-change, lead-activity, and deleted-lead streams. These are
+         modeled here as `subscribe` channels because they expose a
+         change-feed cursor (`nextPageToken` / `moreResult`) keyed off a
+         starting timestamp obtained from `getPagingToken`. The channels
+         bind to the documented REST endpoints under `/rest/v1/activities`
+         on the customer's Marketo Munchkin host.
+
+    Source documentation:
+      - Webhooks:        https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/webhooks/webhooks
+      - Activities:      https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/lead-database/activities
+      - Get Lead Changes, Get Lead Activities, Get Paging Token,
+        Get Deleted Leads, Get Activity Types are documented endpoints under
+        `/rest/v1/activities*.json`.
+
+    No fields beyond those documented by Adobe are invented here. The Webhook
+    payload is intentionally typed as `object` with `additionalProperties: true`
+    because the body is whatever template the Smart Campaign author writes.
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  tags:
+    - name: Marketo
+    - name: Adobe
+    - name: Webhooks
+    - name: Activities
+    - name: Lead Changes
+    - name: Marketing Automation
+
+defaultContentType: application/json
+
+servers:
+  subscriber:
+    url: '{webhookUrl}'
+    protocol: https
+    description: |
+      Customer-hosted HTTPS endpoint that receives outbound HTTP requests
+      from a Marketo Smart Campaign "Call Webhook" flow step. The full
+      URL (path and query) is configured per webhook in the Marketo Admin
+      Webhooks UI and may itself embed tokens.
+    variables:
+      webhookUrl:
+        default: https://example.com/marketo/webhook
+        description: Fully-qualified HTTPS URL of the subscriber endpoint.
+  munchkin:
+    url: 'https://{munchkinId}.mktorest.com'
+    protocol: https
+    description: |
+      Per-instance Marketo REST host. `munchkinId` is the account's
+      Munchkin identifier (the prefix before `.mktorest.com`). All
+      Activities API channels in this document are pulled from this host.
+    variables:
+      munchkinId:
+        default: '123-ABC-456'
+        description: Munchkin ID for the Marketo instance.
+    security:
+      - oauth2ClientCredentials: []
+
+channels:
+  marketo/webhook/outbound:
+    description: |
+      Outbound HTTP delivery from a Marketo Smart Campaign "Call Webhook"
+      flow step to a subscriber URL. Method is GET or POST, configured per
+      webhook. The body is an author-defined template; this channel models
+      the POST/JSON case. For GET deliveries there is no body and tokens
+      are resolved into the URL itself.
+    servers:
+      - subscriber
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: POST
+    subscribe:
+      operationId: receiveMarketoWebhook
+      summary: Receive a Smart Campaign webhook delivery.
+      description: |
+        Marketo issues the request synchronously inside the campaign flow.
+        The 30-second response window applies. To write data back into the
+        lead record, return a 2xx response whose body matches the webhook's
+        configured Response Mappings (JSON or XML).
+      bindings:
+        http:
+          bindingVersion: '0.3.0'
+          type: request
+          method: POST
+      message:
+        $ref: '#/components/messages/WebhookDelivery'
+
+  marketo/activities/leadActivities:
+    description: |
+      Polled stream of lead activity events sourced from
+      `GET /rest/v1/activities.json`. Consumers obtain an initial
+      `nextPageToken` from `GET /rest/v1/activities/pagingtoken.json` using
+      a `sinceDatetime`, then page forward using the returned token until
+      `moreResult` is `false`. `activityTypeIds` (up to 10) selects which
+      activity types are returned; `listId` and `leadIds` (up to 30)
+      further narrow the stream.
+    subscribe:
+      operationId: pollLeadActivities
+      summary: Page through lead activity events.
+      message:
+        $ref: '#/components/messages/LeadActivity'
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: GET
+
+  marketo/activities/leadChanges:
+    description: |
+      Polled stream of lead field-change events sourced from
+      `GET /rest/v1/activities/leadchanges.json`. The `fields` query
+      parameter is required and selects which lead fields are tracked.
+      Pagination uses the same `nextPageToken` / `moreResult` cursor model
+      as `getLeadActivities`.
+    subscribe:
+      operationId: pollLeadChanges
+      summary: Page through lead field-change events.
+      message:
+        $ref: '#/components/messages/LeadChange'
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: GET
+
+  marketo/activities/deletedLeads:
+    description: |
+      Polled stream of deleted-lead events sourced from
+      `GET /rest/v1/activities/deletedleads.json`. Same cursor model as
+      the other activity streams.
+    subscribe:
+      operationId: pollDeletedLeads
+      summary: Page through deleted-lead events.
+      message:
+        $ref: '#/components/messages/DeletedLead'
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+        type: request
+        method: GET
+
+components:
+  securitySchemes:
+    oauth2ClientCredentials:
+      type: oauth2
+      description: |
+        Marketo REST authentication. A custom service in the Marketo Admin
+        issues a client ID and secret; tokens are obtained from
+        `/identity/oauth/token` using the `client_credentials` grant and
+        passed as `access_token` (query) or `Authorization: Bearer` (header).
+      flows:
+        clientCredentials:
+          tokenUrl: https://{munchkinId}.mktorest.com/identity/oauth/token
+          scopes: {}
+
+  messages:
+    WebhookDelivery:
+      name: webhookDelivery
+      title: Marketo Outbound Webhook Delivery
+      summary: HTTP request emitted by a Smart Campaign Call Webhook flow step.
+      description: |
+        The request line, headers, and body are all author-configured
+        templates. Lead and System tokens are always available; Trigger,
+        Campaign, and Program tokens resolve when in scope. Custom
+        headers may be attached via "Webhooks Actions > Set Custom Header".
+        Token values can be encoded as JSON or Form/URL through the
+        "Request Token Encoding" property.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/WebhookPayload'
+
+    LeadActivity:
+      name: leadActivity
+      title: Lead Activity
+      summary: One record from `GET /rest/v1/activities.json`.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LeadActivity'
+
+    LeadChange:
+      name: leadChange
+      title: Lead Change
+      summary: One record from `GET /rest/v1/activities/leadchanges.json`.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LeadChange'
+
+    DeletedLead:
+      name: deletedLead
+      title: Deleted Lead
+      summary: One record from `GET /rest/v1/activities/deletedleads.json`.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/DeletedLead'
+
+  schemas:
+    WebhookPayload:
+      type: object
+      description: |
+        Author-defined templated payload. Marketo does not impose a schema
+        on Call Webhook bodies; subscribers receive whatever the campaign
+        author wrote in the Webhook Template field with tokens resolved at
+        send time. Modeled as a free-form object.
+      additionalProperties: true
+
+    Attribute:
+      type: object
+      description: |
+        Generic name/value attribute as returned inside activity records.
+      properties:
+        name:
+          type: string
+          description: Attribute name as defined on the activity type.
+        value:
+          description: Attribute value; type varies by attribute.
+
+    LeadActivity:
+      type: object
+      description: |
+        Schema mirrors the response fields documented for
+        `GET /rest/v1/activities.json`.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Numeric activity identifier.
+        marketoGUID:
+          type: string
+          description: Stable GUID for the activity.
+        leadId:
+          type: integer
+          format: int64
+          description: Identifier of the lead the activity belongs to.
+        activityDate:
+          type: string
+          format: date-time
+          description: Timestamp the activity occurred.
+        activityTypeId:
+          type: integer
+          description: Numeric identifier of the activity type.
+        primaryAttributeValueId:
+          type: integer
+          description: ID of the primary attribute value, when applicable.
+        primaryAttributeValue:
+          type: string
+          description: Primary attribute value, when applicable.
+        attributes:
+          type: array
+          description: Additional attributes for the activity.
+          items:
+            $ref: '#/components/schemas/Attribute'
+
+    LeadChangeField:
+      type: object
+      description: |
+        Field-level change record returned inside `LeadChange.fields`.
+      properties:
+        name:
+          type: string
+          description: Lead field name.
+        newValue:
+          description: New field value after the change.
+        oldValue:
+          description: Prior field value before the change.
+
+    LeadChange:
+      type: object
+      description: |
+        Schema mirrors the response fields documented for
+        `GET /rest/v1/activities/leadchanges.json`.
+      properties:
+        id:
+          type: integer
+          format: int64
+        marketoGUID:
+          type: string
+        leadId:
+          type: integer
+          format: int64
+        activityDate:
+          type: string
+          format: date-time
+        activityTypeId:
+          type: integer
+          description: |
+            Activity type identifier; lead-change events carry the
+            documented `Change Data Value` and related activity type IDs.
+        fields:
+          type: array
+          description: Per-field change records.
+          items:
+            $ref: '#/components/schemas/LeadChangeField'
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+
+    DeletedLead:
+      type: object
+      description: |
+        Schema mirrors the response fields documented for
+        `GET /rest/v1/activities/deletedleads.json`.
+      properties:
+        id:
+          type: integer
+          format: int64
+        marketoGUID:
+          type: string
+        leadId:
+          type: integer
+          format: int64
+        activityDate:
+          type: string
+          format: date-time
+        activityTypeId:
+          type: integer
+        primaryAttributeValueId:
+          type: integer
+        primaryAttributeValue:
+          type: string
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attribute'
+
+    PageEnvelope:
+      type: object
+      description: |
+        Envelope fields common to the Activities API pages. Not used as a
+        message payload directly; included so generators can model
+        pagination explicitly when binding the REST endpoint.
+      properties:
+        nextPageToken:
+          type: string
+          description: Opaque cursor for the next page.
+        moreResult:
+          type: boolean
+          description: True when more pages are available after this one.
