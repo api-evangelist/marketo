@@ -1,8 +1,9 @@
 aid: marketo
 name: Marketo
-description: Marketo, an Adobe company, develops and sells marketing automation software for account-based marketing and other
-  marketing services and products, including SEO and content creation. Marketo Engage exposes a REST API for programmatic
-  access to leads, programs, campaigns, assets, lists, and bulk import/export.
+description: Marketo, an Adobe company, develops and sells marketing automation software
+  for account-based marketing and other marketing services and products, including
+  SEO and content creation. Marketo Engage exposes a REST API for programmatic access
+  to leads, programs, campaigns, assets, lists, and bulk import/export.
 type: Index
 position: Consumer
 access: 3rd-Party
@@ -19,8 +20,9 @@ specificationVersion: '0.19'
 apis:
 - aid: marketo:marketo-engage-rest-api
   name: Marketo Engage REST API
-  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating
-    programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  description: Marketo exposes a REST API which allows for remote execution of many
+    of the systems capabilities. From creating programs to bulk lead import, there
+    are many options which allow fine-grained control of a Marketo instance.
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   tags:
   - Assets
@@ -40,134 +42,8 @@ apis:
     url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/openapi/marketo-engage-rest-api-openapi.yml
   - type: AsyncAPI
     url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-approve.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-assets.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-campaigns.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-cc.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-channel.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-channels.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-clone-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-content.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-content-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-delete-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-discard.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-dynamic.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-email.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-email-templates.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-emails.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-field.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-fields.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-file.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-file-contents.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-files.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-folder.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-folders.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-form.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-form-fields.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-forms.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-full.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-id.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-landing.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-landing-page-content.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-landing-page-redirect-rules.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-landing-page-templates.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-landing-pages.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-member.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-modules.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-name.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-name-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-page.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-program.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-programs.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-redirect.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-rest.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-rules.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-segments.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-segments-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-send.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-set.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-smart.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-smart-campaigns.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-smart-lists.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-snippets.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-static.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-static-lists.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-submit.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-template.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-templates.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-text-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-thank.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-tokens.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-type.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-unapprove-json.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-used.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-variable.yaml
-  - type: NaftikoCapability
-    url: capabilities/engage-rest-variables.yaml
+  - url: graphql/marketo-graphql.md
+    type: GraphQL
 common:
 - type: LinkedIn
   url: https://www.linkedin.com/company/adobemarketoengage

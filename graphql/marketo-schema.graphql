@@ -1,0 +1,1166 @@
+"""
+Marketo (Adobe) Engage - Conceptual GraphQL Schema
+Derived from the Marketo Engage REST API:
+  https://developers.marketo.com/rest-api/
+  https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+"""
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+scalar URL
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum LeadStatus {
+  KNOWN
+  ANONYMOUS
+  OPTED_OUT
+  UNSUBSCRIBED
+  MARKETING_SUSPENDED
+  BLACKLISTED
+}
+
+enum FieldDataType {
+  STRING
+  INTEGER
+  FLOAT
+  BOOLEAN
+  DATE
+  DATETIME
+  EMAIL
+  URL
+  PHONE
+  CURRENCY
+  REFERENCE
+  PICKLIST
+  MULTIPICKLIST
+  TEXT
+}
+
+enum FolderType {
+  FOLDER
+  PROGRAM
+}
+
+enum AssetStatus {
+  DRAFT
+  APPROVED
+  APPROVED_WITH_DRAFT
+}
+
+enum CampaignType {
+  BATCH
+  TRIGGER
+}
+
+enum ProgramType {
+  DEFAULT
+  EMAIL
+  ENGAGEMENT
+  EVENT
+  WEBINAR
+}
+
+enum SyncStatus {
+  ACTIVE
+  INACTIVE
+  ERROR
+}
+
+enum CustomObjectRelationship {
+  LEAD
+  COMPANY
+}
+
+# ---------------------------------------------------------------------------
+# Lead Database
+# ---------------------------------------------------------------------------
+
+"""A person/lead record in the Marketo lead database."""
+type Lead {
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+  company: String
+  title: String
+  phone: String
+  mobilePhone: String
+  address: String
+  city: String
+  state: String
+  postalCode: String
+  country: String
+  website: URL
+  annualRevenue: Float
+  numberOfEmployees: Int
+  industry: String
+  status: LeadStatus
+  unsubscribed: Boolean
+  unsubscribedReason: String
+  emailInvalid: Boolean
+  emailInvalidCause: String
+  doNotCall: Boolean
+  doNotCallReason: String
+  marketingSuspended: Boolean
+  marketingSuspendedCause: String
+  blacklisted: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  partition: LeadPartition
+  activities(limit: Int, offset: Int): [LeadActivity!]
+  lists: [List!]
+  programs: [ProgramMember!]
+  opportunities: [Opportunity!]
+  customFields: JSON
+}
+
+"""Definition of a field on the Lead object."""
+type LeadField {
+  id: ID!
+  name: String!
+  displayName: String!
+  dataType: FieldDataType!
+  length: Int
+  isReadOnly: Boolean!
+  isRequired: Boolean!
+  isHidden: Boolean!
+  isSensitive: Boolean!
+  isApiCreated: Boolean!
+  updateable: Boolean!
+  crmManaged: Boolean!
+  picklistValues: [String!]
+}
+
+"""An activity event associated with a lead."""
+type LeadActivity {
+  id: ID!
+  leadId: ID!
+  activityTypeId: ID!
+  activityType: ActivityType
+  activityDate: DateTime!
+  primaryAttribute: ActivityAttribute
+  attributes: [ActivityAttribute!]
+  campaignId: ID
+  campaign: Campaign
+}
+
+"""A partition that segments the lead database in a multi-workspace setup."""
+type LeadPartition {
+  id: ID!
+  name: String!
+  description: String
+  workspaceId: ID
+  workspaceName: String
+  leads(limit: Int, offset: Int): [Lead!]
+}
+
+"""Top-level container representing the Marketo lead database."""
+type LeadDatabase {
+  id: ID!
+  numLeads: Int
+  numAnonymousLeads: Int
+  partitions: [LeadPartition!]
+  fields: [LeadField!]
+}
+
+"""A lead scoped to a specific workspace."""
+type WorkspaceLead {
+  leadId: ID!
+  lead: Lead
+  workspaceId: ID!
+  workspaceName: String
+  partitionId: ID
+  partition: LeadPartition
+}
+
+# ---------------------------------------------------------------------------
+# Companies & Opportunities
+# ---------------------------------------------------------------------------
+
+"""A company/account record linked to one or more leads."""
+type Company {
+  id: ID!
+  externalCompanyId: String
+  company: String!
+  website: URL
+  mainPhone: String
+  annualRevenue: Float
+  numberOfEmployees: Int
+  industry: String
+  sicCode: String
+  billingCity: String
+  billingState: String
+  billingPostalCode: String
+  billingCountry: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  leads: [Lead!]
+  opportunities: [Opportunity!]
+  fields: [CompanyField!]
+}
+
+"""Definition of a field on the Company object."""
+type CompanyField {
+  id: ID!
+  name: String!
+  displayName: String!
+  dataType: FieldDataType!
+  isReadOnly: Boolean!
+  isRequired: Boolean!
+  crmManaged: Boolean!
+}
+
+"""An opportunity record for tracking deals."""
+type Opportunity {
+  id: ID!
+  externalOpportunityId: String
+  name: String!
+  amount: Float
+  closeDate: DateTime
+  stage: String
+  isClosed: Boolean
+  isWon: Boolean
+  type: String
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  company: Company
+  roles: [OpportunityRole!]
+}
+
+"""A join between a Lead and an Opportunity with a named role."""
+type OpportunityRole {
+  id: ID!
+  opportunityId: ID!
+  opportunity: Opportunity
+  leadId: ID!
+  lead: Lead
+  role: String
+  isPrimary: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A named account used in account-based marketing (ABM)."""
+type NamedAccount {
+  id: ID!
+  name: String!
+  domain: String
+  industry: String
+  annualRevenue: Float
+  numberOfEmployees: Int
+  country: String
+  score: Int
+  crmGuid: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A list of named accounts for ABM targeting."""
+type AccountList {
+  id: ID!
+  name: String!
+  description: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  accounts: [NamedAccount!]
+}
+
+# ---------------------------------------------------------------------------
+# Lists & Segmentation
+# ---------------------------------------------------------------------------
+
+"""Base interface for all list types."""
+interface List {
+  id: ID!
+  name: String!
+  description: String
+  programId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  leads(limit: Int, offset: Int): [Lead!]
+}
+
+"""A manually maintained list of leads."""
+type StaticList implements List {
+  id: ID!
+  name: String!
+  description: String
+  programId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  leads(limit: Int, offset: Int): [Lead!]
+  numLeads: Int
+}
+
+"""A list dynamically computed from smart list logic."""
+type DynamicList implements List {
+  id: ID!
+  name: String!
+  description: String
+  programId: ID
+  createdAt: DateTime
+  updatedAt: DateTime
+  leads(limit: Int, offset: Int): [Lead!]
+  smartList: SmartList
+}
+
+"""The filter/trigger logic that defines a smart list."""
+type SmartList {
+  id: ID!
+  name: String!
+  rules: [Filter!]
+  logicString: String
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A single filter rule within a smart list."""
+type Filter {
+  id: ID!
+  filterType: String!
+  attribute: String
+  operator: String
+  value: JSON
+  smartListId: ID
+}
+
+# ---------------------------------------------------------------------------
+# Campaigns
+# ---------------------------------------------------------------------------
+
+"""A Marketo campaign — either batch or trigger-based."""
+type Campaign {
+  id: ID!
+  name: String!
+  description: String
+  type: CampaignType!
+  programId: ID
+  program: Program
+  isActive: Boolean
+  isSystem: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  smartList: SmartList
+  flows: [Flow!]
+  schedule: Schedule
+}
+
+"""A smart campaign with trigger/filter logic and flow steps."""
+type SmartCampaign {
+  id: ID!
+  name: String!
+  description: String
+  type: CampaignType!
+  programId: ID
+  program: Program
+  isActive: Boolean
+  qualificationRuleType: String
+  qualificationRuleInterval: Int
+  qualificationRuleUnit: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  triggers: [Trigger!]
+  filters: [Filter!]
+  flows: [Flow!]
+}
+
+"""A batch campaign that runs against a static or smart list on a schedule."""
+type BatchCampaign {
+  id: ID!
+  name: String!
+  description: String
+  programId: ID
+  program: Program
+  isActive: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  smartList: SmartList
+  flows: [Flow!]
+  schedule: Schedule
+}
+
+"""A trigger that initiates a smart campaign."""
+type Trigger {
+  id: ID!
+  type: String!
+  attribute: String
+  operator: String
+  value: JSON
+  smartCampaignId: ID
+}
+
+"""A flow step within a campaign."""
+type Flow {
+  id: ID!
+  stepType: String!
+  stepOrder: Int!
+  attributes: JSON
+  choices: JSON
+  campaignId: ID
+}
+
+"""The scheduled run configuration for a batch campaign."""
+type Schedule {
+  id: ID!
+  campaignId: ID!
+  startAt: DateTime
+  endAt: DateTime
+  recurrenceType: String
+  recurrenceInterval: Int
+  recurrenceDayOfWeek: [String!]
+  recurrenceDayOfMonth: Int
+  timezone: String
+}
+
+# ---------------------------------------------------------------------------
+# Programs & Channels
+# ---------------------------------------------------------------------------
+
+"""A Marketo program grouping campaigns, assets, and members."""
+type Program {
+  id: ID!
+  name: String!
+  description: String
+  type: ProgramType!
+  channel: ProgramChannel
+  status: String
+  workspace: String
+  folderId: ID
+  folder: Folder
+  tags: [Tag!]
+  createdAt: DateTime
+  updatedAt: DateTime
+  campaigns: [Campaign!]
+  members(limit: Int, offset: Int): [ProgramMember!]
+  assets: [Asset!]
+}
+
+"""A channel defines the program type and its membership statuses."""
+type ProgramChannel {
+  id: ID!
+  name: String!
+  applicableProgramType: ProgramType!
+  progressionStatuses: [String!]
+  successStatus: String
+  hidden: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""Membership of a lead in a program with progression status."""
+type ProgramMember {
+  id: ID!
+  leadId: ID!
+  lead: Lead
+  programId: ID!
+  program: Program
+  membershipDate: DateTime
+  progressionStatus: String
+  isExhausted: Boolean
+  acquiredBy: Boolean
+  reachedSuccess: Boolean
+  reachedSuccessDate: DateTime
+  nurtureCadence: String
+  updatedAt: DateTime
+}
+
+"""An A/B test configuration within a program."""
+type ABTest {
+  id: ID!
+  name: String!
+  programId: ID!
+  program: Program
+  status: String
+  testType: String
+  winnerCriteria: String
+  testDuration: Int
+  confidenceLevel: Float
+  variants: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Assets
+# ---------------------------------------------------------------------------
+
+"""Base interface for all marketing assets."""
+interface Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+}
+
+"""A landing page asset."""
+type LandingPage implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+  title: String
+  template: LandingPageTemplate
+  mobileEnabled: Boolean
+  robots: String
+  customHeadHTML: String
+  facebookOgTags: JSON
+}
+
+"""A landing page template used to create landing pages."""
+type LandingPageTemplate implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+  templateType: String
+  enableMunchkin: Boolean
+}
+
+"""A Marketo form for lead capture."""
+type Form implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+  locale: String
+  progressiveProfiling: Boolean
+  labelPosition: String
+  fontFamily: String
+  fontSize: String
+  fields: [FormField!]
+}
+
+"""A single field within a form."""
+type FormField {
+  id: ID!
+  formId: ID!
+  fieldId: String!
+  label: String
+  dataType: FieldDataType
+  required: Boolean
+  hintText: String
+  defaultValue: String
+  maxLength: Int
+  isHidden: Boolean
+  isHtmlAllowed: Boolean
+  fieldOrder: Int
+  validationMessage: String
+  visibilityRules: JSON
+}
+
+"""An email asset."""
+type Email implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+  subject: String
+  fromName: String
+  fromEmail: String
+  replyEmail: String
+  template: EmailTemplate
+  isOperational: Boolean
+  isTextOnly: Boolean
+  previewText: String
+  ccFields: [String!]
+}
+
+"""An email template used to create email assets."""
+type EmailTemplate implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+}
+
+"""A reusable content snippet."""
+type Snippet implements Asset {
+  id: ID!
+  name: String!
+  description: String
+  status: AssetStatus
+  folder: Folder
+  workspace: String
+  createdAt: DateTime
+  updatedAt: DateTime
+  url: URL
+}
+
+"""A folder in the Marketo asset tree."""
+type Folder {
+  id: ID!
+  name: String!
+  description: String
+  type: FolderType!
+  parentId: ID
+  parent: Folder
+  workspace: String
+  isArchive: Boolean
+  isSystem: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  children: [Folder!]
+}
+
+"""A tag value applied to programs or other objects."""
+type Tag {
+  id: ID!
+  tagType: TagType!
+  value: String!
+}
+
+"""A defined tag type used to classify programs."""
+type TagType {
+  id: ID!
+  name: String!
+  applicableProgramTypes: [ProgramType!]
+  required: Boolean!
+  allowableValues: [String!]
+}
+
+# ---------------------------------------------------------------------------
+# Activities
+# ---------------------------------------------------------------------------
+
+"""A type of activity tracked in Marketo (standard or custom)."""
+type ActivityType {
+  id: ID!
+  name: String!
+  description: String
+  primaryAttribute: ActivityAttribute
+  attributes: [ActivityAttribute!]
+  isCustom: Boolean
+}
+
+"""A single attribute of an activity type."""
+type ActivityAttribute {
+  name: String!
+  dataType: FieldDataType!
+  isRequired: Boolean
+}
+
+"""A marketing activity event recorded against a lead."""
+type MarketingActivity {
+  id: ID!
+  leadId: ID!
+  lead: Lead
+  activityTypeId: ID!
+  activityType: ActivityType
+  activityDate: DateTime!
+  campaignId: ID
+  campaign: Campaign
+  primaryAttributeValue: String
+  attributes: JSON
+}
+
+"""A sales activity recorded by a CRM or sales rep."""
+type SalesActivity {
+  id: ID!
+  leadId: ID!
+  lead: Lead
+  type: String!
+  subject: String
+  description: String
+  activityDate: DateTime!
+  userId: ID
+}
+
+# ---------------------------------------------------------------------------
+# Custom Objects
+# ---------------------------------------------------------------------------
+
+"""A custom object type defined in a Marketo instance."""
+type CustomObject {
+  id: ID!
+  name: String!
+  displayName: String!
+  description: String
+  apiName: String!
+  pluralName: String
+  relationship: CustomObjectRelationship!
+  idField: String
+  dedupeFields: [String!]
+  fields: [CustomObjectField!]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A field definition on a custom object."""
+type CustomObjectField {
+  id: ID!
+  name: String!
+  displayName: String!
+  dataType: FieldDataType!
+  isRequired: Boolean!
+  isDedupeField: Boolean!
+  isSearchableField: Boolean!
+  customObjectId: ID!
+}
+
+"""A list of custom object records."""
+type CustomObjectList {
+  customObjectName: String!
+  records: [JSON!]
+  total: Int
+}
+
+# ---------------------------------------------------------------------------
+# Webhooks & API Access
+# ---------------------------------------------------------------------------
+
+"""A webhook configured to call an external service on a trigger."""
+type Webhook {
+  id: ID!
+  name: String!
+  description: String
+  url: URL!
+  httpMethod: String!
+  template: String
+  encoding: String
+  isSSLVerified: Boolean
+  headers: JSON
+  responseMappings: JSON
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""An API key / LaunchPoint service credential."""
+type APIKey {
+  id: ID!
+  name: String!
+  description: String
+  clientId: String!
+  serviceType: String
+  isEnabled: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+"""A token record used for Marketo token substitution in assets."""
+type TokenRecord {
+  id: ID!
+  name: String!
+  type: String!
+  value: String
+  computedUrl: URL
+  folderId: ID
+}
+
+# ---------------------------------------------------------------------------
+# CRM & Partner Integrations
+# ---------------------------------------------------------------------------
+
+"""Salesforce CRM sync configuration and status."""
+type SalesforceSync {
+  id: ID!
+  isEnabled: Boolean!
+  status: SyncStatus!
+  lastSyncAt: DateTime
+  errorMessage: String
+  syncFields: [String!]
+}
+
+"""Microsoft Dynamics CRM sync configuration and status."""
+type MSCRMSync {
+  id: ID!
+  isEnabled: Boolean!
+  status: SyncStatus!
+  lastSyncAt: DateTime
+  errorMessage: String
+  syncFields: [String!]
+}
+
+"""A GoToWebinar event linked to a Marketo program."""
+type GoToWebinar {
+  id: ID!
+  webinarKey: String!
+  subject: String
+  description: String
+  startTime: DateTime
+  endTime: DateTime
+  timezone: String
+  registrationUrl: URL
+  programId: ID
+  program: Program
+}
+
+"""A Zoom webinar event linked to a Marketo program."""
+type ZoomWebinar {
+  id: ID!
+  webinarId: String!
+  topic: String
+  agenda: String
+  startTime: DateTime
+  duration: Int
+  timezone: String
+  joinUrl: URL
+  registrationUrl: URL
+  programId: ID
+  program: Program
+}
+
+"""A social media asset or campaign linked to Marketo."""
+type SocialMedia {
+  id: ID!
+  name: String!
+  type: String!
+  programId: ID
+  status: AssetStatus
+  shareUrl: URL
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Workspaces & Partitions
+# ---------------------------------------------------------------------------
+
+"""A workspace partition configuration within a Marketo instance."""
+type WorkspacePartition {
+  id: ID!
+  name: String!
+  description: String
+  workspaceId: ID!
+  workspaceName: String
+  isDefault: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  leads(limit: Int, offset: Int): [WorkspaceLead!]
+}
+
+# ---------------------------------------------------------------------------
+# Root Query
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Lead Database
+  lead(id: ID!): Lead
+  leads(ids: [ID!], filter: LeadFilterInput, limit: Int, offset: Int): [Lead!]
+  leadFields: [LeadField!]
+  leadDatabase: LeadDatabase
+  leadPartitions: [LeadPartition!]
+  workspaceLeads(workspaceId: ID!, limit: Int, offset: Int): [WorkspaceLead!]
+
+  # Companies & Opportunities
+  company(id: ID!): Company
+  companies(ids: [ID!], filter: JSON, limit: Int, offset: Int): [Company!]
+  companyFields: [CompanyField!]
+  opportunity(id: ID!): Opportunity
+  opportunities(ids: [ID!], limit: Int, offset: Int): [Opportunity!]
+  opportunityRole(id: ID!): OpportunityRole
+  namedAccount(id: ID!): NamedAccount
+  namedAccounts(limit: Int, offset: Int): [NamedAccount!]
+  accountList(id: ID!): AccountList
+  accountLists: [AccountList!]
+
+  # Lists
+  staticList(id: ID!): StaticList
+  staticLists(programId: ID, limit: Int, offset: Int): [StaticList!]
+  dynamicList(id: ID!): DynamicList
+  smartList(id: ID!): SmartList
+
+  # Campaigns
+  campaign(id: ID!): Campaign
+  campaigns(programId: ID, limit: Int, offset: Int): [Campaign!]
+  smartCampaign(id: ID!): SmartCampaign
+  batchCampaign(id: ID!): BatchCampaign
+
+  # Programs
+  program(id: ID!): Program
+  programs(type: ProgramType, limit: Int, offset: Int): [Program!]
+  programChannels: [ProgramChannel!]
+  programMembers(programId: ID!, limit: Int, offset: Int): [ProgramMember!]
+  abTest(id: ID!): ABTest
+
+  # Assets
+  landingPage(id: ID!): LandingPage
+  landingPages(folderId: ID, status: AssetStatus, limit: Int, offset: Int): [LandingPage!]
+  landingPageTemplate(id: ID!): LandingPageTemplate
+  landingPageTemplates(limit: Int, offset: Int): [LandingPageTemplate!]
+  form(id: ID!): Form
+  forms(folderId: ID, status: AssetStatus, limit: Int, offset: Int): [Form!]
+  email(id: ID!): Email
+  emails(folderId: ID, status: AssetStatus, limit: Int, offset: Int): [Email!]
+  emailTemplate(id: ID!): EmailTemplate
+  emailTemplates(limit: Int, offset: Int): [EmailTemplate!]
+  snippet(id: ID!): Snippet
+  snippets(folderId: ID, status: AssetStatus, limit: Int, offset: Int): [Snippet!]
+  folder(id: ID!): Folder
+  folders(parentId: ID, type: FolderType, limit: Int, offset: Int): [Folder!]
+  tagTypes: [TagType!]
+
+  # Activities
+  activityTypes: [ActivityType!]
+  leadActivities(leadId: ID!, activityTypeIds: [ID!], fromDateTime: DateTime, limit: Int, offset: Int): [LeadActivity!]
+  marketingActivities(fromDateTime: DateTime!, activityTypeIds: [ID!], limit: Int, offset: Int): [MarketingActivity!]
+  salesActivities(leadId: ID!, limit: Int, offset: Int): [SalesActivity!]
+
+  # Custom Objects
+  customObject(apiName: String!): CustomObject
+  customObjects: [CustomObject!]
+  customObjectRecords(apiName: String!, filter: JSON, limit: Int, offset: Int): CustomObjectList
+
+  # Webhooks & API Access
+  webhook(id: ID!): Webhook
+  webhooks: [Webhook!]
+  apiKey(id: ID!): APIKey
+  apiKeys: [APIKey!]
+  tokenRecords(folderId: ID!): [TokenRecord!]
+
+  # Integrations
+  salesforceSync: SalesforceSync
+  mscrmSync: MSCRMSync
+  goToWebinars(programId: ID): [GoToWebinar!]
+  zoomWebinars(programId: ID): [ZoomWebinar!]
+  socialMediaAssets(programId: ID): [SocialMedia!]
+
+  # Workspaces & Partitions
+  workspacePartitions: [WorkspacePartition!]
+  workspacePartition(id: ID!): WorkspacePartition
+}
+
+# ---------------------------------------------------------------------------
+# Mutations
+# ---------------------------------------------------------------------------
+
+type Mutation {
+  # Leads
+  upsertLead(input: UpsertLeadInput!): Lead
+  updateLead(id: ID!, input: UpdateLeadInput!): Lead
+  mergeLead(winnerId: ID!, loserIds: [ID!]!): Lead
+  deleteLead(id: ID!): Boolean
+
+  # Lists
+  createStaticList(name: String!, programId: ID): StaticList
+  deleteStaticList(id: ID!): Boolean
+  addLeadsToList(listId: ID!, leadIds: [ID!]!): Boolean
+  removeLeadsFromList(listId: ID!, leadIds: [ID!]!): Boolean
+
+  # Campaigns
+  scheduleCampaign(campaignId: ID!, input: ScheduleCampaignInput!): Schedule
+  requestCampaign(campaignId: ID!, leadIds: [ID!]!): Boolean
+  activateCampaign(campaignId: ID!): Boolean
+  deactivateCampaign(campaignId: ID!): Boolean
+
+  # Programs
+  createProgram(input: CreateProgramInput!): Program
+  updateProgram(id: ID!, input: UpdateProgramInput!): Program
+  deleteProgram(id: ID!): Boolean
+
+  # Assets
+  createEmail(input: CreateEmailInput!): Email
+  updateEmail(id: ID!, input: UpdateEmailInput!): Email
+  approveEmail(id: ID!): Email
+  discardEmailDraft(id: ID!): Boolean
+  deleteEmail(id: ID!): Boolean
+
+  createLandingPage(input: CreateLandingPageInput!): LandingPage
+  approveLandingPage(id: ID!): LandingPage
+  discardLandingPageDraft(id: ID!): Boolean
+  deleteLandingPage(id: ID!): Boolean
+
+  createForm(input: CreateFormInput!): Form
+  updateForm(id: ID!, input: UpdateFormInput!): Form
+  deleteForm(id: ID!): Boolean
+
+  createSnippet(input: CreateSnippetInput!): Snippet
+  approveSnippet(id: ID!): Snippet
+  deleteSnippet(id: ID!): Boolean
+
+  # Custom Objects
+  upsertCustomObjectRecords(apiName: String!, records: [JSON!]!): CustomObjectList
+  deleteCustomObjectRecords(apiName: String!, idField: String!, ids: [String!]!): Boolean
+
+  # Webhooks
+  createWebhook(input: CreateWebhookInput!): Webhook
+  updateWebhook(id: ID!, input: UpdateWebhookInput!): Webhook
+  deleteWebhook(id: ID!): Boolean
+
+  # Tokens
+  createToken(folderId: ID!, input: CreateTokenInput!): TokenRecord
+  deleteToken(folderId: ID!, name: String!): Boolean
+}
+
+# ---------------------------------------------------------------------------
+# Input Types
+# ---------------------------------------------------------------------------
+
+input LeadFilterInput {
+  email: String
+  firstName: String
+  lastName: String
+  company: String
+  status: LeadStatus
+  partitionId: ID
+  updatedAfter: DateTime
+}
+
+input UpsertLeadInput {
+  email: String!
+  firstName: String
+  lastName: String
+  company: String
+  title: String
+  phone: String
+  partitionName: String
+  customFields: JSON
+}
+
+input UpdateLeadInput {
+  firstName: String
+  lastName: String
+  company: String
+  title: String
+  phone: String
+  mobilePhone: String
+  unsubscribed: Boolean
+  doNotCall: Boolean
+  customFields: JSON
+}
+
+input ScheduleCampaignInput {
+  runAt: DateTime
+  cloneToProgram: Boolean
+  tokens: [TokenInput!]
+}
+
+input TokenInput {
+  name: String!
+  value: String!
+}
+
+input CreateProgramInput {
+  name: String!
+  type: ProgramType!
+  channelId: ID!
+  folderId: ID!
+  description: String
+  tags: [TagInput!]
+}
+
+input UpdateProgramInput {
+  name: String
+  description: String
+  tags: [TagInput!]
+}
+
+input TagInput {
+  tagType: String!
+  tagValue: String!
+}
+
+input CreateEmailInput {
+  name: String!
+  folderId: ID!
+  templateId: ID!
+  subject: String!
+  fromName: String!
+  fromEmail: String!
+  description: String
+  isOperational: Boolean
+}
+
+input UpdateEmailInput {
+  name: String
+  subject: String
+  fromName: String
+  fromEmail: String
+  replyEmail: String
+  description: String
+  isOperational: Boolean
+  previewText: String
+}
+
+input CreateLandingPageInput {
+  name: String!
+  folderId: ID!
+  templateId: ID!
+  title: String
+  description: String
+  mobileEnabled: Boolean
+}
+
+input CreateFormInput {
+  name: String!
+  folderId: ID!
+  description: String
+  locale: String
+}
+
+input UpdateFormInput {
+  name: String
+  description: String
+  locale: String
+  progressiveProfiling: Boolean
+  labelPosition: String
+}
+
+input CreateSnippetInput {
+  name: String!
+  folderId: ID!
+  description: String
+}
+
+input CreateWebhookInput {
+  name: String!
+  url: String!
+  httpMethod: String!
+  template: String
+  encoding: String
+  isSSLVerified: Boolean
+  headers: JSON
+  responseType: String
+}
+
+input UpdateWebhookInput {
+  name: String
+  url: String
+  httpMethod: String
+  template: String
+  isSSLVerified: Boolean
+  headers: JSON
+}
+
+input CreateTokenInput {
+  name: String!
+  type: String!
+  value: String!
+}
