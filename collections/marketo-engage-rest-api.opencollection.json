@@ -1,0 +1,4097 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Assets",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Channel by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/channel/byName.json",
+            "params": [
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "Name of channel to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves channels based on the provided name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/channels.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves all channels. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the email"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Returns an email records based on the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns an email records by its id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of an email asset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns the content of the designated email. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the content of an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Rearrange Email Modules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/rearrange.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Rearranges the modules in an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/add.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the module"
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "query",
+                "description": "Index of the module. Determines the order of the module in the email."
+              }
+            ]
+          },
+          "docs": "Adds a new module to an email, with the given id. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              }
+            ]
+          },
+          "docs": "Deletes the given module from the email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Duplicate Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/duplicate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the new module"
+              }
+            ]
+          },
+          "docs": "Creates a copy of the designated module in an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Rename Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/rename.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "New module name"
+              }
+            ]
+          },
+          "docs": "Renames a module. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Email Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Dynamic Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/dynamicContent/:contentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of email"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of email dynamic content section"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the dyanmic content record for the given section. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Dynamic Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/dynamicContent/:contentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of email"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of email dynamic content section"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates dynamic content in the given section. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Send Sample Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/sendSample.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Sends a sample email to the given email address. Leads may be impersonated to populate data for tokens and dynamic content. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the email and reverts it to a draft-only state. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/variable/:name.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "name"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the value of a given variable in an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/variables.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Returns a list of the available variables in an email. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email CC Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/ccFields.json"
+          },
+          "docs": "Returns the set of fields enabled for Email CC in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Template by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "name"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves and email template record by the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Template by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns an email template record by its id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Template Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata for the designated email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Email Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the designated email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Template Content by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/content",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns the content for a given email template. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Template Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Updates the content of the given email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Email Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the designated email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Email Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Email Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the current approved version of the Email Template. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplates.json",
+            "params": [
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns a list of email template records accessible in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Email Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplates.json",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Creates a new email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Template Used By",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplates/:id/usedBy.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email template"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              }
+            ]
+          },
+          "docs": "Returns a list of email records which depend on a given email template. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Emails",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/emails.json",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of emails to return. Max 200, default 20"
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude emails prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude emails after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Returns a list of emails matching the given filter parameters. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Email",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emails.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new email asset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Email Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not."
+              },
+              {
+                "name": "leadId",
+                "value": "",
+                "type": "query",
+                "description": "The lead id to impersonate. Email is rendered as though it was received by this lead."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Email content type to return. Default is HTML."
+              }
+            ]
+          },
+          "docs": "Returns the serialized HTML version of the email. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead."
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Replaces the HTML of an Email that has had its relationship broken from its template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get File by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/file/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the file"
+              }
+            ]
+          },
+          "docs": "Returns files records for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get File by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/file/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for file in database"
+              }
+            ]
+          },
+          "docs": "Returns the file record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update File Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/file/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for file in database"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Replaces the current content of the file with the included payload. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/files.json",
+            "params": [
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging. Default 0"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to return. Max 200, default 20"
+              }
+            ]
+          },
+          "docs": "Returns the files from the given folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/files.json",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Creates a new file from the included payload. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Folder by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folder/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the folder. Not applicable for Programs"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of folder. 'Folder' or 'Program'"
+              },
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "Parent folder reference"
+              },
+              {
+                "name": "workSpace",
+                "value": "",
+                "type": "query",
+                "description": "Name of the workspace"
+              }
+            ]
+          },
+          "docs": "Returns a folder record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Folder by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to retrieve"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of folder. 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Returns the folder record with the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Folder Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata for a given folder. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Folder Contents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to retrieve"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of folder. 'Folder' or 'Program'. Default is 'Folder'"
+              }
+            ]
+          },
+          "docs": "Returns records for the contents of a given folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to delete"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "type",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Deletes the designated folder. Deletion will fail if the folder has content. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Tokens by Folder Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "folderType",
+                "value": "",
+                "type": "query",
+                "description": "Type of folder. 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of available My Tokens in the target folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to which the token will be associated with"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Create or update a token in the parent folder. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Token by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Deletes a token with the given name from the parent folder. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folders.json",
+            "params": [
+              {
+                "name": "root",
+                "value": "",
+                "type": "query",
+                "description": "Parent folder reference"
+              },
+              {
+                "name": "maxDepth",
+                "value": "",
+                "type": "query",
+                "description": "Maximum folder depth to traverse, Default 2"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of folders to return. Default 20, maximum 200"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging. Default 0"
+              },
+              {
+                "name": "workSpace",
+                "value": "",
+                "type": "query",
+                "description": "Name of the workspace"
+              }
+            ]
+          },
+          "docs": "Retrieves child folders from within a given root folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folders.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new folder. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Form by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the form"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Retrieves a form record by its name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Available Form Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/fields.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of fields to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all valid fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Available Form Program Member Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/programMemberFields.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of fields to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Form Field Visibility Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:formId/field/:fieldId/visibility.json",
+            "params": [
+              {
+                "name": "formId",
+                "value": "",
+                "type": "path",
+                "description": "formId"
+              },
+              {
+                "name": "fieldId",
+                "value": "",
+                "type": "path",
+                "description": "fieldId"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adds a visibility rule to the target form field. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Form By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves a form record by its id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Form Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of the target form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target form. Forms which are in use by landing pages may not be deleted until they are removed from all landing pages. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Form Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Form Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/field/:fieldId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "fieldId",
+                "value": "",
+                "type": "path",
+                "description": "fieldId"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the configuration for that target field. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Form Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/field/:fieldId/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "fieldId",
+                "value": "",
+                "type": "path",
+                "description": "fieldId"
+              }
+            ]
+          },
+          "docs": "Deletes a field from a form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Fieldset to Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/fieldSet.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adds a field set to the target form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Field from Fieldset",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/fieldSet/:fieldSetId/field/:fieldId/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "fieldSetId",
+                "value": "",
+                "type": "path",
+                "description": "fieldSetId"
+              },
+              {
+                "name": "fieldId",
+                "value": "",
+                "type": "path",
+                "description": "fieldId"
+              }
+            ]
+          },
+          "docs": "Removes the target field from the fieldset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Fields for Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/fields.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of fields in the target form. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Field to Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/fields.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adds a field to a form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Field Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/reArrange.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Reorders the list of fields in a form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Rich Text Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/richText.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adds a rich-text type field to the form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Submit Button",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/submitButton.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the submit button configuration for the target form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Thank You Page by Form Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/thankYouPage.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns the thank you page configuration for a given form. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Thank You Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/thankYouPage.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the thank you page configuration for a given form. This update is destructive and the resulting draft will not have any memory of the previous configuration. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/forms.json",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of accessible form records from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Form",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/forms.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Form Used By",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/usedBy.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the form"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of assets to return. Max 200, default 20"
+              }
+            ]
+          },
+          "docs": "Returns a list of asset records which depend on a given form. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the landing page"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Returns the landing page record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns the landing record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata for the targe landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Landing Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of content sections in the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Add Landing Page Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Adds a content section to the target landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/content/:contentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page content section"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates a content section the landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/content/:contentId/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page content section"
+              }
+            ]
+          },
+          "docs": "Removes the target content section from the parent landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Landing Page Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Dynamic Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/dynamicContent/:contentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page dynamic content section"
+              }
+            ]
+          },
+          "docs": "Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Dynamic Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/dynamicContent/:contentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the landing page"
+              },
+              {
+                "name": "contentId",
+                "value": "",
+                "type": "path",
+                "description": "Id of the landing page dynamic content"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Landing Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the landing page, reverting it to a draft-only state. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/variable/:variableId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "variableId",
+                "value": "",
+                "type": "path",
+                "description": "variableId"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "New value of the variable"
+              }
+            ]
+          },
+          "docs": "Updates the value of the given variable. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/variables.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the landing page"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Marketo Get Landing Page Variables"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Template by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the landing page template"
+              }
+            ]
+          },
+          "docs": "Retrieves the landing page template record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Template by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the record for the target landing page template. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Template Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata for the target landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Landing Page Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Template Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the content of the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Template Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "content",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Updates the content for the target landing page template. This update is destructive for the draft version of the template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Landing Page Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discrads the current draft of the landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Landing Page Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the landing page template and reverts it to a draft-only state. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Templates",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplates.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of accessible landing page templates from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Landing Page Template",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplates.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Pages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPages.json",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of landing pages to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of accessible landing pages from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Landing Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPages.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the landing page."
+              },
+              {
+                "name": "leadId",
+                "value": "",
+                "type": "query",
+                "description": "The lead id to impersonate. Landing page is rendered as though it was viewed by this lead."
+              },
+              {
+                "name": "segmentation",
+                "value": "",
+                "type": "query",
+                "description": "JSON array of of segmentations. Each segmentation must be a JSON object with members 'segmentationId', and 'segmentId'.<br>Example: [{\"segmentationId\":1030,\"segmentId\":1103}]"
+              }
+            ]
+          },
+          "docs": "Returns the serialized HTML version of the landing page. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead."
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Redirect Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRules.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of landing page redirect rules to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "redirectTolandingPageId",
+                "value": "",
+                "type": "query",
+                "description": "Landing page id of landing page to redirect to"
+              },
+              {
+                "name": "redirectToPath",
+                "value": "",
+                "type": "query",
+                "description": "Path of landing page to redirect to"
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude landing page redirect rules prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude landing page redirect rules after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of landing page redirect rules from the target instance. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRules.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Create a new landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Redirect Rule by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Retrieves the landing page redirect rule record. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Update an existing landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Delete a landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageDomains.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of landing page domains and domain aliases to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of landing page domain and domain aliases. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Program by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/program/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the program"
+              },
+              {
+                "name": "includeTags",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate program tags"
+              },
+              {
+                "name": "includeCosts",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate program costs"
+              }
+            ]
+          },
+          "docs": "Retrieves the program record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Programs by Tag",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/program/byTag.json",
+            "params": [
+              {
+                "name": "tagType",
+                "value": "",
+                "type": "query",
+                "description": "Type of program tag"
+              },
+              {
+                "name": "tagValue",
+                "value": "",
+                "type": "query",
+                "description": "Value of the tag"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of programs matching the tag type and tag values given. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Program by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Retrieves the program record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Program Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the target program's metadata. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Program Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/program/:programId/smartList.json",
+            "params": [
+              {
+                "name": "programId",
+                "value": "",
+                "type": "path",
+                "description": "Id for the email program containing smart list to retrieve"
+              },
+              {
+                "name": "includeRules",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate smart list rules. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its Email Program id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id/approve.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the target program. Only valid for unapproved email programs. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target program. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target program. The program may not contain any assets which are in use outside the program. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/program/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the target program. Only valid for approved email programs. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Programs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/programs.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "filterType",
+                "value": "",
+                "type": "query",
+                "description": "Optional filter. Requires filterValues"
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude programs prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude programs after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves the list of accessible programs from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Program",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/programs.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new program. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Segmentations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/segmentation.json",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of accessible segmentations for the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Segments For Segmentation",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/segmentation/:id/segments.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of segments inside the target segmentation. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart Campaign by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign"
+              }
+            ]
+          },
+          "docs": "Returns the smart campaign for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the smart campaign for the given id. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart Campaign by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the smart campaign"
+              }
+            ]
+          },
+          "docs": "Returns the smart campaign for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Smart Campaign Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/smartList.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign containing smart list to retrieve"
+              },
+              {
+                "name": "includeRules",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate smart list rules. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its Smart Campaign id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart Campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaigns.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of smart campaigns to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude smart campaigns prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude smart campaigns after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "isActive",
+                "value": "",
+                "type": "query",
+                "description": "Set true to return only active campaigns. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves all smart campaigns. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaigns.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new smart campaign. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Activate Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/activate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Activates a trigger smart campaign. Required Permissions: Activate Campaign"
+        },
+        {
+          "info": {
+            "name": "Marketo Deactivate Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/deactivate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Deactivates a trigger smart campaign. Required Permissions: Deactivate Campaign"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones a smart campaign. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Deletes a smart campaign. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the target snippet. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Snippet Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the content of the target snippet. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Snippet Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/content.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Content of the snippet"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of snippet content"
+              }
+            ]
+          },
+          "docs": "Updates the content of the target snippet. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Deletes the target snippet. The snippet may not be in use by emails or landing pages. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Snippet Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the snippet. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Dynamic Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/dynamicContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Gets the list of dynamic content sections for the snippet. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Snippet Dynamic Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/dynamicContent/:segmentId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "segmentId",
+                "value": "",
+                "type": "path",
+                "description": "segmentId"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the target dynamic content section. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Unapprove Snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/unapprove.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Unapproves the current version of the snippet. The snippet may not be in use. The snippet will be reverted to a draft-only state. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Snippets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/snippets.json",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of accessible snippets from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Snippet",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippets.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new snippet. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Tag By Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/tagType/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the tag"
+              }
+            ]
+          },
+          "docs": "Retrieves a tag by its name. This will also return the set of valid values for the tag. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart list to retrieve"
+              },
+              {
+                "name": "includeRules",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate smart list rules. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of smart list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its name. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Smart List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart list to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the designated Smart List. Required Permissions: Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartLists.json",
+            "params": [
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of smart lists to return. Max 200, default 20."
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude smart lists prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude smart lists after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of user created Smart List records. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Smart List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of smart list to clone"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the designated Smart List. Required Permissions: Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static List by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Static List Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of static list to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of a static list asset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticLists.json",
+            "params": [
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of static lists to return. Max 200, default 20."
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude static lists after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Static List records. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Static List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticLists.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new Static List. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static List by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of static list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Static List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the designated Static List. Required Permissions: Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Tag Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/tagTypes.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of available tag types. Required Permissions: Read-Only Assets, Read-Write Assets"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Approve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Approve Email Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of an email. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Email Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the email template. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Form Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the form. This will delete the current approved version of the form. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Landing Page Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the landing page. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Landing Page Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Snippet Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the snippet. Required Permissions: Approve Assets"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": ".Json",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Update Email Content Section",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:htmlId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "htmlId",
+                "value": "",
+                "type": "path",
+                "description": "htmlId"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the content in the given section. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Snippet by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Retrieves the target snippet record. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Snippet Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of the snippet. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
