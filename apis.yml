@@ -45,6 +45,8 @@ apis:
   - url: graphql/marketo-graphql.md
     type: GraphQL
 common:
+- type: DomainSecurity
+  url: security/marketo-domain-security.yml
 - type: LinkedIn
   url: https://www.linkedin.com/company/adobemarketoengage
 - type: Portal
