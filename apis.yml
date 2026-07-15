@@ -45,6 +45,8 @@ apis:
   - url: graphql/marketo-graphql.md
     type: GraphQL
 common:
+- type: AgenticAccess
+  url: agentic-access/marketo-agentic-access.yml
 - type: DomainSecurity
   url: security/marketo-domain-security.yml
 - type: LinkedIn
