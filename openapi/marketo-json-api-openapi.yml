@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve .Json API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: .Json
+paths:
+  /rest/asset/v1/email/{id}/content/{htmlId}.json:
+    post:
+      tags:
+      - .Json
+      summary: Marketo Update Email Content Section
+      description: 'Updates the content in the given section. Required Permissions: Read-Write Assets'
+      operationId: updateEmailComponentContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: htmlId
+        in: path
+        description: htmlId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailComponentContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/snippet/{id}.json:
+    get:
+      tags:
+      - .Json
+      summary: Marketo Get Snippet by Id
+      description: 'Retrieves the target snippet record. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getSnippetByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+    post:
+      tags:
+      - .Json
+      summary: Marketo Update Snippet Metadata
+      description: 'Updates the metadata of the snippet. Required Permissions: Read-Write Assets'
+      operationId: updateSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateSnippetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSnippetRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+      x-codegen-request-body-name: updateSnippetRequest
+components:
+  schemas:
+    SnippetResponse:
+      required:
+      - folder
+      - status
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/SnippetFolder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace
+    UpdateEmailComponentContentRequest:
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        altText:
+          type: string
+          description: Sets the value of the alt parameter for the resulting img element
+        externalUrl:
+          type: string
+        height:
+          type: integer
+          description: Overrides naitve height of the image. The resulting file will be resized to the given height
+          format: int32
+        image:
+          type: string
+          description: Multipart file that allows you to load an image from your computer
+        linkUrl:
+          type: string
+        overWrite:
+          type: boolean
+          description: Allows overwriting of the existing image content section
+        style:
+          type: string
+          description: Sets the value of the style parameter for the content section
+        textValue:
+          type: string
+        type:
+          type: string
+          description: Type of content to set for the section.
+          enum:
+          - Text
+          - DynamicContent
+          - Snippet
+        value:
+          type: string
+          description: Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed
+        videoUrl:
+          type: string
+          description: Sets the Url of the video element. Videos must be either from YouTube or Vimeo
+        width:
+          type: integer
+          description: Overrides native width of the image. The resulting file will be resized to the given width
+          format: int32
+    UpdateSnippetRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the snippet
+        isArchive:
+          type: string
+          description: Archival status of the snippet
+        name:
+          type: string
+          description: Name of the snippet
+    ResponseOfSnippetResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    SnippetFolder:
+      required:
+      - folderName
+      - type
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+        folderName:
+          type: string
+          description: Name of folder
+      description: JSON representation of a folder
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

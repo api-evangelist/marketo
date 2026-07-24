@@ -1,0 +1,1528 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Form API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Form
+paths:
+  /rest/asset/v1/form/byName.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Form by Name
+      description: 'Retrieves a form record by its name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLpFormByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the form
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+  /rest/asset/v1/form/fields.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Available Form Fields
+      description: 'Retrieves a list of all valid fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getAllFieldsUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of fields to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFieldsMetaDataResponse'
+  /rest/asset/v1/form/programMemberFields.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Available Form Program Member Fields
+      description: 'Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getAllProgramMemberFieldsUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of fields to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFieldsMetaDataResponse'
+  /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Add Form Field Visibility Rules
+      description: 'Adds a visibility rule to the target form field. Required Permissions: Read-Write Assets'
+      operationId: addFormFieldVisibilityRuleUsingPOST
+      parameters:
+      - name: formId
+        in: path
+        description: formId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fieldId
+        in: path
+        description: fieldId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: addFormFieldVisibilityRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddFormFieldVisibilityRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFormVisibilityRuleResponse'
+      x-codegen-request-body-name: addFormFieldVisibilityRequest
+  /rest/asset/v1/form/{id}.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Form By Id
+      description: 'Retrieves a form record by its id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLpFormByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+    post:
+      tags:
+      - Form
+      summary: Marketo Update Form Metadata
+      description: 'Updates the metadata of the target form. Required Permissions: Read-Write Assets'
+      operationId: updateFormsUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateFormMetaDataRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateFormMetaDataRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+      x-codegen-request-body-name: updateFormMetaDataRequest
+  /rest/asset/v1/form/{id}/approveDraft.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Approve Form Draft
+      description: 'Approves the current draft of the form. This will delete the current approved version of the form. Required Permissions: Approve Assets'
+      operationId: approveFromUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+  /rest/asset/v1/form/{id}/clone.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Clone Form
+      description: 'Clones the target form. Required Permissions: Read-Write Assets'
+      operationId: cloneLpFormsUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneFormRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneFormRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+      x-codegen-request-body-name: cloneFormRequest
+  /rest/asset/v1/form/{id}/delete.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Delete Form
+      description: 'Deletes the target form. Forms which are in use by landing pages may not be deleted until they are removed from all landing pages. Required Permissions: Read-Write Assets'
+      operationId: deleteFormByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/form/{id}/discardDraft.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Discard Form Draft
+      description: 'Discards the current draft of the form. Required Permissions: Read-Write Assets'
+      operationId: discardFormByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/form/{id}/field/{fieldId}.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Update Form Field
+      description: 'Updates the configuration for that target field. Required Permissions: Read-Write Assets'
+      operationId: updateFormFieldUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fieldId
+        in: path
+        description: fieldId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updateFormFieldRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateFormFieldRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
+      x-codegen-request-body-name: updateFormFieldRequest
+  /rest/asset/v1/form/{id}/field/{fieldId}/delete.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Delete Form Field
+      description: 'Deletes a field from a form. Required Permissions: Read-Write Assets'
+      operationId: deleteFormFieldUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fieldId
+        in: path
+        description: fieldId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/form/{id}/fieldSet.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Add Fieldset to Form
+      description: 'Adds a field set to the target form. Required Permissions: Read-Write Assets'
+      operationId: addFieldSetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: addFormFieldSetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddFormFieldSetRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
+      x-codegen-request-body-name: addFormFieldSetRequest
+  /rest/asset/v1/form/{id}/fieldSet/{fieldSetId}/field/{fieldId}/delete.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Delete Field from Fieldset
+      description: 'Removes the target field from the fieldset. Required Permissions: Read-Write Assets'
+      operationId: deleteFormFieldFromFieldSetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fieldSetId
+        in: path
+        description: fieldSetId
+        required: true
+        schema:
+          type: string
+      - name: fieldId
+        in: path
+        description: fieldId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/form/{id}/fields.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Fields for Form
+      description: 'Retrieves the list of fields in the target form. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getFormFieldByFormVidUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
+    post:
+      tags:
+      - Form
+      summary: Marketo Add Field to Form
+      description: 'Adds a field to a form. Required Permissions: Read-Write Assets'
+      operationId: addFieldToAFormUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: addFormFieldSetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddFormFieldRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
+      x-codegen-request-body-name: addFormFieldSetRequest
+  /rest/asset/v1/form/{id}/reArrange.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Update Field Positions
+      description: 'Reorders the list of fields in a form. Required Permissions: Read-Write Assets'
+      operationId: updateFieldPositionsUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: reArrangeRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/ReArrangeRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: reArrangeRequest
+  /rest/asset/v1/form/{id}/richText.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Add Rich Text Field
+      description: 'Adds a rich-text type field to the form. Required Permissions: Read-Write Assets'
+      operationId: addRichTextFieldUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: addRichTextRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AddRichTextRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormFieldResponse'
+      x-codegen-request-body-name: addRichTextRequest
+  /rest/asset/v1/form/{id}/submitButton.json:
+    post:
+      tags:
+      - Form
+      summary: Marketo Update Submit Button
+      description: 'Updates the submit button configuration for the target form. Required Permissions: Read-Write Assets'
+      operationId: updateFormSubmitButtonUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: submitButtonRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SubmitButtonRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+      x-codegen-request-body-name: submitButtonRequest
+  /rest/asset/v1/form/{id}/thankYouPage.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Thank You Page by Form Id
+      description: 'Returns the thank you page configuration for a given form. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getThankYouPageByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfThankYouPageResponse'
+    post:
+      tags:
+      - Form
+      summary: Marketo Update Thank You Page
+      description: 'Updates the thank you page configuration for a given form. This update is destructive and the resulting draft will not have any memory of the previous configuration. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: updateThankYouPageByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: thankYouPageRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateThankYouPageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfThankYouPageResponse'
+      x-codegen-request-body-name: thankYouPageRequest
+  /rest/asset/v1/form/{id}/usedBy.json:
+    get:
+      tags:
+      - Form
+      summary: Marketo Get Form Used By
+      description: 'Returns a list of asset records which depend on a given form. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getFormUsedByUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the form
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of assets to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFormUsedByResponse'
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    AddRichTextRequest:
+      required:
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: Multipart file. HTML Content for the rich text field.
+    VisibilityRuleRequest:
+      required:
+      - operator
+      - subjectField
+      - values
+      type: object
+      properties:
+        altLabel:
+          type: string
+        operator:
+          type: string
+          description: Operation to apply to target field. Evaluated against the list of values when applicable.
+          enum:
+          - is
+          - isNot
+          - isEmpty
+          - isNotEmpty
+          - startsWith
+          - notStartsWith
+          - endsWith
+          - notEndsWith
+          - contains
+          - notContains
+          - greaterThan
+          - lessThan
+          - atLeast
+          - atMost
+          - between
+          - notBetween
+          - notInTimeFrame
+          - inPast
+          - notInPast
+          - after
+          - before
+          - inTimeFrame
+          - onOrAfter
+          - onOrBefore
+        pickListValues:
+          type: array
+          description: Alternative label to display when rules are applied.
+          items:
+            $ref: '#/components/schemas/PickListDTO'
+        subjectField:
+          type: string
+          description: Target field id to apply the operation defined by operator to
+        values:
+          type: array
+          description: Comma-separated list of values to match against. Valid for operators 'is', 'isNot', 'startsWith', 'notStartsWith', 'endsWith', 'notEndsWith', 'contains', and 'notContains'
+          items:
+            type: string
+    ThankYouPageRequest:
+      required:
+      - followupType
+      - followupValue
+      - operator
+      - subjectField
+      - values
+      type: object
+      properties:
+        default:
+          type: boolean
+          description: When true, this is the default rule, and will be applied when a user does not qualify for any of the other rules
+        followupType:
+          type: string
+          description: Type of followup. When set to url, will follow to the url set in followupValue. When set to lp, will follow to the Landing page with the id given in followupValue
+        followupValue:
+          type: string
+          description: Where to follow to on submission. Given as a URL or and Integer depending on followupType
+        operator:
+          type: string
+          description: Operator to evaluate aginst the subject field
+        subjectField:
+          type: string
+          description: Field to apply to operator to
+        values:
+          type: array
+          description: Comma-separated list of values to compare to with the operator
+          items:
+            type: string
+    SubmitButtonRequest:
+      type: object
+      properties:
+        buttonPosition:
+          type: integer
+          description: Location in pixels of the button relative to the left of the form
+          format: int32
+        buttonStyle:
+          type: string
+          description: Style of the button
+        label:
+          type: string
+          description: Label text of the button
+        waitingLabel:
+          type: string
+          description: Waiting text of the button
+    AddFormFieldVisibilityRequest:
+      type: object
+      properties:
+        visibilityRule:
+          $ref: '#/components/schemas/FormFieldVisibilityRequest'
+    FormFieldVisibilityRuleResponse:
+      type: object
+      properties:
+        ruleType:
+          type: string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormVisibilityRuleDTO'
+    CloneFormRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name for the cloned form
+        folder:
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the cloned form
+    FormUsedByResponse:
+      required:
+      - id
+      - name
+      - status
+      - type
+      - updatedAt
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        type:
+          type: string
+          description: Type of asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+    ResponseOfThankYouPageResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ThankYouPageResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateThankYouPageRequest:
+      type: object
+      properties:
+        thankyou:
+          type: array
+          description: JSON array of followup rules
+          items:
+            $ref: '#/components/schemas/ThankYouPageRequest'
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    FormVisibilityRuleResponse:
+      type: object
+      properties:
+        formFieldId:
+          type: string
+        ruleType:
+          type: string
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormVisibilityRuleDTO'
+    FormThankYouPageDTO:
+      type: object
+      properties:
+        default:
+          type: boolean
+        followupType:
+          type: string
+        followupValue:
+          type: object
+          properties: {}
+        operator:
+          type: string
+        subjectField:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    AddFormFieldRequest:
+      required:
+      - fieldId
+      type: object
+      properties:
+        blankFields:
+          type: integer
+          description: Number of blank fields to show when progressive profiling is enabled
+          format: int32
+        defaultValue:
+          type: string
+          description: Optional default value for the field
+        fieldId:
+          type: string
+          description: Id of the field
+        fieldWidth:
+          type: integer
+          description: Width of the input or select element
+          format: int32
+        formPrefill:
+          type: boolean
+          description: Whether the field should prefill. Default true
+        isSensitive:
+          type: boolean
+          description: Whether the field is marked as sensitive. Default false
+        hintText:
+          type: string
+          description: Hint text for the field
+        initiallyChecked:
+          type: boolean
+          description: Whether the field should be checked upon loading. Default false
+        instructions:
+          type: string
+          description: Instructions for the field
+        label:
+          type: string
+          description: Label of the field
+        labelToRight:
+          type: boolean
+          description: Whether the field label should be displayed to the right of the input/select element. Default false
+        labelWidth:
+          type: integer
+          description: Width of the field label element
+          format: int32
+        maskInput:
+          type: string
+          description: Optional input mask for the field
+        maxLength:
+          type: integer
+          description: Maximum length for text type fields
+          format: int32
+        maxValue:
+          type: number
+          description: Maximum value accepted by the field
+          format: float
+        minValue:
+          type: number
+          description: Minimum value accepted by the field
+          format: float
+        multiSelect:
+          type: boolean
+          description: Whether the field should allow multiple selections. Default false
+        required:
+          type: boolean
+          description: Whether the field is required to submit the form. Default false
+        validationMessage:
+          type: string
+          description: Validation message to display on failed validation
+        values:
+          type: string
+          description: Comma-separated list of accepted values for the field. Only for select-field types
+        visibleLines:
+          type: integer
+          description: Number of lines to display for the field element
+          format: int32
+    ReArrangeRequest:
+      type: object
+      properties:
+        positions:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateFieldPosition'
+    LpFormFieldResponse:
+      type: object
+      properties:
+        blankFields:
+          type: integer
+          format: int32
+        columnNumber:
+          type: integer
+          format: int32
+        dataType:
+          type: string
+        defaultValue:
+          type: string
+        fieldMetaData:
+          type: object
+          properties: {}
+        fieldWidth:
+          type: integer
+          format: int32
+        fields:
+          type: array
+          items:
+            type: string
+        formPrefill:
+          type: boolean
+        isSensitive:
+          type: boolean
+        hintText:
+          type: string
+        id:
+          type: string
+        instructions:
+          type: string
+        label:
+          type: string
+        labelWidth:
+          type: integer
+          format: int32
+        maxLength:
+          type: integer
+          format: int32
+        required:
+          type: boolean
+        rowNumber:
+          type: integer
+          format: int32
+        text:
+          type: string
+        validationMessage:
+          type: object
+          properties: {}
+        visibilityRules:
+          $ref: '#/components/schemas/FormFieldVisibilityRuleResponse'
+    ThankYouPageResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        thankYouList:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormThankYouPageDTO'
+    ResponseOfLpFormResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpFormResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FormFieldVisibilityRequest:
+      required:
+      - ruleType
+      - rules
+      type: object
+      properties:
+        ruleType:
+          type: string
+          description: Type of rule to apply
+          enum:
+          - show
+          - alwaysShow
+          - hide
+        rules:
+          type: array
+          description: JSON Array of rules
+          items:
+            $ref: '#/components/schemas/VisibilityRuleRequest'
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FormKnownVisitorDTO:
+      type: object
+      properties:
+        template:
+          type: string
+        type:
+          type: string
+    AddFormFieldSetRequest:
+      required:
+      - label
+      type: object
+      properties:
+        label:
+          type: string
+          description: Label of the fieldset
+    PickListDTO:
+      type: object
+      properties:
+        isDefault:
+          type: boolean
+        label:
+          type: string
+        selected:
+          type: boolean
+        value:
+          type: string
+    UpdateFormFieldRequest:
+      type: object
+      properties:
+        blankFields:
+          type: integer
+          description: Number of blank fields to show when progressive profiling is enabled
+          format: int32
+        defaultValue:
+          type: string
+          description: Optional default value for the field
+        fieldType:
+          type: string
+          description: Type of field
+        fieldWidth:
+          type: integer
+          description: Width of the input or select element
+          format: int32
+        formPrefill:
+          type: boolean
+          description: Whether the field should prefill. Default true
+        isSensitive:
+          type: boolean
+          description: Whether the field is marked as sensitive. Default false
+        hintText:
+          type: string
+          description: Hint text for the field
+        initiallyChecked:
+          type: boolean
+          description: Whether the field should be checked upon loading. Default false
+        instructions:
+          type: string
+          description: Instructions for the field
+        label:
+          type: string
+          description: Label of the field
+        labelToRight:
+          type: boolean
+          description: Whether the field label should be displayed to the right of the input/select element. Default false
+        labelWidth:
+          type: integer
+          description: Width of the field label element
+          format: int32
+        maskInput:
+          type: string
+          description: Optional input mask for the field
+        maxLength:
+          type: integer
+          description: Maximum length for text type fields
+          format: int32
+        maxValue:
+          type: number
+          description: Maximum value accepted by the field
+          format: float
+        minValue:
+          type: number
+          description: Minimum value accepted by the field
+          format: float
+        multiSelect:
+          type: boolean
+          description: Whether the field should allow multiple selections. Default false
+        required:
+          type: boolean
+          description: Whether the field is required to submit the form. Default false
+        validationMessage:
+          type: string
+          description: Validation message to display on failed validation
+        values:
+          type: string
+          description: 'Array of JSON objects that contain field attributes. Only for select-field types. Example: values=[{''label'':''Select...'',''value'':'''',''isDefault'':true,''selected'':true}, {''label'':''MR'',''value'':''Mr''}, {''label'':''MS'',''value'':''Ms''}, {''label'':''MRS'',''value'':''Mrs''}, {''label'':''DR'',''value'':''Dr''}, {''label'':''PROF'',''value'':''Prof''}]'
+        visibleLines:
+          type: integer
+          description: Number of lines to display for the field element
+          format: int32
+    UpdateFieldPosition:
+      required:
+      - columnNumber
+      - fieldName
+      - rowNumber
+      type: object
+      properties:
+        columnNumber:
+          type: integer
+          description: Column number of the field
+          format: int32
+        fieldList:
+          type: array
+          description: List of positions inside the fields. Only valid if the target is a fieldset
+          items:
+            $ref: '#/components/schemas/UpdateFieldPosition'
+        fieldName:
+          type: string
+          description: Id of the field
+        rowNumber:
+          type: integer
+          description: Row number of the field
+          format: int32
+    UpdateFormMetaDataRequest:
+      type: object
+      properties:
+        customCss:
+          type: string
+          description: Custom CSS to apply to the form
+        description:
+          type: string
+          description: Description of the form
+        fontFamily:
+          type: string
+          description: font-family property for the form
+        fontSize:
+          type: string
+          description: font-size property of the form
+        knownVisitor:
+          $ref: '#/components/schemas/FormKnownVisitorDTO'
+        labelPosition:
+          type: string
+          description: Default positioning of labels.
+        language:
+          type: string
+          description: Language of the form
+        locale:
+          type: string
+          description: Locale of the form
+        name:
+          type: string
+          description: Name of the form
+        progressiveProfiling:
+          type: boolean
+          description: Whether progressive profiling is enabled for the form
+        theme:
+          type: string
+          description: CSS theme for the form to use
+    LpFormResponse:
+      required:
+      - buttonLabel
+      - buttonLocation
+      - folder
+      - fontFamily
+      - fontSize
+      - knownVisitor
+      - labelPosition
+      - language
+      - locale
+      - progressiveProfiling
+      - status
+      - thankYouList
+      - theme
+      - waitingLabel
+      type: object
+      properties:
+        buttonLabel:
+          type: string
+          description: Label text of the button
+        buttonLocation:
+          type: integer
+          description: Location in pixels of the button relative to the left of the form
+          format: int32
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        fontFamily:
+          type: string
+          description: font-family property for the form
+        fontSize:
+          type: string
+          description: font-size property of the form
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        knownVisitor:
+          $ref: '#/components/schemas/FormKnownVisitorDTO'
+        labelPosition:
+          type: string
+          description: Default positioning of labels.
+        language:
+          type: string
+          description: Language of the form
+        locale:
+          type: string
+          description: Locale of the form
+        name:
+          type: string
+          description: Name of the asset
+        progressiveProfiling:
+          type: boolean
+          description: Whether progressive profiling is enabled for the form
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        thankYouList:
+          type: array
+          description: List of thank you page behaviors for the form
+          items:
+            $ref: '#/components/schemas/FormThankYouPageDTO'
+        theme:
+          type: string
+          description: CSS theme for the form to use
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        waitingLabel:
+          type: string
+          description: Waiting text of the button
+    ResponseOfFieldsMetaDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldsMetaDataResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfFormUsedByResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormUsedByResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FieldsMetaDataResponse:
+      required:
+      - id
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Type of field
+        defaultValue:
+          type: string
+          description: Optional default value for the field
+        description:
+          type: string
+          description: Description of the field
+        fieldMaskValues:
+          type: string
+          description: Optional input mask for the field
+        fieldWidth:
+          type: integer
+          description: Width of the input or select element
+          format: int32
+        id:
+          type: string
+          description: Id of the field
+        initiallyChecked:
+          type: boolean
+          description: Whether the field should be checked upon loading. Default false
+        isLabelToRight:
+          type: boolean
+          description: Whether the field label should be displayed to the right of the input/select element. Default false
+        isMultiselect:
+          type: boolean
+          description: Whether the field should allow multiple selections. Default false
+        isRequired:
+          type: boolean
+          description: Whether the field is required to submit the form. Default false
+        isSensitive:
+          type: boolean
+          description: Whether the field is marked as sensitive. Default false
+        labelWidth:
+          type: integer
+          description: Width of the field label element
+          format: int32
+        maxLength:
+          type: integer
+          description: Maximum length for text type fields
+          format: int32
+        maximumNumber:
+          type: number
+          description: Maximum value accepted by the field
+          format: float
+        minimumNumber:
+          type: number
+          description: Minimum value accepted by the field
+          format: float
+        picklistValues:
+          type: string
+          description: Comma-separated list of available picklist values for the field
+        placeholderText:
+          type: string
+          description: Placeholder text for the field
+        validationMessage:
+          type: string
+          description: Validation message to display on failed validation
+        visibleRows:
+          type: integer
+          description: Number of rows visible for progressive profiling
+          format: int32
+    FormVisibilityRuleDTO:
+      type: object
+      properties:
+        altLabel:
+          type: string
+        operator:
+          type: string
+        picklistFilterValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/PickListDTO'
+        subjectField:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    ResponseOfLpFormFieldResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpFormFieldResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfFormVisibilityRuleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FormVisibilityRuleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+x-original-swagger-version: '2.0'

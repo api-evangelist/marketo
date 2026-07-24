@@ -1,0 +1,540 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Approve
+paths:
+  /rest/asset/v1/email/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Email Draft
+      description: 'Approves the current draft of an email. Required Permissions: Approve Assets'
+      operationId: approveDraftUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/emailTemplate/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Email Template Draft
+      description: 'Approves the current draft of the email template. Required Permissions: Approve Assets'
+      operationId: approveDraftUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+  /rest/asset/v1/form/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Form Draft
+      description: 'Approves the current draft of the form. This will delete the current approved version of the form. Required Permissions: Approve Assets'
+      operationId: approveFromUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+  /rest/asset/v1/landingPage/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Landing Page Draft
+      description: 'Approves the current draft of the landing page. Required Permissions: Approve Assets'
+      operationId: approveLandingPageUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Landing Page Template Draft
+      description: 'Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets'
+      operationId: approveLandingPageTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/snippet/{id}/approveDraft.json:
+    post:
+      tags:
+      - Approve
+      summary: Marketo Approve Snippet Draft
+      description: 'Approves the current draft of the snippet. Required Permissions: Approve Assets'
+      operationId: approveSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+components:
+  schemas:
+    LpFormResponse:
+      required:
+      - buttonLabel
+      - buttonLocation
+      - folder
+      - fontFamily
+      - fontSize
+      - knownVisitor
+      - labelPosition
+      - language
+      - locale
+      - progressiveProfiling
+      - status
+      - thankYouList
+      - theme
+      - waitingLabel
+      type: object
+      properties:
+        buttonLabel:
+          type: string
+          description: Label text of the button
+        buttonLocation:
+          type: integer
+          description: Location in pixels of the button relative to the left of the form
+          format: int32
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        fontFamily:
+          type: string
+          description: font-family property for the form
+        fontSize:
+          type: string
+          description: font-size property of the form
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        knownVisitor:
+          $ref: '#/components/schemas/FormKnownVisitorDTO'
+        labelPosition:
+          type: string
+          description: Default positioning of labels.
+        language:
+          type: string
+          description: Language of the form
+        locale:
+          type: string
+          description: Locale of the form
+        name:
+          type: string
+          description: Name of the asset
+        progressiveProfiling:
+          type: boolean
+          description: Whether progressive profiling is enabled for the form
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        thankYouList:
+          type: array
+          description: List of thank you page behaviors for the form
+          items:
+            $ref: '#/components/schemas/FormThankYouPageDTO'
+        theme:
+          type: string
+          description: CSS theme for the form to use
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        waitingLabel:
+          type: string
+          description: Waiting text of the button
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    SnippetResponse:
+      required:
+      - folder
+      - status
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/SnippetFolder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace
+    FormThankYouPageDTO:
+      type: object
+      properties:
+        default:
+          type: boolean
+        followupType:
+          type: string
+        followupValue:
+          type: object
+          properties: {}
+        operator:
+          type: string
+        subjectField:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    ResponseOfEmailTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfLpTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailTemplateResponse:
+      required:
+      - folder
+      - status
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        version:
+          type: integer
+          description: Template version type
+          format: int32
+          enum:
+          - 1
+          - 2
+        workspace:
+          type: string
+          description: Name of the workspace
+    LpTemplateResponse:
+      required:
+      - enableMunchkin
+      - folder
+      - status
+      - templateType
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace. Max 255 characters
+    ResponseOfSnippetResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfLpFormResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpFormResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FormKnownVisitorDTO:
+      type: object
+      properties:
+        template:
+          type: string
+        type:
+          type: string
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    SnippetFolder:
+      required:
+      - folderName
+      - type
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+        folderName:
+          type: string
+          description: Name of folder
+      description: JSON representation of a folder
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

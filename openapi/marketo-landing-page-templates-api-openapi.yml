@@ -1,0 +1,564 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Landing  Page  Templates API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Landing  Page  Templates
+paths:
+  /rest/asset/v1/landingPageTemplate/byName.json:
+    get:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Get Landing Page Template by Name
+      description: 'Retrieves the landing page template record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the landing page template
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplate/{id}.json:
+    get:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Get Landing Page Template by Id
+      description: 'Retrieves the record for the target landing page template. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Update Landing Page Template Metadata
+      description: 'Updates the metadata for the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: updateLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: updateLpTemplateRequest
+  /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json:
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Approve Landing Page Template Draft
+      description: 'Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets'
+      operationId: approveLandingPageTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/clone.json:
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Clone Landing Page Template
+      description: 'Clones the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: cloneLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: cloneLpTemplateRequest
+  /rest/asset/v1/landingPageTemplate/{id}/content.json:
+    get:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Get Landing Page Template Content
+      description: 'Retrieves the content of the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateGetContentResponse'
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Update Landing Page Template Content
+      description: 'Updates the content for the target landing page template. This update is destructive for the draft version of the template. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageTemplateContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - content
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: content
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/delete.json:
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Delete Landing Page Template
+      description: 'Deletes the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: deleteLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json:
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Discard Landing Page Template Draft
+      description: 'Discrads the current draft of the landing page template. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/unapprove.json:
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Unapprove Landing Page Template
+      description: 'Unapproves the landing page template and reverts it to a draft-only state. Required Permissions: Approve Assets'
+      operationId: unapproveLandingPageTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplates.json:
+    get:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Get Landing Page Templates
+      description: 'Retrieves the list of accessible landing page templates from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplatesUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+    post:
+      tags:
+      - Landing  Page  Templates
+      summary: Marketo Create Landing Page Template
+      description: 'Creates a new landing page template. Required Permissions: Read-Write Assets'
+      operationId: createLpTemplateUsingPOST
+      requestBody:
+        description: createLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: createLpTemplateRequest
+components:
+  schemas:
+    ResponseOfLpTemplateGetContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpTemplateGetContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    CloneLpTemplateRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the landing page template
+    ResponseOfLpTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    LpTemplateGetContentResponse:
+      required:
+      - content
+      - enableMunchkin
+      - id
+      - status
+      - templateType
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        id:
+          type: integer
+          description: Unique integer id of the template
+          format: int32
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+    LpTemplateResponse:
+      required:
+      - enableMunchkin
+      - folder
+      - status
+      - templateType
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace. Max 255 characters
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    CreateLpTemplateRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the landing page template
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    UpdateLpTemplateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        name:
+          type: string
+          description: Name of the landing page template
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

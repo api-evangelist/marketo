@@ -1,0 +1,496 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Dynamic API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Dynamic
+paths:
+  /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json:
+    get:
+      tags:
+      - Dynamic
+      summary: Marketo Get Email Dynamic Content
+      description: 'Retrieves the dyanmic content record for the given section. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailDynamicContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of email dynamic content section
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailDynamicContentResponse'
+    post:
+      tags:
+      - Dynamic
+      summary: Marketo Update Email Dynamic Content Section
+      description: 'Updates dynamic content in the given section. Required Permissions: Read-Write Assets'
+      operationId: updateEmailDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of email dynamic content section
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailDynamicContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json:
+    get:
+      tags:
+      - Dynamic
+      summary: Marketo Get Landing Page Dynamic Content
+      description: 'Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageDynamicContentsUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page dynamic content section
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageDynamicContentResponse'
+    post:
+      tags:
+      - Dynamic
+      summary: Marketo Update Landing Page Dynamic Content Section
+      description: 'Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of the landing page dynamic content
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Dynamic content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageDynamicContentRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/snippet/{id}/dynamicContent.json:
+    get:
+      tags:
+      - Dynamic
+      summary: Marketo Get Dynamic Content
+      description: 'Gets the list of dynamic content sections for the snippet. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getDynamicContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+  /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json:
+    post:
+      tags:
+      - Dynamic
+      summary: Marketo Update Snippet Dynamic Content
+      description: 'Updates the target dynamic content section. Required Permissions: Read-Write Assets'
+      operationId: updateDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: segmentId
+        in: path
+        description: segmentId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSnippetDynamicContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+components:
+  schemas:
+    ResponseOfEmailDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateSnippetDynamicContentRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of dynamic content section
+          enum:
+          - Typeofcontent.Either'HTML'or'Text'
+        value:
+          type: string
+          description: Value of the dynamic content section
+    EmailDynamicContentItem:
+      type: object
+      properties:
+        content:
+          type: string
+        id:
+          type: string
+        segmentId:
+          type: string
+        segmentName:
+          type: string
+        type:
+          type: string
+    SegmentContent:
+      required:
+      - content
+      - segmentId
+      - segmentName
+      - type
+      type: object
+      properties:
+        content:
+          type: object
+          properties: {}
+          description: Type of content section
+        followupType:
+          type: string
+        followupValue:
+          type: string
+        segmentId:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        segmentName:
+          type: string
+          description: Name of the segment to display content section for
+        type:
+          type: string
+          description: Type of content section
+    UpdateEmailDynamicContentRequest:
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        altText:
+          type: string
+          description: Sets the value of the alt parameter for the resulting img element
+        externalUrl:
+          type: string
+        height:
+          type: integer
+          description: Overrides naitve height of the image. The resulting file will be resized to the given height
+          format: int32
+        image:
+          type: string
+          description: Multipart file that allows you to add an image from your computer
+        linkUrl:
+          type: string
+        overWrite:
+          type: boolean
+          description: Allows overwriting of the existing image content section
+        style:
+          type: string
+          description: Sets the value of the style parameter for the content section
+        type:
+          type: string
+          description: Type of content to set for the section.
+          enum:
+          - Text
+          - DynamicContent
+          - Snippet
+        value:
+          type: string
+          description: Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed
+        videoUrl:
+          type: string
+          description: Sets the Url of the video element. Videos must be either from YouTube or Vimeo
+        width:
+          type: integer
+          description: Overrides native width of the image. The resulting file will be resized to the given width
+          format: int32
+    LandingPageDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/SegmentContent'
+        createdAt:
+          type: string
+          description: Datetime when the section was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the dnamic content section
+          format: int32
+        segmentation:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        updatedAt:
+          type: string
+          description: Datetime when the section was last updated
+          format: date-time
+    ResponseOfLandingPageDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentItem'
+        createdAt:
+          type: string
+          description: Datetime when the section was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the dnamic content section
+          format: int32
+        segmentation:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        updatedAt:
+          type: string
+          description: Datetime when the section was last updated
+          format: date-time
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    UpdateLandingPageDynamicContentRequest:
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        segment:
+          type: string
+          description: Name of the segment to display content section for
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    ModelResponse:
+      type: object
+x-original-swagger-version: '2.0'

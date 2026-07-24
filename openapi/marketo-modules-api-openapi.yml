@@ -1,0 +1,198 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Modules API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Modules
+paths:
+  /rest/asset/v1/email/{id}/content/{moduleId}/add.json:
+    post:
+      tags:
+      - Modules
+      summary: Marketo Add Email Module
+      description: 'Adds a new module to an email, with the given id. Required Permissions: Read-Write Assets'
+      operationId: addModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the module
+        required: true
+        schema:
+          type: string
+      - name: index
+        in: query
+        description: Index of the module. Determines the order of the module in the email.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/delete.json:
+    post:
+      tags:
+      - Modules
+      summary: Marketo Delete Module
+      description: 'Deletes the given module from the email. Required Permissions: Read-Write Assets'
+      operationId: deleteModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json:
+    post:
+      tags:
+      - Modules
+      summary: Marketo Duplicate Email Module
+      description: 'Creates a copy of the designated module in an email. Required Permissions: Read-Write Assets'
+      operationId: duplicateModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the new module
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/rename.json:
+    post:
+      tags:
+      - Modules
+      summary: Marketo Rename Email Module
+      description: 'Renames a module. Required Permissions: Read-Write Assets'
+      operationId: renameUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: New module name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+components:
+  schemas:
+    ResponseOfEmailModuleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailModuleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    EmailModuleResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the email module
+          format: int32
+x-original-swagger-version: '2.0'

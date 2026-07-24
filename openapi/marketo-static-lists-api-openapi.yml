@@ -1,0 +1,296 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Static  Lists API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Static  Lists
+paths:
+  /rest/asset/v1/staticList/{id}.json:
+    get:
+      tags:
+      - Static  Lists
+      summary: Marketo Get Static List by Id
+      description: 'Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getStaticListByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the static list to retrieve
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+    post:
+      tags:
+      - Static  Lists
+      summary: Marketo Update Static List Metadata
+      description: 'Updates the metadata of a static list asset. Required Permissions: Read-Write Assets'
+      operationId: updateStaticListUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of static list to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateStaticListRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateStaticListRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+      x-codegen-request-body-name: updateStaticListRequest
+  /rest/asset/v1/staticLists.json:
+    get:
+      tags:
+      - Static  Lists
+      summary: Marketo Get Static Lists
+      description: 'Retrieves a list of Static List records. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getStaticListsUsingGET
+      parameters:
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of static lists to return. Max 200, default 20.
+        schema:
+          type: integer
+          format: int32
+      - name: earliestUpdatedAt
+        in: query
+        description: Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        schema:
+          type: string
+      - name: latestUpdatedAt
+        in: query
+        description: Exclude static lists after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+    post:
+      tags:
+      - Static  Lists
+      summary: Marketo Create Static List
+      description: 'Creates a new Static List. Required Permissions: Read-Write Assets'
+      operationId: createStaticListUsingPOST
+      requestBody:
+        description: createStaticListRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateStaticListRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+      x-codegen-request-body-name: createStaticListRequest
+  /rest/asset/v1/staticList/{id}/delete.json:
+    post:
+      tags:
+      - Static  Lists
+      summary: Marketo Delete Static List
+      description: 'Deletes the designated Static List. Required Permissions: Read-Write Asset'
+      operationId: deleteStaticListByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the static list to delete
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    StaticListResponse:
+      required:
+      - createdAt
+      - description
+      - folder
+      - id
+      - name
+      - updatedAt
+      - url
+      - workspace
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the static list
+          format: int64
+        name:
+          type: string
+          description: Name of the static list
+        description:
+          type: string
+          description: Description of the static list
+        createdAt:
+          type: string
+          description: Datetime the static list was created
+          format: date-time
+        updatedAt:
+          type: string
+          description: Datetime the static list was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the static list in the Marketo UI
+        folder:
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+        computedUrl:
+          type: string
+    ResponseOfStaticListResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/StaticListResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateStaticListRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the static list
+        name:
+          type: string
+          description: Name of the static list
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    CreateStaticListRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the static list
+        name:
+          type: string
+          description: Name of the static list
+        folder:
+          $ref: '#/components/schemas/Folder'
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

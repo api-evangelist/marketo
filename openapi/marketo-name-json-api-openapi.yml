@@ -1,0 +1,208 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Name.json API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Name.json
+paths:
+  /rest/asset/v1/smartList/byName.json:
+    get:
+      tags:
+      - Name.json
+      summary: Marketo Get Smart List by Name
+      description: 'Retrieves a Smart List record by its name. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getSmartListByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of smart list to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSmartListResponse'
+  /rest/asset/v1/staticList/byName.json:
+    get:
+      tags:
+      - Name.json
+      summary: Marketo Get Static List by Name
+      description: 'Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getStaticListByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of static list to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    StaticListResponse:
+      required:
+      - createdAt
+      - description
+      - folder
+      - id
+      - name
+      - updatedAt
+      - url
+      - workspace
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the static list
+          format: int64
+        name:
+          type: string
+          description: Name of the static list
+        description:
+          type: string
+          description: Description of the static list
+        createdAt:
+          type: string
+          description: Datetime the static list was created
+          format: date-time
+        updatedAt:
+          type: string
+          description: Datetime the static list was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the static list in the Marketo UI
+        folder:
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+        computedUrl:
+          type: string
+    ResponseOfStaticListResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/StaticListResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    SmartListResponse:
+      required:
+      - createdAt
+      - description
+      - folder
+      - id
+      - name
+      - updatedAt
+      - url
+      - workspace
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the smart list
+          format: int64
+        name:
+          type: string
+          description: Name of the smart list
+        description:
+          type: string
+          description: Description of the smart list
+        createdAt:
+          type: string
+          description: Datetime the smart list was created
+          format: date-time
+        updatedAt:
+          type: string
+          description: Datetime the smart list was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the smart list in the Marketo UI
+        folder:
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+    ResponseOfSmartListResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartListResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+x-original-swagger-version: '2.0'

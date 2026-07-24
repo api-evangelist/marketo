@@ -1,0 +1,570 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Folder API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Folder
+paths:
+  /rest/asset/v1/folder/byName.json:
+    get:
+      tags:
+      - Folder
+      summary: Marketo Get Folder by Name
+      description: 'Returns a folder record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getFolderByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the folder. Not applicable for Programs
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type of folder. 'Folder' or 'Program'
+        schema:
+          type: string
+      - name: root
+        in: query
+        description: Parent folder reference
+        schema:
+          type: string
+      - name: workSpace
+        in: query
+        description: Name of the workspace
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFolderResponse'
+  /rest/asset/v1/folder/{id}.json:
+    get:
+      tags:
+      - Folder
+      summary: Marketo Get Folder by Id
+      description: 'Returns the folder record with the given id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getFolderByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the folder to retrieve
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: Type of folder. 'Folder' or 'Program'
+        required: true
+        schema:
+          type: string
+          default: Folder
+          enum:
+          - Folder
+          - Program
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFolderResponse'
+    post:
+      tags:
+      - Folder
+      summary: Marketo Update Folder Metadata
+      description: 'Updates the metadata for a given folder. Required Permissions: Read-Write Assets'
+      operationId: updateFolderUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the folder to update
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateFolderRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateFolderRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFolderResponse'
+      x-codegen-request-body-name: updateFolderRequest
+  /rest/asset/v1/folder/{id}/content.json:
+    get:
+      tags:
+      - Folder
+      summary: Marketo Get Folder Contents
+      description: 'Returns records for the contents of a given folder. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getFolderContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the folder to retrieve
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: Type of folder. 'Folder' or 'Program'. Default is 'Folder'
+        required: true
+        schema:
+          type: string
+          enum:
+          - Folder
+          - Program
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFolderContentResponse'
+  /rest/asset/v1/folder/{id}/delete.json:
+    post:
+      tags:
+      - Folder
+      summary: Marketo Delete Folder
+      description: 'Deletes the designated folder. Deletion will fail if the folder has content. Required Permissions: Read-Write Assets'
+      operationId: deleteFolderUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the folder to delete
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              required:
+              - type
+              type: object
+              properties:
+                type:
+                  type: string
+                  description: type
+                  default: Folder
+                  enum:
+                  - Program
+                  - Folder
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/folder/{id}/tokens.json:
+    get:
+      tags:
+      - Folder
+      summary: Marketo Get Tokens by Folder Id
+      description: 'Retrieves the list of available My Tokens in the target folder. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getTokensByFolderIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: folderType
+        in: query
+        description: Type of folder. 'Folder' or 'Program'
+        schema:
+          type: string
+          default: Folder
+          enum:
+          - Folder
+          - Program
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfTokenResponse'
+    post:
+      tags:
+      - Folder
+      summary: Marketo Create Token
+      description: 'Create or update a token in the parent folder. Required Permissions: Read-Write Assets'
+      operationId: addTokenTOFolderUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the folder to which the token will be associated with
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: createTokenRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfTokenResponse'
+      x-codegen-request-body-name: createTokenRequest
+  /rest/asset/v1/folder/{id}/tokens/delete.json:
+    post:
+      tags:
+      - Folder
+      summary: Marketo Delete Token by Name
+      description: 'Deletes a token with the given name from the parent folder. Required Permissions: Read-Write Assets'
+      operationId: deleteTokenByNameUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: deleteTokenRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeleteTokenRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: deleteTokenRequest
+components:
+  schemas:
+    ResponseOfFolderResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    TokenResponse:
+      required:
+      - folder
+      type: object
+      properties:
+        folder:
+          type: string
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          example: '{"id":1001,"type":"Program"}'
+        tokens:
+          type: array
+          description: List of tokens in the folder
+          items:
+            $ref: '#/components/schemas/TokenDTO'
+    TokenDTO:
+      type: object
+      properties:
+        computedUrl:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+    FolderContentResponse:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        type:
+          type: string
+    FolderResponse:
+      required:
+      - createdAt
+      - folderId
+      - folderType
+      - id
+      - isArchive
+      - name
+      - parent
+      - path
+      - updatedAt
+      - url
+      type: object
+      properties:
+        accessZoneId:
+          type: integer
+          format: int32
+        createdAt:
+          type: string
+          description: Datetime the folder was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the folder
+        folderId:
+          $ref: '#/components/schemas/Folder'
+        folderType:
+          type: string
+          description: Type of folder
+          enum:
+          - Email
+          - Email Batch Program
+          - Email Template
+          - Image
+          - Landing Page
+          - Landing Page Form
+          - Landing Page Template
+          - Marketing Event
+          - Marketing Folder
+          - Marketing Program
+          - Nurture Program
+          - Report
+          - Revenue Cycle Model
+          - Zone
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        isArchive:
+          type: boolean
+          description: Archival status of the folder
+        isSystem:
+          type: boolean
+          description: Whether the folder is system-managed
+        name:
+          type: string
+          description: Name of the folder. Not applicable for Programs
+        parent:
+          $ref: '#/components/schemas/Folder'
+        path:
+          type: string
+          description: Path of the folder
+        updatedAt:
+          type: string
+          description: Datetime the folder was last updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the folder
+        workspace:
+          type: string
+          description: Name of the workspace
+    UpdateFolderRequest:
+      required:
+      - type
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        isArchive:
+          type: boolean
+          description: Whether the folder is archived or not. Toggling this value will change the archival status of the folder
+        name:
+          type: string
+          description: Name of the Folder
+        type:
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+          enum:
+          - Folder
+          - Program
+    ResponseOfFolderContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FolderContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    CreateTokenRequest:
+      required:
+      - folderType
+      - name
+      - type
+      - value
+      type: object
+      properties:
+        folderType:
+          type: string
+          description: Type of folder. 'Folder' or 'Program'
+          enum:
+          - Program
+          - Folder
+        name:
+          type: string
+          description: Name of the token. Max length is 50 characters)
+        type:
+          type: string
+          description: Type of the token
+          enum:
+          - date
+          - number
+          - rich text
+          - score
+          - sfdc campaign
+          - text
+        value:
+          type: string
+          description: Value of the token
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    ResponseOfTokenResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    DeleteTokenRequest:
+      type: object
+      properties:
+        folderType:
+          type: string
+          enum:
+          - Program
+          - Folder
+        name:
+          type: string
+        type:
+          type: string
+x-original-swagger-version: '2.0'

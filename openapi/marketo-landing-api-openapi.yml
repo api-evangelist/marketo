@@ -1,0 +1,1802 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Landing API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Landing
+paths:
+  /rest/asset/v1/landingPage/byName.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page by Name
+      description: 'Returns the landing page record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the landing page
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+  /rest/asset/v1/landingPage/{id}.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page by Id
+      description: 'Returns the landing record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Metadata
+      description: 'Updates the metadata for the targe landing page. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateLandingPageRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+      x-codegen-request-body-name: updateLandingPageRequest
+  /rest/asset/v1/landingPage/{id}/approveDraft.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Approve Landing Page Draft
+      description: 'Approves the current draft of the landing page. Required Permissions: Approve Assets'
+      operationId: approveLandingPageUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/clone.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Clone Landing Page
+      description: 'Clones the target landing page. Required Permissions: Read-Write Assets'
+      operationId: cloneLandingPageUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneLandingPageRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneLandingPageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+      x-codegen-request-body-name: cloneLandingPageRequest
+  /rest/asset/v1/landingPage/{id}/content.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Content
+      description: 'Retrieves the list of content sections in the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageContentResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Add Landing Page Content Section
+      description: 'Adds a content section to the target landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets'
+      operationId: addLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLandingPageContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/content/{contentId}.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Content Section
+      description: 'Updates a content section the landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page content section
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/content/{contentId}/delete.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Delete Landing Page Content Section
+      description: 'Removes the target content section from the parent landing page. Required Permissions: Read-Write Assets'
+      operationId: removeLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page content section
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/delete.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Delete Landing Page
+      description: 'Deletes the target landing page. Required Permissions: Read-Write Assets'
+      operationId: deleteLandingPageByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/discardDraft.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Discard Landing Page Draft
+      description: 'Discards the current draft of the landing page. Required Permissions: Read-Write Assets'
+      operationId: discardLandingPageByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Dynamic Content
+      description: 'Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageDynamicContentsUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page dynamic content section
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageDynamicContentResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Dynamic Content Section
+      description: 'Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of the landing page dynamic content
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Dynamic content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageDynamicContentRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/unapprove.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Unapprove Landing Page
+      description: 'Unapproves the landing page, reverting it to a draft-only state. Required Permissions: Approve Assets'
+      operationId: unapproveLandingPageByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+  /rest/asset/v1/landingPage/{id}/variable/{variableId}.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Variable
+      description: 'Updates the value of the given variable. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageVariableUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: variableId
+        in: path
+        description: variableId
+        required: true
+        schema:
+          type: string
+      - name: value
+        in: query
+        description: New value of the variable
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageVariableResponse'
+  /rest/asset/v1/landingPage/{id}/variables.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Variables
+      operationId: getVariablesUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageVariableResponse'
+  /rest/asset/v1/landingPageTemplate/byName.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Template by Name
+      description: 'Retrieves the landing page template record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the landing page template
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplate/{id}.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Template by Id
+      description: 'Retrieves the record for the target landing page template. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Template Metadata
+      description: 'Updates the metadata for the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: updateLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: updateLpTemplateRequest
+  /rest/asset/v1/landingPageTemplate/{id}/approveDraft.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Approve Landing Page Template Draft
+      description: 'Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets'
+      operationId: approveLandingPageTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/clone.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Clone Landing Page Template
+      description: 'Clones the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: cloneLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: cloneLpTemplateRequest
+  /rest/asset/v1/landingPageTemplate/{id}/content.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Template Content
+      description: 'Retrieves the content of the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplateContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateGetContentResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Update Landing Page Template Content
+      description: 'Updates the content for the target landing page template. This update is destructive for the draft version of the template. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageTemplateContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - content
+              type: object
+              properties:
+                content:
+                  type: string
+                  description: content
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/delete.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Delete Landing Page Template
+      description: 'Deletes the target landing page template. Required Permissions: Read-Write Assets'
+      operationId: deleteLpTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Discard Landing Page Template Draft
+      description: 'Discrads the current draft of the landing page template. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/unapprove.json:
+    post:
+      tags:
+      - Landing
+      summary: Marketo Unapprove Landing Page Template
+      description: 'Unapproves the landing page template and reverts it to a draft-only state. Required Permissions: Approve Assets'
+      operationId: unapproveLandingPageTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+  /rest/asset/v1/landingPageTemplates.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Templates
+      description: 'Retrieves the list of accessible landing page templates from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageTemplatesUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Create Landing Page Template
+      description: 'Creates a new landing page template. Required Permissions: Read-Write Assets'
+      operationId: createLpTemplateUsingPOST
+      requestBody:
+        description: createLpTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLpTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpTemplateResponse'
+      x-codegen-request-body-name: createLpTemplateRequest
+  /rest/asset/v1/landingPages.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Pages
+      description: 'Retrieves a list of accessible landing pages from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: browseLandingPagesUsingGET
+      parameters:
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: maxReturn
+        in: query
+        description: Maximum number of landing pages to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+    post:
+      tags:
+      - Landing
+      summary: Marketo Create Landing Page
+      description: 'Creates a new landing page. Required Permissions: Read-Write Assets'
+      operationId: createLandingPageUsingPOST
+      requestBody:
+        description: createLandingPageRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLandingPageRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageResponse'
+      x-codegen-request-body-name: createLandingPageRequest
+  /rest/asset/v1/landingPage/{id}/fullContent.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Full Content
+      description: 'Returns the serialized HTML version of the landing page. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.'
+      operationId: getLandingPageFullContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: leadId
+        in: query
+        description: The lead id to impersonate. Landing page is rendered as though it was viewed by this lead.
+        schema:
+          type: integer
+          format: int32
+      - name: segmentation
+        in: query
+        description: 'JSON array of of segmentations. Each segmentation must be a JSON object with members ''segmentationId'', and ''segmentId''.<br>Example: [{"segmentationId":1030,"segmentId":1103}]'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfGetLandingPageFullContentResponse'
+  /rest/asset/v1/landingPageDomains.json:
+    get:
+      tags:
+      - Landing
+      summary: Marketo Get Landing Page Domains
+      description: 'Retrieves a list of landing page domain and domain aliases. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules'
+      operationId: getLandingPageDomainsUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of landing page domains and domain aliases to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageDomains'
+components:
+  schemas:
+    ResponseOfLandingPageDomains:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDomain'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    ResponseOfLandingPageResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfGetLandingPageFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLandingPageFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    JsonNode:
+      type: object
+      properties:
+        array:
+          type: boolean
+        bigDecimal:
+          type: boolean
+        bigInteger:
+          type: boolean
+        binary:
+          type: boolean
+        boolean:
+          type: boolean
+        containerNode:
+          type: boolean
+        double:
+          type: boolean
+        float:
+          type: boolean
+        floatingPointNumber:
+          type: boolean
+        int:
+          type: boolean
+        integralNumber:
+          type: boolean
+        long:
+          type: boolean
+        missingNode:
+          type: boolean
+        nodeType:
+          type: string
+          enum:
+          - ARRAY
+          - BINARY
+          - BOOLEAN
+          - MISSING
+          - 'NULL'
+          - NUMBER
+          - OBJECT
+          - POJO
+          - STRING
+        'null':
+          type: boolean
+        number:
+          type: boolean
+        object:
+          type: boolean
+        pojo:
+          type: boolean
+        short:
+          type: boolean
+        textual:
+          type: boolean
+        valueNode:
+          type: boolean
+    LandingPageDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/SegmentContent'
+        createdAt:
+          type: string
+          description: Datetime when the section was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the dnamic content section
+          format: int32
+        segmentation:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        updatedAt:
+          type: string
+          description: Datetime when the section was last updated
+          format: date-time
+    LandingPageResponse:
+      required:
+      - customHeadHTML
+      - facebookOgTags
+      - robots
+      - title
+      type: object
+      properties:
+        URL:
+          type: string
+          description: Url of the asset in the Marketo UI
+        computedUrl:
+          type: string
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        customHeadHTML:
+          type: string
+          description: Any custom HTML to embed in the <head> tag of the page
+        description:
+          type: string
+          description: Description of the asset
+        facebookOgTags:
+          type: string
+          description: Any OpenGraph meta tags to apply to the page
+        folder:
+          $ref: '#/components/schemas/Folder'
+        formPrefill:
+          type: boolean
+          description: Boolean to toggle whether forms embedded in the page will prefill. Default false
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        keywords:
+          type: string
+        mobileEnabled:
+          type: boolean
+          description: Whether the page has mobile viewing enabled. Free-form pages only. Default false
+        name:
+          type: string
+          description: Name of the asset
+        robots:
+          type: string
+          description: Robots directives to apply to the pages meta tags
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        template:
+          type: integer
+          description: Id of the template used
+          format: int32
+        title:
+          type: string
+          description: Title element of the landing page
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        workspace:
+          type: string
+          description: Name of the workspace
+    ResponseOfLpTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateLandingPageContentRequest:
+      required:
+      - type
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        index:
+          type: integer
+          description: Index of the content section. Determines the order of the section in the landing page
+          format: int32
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - Form
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - DynamicContent
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    CreateLandingPageRequest:
+      required:
+      - folder
+      - name
+      - template
+      type: object
+      properties:
+        customHeadHTML:
+          type: string
+          description: Any custom HTML to embed in the <head> tag of the page
+        description:
+          type: string
+          description: Description of the asset
+        facebookOgTags:
+          type: string
+          description: Any OpenGraph meta tags to apply to the page
+        folder:
+          $ref: '#/components/schemas/Folder'
+        keywords:
+          type: string
+        mobileEnabled:
+          type: boolean
+          description: Whether the page has mobile viewing enabled. Free-form pages only. Default false
+        name:
+          type: string
+          description: Name of the landing page
+        prefillForm:
+          type: boolean
+          description: Boolean to toggle whether forms embedded in the page will prefill. Default false
+        robots:
+          type: string
+          description: Robots directives to apply to the pages meta tags
+        template:
+          type: integer
+          description: Id of the template used
+          format: int32
+        title:
+          type: string
+          description: Title element of the landing page
+        urlPageName:
+          type: string
+          description: URL path of the page. Derived from the name field if unset
+        workspace:
+          type: string
+          description: Name of the workspace
+    LpTemplateResponse:
+      required:
+      - enableMunchkin
+      - folder
+      - status
+      - templateType
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace. Max 255 characters
+    LpTemplateGetContentResponse:
+      required:
+      - content
+      - enableMunchkin
+      - id
+      - status
+      - templateType
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        id:
+          type: integer
+          description: Unique integer id of the template
+          format: int32
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+    UpdateLpTemplateRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        name:
+          type: string
+          description: Name of the landing page template
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    UpdateLandingPageDynamicContentRequest:
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        segment:
+          type: string
+          description: Name of the segment to display content section for
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    ResponseOfLandingPageContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    GetLandingPageFullContentResponse:
+      required:
+      - content
+      - id
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the landing page
+        id:
+          type: integer
+          description: Unique integer id of the landing page
+          format: int32
+    CreateLandingPageContentRequest:
+      required:
+      - contentId
+      - type
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        contentId:
+          type: string
+          description: Id of the content section. Also the HTML id of the section.
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - Form
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    ResponseOfLandingPageDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    LandingPageDomain:
+      required:
+      - hostname
+      - type
+      type: object
+      properties:
+        hostname:
+          type: string
+          description: The hostname for the landing pages
+        type:
+          type: string
+          description: Specifies type of hostname
+          enum:
+          - domain
+          - domain-alias
+    CloneLandingPageRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the landing page
+        template:
+          type: integer
+          description: Id of the template used
+          format: int32
+    LandingPageVariableResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: Integer id of the variable
+        type:
+          type: string
+          description: Type of the variable
+        value:
+          type: object
+          properties: {}
+          description: Value of the variable
+    ResponseOfLpTemplateGetContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpTemplateGetContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfLandingPageVariableResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageVariableResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    SegmentContent:
+      required:
+      - content
+      - segmentId
+      - segmentName
+      - type
+      type: object
+      properties:
+        content:
+          type: object
+          properties: {}
+          description: Type of content section
+        followupType:
+          type: string
+        followupValue:
+          type: string
+        segmentId:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        segmentName:
+          type: string
+          description: Name of the segment to display content section for
+        type:
+          type: string
+          description: Type of content section
+    CloneLpTemplateRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the landing page template
+    UpdateLandingPageRequest:
+      type: object
+      properties:
+        customHeadHTML:
+          type: string
+          description: Any custom HTML to embed in the <head> tag of the page
+        description:
+          type: string
+          description: Description of the asset
+        facebookOgTags:
+          type: string
+          description: Any OpenGraph meta tags to apply to the page
+        keywords:
+          type: string
+        metaTagsDescription:
+          type: string
+          description: Meta description property of the page
+        mobileEnabled:
+          type: boolean
+          description: Whether the page has mobile viewing enabled. Free-form pages only. Default false
+        name:
+          type: string
+          description: Name of the landing page
+        robots:
+          type: string
+          description: Robots directives to apply to the pages meta tags
+        styleOverRide:
+          type: string
+          description: Additional CSS styles to append to the landing page <head>
+        title:
+          type: string
+          description: Title element of the landing page
+        urlPageName:
+          type: string
+          description: URL path of the page. Derived from the name field if unset
+    LandingPageContentResponse:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        content:
+          type: object
+          properties: {}
+          description: 'Content of the section. Expected values vary based on type. Image: An image URL. RichText: HTML Content. HTML: HTML Content. Form: A form id. Rectangle: Empty. Snippet: A snippet id.'
+        followupType:
+          type: string
+          description: Follow-up behavior of a form. Only available for form-type content sections. Defaults to form defined behavior.
+          enum:
+          - url
+          - lp
+          - formDefined
+        followupValue:
+          type: string
+          description: Where to follow-up on form submission. When followupType is lp, accepts the integer id of a landing page. For url, it accepts a url string.
+        formattingOptions:
+          $ref: '#/components/schemas/JsonNode'
+        id:
+          type: object
+          properties: {}
+          description: Id of the content section, may be a string or an int
+        index:
+          type: integer
+          description: Index of the content section. Index orients the elements from lowest to highest
+          format: int32
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - SocialButton
+          - Form
+          - DynamicContent
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - Video
+          - Poll
+          - ReferralOffer
+          - Sweepstakes
+    CreateLpTemplateRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the landing page template
+        enableMunchkin:
+          type: boolean
+          description: Whether to enable munchkin on the derived pages. Defaults to true
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the landing page template
+        templateType:
+          type: string
+          description: Type of template to create. Defaults to freeForm
+          enum:
+          - guided
+          - freeForm
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+x-original-swagger-version: '2.0'

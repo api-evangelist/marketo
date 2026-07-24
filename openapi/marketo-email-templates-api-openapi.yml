@@ -1,0 +1,560 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Email  Templates API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Email  Templates
+paths:
+  /rest/asset/v1/emailTemplate/byName.json:
+    get:
+      tags:
+      - Email  Templates
+      summary: Marketo Get Email Template by Name
+      description: 'Retrieves and email template record by the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getTemplateByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: name
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+  /rest/asset/v1/emailTemplate/{id}.json:
+    get:
+      tags:
+      - Email  Templates
+      summary: Marketo Get Email Template by Id
+      description: 'Returns an email template record by its id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getTemplateByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Update Email Template Metadata
+      description: 'Updates the metadata for the designated email template. Required Permissions: Read-Write Assets'
+      operationId: updateEmailTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateEmailMetaDataRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailTemplateMetaDataRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+      x-codegen-request-body-name: updateEmailMetaDataRequest
+  /rest/asset/v1/emailTemplate/{id}/approveDraft.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Approve Email Template Draft
+      description: 'Approves the current draft of the email template. Required Permissions: Approve Assets'
+      operationId: approveDraftUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+  /rest/asset/v1/emailTemplate/{id}/clone.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Clone Email Template
+      description: 'Clones the designated email template. Required Permissions: Read-Write Assets'
+      operationId: cloneTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneEmailTemplateRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneEmailTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+      x-codegen-request-body-name: cloneEmailTemplateRequest
+  /rest/asset/v1/emailTemplate/{id}/content.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Update Email Template Content
+      description: 'Updates the content of the given email template. Required Permissions: Read-Write Assets'
+      operationId: updateEmailTemplateContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateEmailTemplateContentRequest
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailTemplateContentRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: updateEmailTemplateContentRequest
+  /rest/asset/v1/emailTemplate/{id}/delete.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Delete Email Template
+      description: 'Deletes the designated email template. Required Permissions: Read-Write Assets'
+      operationId: deleteTemplateUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/emailTemplate/{id}/discardDraft.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Discard Email Template Draft
+      description: 'Discards the current draft of the email template. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/emailTemplate/{id}/unapprove.json:
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Unapprove Email Template Draft
+      description: 'Unapproves the current approved version of the Email Template. Required Permissions: Approve Assets'
+      operationId: unapproveDraftUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+  /rest/asset/v1/emailTemplates.json:
+    get:
+      tags:
+      - Email  Templates
+      summary: Marketo Get Email Templates
+      description: 'Returns a list of email template records accessible in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailTemplatesUsingGET
+      parameters:
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+    post:
+      tags:
+      - Email  Templates
+      summary: Marketo Create Email Template
+      description: 'Creates a new email template. Required Permissions: Read-Write Assets'
+      operationId: createEmailTemplateUsingPOST
+      requestBody:
+        description: createEmailTemplateRequest
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/CreateEmailTemplateRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateResponse'
+      x-codegen-request-body-name: createEmailTemplateRequest
+  /rest/asset/v1/emailTemplates/{id}/usedBy.json:
+    get:
+      tags:
+      - Email  Templates
+      summary: Marketo Get Email Template Used By
+      description: 'Returns a list of email records which depend on a given email template. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailTemplateUsedByUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email template
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailTemplateUsedByResponse'
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    UpdateEmailTemplateMetaDataRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Email Template
+    ResponseOfEmailTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfEmailTemplateUsedByResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateUsedByResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailTemplateContentRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content for the email template. Multipart file.
+    EmailTemplateResponse:
+      required:
+      - folder
+      - status
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        version:
+          type: integer
+          description: Template version type
+          format: int32
+          enum:
+          - 1
+          - 2
+        workspace:
+          type: string
+          description: Name of the workspace
+    CreateEmailTemplateRequest:
+      required:
+      - content
+      - folder
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the Email Template. Must be unique under the parent folder.
+        folder:
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the email template
+        content:
+          type: string
+          description: HTML content for template. Multipart file.
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    EmailTemplateUsedByResponse:
+      required:
+      - id
+      - name
+      - status
+      - type
+      - updatedAt
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        type:
+          type: string
+          description: Type of asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    CloneEmailTemplateRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the Email Template
+x-original-swagger-version: '2.0'

@@ -1,0 +1,127 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Channel API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Channel
+paths:
+  /rest/asset/v1/channel/byName.json:
+    get:
+      tags:
+      - Channel
+      summary: Marketo Get Channel by Name
+      description: 'Retrieves channels based on the provided name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getChannelByNameUsingGET
+      parameters:
+      - name: Name
+        in: query
+        description: Name of channel to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfChannelResponse'
+components:
+  schemas:
+    ChannelResponse:
+      required:
+      - applicableProgramType
+      - createdAt
+      - id
+      - name
+      - updatedAt
+      type: object
+      properties:
+        applicableProgramType:
+          type: string
+          description: Types of programs to which the channel can apply
+        createdAt:
+          type: string
+          description: Datetime when the channel was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the Channel
+          format: int32
+        name:
+          type: string
+          description: Name of the Channel
+        progressionStatuses:
+          type: array
+          description: List of available statuses for members of programs with the channel
+          items:
+            $ref: '#/components/schemas/ChannelProgression'
+        updatedAt:
+          type: string
+          description: Datetime when the channel was most recently updated
+          format: date-time
+    ChannelProgression:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the program status
+        hidden:
+          type: boolean
+          description: Whether the status has been hidden
+        name:
+          type: string
+          description: Name of the status
+        type:
+          type: string
+          description: Type of the status
+        step:
+          type: integer
+          description: Step number of the status
+          format: int32
+        success:
+          type: boolean
+          description: Whether this status is a success step for program members
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfChannelResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChannelResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+x-original-swagger-version: '2.0'

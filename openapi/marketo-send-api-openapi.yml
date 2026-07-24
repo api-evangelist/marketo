@@ -1,0 +1,110 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Send API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Send
+paths:
+  /rest/asset/v1/email/{id}/sendSample.json:
+    post:
+      tags:
+      - Send
+      summary: Marketo Send Sample Email
+      description: 'Sends a sample email to the given email address. Leads may be impersonated to populate data for tokens and dynamic content. Required Permissions: Read-Write Assets'
+      operationId: sendSampleEmailUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: sendSampleEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendSampleEmailRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSendSampleResponse'
+      x-codegen-request-body-name: sendSampleEmailRequest
+components:
+  schemas:
+    ResponseOfSendSampleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendSampleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    SendSampleResponse:
+      required:
+      - result
+      - service
+      type: object
+      properties:
+        service:
+          type: string
+          description: API call name
+          enum:
+          - sendTestEmail
+        result:
+          type: boolean
+          description: Whether call was successful
+    SendSampleEmailRequest:
+      required:
+      - emailAddress
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          description: Email address to receive sample email
+        leadId:
+          type: string
+          description: Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.
+        textOnly:
+          type: boolean
+          description: Whether to send to text only version along with the HTML version. Default false.
+x-original-swagger-version: '2.0'

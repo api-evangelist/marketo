@@ -1,0 +1,116 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Name API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Name
+paths:
+  /rest/asset/v1/email/{id}/variable/{name}.json:
+    post:
+      tags:
+      - Name
+      summary: Marketo Update Email Variable
+      description: 'Updates the value of a given variable in an email. Required Permissions: Read-Write Assets'
+      operationId: updateVariableUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: path
+        description: name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updateVariableRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateVariableRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailVariableResponse'
+      x-codegen-request-body-name: updateVariableRequest
+components:
+  schemas:
+    EmailVariableResponse:
+      required:
+      - moduleScope
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the email variable
+        value:
+          type: string
+          description: Value of the email variable
+        moduleScope:
+          type: boolean
+          description: Returns true for local variables else returns false
+        moduleId:
+          type: string
+          description: Returns the moduleId associated with the variable, only in case of local variable
+    ResponseOfEmailVariableResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailVariableResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    UpdateVariableRequest:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value to update variable with
+        moduleId:
+          type: string
+          description: Module that variable is associated with. Required for updating module variables. Not needed for global variables.
+x-original-swagger-version: '2.0'

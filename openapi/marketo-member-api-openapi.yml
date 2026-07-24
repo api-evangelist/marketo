@@ -1,0 +1,147 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Member API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Member
+paths:
+  /rest/asset/v1/form/programMemberFields.json:
+    get:
+      tags:
+      - Member
+      summary: Marketo Get Available Form Program Member Fields
+      description: 'Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getAllProgramMemberFieldsUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of fields to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFieldsMetaDataResponse'
+components:
+  schemas:
+    ResponseOfFieldsMetaDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldsMetaDataResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FieldsMetaDataResponse:
+      required:
+      - id
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Type of field
+        defaultValue:
+          type: string
+          description: Optional default value for the field
+        description:
+          type: string
+          description: Description of the field
+        fieldMaskValues:
+          type: string
+          description: Optional input mask for the field
+        fieldWidth:
+          type: integer
+          description: Width of the input or select element
+          format: int32
+        id:
+          type: string
+          description: Id of the field
+        initiallyChecked:
+          type: boolean
+          description: Whether the field should be checked upon loading. Default false
+        isLabelToRight:
+          type: boolean
+          description: Whether the field label should be displayed to the right of the input/select element. Default false
+        isMultiselect:
+          type: boolean
+          description: Whether the field should allow multiple selections. Default false
+        isRequired:
+          type: boolean
+          description: Whether the field is required to submit the form. Default false
+        isSensitive:
+          type: boolean
+          description: Whether the field is marked as sensitive. Default false
+        labelWidth:
+          type: integer
+          description: Width of the field label element
+          format: int32
+        maxLength:
+          type: integer
+          description: Maximum length for text type fields
+          format: int32
+        maximumNumber:
+          type: number
+          description: Maximum value accepted by the field
+          format: float
+        minimumNumber:
+          type: number
+          description: Minimum value accepted by the field
+          format: float
+        picklistValues:
+          type: string
+          description: Comma-separated list of available picklist values for the field
+        placeholderText:
+          type: string
+          description: Placeholder text for the field
+        validationMessage:
+          type: string
+          description: Validation message to display on failed validation
+        visibleRows:
+          type: integer
+          description: Number of rows visible for progressive profiling
+          format: int32
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

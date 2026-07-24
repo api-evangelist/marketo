@@ -1,0 +1,246 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Full API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Full
+paths:
+  /rest/asset/v1/email/{id}/fullContent.json:
+    get:
+      tags:
+      - Full
+      summary: Marketo Get Email Full Content
+      description: 'Returns the serialized HTML version of the email. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.'
+      operationId: getEmailFullContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not.
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: leadId
+        in: query
+        description: The lead id to impersonate. Email is rendered as though it was received by this lead.
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: Email content type to return. Default is HTML.
+        schema:
+          type: string
+          enum:
+          - Text
+          - HTML
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfGetEmailFullContentResponse'
+    post:
+      tags:
+      - Full
+      summary: Marketo Update Email Full Content
+      description: 'Replaces the HTML of an Email that has had its relationship broken from its template. Required Permissions: Read-Write Assets'
+      operationId: createEmailFullContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Content is multipart file parameter
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailFullContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfUpdateEmailFullContentResponse'
+      x-codegen-request-body-name: updateEmailFullContentRequest
+  /rest/asset/v1/landingPage/{id}/fullContent.json:
+    get:
+      tags:
+      - Full
+      summary: Marketo Get Landing Page Full Content
+      description: 'Returns the serialized HTML version of the landing page. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.'
+      operationId: getLandingPageFullContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: leadId
+        in: query
+        description: The lead id to impersonate. Landing page is rendered as though it was viewed by this lead.
+        schema:
+          type: integer
+          format: int32
+      - name: segmentation
+        in: query
+        description: 'JSON array of of segmentations. Each segmentation must be a JSON object with members ''segmentationId'', and ''segmentId''.<br>Example: [{"segmentationId":1030,"segmentId":1103}]'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfGetLandingPageFullContentResponse'
+components:
+  schemas:
+    ResponseOfGetLandingPageFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetLandingPageFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    GetEmailFullContentResponse:
+      required:
+      - content
+      - id
+      - status
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the email
+        id:
+          type: integer
+          description: Unique integer id of the email
+          format: int32
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+    UpdateEmailFullContentResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique integer id of the email
+          format: int32
+    GetLandingPageFullContentResponse:
+      required:
+      - content
+      - id
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the landing page
+        id:
+          type: integer
+          description: Unique integer id of the landing page
+          format: int32
+    ResponseOfGetEmailFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetEmailFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfUpdateEmailFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateEmailFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailFullContentRequest:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          type: string
+          description: Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags.
+x-original-swagger-version: '2.0'

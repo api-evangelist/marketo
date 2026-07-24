@@ -1,0 +1,604 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Snippets API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Snippets
+  description: Snippet Controller
+paths:
+  /rest/asset/v1/snippet/{id}.json:
+    get:
+      tags:
+      - Snippets
+      summary: Marketo Get Snippet by Id
+      description: 'Retrieves the target snippet record. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getSnippetByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Update Snippet Metadata
+      description: 'Updates the metadata of the snippet. Required Permissions: Read-Write Assets'
+      operationId: updateSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateSnippetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSnippetRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+      x-codegen-request-body-name: updateSnippetRequest
+  /rest/asset/v1/snippet/{id}/approveDraft.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Approve Snippet Draft
+      description: 'Approves the current draft of the snippet. Required Permissions: Approve Assets'
+      operationId: approveSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+  /rest/asset/v1/snippet/{id}/clone.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Clone Snippet
+      description: 'Clones the target snippet. Required Permissions: Read-Write Assets'
+      operationId: cloneSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneSnippetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneSnippetRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+      x-codegen-request-body-name: cloneSnippetRequest
+  /rest/asset/v1/snippet/{id}/content.json:
+    get:
+      tags:
+      - Snippets
+      summary: Marketo Get Snippet Content
+      description: 'Retrieves the content of the target snippet. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getSnippetContentByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetContentResponse'
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Update Snippet Content
+      description: 'Updates the content of the target snippet. Required Permissions: Read-Write Assets'
+      operationId: updateContentUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: content
+        in: query
+        description: Content of the snippet
+        required: true
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Type of snippet content
+        required: true
+        schema:
+          type: string
+          enum:
+          - DynamicContent
+          - HTML
+          - Text
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/snippet/{id}/delete.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Delete Snippet
+      description: 'Deletes the target snippet. The snippet may not be in use by emails or landing pages. Required Permissions: Read-Write Assets'
+      operationId: deleteSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/snippet/{id}/discardDraft.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Discard Snippet Draft
+      description: 'Discards the current draft of the snippet. Required Permissions: Read-Write Assets'
+      operationId: discardSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/snippet/{id}/dynamicContent.json:
+    get:
+      tags:
+      - Snippets
+      summary: Marketo Get Dynamic Content
+      description: 'Gets the list of dynamic content sections for the snippet. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getDynamicContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelResponse'
+  /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Update Snippet Dynamic Content
+      description: 'Updates the target dynamic content section. Required Permissions: Read-Write Assets'
+      operationId: updateDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: segmentId
+        in: path
+        description: segmentId
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateSnippetDynamicContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/snippet/{id}/unapprove.json:
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Unapprove Snippet
+      description: 'Unapproves the current version of the snippet. The snippet may not be in use. The snippet will be reverted to a draft-only state. Required Permissions: Approve Assets'
+      operationId: unapproveSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+  /rest/asset/v1/snippets.json:
+    get:
+      tags:
+      - Snippets
+      summary: Marketo Get Snippets
+      description: 'Retrieves a list of accessible snippets from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getSnippetUsingGET
+      parameters:
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+    post:
+      tags:
+      - Snippets
+      summary: Marketo Create Snippet
+      description: 'Creates a new snippet. Required Permissions: Read-Write Assets'
+      operationId: createSnippetUsingPOST
+      requestBody:
+        description: createSnippetRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateSnippetRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSnippetResponse'
+      x-codegen-request-body-name: createSnippetRequest
+components:
+  schemas:
+    UpdateSnippetDynamicContentRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of dynamic content section
+          enum:
+          - Typeofcontent.Either'HTML'or'Text'
+        value:
+          type: string
+          description: Value of the dynamic content section
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    SnippetResponse:
+      required:
+      - folder
+      - status
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/SnippetFolder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace
+    CloneSnippetRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name for the cloned snippet
+        folder:
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the cloned snippet
+    SnippetFolder:
+      required:
+      - folderName
+      - type
+      - value
+      type: object
+      properties:
+        value:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+        folderName:
+          type: string
+          description: Name of folder
+      description: JSON representation of a folder
+    CreateSnippetRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the snippet
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the snippet
+    ResponseOfSnippetContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfSnippetResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    SnippetContentResponse:
+      required:
+      - type
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content of the snippet
+        type:
+          type: string
+          description: Type of snippet content
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    UpdateSnippetRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the snippet
+        isArchive:
+          type: string
+          description: Archival status of the snippet
+        name:
+          type: string
+          description: Name of the snippet
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ModelResponse:
+      type: object
+x-original-swagger-version: '2.0'

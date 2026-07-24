@@ -1,0 +1,1503 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Emails API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Emails
+  description: Email Controller
+paths:
+  /rest/asset/v1/email/byName.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email by Name
+      description: 'Returns an email records based on the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the email
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+  /rest/asset/v1/email/{id}.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email By Id
+      description: 'Returns an email records by its id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Metadata
+      description: 'Updates the metadata of an email asset. Required Permissions: Read-Write Assets'
+      operationId: updateEmailUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailMetaDataRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+      x-codegen-request-body-name: updateEmailRequest
+  /rest/asset/v1/email/{id}/approveDraft.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Approve Email Draft
+      description: 'Approves the current draft of an email. Required Permissions: Approve Assets'
+      operationId: approveDraftUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/email/{id}/clone.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Clone Email
+      description: 'Clones the target email. Required Permissions: Read-Write Assets'
+      operationId: cloneEmailUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneEmailRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+      x-codegen-request-body-name: cloneEmailRequest
+  /rest/asset/v1/email/{id}/content.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email Content
+      description: 'Returns the content of the designated email. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailContentByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailContentResponse'
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Content
+      description: 'Updates the content of an email. Required Permissions: Read-Write Assets'
+      operationId: updateEmailContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailComponentDataRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: updateEmailRequest
+  /rest/asset/v1/email/{id}/content/rearrange.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Rearrange Email Modules
+      description: 'Rearranges the modules in an email. Required Permissions: Read-Write Assets'
+      operationId: rearrangeModulesUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: JSON array of module positions. Each position must be a JSON object with members 'index' and a 'moduleId'
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: string
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+      x-codegen-request-body-name: positions
+  /rest/asset/v1/email/{id}/content/{htmlId}.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Content Section
+      description: 'Updates the content in the given section. Required Permissions: Read-Write Assets'
+      operationId: updateEmailComponentContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: htmlId
+        in: path
+        description: htmlId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailComponentContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/email/{id}/content/{moduleId}/add.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Add Email Module
+      description: 'Adds a new module to an email, with the given id. Required Permissions: Read-Write Assets'
+      operationId: addModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the module
+        required: true
+        schema:
+          type: string
+      - name: index
+        in: query
+        description: Index of the module. Determines the order of the module in the email.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/delete.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Delete Module
+      description: 'Deletes the given module from the email. Required Permissions: Read-Write Assets'
+      operationId: deleteModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/duplicate.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Duplicate Email Module
+      description: 'Creates a copy of the designated module in an email. Required Permissions: Read-Write Assets'
+      operationId: duplicateModuleUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: Name of the new module
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/content/{moduleId}/rename.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Rename Email Module
+      description: 'Renames a module. Required Permissions: Read-Write Assets'
+      operationId: renameUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: moduleId
+        in: path
+        description: moduleId
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: query
+        description: New module name
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailModuleResponse'
+  /rest/asset/v1/email/{id}/delete.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Delete Email
+      description: 'Deletes the target email. Required Permissions: Read-Write Assets'
+      operationId: deleteEmailUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/email/{id}/discardDraft.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Discard Email Draft
+      description: 'Discards the current draft of an email. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/email/{id}/dynamicContent/{contentId}.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email Dynamic Content
+      description: 'Retrieves the dyanmic content record for the given section. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailDynamicContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of email dynamic content section
+        required: true
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailDynamicContentResponse'
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Dynamic Content Section
+      description: 'Updates dynamic content in the given section. Required Permissions: Read-Write Assets'
+      operationId: updateEmailDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of email dynamic content section
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailDynamicContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/email/{id}/sendSample.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Send Sample Email
+      description: 'Sends a sample email to the given email address. Leads may be impersonated to populate data for tokens and dynamic content. Required Permissions: Read-Write Assets'
+      operationId: sendSampleEmailUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: sendSampleEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SendSampleEmailRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSendSampleResponse'
+      x-codegen-request-body-name: sendSampleEmailRequest
+  /rest/asset/v1/email/{id}/unapprove.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Unapprove Email
+      description: 'Unapproves the email and reverts it to a draft-only state. Required Permissions: Approve Assets'
+      operationId: unapproveDraftUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/email/{id}/variable/{name}.json:
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Variable
+      description: 'Updates the value of a given variable in an email. Required Permissions: Read-Write Assets'
+      operationId: updateVariableUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: name
+        in: path
+        description: name
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: updateVariableRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateVariableRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailVariableResponse'
+      x-codegen-request-body-name: updateVariableRequest
+  /rest/asset/v1/email/{id}/variables.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email Variables
+      description: 'Returns a list of the available variables in an email. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailVariablesUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailVariableResponse'
+  /rest/asset/v1/email/ccFields.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email CC Fields
+      description: 'Returns the set of fields enabled for Email CC in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailCCFieldsUsingGET
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailCCFieldsResponse'
+  /rest/asset/v1/emails.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Emails
+      description: 'Returns a list of emails matching the given filter parameters. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getEmailUsingGET
+      parameters:
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: folder
+        in: query
+        description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        schema:
+          type: string
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      - name: maxReturn
+        in: query
+        description: Maximum number of emails to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: earliestUpdatedAt
+        in: query
+        description: Exclude emails prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        schema:
+          type: string
+      - name: latestUpdatedAt
+        in: query
+        description: Exclude emails after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+    post:
+      tags:
+      - Emails
+      summary: Marketo Create Email
+      description: 'Creates a new email asset. Required Permissions: Read-Write Assets'
+      operationId: createEmailUsingPOST
+      requestBody:
+        description: createEmailRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateEmailRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfEmailResponse'
+      x-codegen-request-body-name: createEmailRequest
+  /rest/asset/v1/email/{id}/fullContent.json:
+    get:
+      tags:
+      - Emails
+      summary: Marketo Get Email Full Content
+      description: 'Returns the serialized HTML version of the email. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.'
+      operationId: getEmailFullContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not.
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      - name: leadId
+        in: query
+        description: The lead id to impersonate. Email is rendered as though it was received by this lead.
+        schema:
+          type: integer
+          format: int32
+      - name: type
+        in: query
+        description: Email content type to return. Default is HTML.
+        schema:
+          type: string
+          enum:
+          - Text
+          - HTML
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfGetEmailFullContentResponse'
+    post:
+      tags:
+      - Emails
+      summary: Marketo Update Email Full Content
+      description: 'Replaces the HTML of an Email that has had its relationship broken from its template. Required Permissions: Read-Write Assets'
+      operationId: createEmailFullContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the email
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: Content is multipart file parameter
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailFullContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfUpdateEmailFullContentResponse'
+      x-codegen-request-body-name: updateEmailFullContentRequest
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    GetEmailFullContentResponse:
+      required:
+      - content
+      - id
+      - status
+      type: object
+      properties:
+        content:
+          type: string
+          description: HTML content of the email
+        id:
+          type: integer
+          description: Unique integer id of the email
+          format: int32
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+    UpdateEmailMetaDataRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Email
+        preHeader:
+          type: string
+          description: Preheader text for the email
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+        published:
+          type: boolean
+          description: Whether the email has been published to Sales Insight. Default false
+        textOnly:
+          type: boolean
+          description: Setting to include text-only version of email when sent
+        webView:
+          type: boolean
+          description: Whether the email has been enabled to allow the 'View as Web Page' when received
+    SendSampleEmailRequest:
+      required:
+      - emailAddress
+      type: object
+      properties:
+        emailAddress:
+          type: string
+          description: Email address to receive sample email
+        leadId:
+          type: string
+          description: Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.
+        textOnly:
+          type: boolean
+          description: Whether to send to text only version along with the HTML version. Default false.
+    ResponseOfEmailDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfEmailResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailResponse:
+      required:
+      - autoCopyToText
+      - folder
+      - fromEmail
+      - fromName
+      - operational
+      - preHeader
+      - publishToMSI
+      - replyEmail
+      - status
+      - subject
+      - template
+      - textOnly
+      - webView
+      type: object
+      properties:
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        fromEmail:
+          $ref: '#/components/schemas/EmailHeaderField'
+        fromName:
+          $ref: '#/components/schemas/EmailHeaderField'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+        publishToMSI:
+          type: boolean
+          description: Whether the email is published to Marketo Sales Insight
+        replyEmail:
+          $ref: '#/components/schemas/EmailHeaderField'
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+        subject:
+          $ref: '#/components/schemas/EmailHeaderField'
+        template:
+          type: integer
+          description: Id of the parent template
+          format: int32
+        textOnly:
+          type: boolean
+          description: Setting to include text-only version of email when sent
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        version:
+          type: integer
+          description: The type version of the email
+          format: int32
+          enum:
+          - 1
+          - 2
+        webView:
+          type: boolean
+          description: Whether 'View as Webpage' function is enabled for the email
+        workspace:
+          type: string
+          description: Name of the workspace
+        autoCopyToText:
+          type: boolean
+          description: Setting to automatically copy HTML version to Text version
+        preHeader:
+          type: string
+          description: The email preheader text (max 1024 characters)
+        ccFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailCCFields'
+    UpdateEmailFullContentRequest:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          type: string
+          description: Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags.
+    ResponseOfEmailContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailModuleResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the email module
+          format: int32
+    CloneEmailRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the new email asset
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+    ResponseOfEmailModuleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailModuleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfGetEmailFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/GetEmailFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfEmailCCFieldsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailCCFields'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailComponentContentRequest:
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        altText:
+          type: string
+          description: Sets the value of the alt parameter for the resulting img element
+        externalUrl:
+          type: string
+        height:
+          type: integer
+          description: Overrides naitve height of the image. The resulting file will be resized to the given height
+          format: int32
+        image:
+          type: string
+          description: Multipart file that allows you to load an image from your computer
+        linkUrl:
+          type: string
+        overWrite:
+          type: boolean
+          description: Allows overwriting of the existing image content section
+        style:
+          type: string
+          description: Sets the value of the style parameter for the content section
+        textValue:
+          type: string
+        type:
+          type: string
+          description: Type of content to set for the section.
+          enum:
+          - Text
+          - DynamicContent
+          - Snippet
+        value:
+          type: string
+          description: Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed
+        videoUrl:
+          type: string
+          description: Sets the Url of the video element. Videos must be either from YouTube or Vimeo
+        width:
+          type: integer
+          description: Overrides native width of the image. The resulting file will be resized to the given width
+          format: int32
+    UpdateVariableRequest:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value to update variable with
+        moduleId:
+          type: string
+          description: Module that variable is associated with. Required for updating module variables. Not needed for global variables.
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailDynamicContentRequest:
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        altText:
+          type: string
+          description: Sets the value of the alt parameter for the resulting img element
+        externalUrl:
+          type: string
+        height:
+          type: integer
+          description: Overrides naitve height of the image. The resulting file will be resized to the given height
+          format: int32
+        image:
+          type: string
+          description: Multipart file that allows you to add an image from your computer
+        linkUrl:
+          type: string
+        overWrite:
+          type: boolean
+          description: Allows overwriting of the existing image content section
+        style:
+          type: string
+          description: Sets the value of the style parameter for the content section
+        type:
+          type: string
+          description: Type of content to set for the section.
+          enum:
+          - Text
+          - DynamicContent
+          - Snippet
+        value:
+          type: string
+          description: Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed
+        videoUrl:
+          type: string
+          description: Sets the Url of the video element. Videos must be either from YouTube or Vimeo
+        width:
+          type: integer
+          description: Overrides native width of the image. The resulting file will be resized to the given width
+          format: int32
+    ResponseOfUpdateEmailFullContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/UpdateEmailFullContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfEmailVariableResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailVariableResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailDynamicContentItem:
+      type: object
+      properties:
+        content:
+          type: string
+        id:
+          type: string
+        segmentId:
+          type: string
+        segmentName:
+          type: string
+        type:
+          type: string
+    CreateEmailRequest:
+      required:
+      - folder
+      - fromEmail
+      - fromName
+      - name
+      - replyEmail
+      - subject
+      - template
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        fromEmail:
+          type: string
+          description: From-address of the Email
+        fromName:
+          type: string
+          description: From-name of the Email
+        name:
+          type: string
+          description: Name of the email
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+        replyEmail:
+          type: string
+          description: Reply-To address of the Email
+        subject:
+          type: string
+          description: Subject Line of the Email
+        template:
+          type: integer
+          description: Id of the parent template
+          format: int32
+        textOnly:
+          type: string
+          description: Setting to include text-only version of email when sent
+    ResponseOfSendSampleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendSampleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailFullContentResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Unique integer id of the email
+          format: int32
+    EmailVariableResponse:
+      required:
+      - moduleScope
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name of the email variable
+        value:
+          type: string
+          description: Value of the email variable
+        moduleScope:
+          type: boolean
+          description: Returns true for local variables else returns false
+        moduleId:
+          type: string
+          description: Returns the moduleId associated with the variable, only in case of local variable
+    EmailHeaderField:
+      required:
+      - type
+      - value
+      type: object
+      properties:
+        type:
+          type: string
+          description: Field type
+        value:
+          type: string
+          description: Value of field
+    UpdateEmailComponentDataRequest:
+      type: object
+      properties:
+        fromEmail:
+          $ref: '#/components/schemas/EmailHeaderField'
+        fromName:
+          $ref: '#/components/schemas/EmailHeaderField'
+        replyTO:
+          $ref: '#/components/schemas/EmailHeaderField'
+        subject:
+          $ref: '#/components/schemas/EmailHeaderField'
+    EmailDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentItem'
+        createdAt:
+          type: string
+          description: Datetime when the section was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the dnamic content section
+          format: int32
+        segmentation:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        updatedAt:
+          type: string
+          description: Datetime when the section was last updated
+          format: date-time
+    EmailContentResponse:
+      required:
+      - contentType
+      - htmlId
+      - value
+      type: object
+      properties:
+        contentType:
+          type: string
+          description: Type of content to set for the section.
+        htmlId:
+          type: string
+          description: HTML id of the content section
+        index:
+          type: integer
+          format: int32
+        isLocked:
+          type: boolean
+        parentHtmlId:
+          type: string
+        value:
+          type: object
+          properties: {}
+          description: Contents of the section
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    SendSampleResponse:
+      required:
+      - result
+      - service
+      type: object
+      properties:
+        service:
+          type: string
+          description: API call name
+          enum:
+          - sendTestEmail
+        result:
+          type: boolean
+          description: Whether call was successful
+    EmailCCFields:
+      required:
+      - apiName
+      - attributeId
+      - displayName
+      - objectName
+      type: object
+      properties:
+        attributeId:
+          type: string
+          description: Attribute identifier
+        objectName:
+          type: string
+          description: Object name. 'lead' or 'company'
+        displayName:
+          type: string
+          description: Display name
+        apiName:
+          type: string
+          description: API name
+x-original-swagger-version: '2.0'

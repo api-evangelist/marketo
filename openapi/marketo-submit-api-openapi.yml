@@ -1,0 +1,225 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Submit API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Submit
+paths:
+  /rest/asset/v1/form/{id}/submitButton.json:
+    post:
+      tags:
+      - Submit
+      summary: Marketo Update Submit Button
+      description: 'Updates the submit button configuration for the target form. Required Permissions: Read-Write Assets'
+      operationId: updateFormSubmitButtonUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: submitButtonRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/SubmitButtonRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLpFormResponse'
+      x-codegen-request-body-name: submitButtonRequest
+components:
+  schemas:
+    LpFormResponse:
+      required:
+      - buttonLabel
+      - buttonLocation
+      - folder
+      - fontFamily
+      - fontSize
+      - knownVisitor
+      - labelPosition
+      - language
+      - locale
+      - progressiveProfiling
+      - status
+      - thankYouList
+      - theme
+      - waitingLabel
+      type: object
+      properties:
+        buttonLabel:
+          type: string
+          description: Label text of the button
+        buttonLocation:
+          type: integer
+          description: Location in pixels of the button relative to the left of the form
+          format: int32
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          $ref: '#/components/schemas/Folder'
+        fontFamily:
+          type: string
+          description: font-family property for the form
+        fontSize:
+          type: string
+          description: font-size property of the form
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        knownVisitor:
+          $ref: '#/components/schemas/FormKnownVisitorDTO'
+        labelPosition:
+          type: string
+          description: Default positioning of labels.
+        language:
+          type: string
+          description: Language of the form
+        locale:
+          type: string
+          description: Locale of the form
+        name:
+          type: string
+          description: Name of the asset
+        progressiveProfiling:
+          type: boolean
+          description: Whether progressive profiling is enabled for the form
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+        thankYouList:
+          type: array
+          description: List of thank you page behaviors for the form
+          items:
+            $ref: '#/components/schemas/FormThankYouPageDTO'
+        theme:
+          type: string
+          description: CSS theme for the form to use
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        waitingLabel:
+          type: string
+          description: Waiting text of the button
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    FormThankYouPageDTO:
+      type: object
+      properties:
+        default:
+          type: boolean
+        followupType:
+          type: string
+        followupValue:
+          type: object
+          properties: {}
+        operator:
+          type: string
+        subjectField:
+          type: string
+        values:
+          type: array
+          items:
+            type: string
+    ResponseOfLpFormResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LpFormResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    SubmitButtonRequest:
+      type: object
+      properties:
+        buttonPosition:
+          type: integer
+          description: Location in pixels of the button relative to the left of the form
+          format: int32
+        buttonStyle:
+          type: string
+          description: Style of the button
+        label:
+          type: string
+          description: Label text of the button
+        waitingLabel:
+          type: string
+          description: Waiting text of the button
+    FormKnownVisitorDTO:
+      type: object
+      properties:
+        template:
+          type: string
+        type:
+          type: string
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+x-original-swagger-version: '2.0'

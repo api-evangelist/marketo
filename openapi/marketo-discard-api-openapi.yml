@@ -1,0 +1,193 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Discard API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Discard
+paths:
+  /rest/asset/v1/email/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Email Draft
+      description: 'Discards the current draft of an email. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/emailTemplate/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Email Template Draft
+      description: 'Discards the current draft of the email template. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST_1
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/form/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Form Draft
+      description: 'Discards the current draft of the form. Required Permissions: Read-Write Assets'
+      operationId: discardFormByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Landing Page Draft
+      description: 'Discards the current draft of the landing page. Required Permissions: Read-Write Assets'
+      operationId: discardLandingPageByIdUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPageTemplate/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Landing Page Template Draft
+      description: 'Discrads the current draft of the landing page template. Required Permissions: Read-Write Assets'
+      operationId: discardDraftUsingPOST_2
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/snippet/{id}/discardDraft.json:
+    post:
+      tags:
+      - Discard
+      summary: Marketo Discard Snippet Draft
+      description: 'Discards the current draft of the snippet. Required Permissions: Read-Write Assets'
+      operationId: discardSnippetUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+components:
+  schemas:
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+x-original-swagger-version: '2.0'

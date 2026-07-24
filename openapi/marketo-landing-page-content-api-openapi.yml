@@ -1,0 +1,616 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Landing  Page  Content API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Landing  Page  Content
+paths:
+  /rest/asset/v1/landingPage/{id}/content.json:
+    get:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Get Landing Page Content
+      description: 'Retrieves the list of content sections in the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageContentUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: status
+        in: query
+        description: Status filter for draft or approved versions
+        schema:
+          type: string
+          enum:
+          - approved
+          - draft
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageContentResponse'
+    post:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Add Landing Page Content Section
+      description: 'Adds a content section to the target landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets'
+      operationId: addLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: request
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLandingPageContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/content/{contentId}.json:
+    post:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Update Landing Page Content Section
+      description: 'Updates a content section the landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page content section
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageContentRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+  /rest/asset/v1/landingPage/{id}/content/{contentId}/delete.json:
+    post:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Delete Landing Page Content Section
+      description: 'Removes the target content section from the parent landing page. Required Permissions: Read-Write Assets'
+      operationId: removeLandingPageContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page content section
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json:
+    get:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Get Landing Page Dynamic Content
+      description: 'Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getLandingPageDynamicContentsUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of landing page dynamic content section
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLandingPageDynamicContentResponse'
+    post:
+      tags:
+      - Landing  Page  Content
+      summary: Marketo Update Landing Page Dynamic Content Section
+      description: 'Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets'
+      operationId: updateLandingPageDynamicContentUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of the landing page
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: contentId
+        in: path
+        description: Id of the landing page dynamic content
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Dynamic content properties
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageDynamicContentRequest'
+        required: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+      x-codegen-request-body-name: request
+components:
+  schemas:
+    ResponseOfLandingPageContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    SegmentContent:
+      required:
+      - content
+      - segmentId
+      - segmentName
+      - type
+      type: object
+      properties:
+        content:
+          type: object
+          properties: {}
+          description: Type of content section
+        followupType:
+          type: string
+        followupValue:
+          type: string
+        segmentId:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        segmentName:
+          type: string
+          description: Name of the segment to display content section for
+        type:
+          type: string
+          description: Type of content section
+    LandingPageContentResponse:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        content:
+          type: object
+          properties: {}
+          description: 'Content of the section. Expected values vary based on type. Image: An image URL. RichText: HTML Content. HTML: HTML Content. Form: A form id. Rectangle: Empty. Snippet: A snippet id.'
+        followupType:
+          type: string
+          description: Follow-up behavior of a form. Only available for form-type content sections. Defaults to form defined behavior.
+          enum:
+          - url
+          - lp
+          - formDefined
+        followupValue:
+          type: string
+          description: Where to follow-up on form submission. When followupType is lp, accepts the integer id of a landing page. For url, it accepts a url string.
+        formattingOptions:
+          $ref: '#/components/schemas/JsonNode'
+        id:
+          type: object
+          properties: {}
+          description: Id of the content section, may be a string or an int
+        index:
+          type: integer
+          description: Index of the content section. Index orients the elements from lowest to highest
+          format: int32
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - SocialButton
+          - Form
+          - DynamicContent
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - Video
+          - Poll
+          - ReferralOffer
+          - Sweepstakes
+    JsonNode:
+      type: object
+      properties:
+        array:
+          type: boolean
+        bigDecimal:
+          type: boolean
+        bigInteger:
+          type: boolean
+        binary:
+          type: boolean
+        boolean:
+          type: boolean
+        containerNode:
+          type: boolean
+        double:
+          type: boolean
+        float:
+          type: boolean
+        floatingPointNumber:
+          type: boolean
+        int:
+          type: boolean
+        integralNumber:
+          type: boolean
+        long:
+          type: boolean
+        missingNode:
+          type: boolean
+        nodeType:
+          type: string
+          enum:
+          - ARRAY
+          - BINARY
+          - BOOLEAN
+          - MISSING
+          - 'NULL'
+          - NUMBER
+          - OBJECT
+          - POJO
+          - STRING
+        'null':
+          type: boolean
+        number:
+          type: boolean
+        object:
+          type: boolean
+        pojo:
+          type: boolean
+        short:
+          type: boolean
+        textual:
+          type: boolean
+        valueNode:
+          type: boolean
+    CreateLandingPageContentRequest:
+      required:
+      - contentId
+      - type
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        contentId:
+          type: string
+          description: Id of the content section. Also the HTML id of the section.
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - Form
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    UpdateLandingPageContentRequest:
+      required:
+      - type
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        index:
+          type: integer
+          description: Index of the content section. Determines the order of the section in the landing page
+          format: int32
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - Form
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - DynamicContent
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    LandingPageDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/SegmentContent'
+        createdAt:
+          type: string
+          description: Datetime when the section was created
+          format: date-time
+        id:
+          type: integer
+          description: Id of the dnamic content section
+          format: int32
+        segmentation:
+          type: integer
+          description: Segmentation to which the section is linked
+          format: int32
+        updatedAt:
+          type: string
+          description: Datetime when the section was last updated
+          format: date-time
+    ResponseOfLandingPageDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    UpdateLandingPageDynamicContentRequest:
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        segment:
+          type: string
+          description: Name of the segment to display content section for
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+x-original-swagger-version: '2.0'

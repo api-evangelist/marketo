@@ -1,0 +1,775 @@
+openapi: 3.0.1
+info:
+  title: Marketo Engage Rest Approve Program API
+  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: developerfeedback@marketo.com
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+  version: '1.0'
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Program
+paths:
+  /rest/asset/v1/form/programMemberFields.json:
+    get:
+      tags:
+      - Program
+      summary: Marketo Get Available Form Program Member Fields
+      description: 'Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getAllProgramMemberFieldsUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of fields to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfFieldsMetaDataResponse'
+  /rest/asset/v1/program/byName.json:
+    get:
+      tags:
+      - Program
+      summary: Marketo Get Program by Name
+      description: 'Retrieves the program record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getProgramByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the program
+        required: true
+        schema:
+          type: string
+      - name: includeTags
+        in: query
+        description: Set true to populate program tags
+        schema:
+          type: boolean
+      - name: includeCosts
+        in: query
+        description: Set true to populate program costs
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfProgramResponse'
+  /rest/asset/v1/program/byTag.json:
+    get:
+      tags:
+      - Program
+      summary: Marketo Get Programs by Tag
+      description: 'Retrieves a list of programs matching the tag type and tag values given. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getProgramListByTagUsingGET
+      parameters:
+      - name: tagType
+        in: query
+        description: Type of program tag
+        required: true
+        schema:
+          type: string
+      - name: tagValue
+        in: query
+        description: Value of the tag
+        required: true
+        schema:
+          type: string
+      - name: maxReturn
+        in: query
+        description: Maximum number of channels to return. Max 200, default 20
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfProgramResponse'
+  /rest/asset/v1/program/{id}.json:
+    get:
+      tags:
+      - Program
+      summary: Marketo Get Program by Id
+      description: 'Retrieves the program record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getProgramByIdUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfProgramResponse'
+    post:
+      tags:
+      - Program
+      summary: Marketo Update Program Metadata
+      description: 'Updates the target program''s metadata. Required Permissions: Read-Write Assets'
+      operationId: updateProgramUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: updateProgramRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateProgramRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfProgramResponse'
+      x-codegen-request-body-name: updateProgramRequest
+  /rest/asset/v1/program/{programId}/smartList.json:
+    get:
+      tags:
+      - Program
+      summary: Marketo Get Smart List by Program Id
+      description: 'Retrieves a Smart List record by its Email Program id. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getSmartListByProgramIdUsingGET
+      parameters:
+      - name: programId
+        in: path
+        description: Id for the email program containing smart list to retrieve
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: includeRules
+        in: query
+        description: Set true to populate smart list rules. Default false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfSmartListResponseWithRules'
+  /rest/asset/v1/program/{id}/approve.json:
+    post:
+      tags:
+      - Program
+      summary: Marketo Approve Program
+      description: 'Approves the target program. Only valid for unapproved email programs. Required Permissions: Read-Write Assets'
+      operationId: approveProgramUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/program/{id}/clone.json:
+    post:
+      tags:
+      - Program
+      summary: Marketo Clone Program
+      description: 'Clones the target program. Required Permissions: Read-Write Assets'
+      operationId: cloneProgramUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      requestBody:
+        description: cloneProgramRequest
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneProgramRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfProgramResponse'
+      x-codegen-request-body-name: cloneProgramRequest
+  /rest/asset/v1/program/{id}/delete.json:
+    post:
+      tags:
+      - Program
+      summary: Marketo Delete Program
+      description: 'Deletes the target program. The program may not contain any assets which are in use outside the program. Required Permissions: Read-Write Assets'
+      operationId: deleteProgramUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+  /rest/asset/v1/program/{id}/unapprove.json:
+    post:
+      tags:
+      - Program
+      summary: Marketo Unapprove Program
+      description: 'Unapproves the target program. Only valid for approved email programs. Required Permissions: Read-Write Assets'
+      operationId: unapproveProgramUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfIdResponse'
+components:
+  schemas:
+    Folder:
+      required:
+      - id
+      - type
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the folder
+          format: int32
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    UpdateProgramRequest:
+      type: object
+      properties:
+        costs:
+          type: array
+          description: Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true
+          items:
+            $ref: '#/components/schemas/CostRequest'
+        costsDestructiveUpdate:
+          type: boolean
+          description: Set true to destroy existing costs and replace them with the specified costs
+        description:
+          type: string
+          description: Updated description for the program
+        endDate:
+          type: string
+          description: End date of the program. Applicable to event, email, and webinar type programs
+        name:
+          type: string
+          description: Name of the program
+        startDate:
+          type: string
+          description: Start date of program. Applicable to event, email and webinar type programs
+        tags:
+          type: array
+          description: List of associated program tags
+          items:
+            $ref: '#/components/schemas/TagRequest'
+    SmartListFilters:
+      required:
+      - conditions
+      - id
+      - name
+      - operator
+      - ruleType
+      - ruleTypeId
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the filter
+          format: int32
+        name:
+          type: string
+          description: Name of filter
+        ruleTypeId:
+          type: integer
+          description: Id of the rule type
+          format: int32
+        ruleType:
+          type: string
+          description: Name of rule type
+        operator:
+          type: string
+          description: Name of operator
+        conditions:
+          type: array
+          description: List of smart list conditions
+          items:
+            $ref: '#/components/schemas/SmartListConditions'
+      description: JSON representation of smart list filters
+    ResponseOfSmartListResponseWithRules:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartListResponseWithRules'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Tags:
+      required:
+      - tagType
+      - tagValue
+      type: object
+      properties:
+        tagType:
+          type: string
+          description: Name of the tag
+        tagValue:
+          type: string
+          description: Value of the tag
+    SmartListResponseWithRules:
+      required:
+      - createdAt
+      - description
+      - folder
+      - id
+      - name
+      - updatedAt
+      - url
+      - workspace
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the smart list
+          format: int64
+        name:
+          type: string
+          description: Name of the smart list
+        description:
+          type: string
+          description: Description of the smart list
+        createdAt:
+          type: string
+          description: Datetime the smart list was created
+          format: date-time
+        updatedAt:
+          type: string
+          description: Datetime the smart list was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the smart list in the Marketo UI
+        folder:
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+        rules:
+          $ref: '#/components/schemas/SmartListRules'
+    CloneProgramRequest:
+      required:
+      - folder
+      - name
+      type: object
+      properties:
+        description:
+          type: string
+        folder:
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the program. Max 255 characters
+    Error:
+      required:
+      - code
+      - message
+      type: object
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfProgramResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ProgramResponse:
+      required:
+      - channel
+      - costs
+      - folder
+      - status
+      - tags
+      - type
+      type: object
+      properties:
+        channel:
+          type: string
+          description: Channel of the program
+        costs:
+          type: array
+          description: Lists of associated period costs
+          items:
+            $ref: '#/components/schemas/Costs'
+        createdAt:
+          type: string
+          description: Datetime the asset was created
+          format: date-time
+        description:
+          type: string
+          description: Description of the asset
+        endDate:
+          type: string
+          description: End date of the program. Applicable to event, email, and webinar type programs
+          format: date-time
+        folder:
+          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          description: Id of the asset
+          format: int64
+        name:
+          type: string
+          description: Name of the asset
+        sfdcId:
+          type: string
+          description: SFDC id of the program if linked to an SFDC campaign
+        sfdcName:
+          type: string
+          description: Name of the linked SFDC campaign if applicable
+        startDate:
+          type: string
+          description: Start date of program. Applicable to event, email and webinar type programs
+          format: date-time
+        status:
+          type: string
+          description: Status of the program. Only valid for Email and engagement program types.
+          enum:
+          - locked
+          - unlocked
+          - 'on'
+          - 'off'
+        tags:
+          type: array
+          description: List of associated program tags
+          items:
+            $ref: '#/components/schemas/Tags'
+        type:
+          type: string
+          description: Type of the program
+          enum:
+          - default
+          - event
+          - webinar
+          - nurture
+        updatedAt:
+          type: string
+          description: Datetime the asset was most recently updated
+          format: date-time
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+        workspace:
+          type: string
+          description: Name of the workspace
+    SmartListRules:
+      required:
+      - filterMatchType
+      - filters
+      - triggers
+      type: object
+      properties:
+        filterMatchType:
+          type: string
+          description: Smart list filter match type (rule logic)
+          enum:
+          - All
+          - Any
+          - Advanced
+        triggers:
+          type: array
+          description: List of smart list triggers
+          items:
+            type: string
+        filters:
+          type: array
+          description: List of smart list filters
+          items:
+            $ref: '#/components/schemas/SmartListFilters'
+      description: JSON representation of smart list rules
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Costs:
+      required:
+      - cost
+      - startDate
+      type: object
+      properties:
+        cost:
+          type: integer
+          description: Amount of the cost
+          format: int32
+        note:
+          type: string
+          description: Notes on the cost
+        startDate:
+          type: string
+          description: Start date of the period cost
+          format: date-time
+    CostRequest:
+      required:
+      - cost
+      - startDate
+      type: object
+      properties:
+        cost:
+          type: integer
+          description: Amount of the cost
+          format: int32
+        note:
+          type: string
+          description: Notes on the cost
+        startDate:
+          type: string
+          description: Start date of the period cost
+          format: date-time
+    SmartListConditions:
+      required:
+      - activityAttributeId
+      - activityAttributeName
+      - isPrimary
+      - operator
+      - values
+      type: object
+      properties:
+        activityAttributeId:
+          type: integer
+          description: Id of the activity attribute
+          format: int32
+        activityAttributeName:
+          type: string
+          description: Name of activity attribute
+        operator:
+          type: string
+          description: Value of operator
+        values:
+          type: array
+          description: List of values
+          items:
+            type: string
+        isPrimary:
+          type: boolean
+          description: Whether the condition is primary or not (first condition of the smart list)
+      description: JSON representation of smart list conditions
+    ResponseOfFieldsMetaDataResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldsMetaDataResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    FieldsMetaDataResponse:
+      required:
+      - id
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Type of field
+        defaultValue:
+          type: string
+          description: Optional default value for the field
+        description:
+          type: string
+          description: Description of the field
+        fieldMaskValues:
+          type: string
+          description: Optional input mask for the field
+        fieldWidth:
+          type: integer
+          description: Width of the input or select element
+          format: int32
+        id:
+          type: string
+          description: Id of the field
+        initiallyChecked:
+          type: boolean
+          description: Whether the field should be checked upon loading. Default false
+        isLabelToRight:
+          type: boolean
+          description: Whether the field label should be displayed to the right of the input/select element. Default false
+        isMultiselect:
+          type: boolean
+          description: Whether the field should allow multiple selections. Default false
+        isRequired:
+          type: boolean
+          description: Whether the field is required to submit the form. Default false
+        isSensitive:
+          type: boolean
+          description: Whether the field is marked as sensitive. Default false
+        labelWidth:
+          type: integer
+          description: Width of the field label element
+          format: int32
+        maxLength:
+          type: integer
+          description: Maximum length for text type fields
+          format: int32
+        maximumNumber:
+          type: number
+          description: Maximum value accepted by the field
+          format: float
+        minimumNumber:
+          type: number
+          description: Minimum value accepted by the field
+          format: float
+        picklistValues:
+          type: string
+          description: Comma-separated list of available picklist values for the field
+        placeholderText:
+          type: string
+          description: Placeholder text for the field
+        validationMessage:
+          type: string
+          description: Validation message to display on failed validation
+        visibleRows:
+          type: integer
+          description: Number of rows visible for progressive profiling
+          format: int32
+    TagRequest:
+      type: object
+      properties:
+        tagType:
+          type: string
+          description: Type of program tag
+        tagValue:
+          type: string
+          description: Value of the tag
+    IdResponse:
+      required:
+      - id
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id of the asset
+          format: int32
+x-original-swagger-version: '2.0'
