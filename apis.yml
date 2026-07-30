@@ -5,9 +5,21 @@ description: Marketo, an Adobe company, develops and sells marketing automation 
   SEO and content creation. Marketo Engage exposes a REST API for programmatic access
   to leads, programs, campaigns, assets, lists, and bulk import/export.
 type: Index
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/marketo.png
 url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/apis.yml
 tags:
 - Adobe
@@ -18,32 +30,1032 @@ created: '2023-11-23'
 modified: '2026-05-30'
 specificationVersion: '0.19'
 apis:
-- aid: marketo:marketo-engage-rest-api
-  name: Marketo Engage REST API
-  description: Marketo exposes a REST API which allows for remote execution of many
-    of the systems capabilities. From creating programs to bulk lead import, there
-    are many options which allow fine-grained control of a Marketo instance.
+- aid: marketo:marketo-approve-api
+  name: Marketo Approve API
+  description: The Approve API from Marketo — 6 operation(s) for approve.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Approve
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-approve-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-assets-api
+  name: Marketo Assets API
+  description: The Assets API from Marketo — 133 operation(s) for assets.
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   tags:
   - Assets
-  - Campaigns
-  - Email
-  - Forms
-  - Landing Pages
-  - Leads
-  - Marketing Automation
-  - Programs
-  - REST
-  - Smart Lists
   properties:
+  - type: OpenAPI
+    url: openapi/marketo-assets-api-openapi.yml
   - type: Documentation
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
-  - type: OpenAPI
-    url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/openapi/marketo-engage-rest-api-openapi.yml
   - type: AsyncAPI
-    url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - url: graphql/marketo-graphql.md
-    type: GraphQL
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-campaigns-api
+  name: Marketo Campaigns API
+  description: The Campaigns API from Marketo — 7 operation(s) for campaigns.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-cc-api
+  name: Marketo Cc API
+  description: The Cc API from Marketo — 1 operation(s) for cc.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Cc
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-cc-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-channel-api
+  name: Marketo Channel API
+  description: The Channel API from Marketo — 1 operation(s) for channel.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Channel
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-channel-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-channels-api
+  name: Marketo Channels API
+  description: Channel Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Channels
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-channels-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-clone-json-api
+  name: Marketo Clone.json API
+  description: The Clone.json API from Marketo — 1 operation(s) for clone.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Clone.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-clone-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-content-api
+  name: Marketo Content API
+  description: The Content API from Marketo — 12 operation(s) for content.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Content
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-content-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-content-json-api
+  name: Marketo Content.json API
+  description: The Content.json API from Marketo — 1 operation(s) for content.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Content.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-content-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-delete-json-api
+  name: Marketo Delete.json API
+  description: The Delete.json API from Marketo — 1 operation(s) for delete.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Delete.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-delete-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-discard-api
+  name: Marketo Discard API
+  description: The Discard API from Marketo — 6 operation(s) for discard.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Discard
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-discard-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-dynamic-api
+  name: Marketo Dynamic API
+  description: The Dynamic API from Marketo — 4 operation(s) for dynamic.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Dynamic
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-dynamic-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-email-api
+  name: Marketo Email API
+  description: The Email API from Marketo — 31 operation(s) for email.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Email
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-email-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-email-templates-api
+  name: Marketo Email  Templates API
+  description: The Email  Templates API from Marketo — 10 operation(s) for email  templates.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Email  Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-email-templates-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-emails-api
+  name: Marketo Emails API
+  description: Email Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Emails
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-emails-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-field-api
+  name: Marketo Field API
+  description: The Field API from Marketo — 5 operation(s) for field.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Field
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-field-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-fields-api
+  name: Marketo Fields API
+  description: The Fields API from Marketo — 4 operation(s) for fields.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-fields-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-file-api
+  name: Marketo File API
+  description: The File API from Marketo — 3 operation(s) for file.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - File
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-file-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-file-contents-api
+  name: Marketo File  Contents API
+  description: The File  Contents API from Marketo — 1 operation(s) for file  contents.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - File  Contents
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-file-contents-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-files-api
+  name: Marketo Files API
+  description: File Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Files
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-files-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-folder-api
+  name: Marketo Folder API
+  description: The Folder API from Marketo — 6 operation(s) for folder.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Folder
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-folder-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-folders-api
+  name: Marketo Folders API
+  description: Folder Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-folders-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-form-api
+  name: Marketo Form API
+  description: The Form API from Marketo — 19 operation(s) for form.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Form
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-form-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-form-fields-api
+  name: Marketo Form  Fields API
+  description: The Form  Fields API from Marketo — 9 operation(s) for form  fields.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Form  Fields
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-form-fields-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-forms-api
+  name: Marketo Forms API
+  description: Form Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Forms
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-forms-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-full-api
+  name: Marketo Full API
+  description: The Full API from Marketo — 2 operation(s) for full.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Full
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-full-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-id-api
+  name: Marketo Id API
+  description: The Id API from Marketo — 5 operation(s) for id.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Id
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-id-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-json-api
+  name: Marketo .Json API
+  description: The .Json API from Marketo — 2 operation(s) for .json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - .Json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-landing-api
+  name: Marketo Landing API
+  description: The Landing API from Marketo — 25 operation(s) for landing.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Landing
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-landing-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-landing-page-content-api
+  name: Marketo Landing  Page  Content API
+  description: The Landing  Page  Content API from Marketo — 4 operation(s) for landing  page  content.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Landing  Page  Content
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-landing-page-content-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-landing-page-redirect-rules-api
+  name: Marketo Landing  Page  Redirect  Rules API
+  description: >-
+    The Landing  Page  Redirect  Rules API from Marketo — 4 operation(s) for landing  page  redirect  rules.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Landing  Page  Redirect  Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-landing-page-redirect-rules-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-landing-page-templates-api
+  name: Marketo Landing  Page  Templates API
+  description: >-
+    The Landing  Page  Templates API from Marketo — 9 operation(s) for landing  page  templates.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Landing  Page  Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-landing-page-templates-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-landing-pages-api
+  name: Marketo Landing  Pages API
+  description: The Landing  Pages API from Marketo — 11 operation(s) for landing  pages.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Landing  Pages
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-landing-pages-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-member-api
+  name: Marketo Member API
+  description: The Member API from Marketo — 1 operation(s) for member.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Member
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-member-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-modules-api
+  name: Marketo Modules API
+  description: The Modules API from Marketo — 4 operation(s) for modules.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Modules
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-modules-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-name-api
+  name: Marketo Name API
+  description: The Name API from Marketo — 1 operation(s) for name.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Name
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-name-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-name-json-api
+  name: Marketo Name.json API
+  description: The Name.json API from Marketo — 2 operation(s) for name.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Name.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-name-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-page-api
+  name: Marketo Page API
+  description: The Page API from Marketo — 24 operation(s) for page.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Page
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-page-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-program-api
+  name: Marketo Program API
+  description: The Program API from Marketo — 9 operation(s) for program.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Program
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-program-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-programs-api
+  name: Marketo Programs API
+  description: Program Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Programs
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-programs-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-redirect-api
+  name: Marketo Redirect API
+  description: The Redirect API from Marketo — 3 operation(s) for redirect.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Redirect
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-redirect-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-rest-api
+  name: Marketo Rest API
+  description: The Rest API from Marketo — 133 operation(s) for rest.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Rest
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-rest-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-rules-api
+  name: Marketo Rules API
+  description: The Rules API from Marketo — 2 operation(s) for rules.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-rules-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-segments-api
+  name: Marketo Segments API
+  description: Segment Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Segments
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-segments-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-segments-json-api
+  name: Marketo Segments.json API
+  description: The Segments.json API from Marketo — 1 operation(s) for segments.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Segments.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-segments-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-send-api
+  name: Marketo Send API
+  description: The Send API from Marketo — 1 operation(s) for send.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Send
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-send-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-set-api
+  name: Marketo Set API
+  description: The Set API from Marketo — 1 operation(s) for set.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Set
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-set-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-smart-api
+  name: Marketo Smart API
+  description: The Smart API from Marketo — 13 operation(s) for smart.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Smart
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-smart-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-smart-campaigns-api
+  name: Marketo Smart  Campaigns API
+  description: The Smart  Campaigns API from Marketo — 8 operation(s) for smart  campaigns.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Smart  Campaigns
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-smart-campaigns-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-smart-lists-api
+  name: Marketo Smart  Lists API
+  description: The Smart  Lists API from Marketo — 4 operation(s) for smart  lists.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Smart  Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-smart-lists-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-snippets-api
+  name: Marketo Snippets API
+  description: Snippet Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Snippets
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-snippets-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-static-api
+  name: Marketo Static API
+  description: The Static API from Marketo — 4 operation(s) for static.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Static
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-static-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-static-lists-api
+  name: Marketo Static  Lists API
+  description: The Static  Lists API from Marketo — 3 operation(s) for static  lists.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Static  Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-static-lists-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-submit-api
+  name: Marketo Submit API
+  description: The Submit API from Marketo — 1 operation(s) for submit.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Submit
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-submit-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-template-api
+  name: Marketo Template API
+  description: The Template API from Marketo — 17 operation(s) for template.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Template
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-template-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-templates-api
+  name: Marketo Templates API
+  description: The Templates API from Marketo — 1 operation(s) for templates.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Templates
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-templates-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-text-json-api
+  name: Marketo Text.json API
+  description: The Text.json API from Marketo — 1 operation(s) for text.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Text.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-text-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-thank-api
+  name: Marketo Thank API
+  description: The Thank API from Marketo — 1 operation(s) for thank.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Thank
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-thank-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-tokens-api
+  name: Marketo Tokens API
+  description: Token Controller
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-tokens-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-type-api
+  name: Marketo Type API
+  description: The Type API from Marketo — 1 operation(s) for type.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Type
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-type-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-unapprove-json-api
+  name: Marketo Unapprove.json API
+  description: The Unapprove.json API from Marketo — 1 operation(s) for unapprove.json.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Unapprove.json
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-unapprove-json-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-used-api
+  name: Marketo Used API
+  description: The Used API from Marketo — 2 operation(s) for used.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Used
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-used-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-variable-api
+  name: Marketo Variable API
+  description: The Variable API from Marketo — 2 operation(s) for variable.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Variable
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-variable-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
+- aid: marketo:marketo-variables-api
+  name: Marketo Variables API
+  description: The Variables API from Marketo — 1 operation(s) for variables.
+  humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  tags:
+  - Variables
+  properties:
+  - type: OpenAPI
+    url: openapi/marketo-variables-api-openapi.yml
+  - type: Documentation
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - type: AsyncAPI
+    url: >-
+      https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
+  - type: GraphQL
+    url: graphql/marketo-graphql.md
 common:
 - type: AgenticAccess
   url: agentic-access/marketo-agentic-access.yml
