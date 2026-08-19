@@ -1,0 +1,241 @@
+generated: '2026-08-13'
+method: derived
+source:
+  - mcp/marketo-mcp.yml
+  - openapi/marketo-lead-database-openapi-original.json
+  - openapi/marketo-asset-openapi-original.json
+  - openapi/marketo-user-management-openapi-original.json
+  - openapi/marketo-data-ingestion-openapi-original.json
+  - openapi/marketo-identity-openapi-original.json
+  - graphql/marketo-graphql.md
+note: >-
+  Every crosswalk row binds a candidate MCP tool to a REST operationId that
+  exists verbatim in an Adobe-published spec, so each tool inherits that
+  operation's real `parameters` / `body` schema as its inputSchema. Confidence is
+  `high` throughout because the tools were derived FROM these operations rather
+  than matched to a published tool list — there is no vendor MCP server to
+  reconcile against, and that fact is the honest headline of this file.
+surfaces:
+  openapi:
+    files:
+      - path: openapi/marketo-lead-database-openapi-original.json
+        spec: Swagger 2.0
+        operations: 147
+      - path: openapi/marketo-asset-openapi-original.json
+        spec: Swagger 2.0
+        operations: 199
+      - path: openapi/marketo-user-management-openapi-original.json
+        spec: Swagger 2.0
+        operations: 12
+      - path: openapi/marketo-data-ingestion-openapi-original.json
+        spec: OpenAPI 3.0.1
+        operations: 7
+      - path: openapi/marketo-identity-openapi-original.json
+        spec: Swagger 2.0
+        operations: 2
+    gated: false
+    note: >-
+      Published by Adobe at
+      github.com/AdobeDocs/marketo-apis/tree/main/static. Anonymous, parseable.
+  graphql:
+    endpoint: null
+    gated: null
+    note: >-
+      Marketo publishes NO GraphQL endpoint. graphql/marketo-schema.graphql in
+      this repo is an API Evangelist conceptual model of the REST surface and is
+      explicitly labelled as such — it is NOT a provider surface and contributes
+      no rows to this crosswalk.
+  mcp:
+    url: null
+    gated: null
+    note: >-
+      No provider MCP server exists, so tools/list could not be called. Tool
+      input schemas below come from the OpenAPI, which is the stronger source
+      anyway.
+crosswalk:
+  - tool: get_lead_by_id
+    category: people
+    rest: [getLeadByIdUsingGET]
+    binding: rest
+    confidence: high
+  - tool: find_leads
+    category: people
+    rest: [getLeadsByFilterUsingGET]
+    binding: rest
+    confidence: high
+    note: >-
+      Requires filterType + filterValues. Not every field is filterable; error
+      1011 on unsupported fields.
+  - tool: sync_leads
+    category: people
+    rest: [syncLeadUsingPOST]
+    binding: rest
+    confidence: high
+    note: >-
+      Write. inputSchema is SyncLeadRequest — action enum
+      (createOnly|updateOnly|createOrUpdate|createDuplicate), lookupField,
+      partitionName, input[]. Only createOrUpdate is replay-safe.
+  - tool: describe_lead
+    category: metadata
+    rest: [describeUsingGET_6, describeUsingGET_2, getLeadFieldsUsingGET]
+    binding: rest
+    confidence: high
+    note: >-
+      Fans out. Describe Lead2 (describeUsingGET_6) is the current shape;
+      describeUsingGET_2 is the legacy Describe Lead; getLeadFieldsUsingGET is
+      the paged field list. An agent should call one and cache it — the field
+      vocabulary is per-subscription.
+  - tool: get_paging_token
+    category: activities
+    rest: [getActivitiesPagingTokenUsingGET]
+    binding: rest
+    confidence: high
+    note: Mandatory seed step — the activity cursor cannot be built client-side.
+  - tool: get_lead_activities
+    category: activities
+    rest: [getLeadActivitiesUsingGET]
+    binding: rest
+    confidence: high
+  - tool: get_lead_changes
+    category: activities
+    rest: [getLeadChangesUsingGET]
+    binding: rest
+    confidence: high
+  - tool: list_campaigns
+    category: campaigns
+    rest: [getCampaignsUsingGET, getCampaignByIdUsingGET]
+    binding: rest
+    confidence: high
+  - tool: request_campaign
+    category: campaigns
+    rest: [triggerCampaignUsingPOST]
+    binding: rest
+    confidence: high
+    note: >-
+      Consequential write — actually executes marketing flow steps against real
+      people. Trigger campaigns only; a batch campaign returns error 1003.
+  - tool: schedule_campaign
+    category: campaigns
+    rest: [scheduleCampaignUsingPOST]
+    binding: rest
+    confidence: high
+    note: runAt more than two years out returns error 1042.
+  - tool: list_static_lists
+    category: lists
+    rest: [getListsUsingGET, getListByIdUsingGET]
+    binding: rest
+    confidence: high
+  - tool: add_leads_to_list
+    category: lists
+    rest: [addLeadsToListUsingPOST]
+    binding: rest
+    confidence: high
+  - tool: remove_leads_from_list
+    category: lists
+    rest: [removeLeadsFromListUsingDELETE]
+    binding: rest
+    confidence: high
+  - tool: sync_program_member_status
+    category: programs
+    rest: [syncProgramMemberStatusUsingPOST]
+    binding: rest
+    confidence: high
+  - tool: create_lead_export_job
+    category: bulk
+    rest: [createExportLeadsUsingPOST, enqueueExportLeadsUsingPOST]
+    binding: rest
+    confidence: high
+    note: >-
+      Two operations — a job must be created AND enqueued before it runs. Max 10
+      queued jobs (error 1029).
+  - tool: get_lead_export_status
+    category: bulk
+    rest: [getExportLeadsStatusUsingGET]
+    binding: rest
+    confidence: high
+  - tool: get_lead_export_file
+    category: bulk
+    rest: [getExportLeadsFileUsingGET]
+    binding: rest
+    confidence: high
+  - tool: get_daily_usage
+    category: governance
+    rest: [getDailyUsageUsingGET]
+    binding: rest
+    confidence: high
+    note: >-
+      The ONLY way an agent can see its rate-limit budget — Marketo returns no
+      rate-limit headers.
+  - tool: get_daily_errors
+    category: governance
+    rest: [getDailyErrorsUsingGET]
+    binding: rest
+    confidence: high
+  - tool: list_forms
+    category: assets
+    rest: [browseForms2UsingGET, getLpFormByIdUsingGET]
+    binding: rest
+    confidence: high
+mcp_only: []
+mcp_only_note: >-
+  Empty by construction. There is no provider MCP server, so no tool can exist
+  that the REST surface does not back.
+rest_only:
+  - capability: Asset authoring — emails, landing pages, templates, forms, snippets, segments, tokens, folders, files
+    operations: 197
+    spec: openapi/marketo-asset-openapi-original.json
+    note: >-
+      The largest uncovered block by far. The candidate tool set deliberately
+      exposes only form browsing here; approve/clone/discard/delete flows mutate
+      live marketing collateral and are poor autonomous-agent surfaces.
+  - capability: Person records beyond lookup and upsert — partitions, merges, form submission, program/list membership lookups
+    operations: 16
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Custom object type and field administration
+    operations: 17
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Companies, Opportunities, Opportunity Roles, Sales Persons, Named Accounts, Named Account Lists
+    operations: 32
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Custom activity type administration and deleted-lead feed
+    operations: 13
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Bulk import/export for custom objects, program members and activities
+    operations: 30
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Bulk lead export job listing and cancellation
+    operations: 2
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Program member field administration and membership sync
+    operations: 8
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Static list membership checks and per-list lead reads
+    operations: 3
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: Weekly usage and error reporting
+    operations: 2
+    spec: openapi/marketo-lead-database-openapi-original.json
+  - capability: User and role administration
+    operations: 12
+    spec: openapi/marketo-user-management-openapi-original.json
+    note: Privileged tenant administration — deliberately excluded from the tool set.
+  - capability: Streaming data ingestion
+    operations: 7
+    spec: openapi/marketo-data-ingestion-openapi-original.json
+    note: >-
+      A separate host (mkto-ingestion-api.adobe.io) and a separate async contract
+      (HTTP 202). Would need its own tool family.
+  - capability: Identity / token issuance
+    operations: 2
+    spec: openapi/marketo-identity-openapi-original.json
+    note: Handled by the transport layer, never exposed as a tool.
+rest_only_total: 341
+coverage:
+  tools_named: 20
+  tools_bound: 20
+  tools_unbound: 0
+  mcp_only: 0
+  rest_operations_total: 367
+  rest_operations_with_a_tool: 26
+  rest_operations_without_a_tool: 341
+  graphql_fields: 0

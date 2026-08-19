@@ -1,0 +1,349 @@
+{
+  "item": [
+    {
+      "id": "1a37c9cd-98fe-4bc5-b030-7578a2169188",
+      "name": "File",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "48b63a98-a4c2-4ec2-a2d9-779f9d10782f",
+          "name": "Marketo Get File by Name",
+          "request": {
+            "name": "Marketo Get File by Name",
+            "description": {
+              "content": "Returns files records for the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "file",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the file"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6e8b1803-b400-42c2-a90f-974dd323f3f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "file",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2006-10-28T18:06:33.570Z\",\n      \"folder\": {\n        \"id\": 9233,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 7141,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 1438,\n      \"updatedAt\": \"2008-08-07T09:29:29.851Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"createdAt\": \"1960-01-16T21:56:00.875Z\",\n      \"folder\": {\n        \"id\": 7641,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 3074,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 5901,\n      \"updatedAt\": \"2011-08-26T21:13:03.312Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "508a6c33-c9ff-48bc-a461-dd61ff1e90a5",
+          "name": "Marketo Get File by Id",
+          "request": {
+            "name": "Marketo Get File by Id",
+            "description": {
+              "content": "Returns the file record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "file",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b16057af-937e-4464-ab71-53550858cbdb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "file",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2000-04-23T04:47:19.620Z\",\n      \"folder\": {\n        \"id\": 9560,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 2477,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 9802,\n      \"updatedAt\": \"1959-04-25T21:55:05.636Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"createdAt\": \"1978-04-11T21:06:22.930Z\",\n      \"folder\": {\n        \"id\": 9930,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 3549,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 409,\n      \"updatedAt\": \"1980-01-25T02:48:06.945Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6cc1d212-0903-4e31-bf57-47334a3091b3",
+          "name": "Marketo Update File Content",
+          "request": {
+            "name": "Marketo Update File Content",
+            "description": {
+              "content": "Replaces the current content of the file with the included payload. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "file",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id for file in database"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Multipart file. Content of the file."
+                },
+                {
+                  "key": "id",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) Id of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ce035e91-10d7-4592-9bde-3c27bd96868a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "file",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id for file in database"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Multipart file. Content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Id of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2000-04-23T04:47:19.620Z\",\n      \"folder\": {\n        \"id\": 9560,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 2477,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 9802,\n      \"updatedAt\": \"1959-04-25T21:55:05.636Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"createdAt\": \"1978-04-11T21:06:22.930Z\",\n      \"folder\": {\n        \"id\": 9930,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 3549,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 409,\n      \"updatedAt\": \"1980-01-25T02:48:06.945Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id for file in database",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "50a4265b-22c3-41e8-bbd2-b0ce88f2fb63",
+    "name": "Marketo Engage Rest Approve File API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

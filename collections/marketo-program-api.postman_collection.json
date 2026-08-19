@@ -1,0 +1,1236 @@
+{
+  "item": [
+    {
+      "id": "2bddb4af-b53c-4f41-9f7e-0b034fec2c9f",
+      "name": "Program",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9bdae203-87cc-43ed-934b-fb94b49cab28",
+          "name": "Marketo Get Available Form Program Member Fields",
+          "request": {
+            "name": "Marketo Get Available Form Program Member Fields",
+            "description": {
+              "content": "Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                "programMemberFields.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of fields to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9260adc4-7be2-45b3-9d3b-9a531691e57b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    "programMemberFields.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": \"string\",\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"description\": \"string\",\n      \"fieldMaskValues\": \"string\",\n      \"fieldWidth\": 3934,\n      \"initiallyChecked\": true,\n      \"isLabelToRight\": false,\n      \"isMultiselect\": false,\n      \"isRequired\": false,\n      \"isSensitive\": true,\n      \"labelWidth\": 5781,\n      \"maxLength\": 7813,\n      \"maximumNumber\": 1856.8574824508587,\n      \"minimumNumber\": 2246.3541311088397,\n      \"picklistValues\": \"string\",\n      \"placeholderText\": \"string\",\n      \"validationMessage\": \"string\",\n      \"visibleRows\": 1227\n    },\n    {\n      \"id\": \"string\",\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"description\": \"string\",\n      \"fieldMaskValues\": \"string\",\n      \"fieldWidth\": 819,\n      \"initiallyChecked\": false,\n      \"isLabelToRight\": false,\n      \"isMultiselect\": false,\n      \"isRequired\": false,\n      \"isSensitive\": false,\n      \"labelWidth\": 3066,\n      \"maxLength\": 4774,\n      \"maximumNumber\": 2463.23581858886,\n      \"minimumNumber\": 6728.08737550176,\n      \"picklistValues\": \"string\",\n      \"placeholderText\": \"string\",\n      \"validationMessage\": \"string\",\n      \"visibleRows\": 1543\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dd57c927-0405-4702-912f-7428cf6faa46",
+          "name": "Marketo Get Program by Name",
+          "request": {
+            "name": "Marketo Get Program by Name",
+            "description": {
+              "content": "Retrieves the program record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the program"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeTags",
+                  "value": "<boolean>",
+                  "description": "Set true to populate program tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeCosts",
+                  "value": "<boolean>",
+                  "description": "Set true to populate program costs"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6f51a475-66ed-4405-a94b-04cd3cee396c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeTags",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "includeCosts",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 4508,\n          \"startDate\": \"1969-01-02T23:19:40.484Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 5140,\n          \"startDate\": \"2025-09-22T05:06:03.572Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 8538,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"default\",\n      \"createdAt\": \"2004-10-25T06:05:10.553Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1981-11-01T22:50:37.995Z\",\n      \"id\": 3166,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"1996-06-03T22:32:37.011Z\",\n      \"updatedAt\": \"1988-10-05T13:10:48.066Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 1461,\n          \"startDate\": \"1986-08-01T10:21:53.174Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 5966,\n          \"startDate\": \"1988-03-27T20:48:29.069Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 122,\n        \"type\": \"Program\"\n      },\n      \"status\": \"off\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"event\",\n      \"createdAt\": \"2016-01-11T22:19:54.203Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1958-08-27T03:13:24.135Z\",\n      \"id\": 560,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"2025-11-12T21:18:31.949Z\",\n      \"updatedAt\": \"2004-03-11T21:13:23.804Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2dd21423-cebd-4540-a73f-ff8c8bf5c7f1",
+          "name": "Marketo Get Programs by Tag",
+          "request": {
+            "name": "Marketo Get Programs by Tag",
+            "description": {
+              "content": "Retrieves a list of programs matching the tag type and tag values given. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                "byTag.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tagType",
+                  "value": "<string>",
+                  "description": "(Required) Type of program tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagValue",
+                  "value": "<string>",
+                  "description": "(Required) Value of the tag"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of channels to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ed6fbf3e-9719-47be-aca7-518ca785c001",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    "byTag.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tagType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 6080,\n          \"startDate\": \"1960-06-16T10:12:24.728Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 8386,\n          \"startDate\": \"1962-12-25T00:44:56.990Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 3661,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"webinar\",\n      \"createdAt\": \"1975-06-25T00:54:29.918Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1990-06-28T20:35:09.413Z\",\n      \"id\": 1167,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"2008-04-01T16:46:51.854Z\",\n      \"updatedAt\": \"1948-01-26T14:57:54.943Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 9619,\n          \"startDate\": \"1990-08-04T15:31:42.552Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 4614,\n          \"startDate\": \"1961-01-18T13:57:20.439Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 6668,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"nurture\",\n      \"createdAt\": \"1954-07-28T07:28:18.697Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1981-07-31T10:58:45.986Z\",\n      \"id\": 8932,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"1996-02-02T10:55:40.019Z\",\n      \"updatedAt\": \"2018-09-25T21:00:16.352Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1b6c76b-567e-4afe-949d-c51941f0c6f8",
+          "name": "Marketo Get Program by Id",
+          "request": {
+            "name": "Marketo Get Program by Id",
+            "description": {
+              "content": "Retrieves the program record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "536350a6-46ca-44df-8252-ca88d7f2b29f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 6080,\n          \"startDate\": \"1960-06-16T10:12:24.728Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 8386,\n          \"startDate\": \"1962-12-25T00:44:56.990Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 3661,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"webinar\",\n      \"createdAt\": \"1975-06-25T00:54:29.918Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1990-06-28T20:35:09.413Z\",\n      \"id\": 1167,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"2008-04-01T16:46:51.854Z\",\n      \"updatedAt\": \"1948-01-26T14:57:54.943Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 9619,\n          \"startDate\": \"1990-08-04T15:31:42.552Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 4614,\n          \"startDate\": \"1961-01-18T13:57:20.439Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 6668,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"nurture\",\n      \"createdAt\": \"1954-07-28T07:28:18.697Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1981-07-31T10:58:45.986Z\",\n      \"id\": 8932,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"1996-02-02T10:55:40.019Z\",\n      \"updatedAt\": \"2018-09-25T21:00:16.352Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bd32226c-75d9-4ae5-bdd7-3c87255df88c",
+          "name": "Marketo Update Program Metadata",
+          "request": {
+            "name": "Marketo Update Program Metadata",
+            "description": {
+              "content": "Updates the target program's metadata. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "costs",
+                  "value": "{\"cost\":\"<integer>\",\"startDate\":\"<dateTime>\",\"note\":\"<string>\"}",
+                  "description": "Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "costs",
+                  "value": "{\"cost\":\"<integer>\",\"startDate\":\"<dateTime>\",\"note\":\"<string>\"}",
+                  "description": "Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true"
+                },
+                {
+                  "disabled": false,
+                  "key": "costsDestructiveUpdate",
+                  "value": "<boolean>",
+                  "description": "Set true to destroy existing costs and replace them with the specified costs"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Updated description for the program"
+                },
+                {
+                  "disabled": false,
+                  "key": "endDate",
+                  "value": "<string>",
+                  "description": "End date of the program. Applicable to event, email, and webinar type programs"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the program"
+                },
+                {
+                  "disabled": false,
+                  "key": "startDate",
+                  "value": "<string>",
+                  "description": "Start date of program. Applicable to event, email and webinar type programs"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "{\"tagType\":\"<string>\",\"tagValue\":\"<string>\"}",
+                  "description": "List of associated program tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "tags",
+                  "value": "{\"tagType\":\"<string>\",\"tagValue\":\"<string>\"}",
+                  "description": "List of associated program tags"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2275d04d-30db-4ba7-a7cc-25f63ea968eb",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true",
+                        "type": "text/plain"
+                      },
+                      "key": "costs",
+                      "value": "{\"cost\":\"<integer>\",\"startDate\":\"<dateTime>\",\"note\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true",
+                        "type": "text/plain"
+                      },
+                      "key": "costs",
+                      "value": "{\"cost\":\"<integer>\",\"startDate\":\"<dateTime>\",\"note\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Set true to destroy existing costs and replace them with the specified costs",
+                        "type": "text/plain"
+                      },
+                      "key": "costsDestructiveUpdate",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Updated description for the program",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "End date of the program. Applicable to event, email, and webinar type programs",
+                        "type": "text/plain"
+                      },
+                      "key": "endDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the program",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Start date of program. Applicable to event, email and webinar type programs",
+                        "type": "text/plain"
+                      },
+                      "key": "startDate",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of associated program tags",
+                        "type": "text/plain"
+                      },
+                      "key": "tags",
+                      "value": "{\"tagType\":\"<string>\",\"tagValue\":\"<string>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "List of associated program tags",
+                        "type": "text/plain"
+                      },
+                      "key": "tags",
+                      "value": "{\"tagType\":\"<string>\",\"tagValue\":\"<string>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 6080,\n          \"startDate\": \"1960-06-16T10:12:24.728Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 8386,\n          \"startDate\": \"1962-12-25T00:44:56.990Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 3661,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"webinar\",\n      \"createdAt\": \"1975-06-25T00:54:29.918Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1990-06-28T20:35:09.413Z\",\n      \"id\": 1167,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"2008-04-01T16:46:51.854Z\",\n      \"updatedAt\": \"1948-01-26T14:57:54.943Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 9619,\n          \"startDate\": \"1990-08-04T15:31:42.552Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 4614,\n          \"startDate\": \"1961-01-18T13:57:20.439Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": 6668,\n        \"type\": \"Program\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"nurture\",\n      \"createdAt\": \"1954-07-28T07:28:18.697Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1981-07-31T10:58:45.986Z\",\n      \"id\": 8932,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"1996-02-02T10:55:40.019Z\",\n      \"updatedAt\": \"2018-09-25T21:00:16.352Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18eb2955-115a-4c10-8441-964ae82d1c36",
+          "name": "Marketo Get Smart List by Program Id",
+          "request": {
+            "name": "Marketo Get Smart List by Program Id",
+            "description": {
+              "content": "Retrieves a Smart List record by its Email Program id. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                ":programId",
+                "smartList.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeRules",
+                  "value": "<boolean>",
+                  "description": "Set true to populate smart list rules. Default false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "programId",
+                  "description": "(Required) Id for the email program containing smart list to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83b7b616-7c69-4acf-90d0-1d678eda6fde",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    ":programId",
+                    "smartList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeRules",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "programId",
+                      "description": "(Required) Id for the email program containing smart list to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2015-07-02T01:07:29.503Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 4044,\n        \"type\": \"Program\"\n      },\n      \"id\": 7621,\n      \"name\": \"string\",\n      \"updatedAt\": \"1981-08-21T21:29:58.165Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"Any\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 8825,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 7936\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 1653,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 8308\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"createdAt\": \"1979-06-16T15:05:53.312Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 2523,\n        \"type\": \"Program\"\n      },\n      \"id\": 2293,\n      \"name\": \"string\",\n      \"updatedAt\": \"1960-03-20T05:20:28.874Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"Advanced\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 8598,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 6014\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 6898,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 5936\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4e26d143-59d0-44c9-9c39-a74edde5cb78",
+          "name": "Marketo Approve Program",
+          "request": {
+            "name": "Marketo Approve Program",
+            "description": {
+              "content": "Approves the target program. Only valid for unapproved email programs. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                ":id",
+                "approve.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "15b183c2-48b6-4573-8fdc-66daa0c76881",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    ":id",
+                    "approve.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 6443\n    },\n    {\n      \"id\": 4002\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75c397dd-7ecc-4db1-81ec-c8662b4075fa",
+          "name": "Marketo Clone Program",
+          "request": {
+            "name": "Marketo Clone Program",
+            "description": {
+              "content": "Clones the target program. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                ":id",
+                "clone.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the program. Max 255 characters"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4de0d5f6-3f15-4e6c-b877-ac40c7b85bfc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    ":id",
+                    "clone.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the program. Max 255 characters",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 2472,\n          \"startDate\": \"1960-08-14T21:17:15.008Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 5530,\n          \"startDate\": \"2024-12-14T12:35:15.646Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"status\": \"locked\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"webinar\",\n      \"createdAt\": \"1972-08-22T03:52:36.426Z\",\n      \"description\": \"string\",\n      \"endDate\": \"1959-03-30T17:33:02.714Z\",\n      \"id\": 646,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"2007-04-01T04:26:11.695Z\",\n      \"updatedAt\": \"1951-05-03T11:27:58.251Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"channel\": \"string\",\n      \"costs\": [\n        {\n          \"cost\": 8219,\n          \"startDate\": \"1963-07-02T23:54:50.740Z\",\n          \"note\": \"string\"\n        },\n        {\n          \"cost\": 6415,\n          \"startDate\": \"1989-04-11T12:41:38.621Z\",\n          \"note\": \"string\"\n        }\n      ],\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"status\": \"off\",\n      \"tags\": [\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        },\n        {\n          \"tagType\": \"string\",\n          \"tagValue\": \"string\"\n        }\n      ],\n      \"type\": \"event\",\n      \"createdAt\": \"2025-02-24T19:39:35.908Z\",\n      \"description\": \"string\",\n      \"endDate\": \"2008-08-10T04:10:44.613Z\",\n      \"id\": 5065,\n      \"name\": \"string\",\n      \"sfdcId\": \"string\",\n      \"sfdcName\": \"string\",\n      \"startDate\": \"1959-12-29T17:51:10.285Z\",\n      \"updatedAt\": \"1979-06-22T08:42:42.009Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ec9814a-dec9-4cac-a1e9-6bdd6a99c5a7",
+          "name": "Marketo Delete Program",
+          "request": {
+            "name": "Marketo Delete Program",
+            "description": {
+              "content": "Deletes the target program. The program may not contain any assets which are in use outside the program. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1dea7bfb-9658-4757-9ce5-47dd06afe650",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 3616\n    },\n    {\n      \"id\": 8960\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "28738686-0cea-4f98-b610-b91af5c6241b",
+          "name": "Marketo Unapprove Program",
+          "request": {
+            "name": "Marketo Unapprove Program",
+            "description": {
+              "content": "Unapproves the target program. Only valid for approved email programs. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "program",
+                ":id",
+                "unapprove.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "aa6ea9be-081e-4269-8a33-339f9e4d003c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "program",
+                    ":id",
+                    "unapprove.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 3616\n    },\n    {\n      \"id\": 8960\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) id",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "1f41ff36-a4b6-4d62-adfa-8905207d9ac3",
+    "name": "Marketo Engage Rest Approve Program API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

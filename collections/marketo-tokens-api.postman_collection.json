@@ -1,0 +1,450 @@
+{
+  "item": [
+    {
+      "id": "6956fec8-b5b2-45df-9689-def2eb55e9a7",
+      "name": "Tokens",
+      "description": {
+        "content": "Token Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e7bdd20-2739-4d0e-bb9e-7ecfb061025e",
+          "name": "Marketo Get Tokens by Folder Id",
+          "request": {
+            "name": "Marketo Get Tokens by Folder Id",
+            "description": {
+              "content": "Retrieves the list of available My Tokens in the target folder. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                ":id",
+                "tokens.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "folderType",
+                  "value": "Folder",
+                  "description": "Type of folder. 'Folder' or 'Program'"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7090c7a2-686d-47e0-aec9-c4f773de1a59",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    ":id",
+                    "tokens.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "folderType",
+                      "value": "Folder"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": \"{\\\"id\\\":1001,\\\"type\\\":\\\"Program\\\"}\",\n      \"tokens\": [\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"folder\": \"{\\\"id\\\":1001,\\\"type\\\":\\\"Program\\\"}\",\n      \"tokens\": [\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0bbd28eb-2f9e-44d2-9285-a6233769b58a",
+          "name": "Marketo Create Token",
+          "request": {
+            "name": "Marketo Create Token",
+            "description": {
+              "content": "Create or update a token in the parent folder. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                ":id",
+                "tokens.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the folder to which the token will be associated with"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "folderType",
+                  "value": "<string>",
+                  "description": "(Required) Type of folder. 'Folder' or 'Program'"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the token. Max length is 50 characters)"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of the token"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Value of the token"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0aeda141-4d72-451d-89ca-77fe4d9e4bef",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    ":id",
+                    "tokens.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the folder to which the token will be associated with"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of folder. 'Folder' or 'Program'",
+                        "type": "text/plain"
+                      },
+                      "key": "folderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the token. Max length is 50 characters)",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of the token",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Value of the token",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": \"{\\\"id\\\":1001,\\\"type\\\":\\\"Program\\\"}\",\n      \"tokens\": [\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    },\n    {\n      \"folder\": \"{\\\"id\\\":1001,\\\"type\\\":\\\"Program\\\"}\",\n      \"tokens\": [\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        },\n        {\n          \"computedUrl\": \"string\",\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"value\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "77028761-2b3b-4521-9de2-64a3de9b4592",
+          "name": "Marketo Delete Token by Name",
+          "request": {
+            "name": "Marketo Delete Token by Name",
+            "description": {
+              "content": "Deletes a token with the given name from the parent folder. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                ":id",
+                "tokens",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "folderType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "99f99331-6b5e-4dbc-ad5c-cf753ada1f2b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    ":id",
+                    "tokens",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "folderType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4802\n    },\n    {\n      \"id\": 2780\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "368ef9cf-213a-4992-b868-3a4460517878",
+    "name": "Marketo Engage Rest Approve Tokens API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

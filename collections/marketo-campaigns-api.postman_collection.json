@@ -1,0 +1,874 @@
+{
+  "item": [
+    {
+      "id": "b5c5dfc5-2d2c-4203-b80d-fa84c968311a",
+      "name": "Campaigns",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7624b0bc-72ab-411e-85fd-58c12c1dee15",
+          "name": "Marketo Get Smart Campaign by Id",
+          "request": {
+            "name": "Marketo Get Smart Campaign by Id",
+            "description": {
+              "content": "Returns the smart campaign for the given id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc9701e2-96cc-4178-bd44-9526d79a2a6f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1966-04-24T07:45:53.229Z\",\n      \"description\": \"string\",\n      \"flowId\": 3003,\n      \"folder\": {\n        \"id\": 2447,\n        \"type\": \"Program\"\n      },\n      \"id\": 6817,\n      \"isActive\": false,\n      \"isCommunicationLimitEnabled\": true,\n      \"isRequestable\": true,\n      \"isSystem\": false,\n      \"maxMembers\": 6673,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 7449,\n      \"qualificationRuleType\": \"interval\",\n      \"qualificationRuleUnit\": \"month\",\n      \"recurrence\": {\n        \"dayOfMonth\": 191,\n        \"dayOfWeek\": \"Wednesday\",\n        \"endAt\": \"1962-05-03T07:08:02.971Z\",\n        \"interval\": 3681,\n        \"intervalType\": \"Daily\",\n        \"startAt\": \"1959-01-24T05:32:45.488Z\",\n        \"weekOfMonth\": 104,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 6439,\n      \"status\": \"Inactive\",\n      \"type\": \"default\",\n      \"updatedAt\": \"1990-03-02T18:05:03.123Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 4854,\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1954-11-25T13:40:55.437Z\",\n      \"description\": \"string\",\n      \"flowId\": 1084,\n      \"folder\": {\n        \"id\": 8524,\n        \"type\": \"Folder\"\n      },\n      \"id\": 1658,\n      \"isActive\": true,\n      \"isCommunicationLimitEnabled\": false,\n      \"isRequestable\": false,\n      \"isSystem\": false,\n      \"maxMembers\": 3649,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 1662,\n      \"qualificationRuleType\": \"interval\",\n      \"qualificationRuleUnit\": \"hour\",\n      \"recurrence\": {\n        \"dayOfMonth\": 2060,\n        \"dayOfWeek\": \"Tuesday\",\n        \"endAt\": \"2002-05-10T02:36:44.532Z\",\n        \"interval\": 1254,\n        \"intervalType\": \"Weekly\",\n        \"startAt\": \"1982-07-26T03:18:09.303Z\",\n        \"weekOfMonth\": 8749,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 2968,\n      \"status\": \"Inactive\",\n      \"type\": \"trigger\",\n      \"updatedAt\": \"1948-12-23T14:09:25.630Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 5863,\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f49a1c71-f1cb-4306-8bc8-0bf7a467b60f",
+          "name": "Marketo Update Smart Campaign",
+          "request": {
+            "name": "Marketo Update Smart Campaign",
+            "description": {
+              "content": "Update the smart campaign for the given id. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fbda181f-d873-43b2-8b55-a63b14c02d2e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"<string>\",\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1952-04-29T03:35:56.302Z\",\n      \"description\": \"string\",\n      \"flowId\": 1725,\n      \"folder\": {\n        \"id\": 84,\n        \"type\": \"Program\"\n      },\n      \"id\": 1946,\n      \"isActive\": false,\n      \"isCommunicationLimitEnabled\": true,\n      \"isRequestable\": true,\n      \"isSystem\": true,\n      \"maxMembers\": 17,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 7878,\n      \"qualificationRuleType\": \"any\",\n      \"qualificationRuleUnit\": \"week\",\n      \"recurrence\": {\n        \"dayOfMonth\": 2569,\n        \"dayOfWeek\": \"Sunday\",\n        \"endAt\": \"1993-04-17T01:30:11.227Z\",\n        \"interval\": 7261,\n        \"intervalType\": \"Monthly\",\n        \"startAt\": \"1989-04-18T06:34:54.885Z\",\n        \"weekOfMonth\": 5518,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 3970,\n      \"status\": \"Active\",\n      \"type\": \"trigger\",\n      \"updatedAt\": \"2025-02-04T18:41:29.854Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 9517,\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1954-09-21T11:38:11.273Z\",\n      \"description\": \"string\",\n      \"flowId\": 2190,\n      \"folder\": {\n        \"id\": 7179,\n        \"type\": \"Program\"\n      },\n      \"id\": 9248,\n      \"isActive\": true,\n      \"isCommunicationLimitEnabled\": false,\n      \"isRequestable\": true,\n      \"isSystem\": false,\n      \"maxMembers\": 7040,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 4449,\n      \"qualificationRuleType\": \"interval\",\n      \"qualificationRuleUnit\": \"day\",\n      \"recurrence\": {\n        \"dayOfMonth\": 9457,\n        \"dayOfWeek\": \"Wednesday\",\n        \"endAt\": \"1986-04-16T01:51:20.699Z\",\n        \"interval\": 1179,\n        \"intervalType\": \"Monthly\",\n        \"startAt\": \"1964-12-23T21:02:01.430Z\",\n        \"weekOfMonth\": 1246,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": true\n      },\n      \"smartListId\": 6295,\n      \"status\": \"Recurring Run\",\n      \"type\": \"default\",\n      \"updatedAt\": \"1950-05-14T23:53:11.520Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 9437,\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8d275451-eb4e-4105-b7c1-67772af55ccd",
+          "name": "Marketo Get Smart Campaign by Name",
+          "request": {
+            "name": "Marketo Get Smart Campaign by Name",
+            "description": {
+              "content": "Returns the smart campaign for the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name for the smart campaign"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "87e1125a-515a-4ca1-badd-0e2d91c12eb4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1952-04-29T03:35:56.302Z\",\n      \"description\": \"string\",\n      \"flowId\": 1725,\n      \"folder\": {\n        \"id\": 84,\n        \"type\": \"Program\"\n      },\n      \"id\": 1946,\n      \"isActive\": false,\n      \"isCommunicationLimitEnabled\": true,\n      \"isRequestable\": true,\n      \"isSystem\": true,\n      \"maxMembers\": 17,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 7878,\n      \"qualificationRuleType\": \"any\",\n      \"qualificationRuleUnit\": \"week\",\n      \"recurrence\": {\n        \"dayOfMonth\": 2569,\n        \"dayOfWeek\": \"Sunday\",\n        \"endAt\": \"1993-04-17T01:30:11.227Z\",\n        \"interval\": 7261,\n        \"intervalType\": \"Monthly\",\n        \"startAt\": \"1989-04-18T06:34:54.885Z\",\n        \"weekOfMonth\": 5518,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 3970,\n      \"status\": \"Active\",\n      \"type\": \"trigger\",\n      \"updatedAt\": \"2025-02-04T18:41:29.854Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 9517,\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1954-09-21T11:38:11.273Z\",\n      \"description\": \"string\",\n      \"flowId\": 2190,\n      \"folder\": {\n        \"id\": 7179,\n        \"type\": \"Program\"\n      },\n      \"id\": 9248,\n      \"isActive\": true,\n      \"isCommunicationLimitEnabled\": false,\n      \"isRequestable\": true,\n      \"isSystem\": false,\n      \"maxMembers\": 7040,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 4449,\n      \"qualificationRuleType\": \"interval\",\n      \"qualificationRuleUnit\": \"day\",\n      \"recurrence\": {\n        \"dayOfMonth\": 9457,\n        \"dayOfWeek\": \"Wednesday\",\n        \"endAt\": \"1986-04-16T01:51:20.699Z\",\n        \"interval\": 1179,\n        \"intervalType\": \"Monthly\",\n        \"startAt\": \"1964-12-23T21:02:01.430Z\",\n        \"weekOfMonth\": 1246,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": true\n      },\n      \"smartListId\": 6295,\n      \"status\": \"Recurring Run\",\n      \"type\": \"default\",\n      \"updatedAt\": \"1950-05-14T23:53:11.520Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 9437,\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "94a60bae-8398-4741-b0e3-6709cca4cddf",
+          "name": "Marketo Get Smart List by Smart Campaign Id",
+          "request": {
+            "name": "Marketo Get Smart List by Smart Campaign Id",
+            "description": {
+              "content": "Retrieves a Smart List record by its Smart Campaign id. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                ":id",
+                "smartList.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeRules",
+                  "value": "<boolean>",
+                  "description": "Set true to populate smart list rules. Default false"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) Id for the smart campaign containing smart list to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e1f9f59b-34a4-486f-b176-53cb070f1dc7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    ":id",
+                    "smartList.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeRules",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) Id for the smart campaign containing smart list to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1999-04-03T18:22:39.872Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 8176,\n        \"type\": \"Program\"\n      },\n      \"id\": 4845,\n      \"name\": \"string\",\n      \"updatedAt\": \"1948-12-18T23:42:23.493Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"All\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 5010,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 918\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 4250,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 6100\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"createdAt\": \"1959-07-14T21:20:19.222Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 8050,\n        \"type\": \"Program\"\n      },\n      \"id\": 1353,\n      \"name\": \"string\",\n      \"updatedAt\": \"2000-06-08T04:05:40.689Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"Any\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 5218,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 4472\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 1555,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 7061\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9502a852-7feb-4e33-a6dc-5b46ac849d6c",
+          "name": "Marketo Activate Smart Campaign",
+          "request": {
+            "name": "Marketo Activate Smart Campaign",
+            "description": {
+              "content": "Activates a trigger smart campaign. Required Permissions: Activate Campaign",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                ":id",
+                "activate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the smart campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3de7f897-eda7-4bdf-8533-7aa92b726832",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    ":id",
+                    "activate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the smart campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 761\n    },\n    {\n      \"id\": 9683\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2658a763-7539-44ef-b407-30a73e02f865",
+          "name": "Marketo Deactivate Smart Campaign",
+          "request": {
+            "name": "Marketo Deactivate Smart Campaign",
+            "description": {
+              "content": "Deactivates a trigger smart campaign. Required Permissions: Deactivate Campaign",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                ":id",
+                "deactivate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the smart campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a3a15829-ea81-4d35-a96e-7baa2eef7351",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    ":id",
+                    "deactivate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the smart campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 2530\n    },\n    {\n      \"id\": 4411\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4cb46de-f6ea-42f0-8b5e-82ea737006dd",
+          "name": "Marketo Clone Smart Campaign",
+          "request": {
+            "name": "Marketo Clone Smart Campaign",
+            "description": {
+              "content": "Clones a smart campaign. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                ":id",
+                "clone.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the smart campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the smart campaign"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the smart campaign"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6a1d89a7-7b5a-467c-9c79-76d15374d8cc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    ":id",
+                    "clone.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the smart campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the smart campaign",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the smart campaign",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1976-04-09T00:43:14.549Z\",\n      \"description\": \"string\",\n      \"flowId\": 9692,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 606,\n      \"isActive\": true,\n      \"isCommunicationLimitEnabled\": false,\n      \"isRequestable\": false,\n      \"isSystem\": true,\n      \"maxMembers\": 7839,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 968,\n      \"qualificationRuleType\": \"once\",\n      \"qualificationRuleUnit\": \"hour\",\n      \"recurrence\": {\n        \"dayOfMonth\": 2669,\n        \"dayOfWeek\": \"Wednesday\",\n        \"endAt\": \"1975-04-23T11:09:38.357Z\",\n        \"interval\": 5769,\n        \"intervalType\": \"Daily\",\n        \"startAt\": \"1963-05-17T18:47:25.040Z\",\n        \"weekOfMonth\": 3767,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 8352,\n      \"status\": \"Active\",\n      \"type\": \"batch\",\n      \"updatedAt\": \"2020-12-04T10:08:51.679Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 6862,\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"2003-01-24T02:52:32.322Z\",\n      \"description\": \"string\",\n      \"flowId\": 9328,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 3363,\n      \"isActive\": false,\n      \"isCommunicationLimitEnabled\": true,\n      \"isRequestable\": true,\n      \"isSystem\": false,\n      \"maxMembers\": 4430,\n      \"name\": \"string\",\n      \"qualificationRuleInterval\": 1380,\n      \"qualificationRuleType\": \"any\",\n      \"qualificationRuleUnit\": \"day\",\n      \"recurrence\": {\n        \"dayOfMonth\": 5603,\n        \"dayOfWeek\": \"Friday\",\n        \"endAt\": \"1979-06-16T17:04:51.747Z\",\n        \"interval\": 9003,\n        \"intervalType\": \"Weekly\",\n        \"startAt\": \"2015-10-07T09:47:11.092Z\",\n        \"weekOfMonth\": 2112,\n        \"weekdayMask\": [\n          \"string\",\n          \"string\"\n        ],\n        \"weekdayOnly\": false\n      },\n      \"smartListId\": 9385,\n      \"status\": \"Single Run\",\n      \"type\": \"trigger\",\n      \"updatedAt\": \"1977-09-22T10:20:36.893Z\",\n      \"workspace\": \"string\",\n      \"parentProgramId\": 1024,\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2434c29a-1c04-475a-b140-aefdb9102230",
+          "name": "Marketo Delete Smart Campaign",
+          "request": {
+            "name": "Marketo Delete Smart Campaign",
+            "description": {
+              "content": "Deletes a smart campaign. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartCampaign",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the smart campaign"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40534485-c89b-45fa-8241-6ad55c8d24ba",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartCampaign",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the smart campaign"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 2530\n    },\n    {\n      \"id\": 4411\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id for the smart campaign",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "405e7463-fdb9-4105-98bc-f3ff5dca63b4",
+    "name": "Marketo Engage Rest Approve Campaigns API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

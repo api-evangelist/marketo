@@ -1,0 +1,89 @@
+generated: '2026-08-13'
+method: probed
+source: live GET of /.well-known/* on every Marketo/Adobe host in apis.yml + OpenAPI servers[]
+note: >-
+  Marketo Engage is an Adobe product. www.marketo.com 301s to
+  https://business.adobe.com/products/marketo/adobe-marketo.html and
+  developers.marketo.com canonicalizes to experienceleague.adobe.com, so the
+  corporate .well-known surface that governs Marketo is Adobe's. The only
+  document served anywhere in that set is Adobe's RFC 9116 security.txt on
+  www.adobe.com, saved verbatim here as marketo-security.txt. Note that
+  developers.marketo.com answers HTTP 200 with the SAME 9,233-byte HTML shell
+  for EVERY path probed (including /openapi.json and /.well-known/*) — a
+  single-page-app catch-all, not a document. Those 200s are recorded below as
+  soft-404 misses, not hits.
+hosts:
+  - host: https://www.adobe.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/plain
+        file: marketo-security.txt
+        real_document: true
+      - path: /.well-known/agent-card.json
+        status: 404
+        real_document: false
+  - host: https://developers.marketo.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        real_document: false
+        note: SPA catch-all — identical 9,233-byte HTML shell returned for every path.
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        real_document: false
+        note: SPA catch-all — same HTML shell. Not an agent card.
+  - host: https://experienceleague.adobe.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+      - path: /.well-known/agent-card.json
+        status: 404
+        real_document: false
+      - path: /.well-known/api-catalog
+        status: 404
+        real_document: false
+  - host: https://developer.adobe.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        content_type: text/html
+        real_document: false
+        note: >-
+          SPA catch-all — a 1.2MB HTML document is returned for every
+          /.well-known/* path including agent-card.json and
+          oauth-authorization-server. Not a document.
+      - path: /.well-known/agent-card.json
+        status: 200
+        content_type: text/html
+        real_document: false
+      - path: /.well-known/oauth-authorization-server
+        status: 200
+        content_type: text/html
+        real_document: false
+  - host: https://mkto-ingestion-api.adobe.io
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        real_document: false
+summary:
+  hosts_probed: 5
+  paths_probed: 13
+  real_documents: 1
+  soft_404_200s: 6
+x-evidence:
+  fetched: '2026-08-13'
+  security_txt:
+    url: https://www.adobe.com/.well-known/security.txt
+    http_status: 200
+    content_type: text/plain; charset=UTF-8
+    bytes: 3600
+    contact:
+      - https://hackerone.com/adobe
+      - psirt@adobe.com
+    policy: https://helpx.adobe.com/security.html/security/policy.ug.html
+    expires: '2027-07-30T01:00:00.000Z'
+    pgp_signed: true

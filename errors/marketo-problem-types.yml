@@ -1,0 +1,75 @@
+generated: '2026-08-13'
+method: derived
+source: >-
+  openapi/marketo-lead-database-openapi-original.json,
+  openapi/marketo-asset-openapi-original.json,
+  openapi/marketo-user-management-openapi-original.json,
+  openapi/marketo-data-ingestion-openapi-original.json,
+  openapi/marketo-identity-openapi-original.json
+format: none
+format_note: >-
+  Marketo publishes NO RFC 9457 problem+json. Its own envelope is a proprietary
+  {requestId, success, errors[{code,message}]} document returned with HTTP 200.
+  The full, provider-published code registry lives in
+  errors/marketo-error-codes.yml (method: searched) — this file records only what
+  the machine-readable specs themselves declare, which is far less.
+finding: >-
+  A derived error catalog is the sharpest measure of the gap between Marketo's
+  documentation and its contract. Across 361 documented operations in the five
+  Adobe-published specs, only 51 declare ANY non-2xx response, and 310 declare
+  none at all. The two legacy Swagger 2.0 documents that carry the bulk of the
+  API — Lead Database (147 ops) and Asset (199 ops) — declare 200 OK and, in the
+  Asset spec's case, an untyped `default: Error` on 33 operations. Neither models
+  the 601/602/603/606/607 response-level codes that every real integration must
+  handle, so an agent generated purely from the spec would treat a rate-limited
+  or expired-token call as a success.
+problems:
+  - status: 400
+    title: Bad request
+    detail: Validation error — e.g. invalid payload, lead key, or static list reference.
+    spec: openapi/marketo-data-ingestion-openapi-original.json
+    operations:
+      - syncPersons
+      - syncCustomObjects
+      - syncCompanies
+      - syncProgramMembers
+      - deleteProgramMembers
+      - addToList
+      - removeFromList
+  - status: 401
+    title: Unauthorized
+    detail: OAuth token is invalid.
+    spec: openapi/marketo-data-ingestion-openapi-original.json
+    operations:
+      - syncPersons
+      - syncCustomObjects
+      - syncCompanies
+      - syncProgramMembers
+      - deleteProgramMembers
+      - addToList
+      - removeFromList
+  - status: 401
+    title: Unauthorized
+    spec: openapi/marketo-user-management-openapi-original.json
+    operation_count: 12
+  - status: 403
+    title: Forbidden
+    spec: openapi/marketo-user-management-openapi-original.json
+    operation_count: 12
+  - status: 404
+    title: Not Found
+    spec: openapi/marketo-user-management-openapi-original.json
+    operation_count: 12
+  - status: default
+    title: Error
+    detail: Untyped catch-all response with no schema.
+    spec: openapi/marketo-asset-openapi-original.json
+    operation_count: 33
+coverage:
+  operations_total: 361
+  operations_with_non_2xx: 51
+  operations_with_no_error_response: 310
+  specs_declaring_problem_json: 0
+cross_reference:
+  provider_error_registry: errors/marketo-error-codes.yml
+  conventions: conventions/marketo-conventions.yml

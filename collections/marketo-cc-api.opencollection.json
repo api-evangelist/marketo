@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Cc API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cc",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Email CC Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/ccFields.json"
+          },
+          "docs": "Returns the set of fields enabled for Email CC in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

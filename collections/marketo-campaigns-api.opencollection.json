@@ -1,0 +1,184 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Campaigns API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Campaigns",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Smart Campaign by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign"
+              }
+            ]
+          },
+          "docs": "Returns the smart campaign for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update the smart campaign for the given id. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart Campaign by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name for the smart campaign"
+              }
+            ]
+          },
+          "docs": "Returns the smart campaign for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Smart Campaign Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/smartList.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for the smart campaign containing smart list to retrieve"
+              },
+              {
+                "name": "includeRules",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate smart list rules. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its Smart Campaign id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Activate Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/activate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Activates a trigger smart campaign. Required Permissions: Activate Campaign"
+        },
+        {
+          "info": {
+            "name": "Marketo Deactivate Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/deactivate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Deactivates a trigger smart campaign. Required Permissions: Deactivate Campaign"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones a smart campaign. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Smart Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartCampaign/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart campaign"
+              }
+            ]
+          },
+          "docs": "Deletes a smart campaign. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

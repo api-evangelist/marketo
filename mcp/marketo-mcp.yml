@@ -1,0 +1,122 @@
+generated: '2026-08-13'
+method: derived
+status: candidate
+source: openapi/marketo-lead-database-openapi-original.json
+searched:
+  - https://registry.modelcontextprotocol.io/v0/servers?search=marketo
+  - https://registry.modelcontextprotocol.io/v0/servers?search=adobe
+  - https://registry.npmjs.org/-/v1/search?text=marketo%20mcp
+  - https://experienceleague.adobe.com/llms.txt
+finding: >-
+  Adobe ships NO Marketo Engage MCP server. Adobe's own llms.txt on the docs host
+  enumerates every MCP server it operates — all of them AEM, all under
+  https://mcp.adobeaemcloud.com/adobe/mcp/ — and states that a dedicated
+  Experience League content MCP server "is not yet generally available". Nothing
+  in the Marketo developer documentation mentions MCP. The only Marketo MCP
+  server in the public registry is third-party
+  (io.github.ZLeventer/marketo-mcp-server, npm marketo-mcp-server), which is a
+  local stdio package by an unaffiliated author, not a provider surface. The
+  tools below are therefore a DERIVED CANDIDATE set, bound to real Adobe-published
+  operationIds so the crosswalk can carry real input schemas.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: oauth
+  verified: derived
+  note: >-
+    mode:none because the provider ships neither a remote endpoint nor a stdio
+    package. An agent cannot reach Marketo Engage over MCP today without building
+    or trusting a third-party server.
+third_party_servers:
+  - name: io.github.ZLeventer/marketo-mcp-server
+    registry: https://registry.modelcontextprotocol.io/v0/servers?search=marketo
+    package: https://www.npmjs.com/package/marketo-mcp-server
+    repository: https://github.com/ZLeventer/marketo-mcp-server
+    transport: stdio
+    latest_version: 1.4.0
+    published: '2026-04-29'
+    first_party: false
+    auth: >-
+      Requires MARKETO_CLIENT_ID / MARKETO_CLIENT_SECRET from a LaunchPoint
+      custom service — i.e. the caller supplies their own instance credentials.
+    note: >-
+      Recorded for completeness ONLY. Not endorsed, not audited, and not counted
+      as a Marketo agent surface.
+server:
+  name: marketo
+  transport: null
+  url: null
+auth_model:
+  flow: OAuth 2.0 client credentials against https://{munchkinId}.mktorest.com/identity/oauth/token
+  per_tenant: true
+  note: >-
+    Any Marketo MCP server is inherently per-subscription: the base URL contains
+    the caller's Munchkin ID, so a single hosted multi-tenant endpoint would have
+    to accept the host as a parameter. This is the structural reason Marketo has
+    no hosted MCP server, and it is worth stating rather than treating the
+    absence as neglect.
+tools:
+  - name: get_lead_by_id
+    description: Retrieve a single person record by Marketo lead id.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getLeadByIdUsingGET
+  - name: find_leads
+    description: Find person records by a filter field and a list of values.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getLeadsByFilterUsingGET
+  - name: sync_leads
+    description: Upsert a batch of person records using a chosen lookupField and action mode.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#syncLeadUsingPOST
+  - name: describe_lead
+    description: Enumerate the lead field vocabulary for this subscription.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#describeUsingGET_6
+  - name: get_paging_token
+    description: Obtain the activity-feed cursor for a starting timestamp.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getActivitiesPagingTokenUsingGET
+  - name: get_lead_activities
+    description: Read the activity feed from a paging token.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getLeadActivitiesUsingGET
+  - name: get_lead_changes
+    description: Read the data-value-change feed from a paging token.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getLeadChangesUsingGET
+  - name: list_campaigns
+    description: List smart campaigns available to the credential.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getCampaignsUsingGET
+  - name: request_campaign
+    description: Trigger a smart campaign for a set of leads.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#triggerCampaignUsingPOST
+  - name: schedule_campaign
+    description: Schedule a batch campaign to run at a future time.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#scheduleCampaignUsingPOST
+  - name: list_static_lists
+    description: List static lists.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getListsUsingGET
+  - name: add_leads_to_list
+    description: Add person records to a static list.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#addLeadsToListUsingPOST
+  - name: remove_leads_from_list
+    description: Remove person records from a static list.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#removeLeadsFromListUsingDELETE
+  - name: sync_program_member_status
+    description: Set program membership status for a batch of people.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#syncProgramMemberStatusUsingPOST
+  - name: create_lead_export_job
+    description: Create a bulk lead export job.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#createExportLeadsUsingPOST
+  - name: get_lead_export_status
+    description: Poll a bulk lead export job.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getExportLeadsStatusUsingGET
+  - name: get_lead_export_file
+    description: Download the completed bulk lead export file.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getExportLeadsFileUsingGET
+  - name: get_daily_usage
+    description: Read today's API call consumption against the 50,000/day quota.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getDailyUsageUsingGET
+  - name: get_daily_errors
+    description: Read today's API error counts.
+    source_operation: openapi/marketo-lead-database-openapi-original.json#getDailyErrorsUsingGET
+  - name: list_forms
+    description: Browse Marketo forms.
+    source_operation: openapi/marketo-asset-openapi-original.json#browseForms2UsingGET
+tool_count: 20
+crosswalk: mcp/marketo-tool-crosswalk.yml

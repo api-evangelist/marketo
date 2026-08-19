@@ -1,0 +1,54 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Marketo Data Ingestion API
+  version: 1.0.0
+extends: openapi/marketo-data-ingestion-openapi-original.json
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Adobe-published specification harvested verbatim from
+  https://github.com/AdobeDocs/marketo-apis/tree/main/static — enhancements
+  below are API Evangelist additions and are never written back into the
+  original.
+actions:
+  - target: $
+    description: Record the documented security scheme; the spec declares none.
+    update:
+      x-apievangelist-authentication:
+        type: oauth2
+        flow: clientCredentials
+        tokenUrl: 'https://{munchkinId}.mktorest.com/identity/oauth/token'
+        transport: 'Authorization: Bearer'
+        artifact: authentication/marketo-authentication.yml
+  - target: $
+    description: >-
+      Note that this surface is the exception in the Marketo estate — it uses
+      real HTTP status semantics (202/400/401) rather than the HTTP-200 envelope
+      the REST APIs use.
+    update:
+      x-apievangelist-error-semantics:
+        http_status_reliable: true
+        catalog: errors/marketo-error-codes.yml
+  - target: $.info
+    description: Provenance, operating envelope and cross-links to the derived artifacts.
+    update:
+      x-apievangelist-provider: marketo
+      x-apievangelist-operations: 7
+      x-apievangelist-artifacts:
+        authentication: authentication/marketo-authentication.yml
+        permissions: scopes/marketo-scopes.yml
+        errors: errors/marketo-error-codes.yml
+        conventions: conventions/marketo-conventions.yml
+        rate_limits: rate-limits/marketo-rate-limits.yml
+        lifecycle: lifecycle/marketo-lifecycle.yml
+        data_model: data-model/marketo-data-model.yml
+        skills: skills/_index.yml
+      x-apievangelist-rate-limit:
+        rate: 100 calls per 20 seconds per subscription
+        daily_quota: 50000
+        concurrency: 10
+        headers: none
+        exhaustion_codes: ['606', '607', '615']
+      x-apievangelist-deprecations:
+        - item: access_token query/form parameter
+          removal_date: '2026-08-31'

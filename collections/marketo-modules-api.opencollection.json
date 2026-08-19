@@ -1,0 +1,142 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Modules API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Modules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Add Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/add.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the module"
+              },
+              {
+                "name": "index",
+                "value": "",
+                "type": "query",
+                "description": "Index of the module. Determines the order of the module in the email."
+              }
+            ]
+          },
+          "docs": "Adds a new module to an email, with the given id. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              }
+            ]
+          },
+          "docs": "Deletes the given module from the email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Duplicate Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/duplicate.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the new module"
+              }
+            ]
+          },
+          "docs": "Creates a copy of the designated module in an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Rename Email Module",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/content/:moduleId/rename.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "moduleId",
+                "value": "",
+                "type": "path",
+                "description": "moduleId"
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "New module name"
+              }
+            ]
+          },
+          "docs": "Renames a module. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

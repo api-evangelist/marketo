@@ -1,0 +1,39 @@
+generated: '2026-08-13'
+method: generated
+source:
+  - openapi/marketo-lead-database-openapi-original.json
+  - openapi/marketo-asset-openapi-original.json
+  - conventions/marketo-conventions.yml
+  - errors/marketo-error-codes.yml
+  - rate-limits/marketo-rate-limits.yml
+note: >-
+  Packaged operating instructions for the Marketo Engage REST API. Marketo
+  publishes no AGENTS.md and no skill files, so these are generated. Every
+  operationId referenced in every skill was verified to exist verbatim in the
+  named Adobe-published spec.
+skills:
+  - file: marketo-authenticate.md
+    name: Authenticate against a Marketo instance
+    api: openapi/marketo-identity-openapi-original.json
+    operations: [identityUsingGET, identityUsingPOST]
+  - file: marketo-upsert-people.md
+    name: Upsert people safely
+    api: openapi/marketo-lead-database-openapi-original.json
+    operations: [describeUsingGET_6, getLeadsByFilterUsingGET, syncLeadUsingPOST, getLeadByIdUsingGET]
+  - file: marketo-read-activity-feed.md
+    name: Read the activity and change feeds
+    api: openapi/marketo-lead-database-openapi-original.json
+    operations: [getActivitiesPagingTokenUsingGET, getAllActivityTypesUsingGET, getLeadActivitiesUsingGET, getLeadChangesUsingGET, getDeletedLeadsUsingGET]
+  - file: marketo-bulk-export-leads.md
+    name: Run a bulk lead export job
+    api: openapi/marketo-lead-database-openapi-original.json
+    operations: [createExportLeadsUsingPOST, enqueueExportLeadsUsingPOST, getExportLeadsStatusUsingGET, getExportLeadsFileUsingGET, cancelExportLeadsUsingPOST, getExportLeadsUsingGET]
+  - file: marketo-trigger-campaign.md
+    name: Add people to a list and trigger a campaign
+    api: openapi/marketo-lead-database-openapi-original.json
+    operations: [getListsUsingGET, addLeadsToListUsingPOST, getCampaignsUsingGET, triggerCampaignUsingPOST, scheduleCampaignUsingPOST, getSmartCampaignMembershipUsingGET]
+  - file: marketo-watch-the-quota.md
+    name: Stay inside the API budget
+    api: openapi/marketo-lead-database-openapi-original.json
+    operations: [getDailyUsageUsingGET, getLast7DaysUsageUsingGET, getDailyErrorsUsingGET, getLast7DaysErrorsUsingGET]
+skill_count: 6

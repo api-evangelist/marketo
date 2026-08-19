@@ -1,0 +1,109 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Full API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Full",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Email Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not."
+              },
+              {
+                "name": "leadId",
+                "value": "",
+                "type": "query",
+                "description": "The lead id to impersonate. Email is rendered as though it was received by this lead."
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Email content type to return. Default is HTML."
+              }
+            ]
+          },
+          "docs": "Returns the serialized HTML version of the email. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead."
+        },
+        {
+          "info": {
+            "name": "Marketo Update Email Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the email"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Replaces the HTML of an Email that has had its relationship broken from its template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Full Content",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/fullContent.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the landing page."
+              },
+              {
+                "name": "leadId",
+                "value": "",
+                "type": "query",
+                "description": "The lead id to impersonate. Landing page is rendered as though it was viewed by this lead."
+              },
+              {
+                "name": "segmentation",
+                "value": "",
+                "type": "query",
+                "description": "JSON array of of segmentations. Each segmentation must be a JSON object with members 'segmentationId', and 'segmentId'.<br>Example: [{\"segmentationId\":1030,\"segmentId\":1103}]"
+              }
+            ]
+          },
+          "docs": "Returns the serialized HTML version of the landing page. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

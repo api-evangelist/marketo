@@ -1,0 +1,692 @@
+{
+  "item": [
+    {
+      "id": "53bc8b80-582b-40f1-9063-d5c05055d962",
+      "name": "Id",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85db3deb-8eb0-4855-b499-0a906e88fd9c",
+          "name": "Marketo Get Smart List by Id",
+          "request": {
+            "name": "Marketo Get Smart List by Id",
+            "description": {
+              "content": "Retrieves a Smart List record by its id. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartList",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeRules",
+                  "value": "<boolean>",
+                  "description": "Set true to populate smart list rules. Default false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4827fead-5455-402a-9b10-0757f5479bf4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartList",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeRules",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1997-04-16T07:28:26.482Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1747,\n        \"type\": \"Program\"\n      },\n      \"id\": 5040,\n      \"name\": \"string\",\n      \"updatedAt\": \"2005-07-05T00:28:30.112Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"Any\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 6277,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 3696\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 9510,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 7799\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    },\n    {\n      \"createdAt\": \"1989-01-22T09:04:58.370Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 8348,\n        \"type\": \"Folder\"\n      },\n      \"id\": 1047,\n      \"name\": \"string\",\n      \"updatedAt\": \"2016-09-16T03:38:52.688Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"rules\": {\n        \"filterMatchType\": \"Any\",\n        \"filters\": [\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 5380,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 4050\n          },\n          {\n            \"conditions\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"id\": 6297,\n            \"name\": \"string\",\n            \"operator\": \"string\",\n            \"ruleType\": \"string\",\n            \"ruleTypeId\": 9355\n          }\n        ],\n        \"triggers\": [\n          \"string\",\n          \"string\"\n        ]\n      }\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ea4e655f-4a8d-4577-a9a2-076f8f8aa5f8",
+          "name": "Marketo Delete Smart List",
+          "request": {
+            "name": "Marketo Delete Smart List",
+            "description": {
+              "content": "Deletes the designated Smart List. Required Permissions: Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartList",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) Id of the smart list to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "946ecd95-3fd7-4f1a-a474-a189e1207483",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartList",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) Id of the smart list to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 3289\n    },\n    {\n      \"id\": 7986\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32835a7c-2bf3-475c-a7e3-5b3387dd6a2e",
+          "name": "Marketo Clone Smart List",
+          "request": {
+            "name": "Marketo Clone Smart List",
+            "description": {
+              "content": "Clones the designated Smart List. Required Permissions: Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartList",
+                ":id",
+                "clone.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of smart list to clone"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name for the cloned smart list"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the cloned smart list"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7c85bad3-c9ee-4c59-ba96-a8ffb4ec53db",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartList",
+                    ":id",
+                    "clone.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of smart list to clone"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name for the cloned smart list",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the cloned smart list",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1991-08-29T05:32:34.375Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 5877,\n      \"name\": \"string\",\n      \"updatedAt\": \"2023-06-25T19:09:24.618Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"1995-03-12T18:47:34.331Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 9115,\n      \"name\": \"string\",\n      \"updatedAt\": \"2014-11-06T16:11:43.882Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3589accd-80ab-497d-abb3-697cc1a640cb",
+          "name": "Marketo Get Static List by Id",
+          "request": {
+            "name": "Marketo Get Static List by Id",
+            "description": {
+              "content": "Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "02c8b725-b41d-4dd3-8efc-e51a722e1639",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1985-03-25T01:32:50.085Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 4202,\n      \"name\": \"string\",\n      \"updatedAt\": \"2024-10-04T17:38:50.326Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"2012-10-29T00:01:44.231Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 598,\n      \"name\": \"string\",\n      \"updatedAt\": \"1960-02-28T13:59:06.222Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d8e03a08-8fb9-48e9-95dc-04fc72f98401",
+          "name": "Marketo Update Static List Metadata",
+          "request": {
+            "name": "Marketo Update Static List Metadata",
+            "description": {
+              "content": "Updates the metadata of a static list asset. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the static list"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the static list"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af3d59f5-1aa7-4483-8b11-e72fa62e4c1d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1998-11-13T15:01:55.799Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 8283,\n      \"name\": \"string\",\n      \"updatedAt\": \"1993-06-12T07:36:10.436Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1985-05-25T02:01:40.627Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 7527,\n      \"name\": \"string\",\n      \"updatedAt\": \"1970-12-03T00:15:04.683Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "309a6ad6-0eef-41e3-bf56-e37aaf993093",
+          "name": "Marketo Delete Static List",
+          "request": {
+            "name": "Marketo Delete Static List",
+            "description": {
+              "content": "Deletes the designated Static List. Required Permissions: Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) Id of the static list to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96dde863-e9ef-4057-bb6f-dea11e48b994",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) Id of the static list to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 8434\n    },\n    {\n      \"id\": 2560\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of the smart list to retrieve",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c599b91-eb6f-48e1-ac19-4a23472e0323",
+    "name": "Marketo Engage Rest Approve Id API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

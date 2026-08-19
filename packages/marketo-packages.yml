@@ -1,0 +1,194 @@
+generated: '2026-08-13'
+method: searched
+source: >-
+  https://github.com/Marketo/Community-Supported-Client-Libraries (Marketo's own
+  client-library index), the Marketo GitHub org, and unauthenticated registry
+  metadata endpoints (registry.npmjs.org, pypi.org, rubygems.org,
+  repo.packagist.org, proxy.golang.org, search.maven.org, api.github.com).
+note: >-
+  Marketo publishes almost no first-party REST client libraries. Its own index
+  page is titled "Community Supported Client Libraries" and states plainly that
+  "these client libraries have not been security tested by Marketo"; only two
+  entries appear under its "Official Libraries" heading, and both target the
+  SOAP API that Adobe deprecated on 2026-07-31. The only first-party libraries
+  with live registry metadata are the Marketo Mobile Engagement SDKs (iOS /
+  Android), which are mobile-engagement SDKs, not REST API clients. Every
+  package below carries a structured `version` + `published` read from the
+  registry, because the decay is the finding: the newest first-party REST-era
+  artifact in this list is a 2015 Maven plugin.
+official_sdk_count: 4
+packages:
+  # ---------- FIRST-PARTY (Marketo / Adobe) ----------
+  - language: java
+    registry: maven
+    name: com.marketo:MarketoSDK
+    url: https://search.maven.org/artifact/com.marketo/MarketoSDK
+    install: implementation 'com.marketo:MarketoSDK:0.8.13'
+    official: true
+    version: 0.8.13
+    published: '2024-08-14'
+    source_code: https://github.com/Marketo/android-sdk
+    scope: Marketo Mobile Engagement (Android) — push, in-app messaging, mobile tracking. Not a REST API client.
+  - language: objective-c
+    registry: github
+    name: Marketo/ios-sdk
+    url: https://github.com/Marketo/ios-sdk
+    install: "CocoaPods via the podspec in the repo (no pod published to trunk.cocoapods.org)"
+    official: true
+    version: 0.8.6
+    published: '2024-04-23'
+    scope: Marketo Mobile Engagement (iOS). Not a REST API client.
+    note: >-
+      trunk.cocoapods.org/api/v1/pods/Marketo returns
+      {"error":"No pod found with the specified name."} — the SDK is distributed
+      from GitHub releases only, so there is no registry version to reconcile
+      against. version/published read from the GitHub release list.
+  - language: java
+    registry: maven
+    name: com.marketo:marketo_plugin
+    url: https://search.maven.org/artifact/com.marketo/marketo_plugin
+    official: true
+    version: 2.1.0
+    published: '2015-11-02'
+    scope: Marketo-published Maven plugin. Eleven years without a release.
+  - language: java
+    registry: github
+    name: Marketo/SOAP-API-Java-Client
+    url: https://github.com/Marketo/SOAP-API-Java-Client
+    official: true
+    version: null
+    published: '2017-09-22'
+    scope: >-
+      Listed by Marketo under "Official Libraries". Targets SOAP API v2.1-2.2,
+      which Adobe deprecated on 2026-07-31. Never published to Maven Central —
+      version: null because no registry carries it; date is the last push.
+  - language: csharp
+    registry: github
+    name: Marketo/C-Sample-Code
+    url: https://github.com/Marketo/C-Sample-Code
+    official: true
+    version: null
+    published: '2014-12-19'
+    scope: >-
+      Listed by Marketo under "Official Libraries". C# sample code for the
+      now-deprecated SOAP API. Not published to NuGet — version: null because
+      there is no registry entry to query.
+  - language: java
+    registry: github
+    name: Marketo/REST-Sample-Code
+    url: https://github.com/Marketo/REST-Sample-Code
+    official: true
+    version: null
+    published: '2020-03-07'
+    scope: First-party REST API sample code. Not a packaged library; no registry entry.
+
+  # ---------- COMMUNITY (listed by Marketo, explicitly not security-tested) ----------
+  - language: python
+    registry: pypi
+    name: marketorestpython
+    url: https://pypi.org/project/marketorestpython/
+    install: pip install marketorestpython
+    official: false
+    version: 0.5.25
+    published: '2025-10-27'
+    source_code: https://github.com/jepcastelein/marketo-rest-python
+    note: The most actively maintained client in Marketo's community index.
+  - language: ruby
+    registry: rubygems
+    name: mrkt
+    url: https://rubygems.org/gems/mrkt
+    install: gem install mrkt
+    official: false
+    version: 1.2.2
+    published: '2023-01-08'
+    source_code: https://github.com/raszi/mrkt
+  - language: javascript
+    registry: npm
+    name: node-marketo-rest
+    url: https://www.npmjs.com/package/node-marketo-rest
+    install: npm install node-marketo-rest
+    official: false
+    version: 0.12.2
+    published: '2024-02-06'
+    source_code: https://github.com/MadKudu/node-marketo
+    note: >-
+      A MadKudu fork. Marketo's own index still points at
+      github.com/usermindinc/node-marketo, which never shipped under this name.
+  - language: javascript
+    registry: npm
+    name: node-marketo
+    url: https://www.npmjs.com/package/node-marketo
+    official: false
+    version: 1.0.0
+    published: '2015-11-05'
+    source_code: https://github.com/Datahero/node-marketo
+  - language: php
+    registry: packagist
+    name: dchesterton/marketo-rest-api
+    url: https://packagist.org/packages/dchesterton/marketo-rest-api
+    install: composer require dchesterton/marketo-rest-api
+    official: false
+    version: v0.0.5
+    published: '2015-12-02'
+  - language: php
+    registry: packagist
+    name: eventfarm/marketo-client
+    url: https://packagist.org/packages/eventfarm/marketo-client
+    install: composer require eventfarm/marketo-client
+    official: false
+    version: '1.1'
+    published: '2016-11-03'
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/SpeakData/minimarketo
+    url: https://pkg.go.dev/github.com/SpeakData/minimarketo
+    install: go get github.com/SpeakData/minimarketo
+    official: false
+    version: v0.0.0-20170821092521-29339e452f44
+    published: '2017-08-21'
+    note: Pseudo-version only — the module was never tagged.
+  - language: ruby
+    registry: rubygems
+    name: markety
+    url: https://rubygems.org/gems/markety
+    official: false
+    version: 2.4.1
+    published: '2015-05-07'
+    note: SOAP-era client; the underlying API was retired 2026-07-31.
+  - language: ruby
+    registry: rubygems
+    name: marketo-api-ruby
+    url: https://rubygems.org/gems/marketo-api-ruby
+    official: false
+    version: 0.9.2
+    published: '2014-08-01'
+    note: SOAP-era client; the underlying API was retired 2026-07-31.
+  - language: python
+    registry: pypi
+    name: pymarketo
+    url: https://pypi.org/project/pymarketo/
+    official: false
+    version: 1.1.2
+    published: '2018-04-12'
+  - language: python
+    registry: pypi
+    name: marketo
+    url: https://pypi.org/project/marketo/
+    official: false
+    version: 0.1.0
+    published: '2013-05-24'
+    source_code: https://github.com/segmentio/marketo-python
+    note: SOAP-era client; the underlying API was retired 2026-07-31.
+findings:
+  - >-
+    Marketo names only two "Official Libraries", both for the SOAP API Adobe
+    deprecated on 2026-07-31. There is no first-party REST client library in any
+    registry.
+  - >-
+    The two first-party SDKs with live registry metadata (MarketoSDK 0.8.13,
+    2024-08-14; ios-sdk 0.8.6, 2024-04-23) are Mobile Engagement SDKs and do not
+    wrap the REST API this profile describes.
+  - >-
+    Marketo's published client-library index still links repositories that were
+    never released to a registry under the linked name (usermindinc/node-marketo),
+    and four of its fourteen community entries target the retired SOAP API.

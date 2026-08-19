@@ -1,0 +1,1826 @@
+{
+  "item": [
+    {
+      "id": "a2702158-270e-4708-b209-da16a940b527",
+      "name": "Landing  Pages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f4556bf7-fc9f-46c9-8087-5a802d2dc319",
+          "name": "Marketo Get Landing Page by Name",
+          "request": {
+            "name": "Marketo Get Landing Page by Name",
+            "description": {
+              "content": "Returns the landing page record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of channels to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ef390c9-6394-4016-b0b0-8916dcca6d59",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1971-08-01T10:45:25.122Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1379,\n        \"type\": \"Program\"\n      },\n      \"formPrefill\": false,\n      \"id\": 6245,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5390,\n      \"updatedAt\": \"1967-02-18T18:01:45.250Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1948-05-03T15:37:48.509Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 9627,\n        \"type\": \"Program\"\n      },\n      \"formPrefill\": true,\n      \"id\": 5598,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 1762,\n      \"updatedAt\": \"2009-10-20T18:55:03.242Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10a74762-5025-473f-909b-2da2a3f4f86a",
+          "name": "Marketo Get Landing Page by Id",
+          "request": {
+            "name": "Marketo Get Landing Page by Id",
+            "description": {
+              "content": "Returns the landing record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae693246-eb5e-44cf-b5a2-183f8e81b1a2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1973-06-19T15:29:23.081Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1651,\n        \"type\": \"Program\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6515,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5900,\n      \"updatedAt\": \"1954-03-27T04:47:31.169Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1989-06-04T07:05:28.592Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 7500,\n        \"type\": \"Folder\"\n      },\n      \"formPrefill\": true,\n      \"id\": 8346,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6311,\n      \"updatedAt\": \"1961-02-18T12:04:23.607Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d46238b9-5d76-405f-90dd-b9167e2a8745",
+          "name": "Marketo Update Landing Page Metadata",
+          "request": {
+            "name": "Marketo Update Landing Page Metadata",
+            "description": {
+              "content": "Updates the metadata for the targe landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "customHeadHTML",
+                  "value": "<string>",
+                  "description": "Any custom HTML to embed in the <head> tag of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "facebookOgTags",
+                  "value": "<string>",
+                  "description": "Any OpenGraph meta tags to apply to the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "keywords",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "metaTagsDescription",
+                  "value": "<string>",
+                  "description": "Meta description property of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "mobileEnabled",
+                  "value": "<boolean>",
+                  "description": "Whether the page has mobile viewing enabled. Free-form pages only. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "robots",
+                  "value": "<string>",
+                  "description": "Robots directives to apply to the pages meta tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "styleOverRide",
+                  "value": "<string>",
+                  "description": "Additional CSS styles to append to the landing page <head>"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Title element of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "urlPageName",
+                  "value": "<string>",
+                  "description": "URL path of the page. Derived from the name field if unset"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eee78519-ef0b-487c-a6e7-48fecdbe8fd9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Any custom HTML to embed in the <head> tag of the page",
+                        "type": "text/plain"
+                      },
+                      "key": "customHeadHTML",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Any OpenGraph meta tags to apply to the page",
+                        "type": "text/plain"
+                      },
+                      "key": "facebookOgTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Meta description property of the page",
+                        "type": "text/plain"
+                      },
+                      "key": "metaTagsDescription",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the page has mobile viewing enabled. Free-form pages only. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "mobileEnabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Robots directives to apply to the pages meta tags",
+                        "type": "text/plain"
+                      },
+                      "key": "robots",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Additional CSS styles to append to the landing page <head>",
+                        "type": "text/plain"
+                      },
+                      "key": "styleOverRide",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Title element of the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL path of the page. Derived from the name field if unset",
+                        "type": "text/plain"
+                      },
+                      "key": "urlPageName",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1973-06-19T15:29:23.081Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1651,\n        \"type\": \"Program\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6515,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5900,\n      \"updatedAt\": \"1954-03-27T04:47:31.169Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1989-06-04T07:05:28.592Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 7500,\n        \"type\": \"Folder\"\n      },\n      \"formPrefill\": true,\n      \"id\": 8346,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6311,\n      \"updatedAt\": \"1961-02-18T12:04:23.607Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "753cbb63-2eaa-44a8-9b6e-b0487eac7913",
+          "name": "Marketo Approve Landing Page Draft",
+          "request": {
+            "name": "Marketo Approve Landing Page Draft",
+            "description": {
+              "content": "Approves the current draft of the landing page. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "788ea4a7-fb74-4f73-9e1d-ec9112f98bff",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4256\n    },\n    {\n      \"id\": 9788\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1581cce7-adc9-42f6-8b57-fb89addaf583",
+          "name": "Marketo Clone Landing Page",
+          "request": {
+            "name": "Marketo Clone Landing Page",
+            "description": {
+              "content": "Clones the target landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "clone.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "template",
+                  "value": "<integer>",
+                  "description": "Id of the template used"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e02a069c-820d-409e-a2f3-7126ce86e1b0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "clone.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Id of the template used",
+                        "type": "text/plain"
+                      },
+                      "key": "template",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1982-10-06T04:29:07.436Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6919,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6785,\n      \"updatedAt\": \"1952-01-19T15:28:15.498Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1964-10-30T07:27:56.259Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": false,\n      \"id\": 2338,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5696,\n      \"updatedAt\": \"1981-08-19T08:15:44.337Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fea9d0b9-fea8-4709-927e-1feb91e5f836",
+          "name": "Marketo Delete Landing Page",
+          "request": {
+            "name": "Marketo Delete Landing Page",
+            "description": {
+              "content": "Deletes the target landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "90223e8c-d73b-44e5-8745-912e10d36673",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 7424\n    },\n    {\n      \"id\": 479\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4a8b898c-cb8f-45ef-adb3-2c8e7d2b7a27",
+          "name": "Marketo Discard Landing Page Draft",
+          "request": {
+            "name": "Marketo Discard Landing Page Draft",
+            "description": {
+              "content": "Discards the current draft of the landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "discardDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d2d117c-a136-4d14-8e2a-6c1a8635c412",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "discardDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 7424\n    },\n    {\n      \"id\": 479\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3c3e0d04-6831-49ca-ab4e-2b203e1de563",
+          "name": "Marketo Unapprove Landing Page",
+          "request": {
+            "name": "Marketo Unapprove Landing Page",
+            "description": {
+              "content": "Unapproves the landing page, reverting it to a draft-only state. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "unapprove.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b7ca51d1-76fa-476c-a704-f72fbceb24fd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "unapprove.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1982-10-06T04:29:07.436Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6919,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6785,\n      \"updatedAt\": \"1952-01-19T15:28:15.498Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1964-10-30T07:27:56.259Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": false,\n      \"id\": 2338,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5696,\n      \"updatedAt\": \"1981-08-19T08:15:44.337Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0a87bdd9-52b8-4a61-bea2-3254ffc712b0",
+          "name": "Marketo Update Landing Page Variable",
+          "request": {
+            "name": "Marketo Update Landing Page Variable",
+            "description": {
+              "content": "Updates the value of the given variable. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "variable",
+                "{{variableId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<integer>",
+                  "description": "(Required) New value of the variable"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "daa2231a-929b-43f8-83eb-f6f7bf5942e5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "variable",
+                    "{{variableId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "value",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"value\": {}\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1c82e18c-e536-4441-b5bb-4e9596184d38",
+          "name": "Marketo Get Landing Page Variables",
+          "request": {
+            "name": "Marketo Get Landing Page Variables",
+            "description": {},
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "variables.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9b3166d-762f-43a3-ac93-cfaf9cccbf62",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "variables.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"value\": {}\n    },\n    {\n      \"id\": \"string\",\n      \"type\": \"string\",\n      \"value\": {}\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2e32ef0-26c3-4811-89bf-978d096d4eb7",
+          "name": "Marketo Get Landing Pages",
+          "request": {
+            "name": "Marketo Get Landing Pages",
+            "description": {
+              "content": "Retrieves a list of accessible landing pages from the target instance. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPages.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of landing pages to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                },
+                {
+                  "disabled": false,
+                  "key": "folder",
+                  "value": "<string>",
+                  "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3d8c1d18-8174-4b28-bac9-d276a666ba14",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPages.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "folder",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1982-10-06T04:29:07.436Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6919,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6785,\n      \"updatedAt\": \"1952-01-19T15:28:15.498Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1964-10-30T07:27:56.259Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": false,\n      \"id\": 2338,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5696,\n      \"updatedAt\": \"1981-08-19T08:15:44.337Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "22f54450-d169-4144-aa12-8bbf0ae41deb",
+          "name": "Marketo Create Landing Page",
+          "request": {
+            "name": "Marketo Create Landing Page",
+            "description": {
+              "content": "Creates a new landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPages.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "template",
+                  "value": "<integer>",
+                  "description": "(Required) Id of the template used"
+                },
+                {
+                  "disabled": false,
+                  "key": "customHeadHTML",
+                  "value": "<string>",
+                  "description": "Any custom HTML to embed in the <head> tag of the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "facebookOgTags",
+                  "value": "<string>",
+                  "description": "Any OpenGraph meta tags to apply to the page"
+                },
+                {
+                  "disabled": false,
+                  "key": "keywords",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "mobileEnabled",
+                  "value": "<boolean>",
+                  "description": "Whether the page has mobile viewing enabled. Free-form pages only. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "prefillForm",
+                  "value": "<boolean>",
+                  "description": "Boolean to toggle whether forms embedded in the page will prefill. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "robots",
+                  "value": "<string>",
+                  "description": "Robots directives to apply to the pages meta tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Title element of the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "urlPageName",
+                  "value": "<string>",
+                  "description": "URL path of the page. Derived from the name field if unset"
+                },
+                {
+                  "disabled": false,
+                  "key": "workspace",
+                  "value": "<string>",
+                  "description": "Name of the workspace"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "125a2b5a-07c5-44b8-93cf-180d82202e57",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPages.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Id of the template used",
+                        "type": "text/plain"
+                      },
+                      "key": "template",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Any custom HTML to embed in the <head> tag of the page",
+                        "type": "text/plain"
+                      },
+                      "key": "customHeadHTML",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Any OpenGraph meta tags to apply to the page",
+                        "type": "text/plain"
+                      },
+                      "key": "facebookOgTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "keywords",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the page has mobile viewing enabled. Free-form pages only. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "mobileEnabled",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Boolean to toggle whether forms embedded in the page will prefill. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "prefillForm",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Robots directives to apply to the pages meta tags",
+                        "type": "text/plain"
+                      },
+                      "key": "robots",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Title element of the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "title",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL path of the page. Derived from the name field if unset",
+                        "type": "text/plain"
+                      },
+                      "key": "urlPageName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the workspace",
+                        "type": "text/plain"
+                      },
+                      "key": "workspace",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1982-10-06T04:29:07.436Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": true,\n      \"id\": 6919,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": true,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 6785,\n      \"updatedAt\": \"1952-01-19T15:28:15.498Z\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"customHeadHTML\": \"string\",\n      \"facebookOgTags\": \"string\",\n      \"robots\": \"string\",\n      \"title\": \"string\",\n      \"URL\": \"string\",\n      \"computedUrl\": \"string\",\n      \"createdAt\": \"1964-10-30T07:27:56.259Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"formPrefill\": false,\n      \"id\": 2338,\n      \"keywords\": \"string\",\n      \"mobileEnabled\": false,\n      \"name\": \"string\",\n      \"status\": \"string\",\n      \"template\": 5696,\n      \"updatedAt\": \"1981-08-19T08:15:44.337Z\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0e736613-76c0-4122-9e53-218517fa21eb",
+          "name": "Marketo Get Landing Page Full Content",
+          "request": {
+            "name": "Marketo Get Landing Page Full Content",
+            "description": {
+              "content": "Returns the serialized HTML version of the landing page. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "fullContent.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "leadId",
+                  "value": "<integer>",
+                  "description": "The lead id to impersonate. Landing page is rendered as though it was viewed by this lead."
+                },
+                {
+                  "disabled": false,
+                  "key": "segmentation",
+                  "value": "<string>",
+                  "description": "JSON array of of segmentations. Each segmentation must be a JSON object with members 'segmentationId', and 'segmentId'.<br>Example: [{\"segmentationId\":1030,\"segmentId\":1103}]"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the landing page."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "624ab7ab-f1f0-4103-ae20-a42a94fa4710",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "fullContent.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "leadId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "segmentation",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the landing page."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": \"string\",\n      \"id\": 6948\n    },\n    {\n      \"content\": \"string\",\n      \"id\": 5611\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) id",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) variableId",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "variableId"
+    }
+  ],
+  "info": {
+    "_postman_id": "fdeb2c82-5052-4a5f-b5a4-840585392710",
+    "name": "Marketo Engage Rest Approve Landing  Pages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

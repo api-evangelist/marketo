@@ -1,0 +1,184 @@
+generated: '2026-08-13'
+method: searched
+source:
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/error-codes
+  - openapi/marketo-lead-database-openapi-original.json
+description: >-
+  Cross-cutting request/response semantics for the Marketo Engage REST API — the
+  rules an agent must follow that no single operation states.
+base_url:
+  form: https://{munchkinId}.mktorest.com/rest
+  templated: true
+  variable:
+    munchkinId: >-
+      The subscription's Munchkin ID / account ID, unique per Marketo instance
+      (example from Adobe's own docs: 284-RPR-133). Found in the instance at
+      Admin > Integration > Web Services, labelled "Endpoint:".
+  example: https://284-RPR-133.mktorest.com/rest/v1/lead/318581.json?fields=email,firstName,lastName
+  identity_host: https://{munchkinId}.mktorest.com/identity
+  note: >-
+    There is no shared production host. Every caller's base URL is different,
+    which is why the specs Adobe publishes carry host `localhost:8080` rather
+    than a real server. Treat the host as configuration, not a constant.
+  known_issue: >-
+    Adobe has announced deprecation of the double slash in API gateway URLs;
+    normalise paths before sending.
+authentication:
+  style: OAuth 2.0 client credentials, bearer token
+  header: 'Authorization: Bearer <access_token>'
+  token_lifetime_seconds: 3600
+  deprecated: access_token query/form parameter — removed 2026-08-31
+  detail: authentication/marketo-authentication.yml
+idempotency:
+  header: null
+  supported: false
+  mechanism: natural-key upsert
+  detail: >-
+    Marketo publishes NO Idempotency-Key header and no request-replay dedupe.
+    Safe re-execution is instead expressed through the write model: the sync
+    operations are upserts keyed on a caller-chosen field, and each carries an
+    explicit `action` mode that makes the intended effect unambiguous on retry.
+  action_modes:
+    - value: createOnly
+      effect: Fails with record error 1005 "Lead already exists" if the key matches.
+    - value: updateOnly
+      effect: Fails with record error 1004 "Lead not found" if the key does not match.
+    - value: createOrUpdate
+      effect: Upsert. The default and the replay-safe mode.
+    - value: createDuplicate
+      effect: Always inserts. NOT replay-safe — a retry creates a second record.
+  dedupe_key:
+    parameter: lookupField
+    default: email
+    note: >-
+      Any unique field may be nominated, including a caller-owned external id.
+      Using an external id as lookupField with action createOrUpdate is the
+      closest equivalent to an idempotency key this API offers, and is the
+      pattern Adobe's own bulk-import guidance assumes.
+    failure: >-
+      Error 1007 "Multiple leads match the lookup criteria" — updates only run
+      when the key matches exactly one record.
+  external_keys:
+    - object: company
+      field: externalCompanyId
+    - object: opportunity
+      field: externalOpportunityId
+    - object: sales person
+      field: externalSalesPersonId
+    - object: custom object
+      field: dedupeFields declared on the custom object type
+  duplicate_input_guard: >-
+    Error 1036 "Duplicate object found in input" — a single request may not
+    update two records through the same foreign key, so batch de-duplication is
+    the caller's job.
+  agent_guidance: >-
+    Retry a failed write ONLY with action createOrUpdate and a stable
+    lookupField. Never retry createDuplicate. Because most failures arrive as
+    HTTP 200, decide retry from the body, not the status line.
+pagination:
+  styles:
+    - style: token
+      applies: Activity and change feeds (Get Lead Activities, Get Lead Changes, Get Deleted Leads).
+      params: [nextPageToken]
+      seed: >-
+        Obtain the first token from getActivitiesPagingTokenUsingGET (Get Paging
+        Token) using a `sinceDatetime` timestamp — the feed cursor cannot be
+        constructed client-side.
+      response_fields: [nextPageToken, moreResult]
+      termination: Stop when moreResult is false.
+    - style: token
+      applies: Bulk / large result sets across the Lead Database API.
+      params: [nextPageToken, batchSize]
+      response_fields: [nextPageToken, moreResult]
+    - style: offset
+      applies: Asset API list operations.
+      params: [offset, maxReturn]
+      default_max_return: 20
+      max_max_return: 200
+  batch_size:
+    default: 300
+    max: 300
+    applies: Bulk export job listings and several activity endpoints.
+filtering:
+  style: filterType / filterValues pair
+  detail: >-
+    Get Leads by Filter Type takes a `filterType` naming the field and a
+    comma-separated `filterValues`. Not every standard field is filterable —
+    error 1011 "Field '%s' not supported" is returned for unsupported fields.
+  filterable_fields: >-
+    Any custom field of string, email or integer type, plus a documented set of
+    standard fields (cookies, email, ...). See the getLeadsByFilterUsingGET
+    parameter description in the Lead Database spec for the current list.
+field_selection:
+  parameter: fields
+  form: Comma-separated field names, e.g. fields=email,firstName,lastName
+  discovery: >-
+    Field vocabularies are runtime, not static. Use describeUsingGET_2 /
+    describeUsingGET_6 (Describe Lead / Describe Lead2), getLeadFieldsUsingGET,
+    describeUsingGET (Describe Companies), describeUsingGET_4 (Describe
+    Opportunity) and describeCustomObjectTypeUsingGET to enumerate what a given
+    subscription actually has. Every instance differs.
+long_request_workaround:
+  problem: HTTP 414 when a GET URI exceeds 8KB.
+  solution: >-
+    Re-issue as POST with `_method=GET` appended to the URL and the query string
+    moved into an application/x-www-form-urlencoded body.
+  note: >-
+    This is a Marketo-specific method-override convention, and it is mandatory
+    for any real-world filter query on GUID-valued fields.
+request_tracing:
+  request_id_header: null
+  request_id_field: requestId
+  detail: >-
+    Every JSON response body carries a `requestId` (e.g. "e42b#14272d07d78").
+    There is no correlation-id request header — the id is server-assigned and
+    read from the body. Log it; Adobe Support asks for it.
+versioning:
+  scheme: uri-path
+  current: v1
+  paths:
+    - /rest/v1/...      # Lead Database
+    - /rest/asset/v1/...  # Asset API
+    - /bulk/v1/...        # Bulk import/export
+    - /userservice/management/v1/...  # User Management
+    - /identity/oauth/token           # Identity
+  detail: lifecycle/marketo-lifecycle.yml
+error_envelope:
+  format: proprietary
+  shape: '{requestId, success, errors[{code,message}]} or {requestId, success, result[{status,reasons[]}]}'
+  http_status_on_error: 200
+  critical: >-
+    HTTP status is NOT the failure signal. Read the boolean `success` member, and
+    on batch writes read each record's `status` and `reasons`. Adobe instructs
+    integrators not to evaluate the HTTP reason phrase at all.
+  detail: errors/marketo-error-codes.yml
+rate_limit_signaling:
+  headers: none
+  signal: In-body response-level codes 606 (rate), 607 (daily quota), 615 (concurrency), all with HTTP 200.
+  budget_introspection: getDailyUsageUsingGET, getLast7DaysUsageUsingGET, getDailyErrorsUsingGET, getLast7DaysErrorsUsingGET
+  detail: rate-limits/marketo-rate-limits.yml
+content_type:
+  request: application/json (error 612 if omitted on a body-bearing call)
+  bulk_import: multipart/form-data (error 613 when malformed)
+  bulk_export_download: text/csv, text/tab-separated-values, application/x-ndjson
+asynchrony:
+  model: job
+  detail: >-
+    Bulk import and bulk export are job-based, not request/response. Create the
+    job, enqueue it, poll status, then download the file — e.g.
+    createExportLeadsUsingPOST -> enqueueExportLeadsUsingPOST ->
+    getExportLeadsStatusUsingGET -> getExportLeadsFileUsingGET. Job states are
+    Created, Queued, Processing, Cancelled, Completed, Failed.
+  ingestion_api: >-
+    The separate Data Ingestion API (mkto-ingestion-api.adobe.io) returns HTTP
+    202 Accepted for asynchronous processing and is the only Marketo surface that
+    uses real HTTP status semantics for both success and error.
+cross_reference:
+  errors: errors/marketo-error-codes.yml
+  authentication: authentication/marketo-authentication.yml
+  scopes: scopes/marketo-scopes.yml
+  rate_limits: rate-limits/marketo-rate-limits.yml
+  lifecycle: lifecycle/marketo-lifecycle.yml

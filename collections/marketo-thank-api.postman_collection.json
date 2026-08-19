@@ -1,0 +1,279 @@
+{
+  "item": [
+    {
+      "id": "b47e9d32-b495-4577-b16f-2fca4c5ae684",
+      "name": "Thank",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6f8f8cfa-0556-41a5-bfbc-ecdc8fdeb43a",
+          "name": "Marketo Get Thank You Page by Form Id",
+          "request": {
+            "name": "Marketo Get Thank You Page by Form Id",
+            "description": {
+              "content": "Returns the thank you page configuration for a given form. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "thankYouPage.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fdd199f3-443c-44f8-a253-83864274bd0b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "thankYouPage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 7901,\n      \"thankYouList\": [\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": 3415,\n      \"thankYouList\": [\n        {\n          \"default\": false,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": false,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c9ba575e-c008-4b93-8ad9-aa65735a260f",
+          "name": "Marketo Update Thank You Page",
+          "request": {
+            "name": "Marketo Update Thank You Page",
+            "description": {
+              "content": "Updates the thank you page configuration for a given form. This update is destructive and the resulting draft will not have any memory of the previous configuration. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "thankYouPage.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "thankyou",
+                  "value": "{\"followupType\":\"<string>\",\"followupValue\":\"<string>\",\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"default\":\"<boolean>\"}",
+                  "description": "JSON array of followup rules"
+                },
+                {
+                  "disabled": false,
+                  "key": "thankyou",
+                  "value": "{\"followupType\":\"<string>\",\"followupValue\":\"<string>\",\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"default\":\"<boolean>\"}",
+                  "description": "JSON array of followup rules"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ba3a104b-e19e-4db9-8500-7a03034d9163",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "thankYouPage.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "JSON array of followup rules",
+                        "type": "text/plain"
+                      },
+                      "key": "thankyou",
+                      "value": "{\"followupType\":\"<string>\",\"followupValue\":\"<string>\",\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"default\":\"<boolean>\"}"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "JSON array of followup rules",
+                        "type": "text/plain"
+                      },
+                      "key": "thankyou",
+                      "value": "{\"followupType\":\"<string>\",\"followupValue\":\"<string>\",\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"default\":\"<boolean>\"}"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 8027,\n      \"thankYouList\": [\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"id\": 5311,\n      \"thankYouList\": [\n        {\n          \"default\": false,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4c2e493b-5223-49bb-9053-8d863eb30a69",
+    "name": "Marketo Engage Rest Approve Thank API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

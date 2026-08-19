@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Tokens API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Tokens by Folder Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "folderType",
+                "value": "",
+                "type": "query",
+                "description": "Type of folder. 'Folder' or 'Program'"
+              }
+            ]
+          },
+          "docs": "Retrieves the list of available My Tokens in the target folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the folder to which the token will be associated with"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Create or update a token in the parent folder. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Token by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/folder/:id/tokens/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Deletes a token with the given name from the parent folder. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

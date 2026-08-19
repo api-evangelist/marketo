@@ -1,0 +1,608 @@
+{
+  "item": [
+    {
+      "id": "41d6c154-8978-49e1-8ae9-f7f1bf76f230",
+      "name": "Approve",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4dd61093-7942-416a-9f15-f1634cfe581c",
+          "name": "Marketo Approve Email Draft",
+          "request": {
+            "name": "Marketo Approve Email Draft",
+            "description": {
+              "content": "Approves the current draft of an email. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35b038ac-abd7-4e10-9e7f-7053d2c6ac55",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 9198\n    },\n    {\n      \"id\": 8158\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "96e435ab-8a4f-42ac-9457-007ca503ecd2",
+          "name": "Marketo Approve Email Template Draft",
+          "request": {
+            "name": "Marketo Approve Email Template Draft",
+            "description": {
+              "content": "Approves the current draft of the email template. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "emailTemplate",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4788facb-2171-4abe-af86-28f089b2cc18",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "emailTemplate",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": {\n        \"id\": 6752,\n        \"type\": \"Program\"\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"1957-03-19T21:12:50.908Z\",\n      \"description\": \"string\",\n      \"id\": 1086,\n      \"name\": \"string\",\n      \"updatedAt\": \"2026-06-13T04:28:51.802Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\"\n    },\n    {\n      \"folder\": {\n        \"id\": 1748,\n        \"type\": \"Program\"\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"2009-04-22T16:14:16.352Z\",\n      \"description\": \"string\",\n      \"id\": 7194,\n      \"name\": \"string\",\n      \"updatedAt\": \"2018-10-23T16:08:58.675Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5d7991cf-1317-4efa-86bb-478657682fc8",
+          "name": "Marketo Approve Form Draft",
+          "request": {
+            "name": "Marketo Approve Form Draft",
+            "description": {
+              "content": "Approves the current draft of the form. This will delete the current approved version of the form. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b2b31abf-a18c-4862-aa7a-671881c156d3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"buttonLabel\": \"string\",\n      \"buttonLocation\": 294,\n      \"folder\": {\n        \"id\": 2927,\n        \"type\": \"Folder\"\n      },\n      \"fontFamily\": \"string\",\n      \"fontSize\": \"string\",\n      \"knownVisitor\": {\n        \"template\": \"string\",\n        \"type\": \"string\"\n      },\n      \"labelPosition\": \"string\",\n      \"language\": \"string\",\n      \"locale\": \"string\",\n      \"progressiveProfiling\": true,\n      \"status\": \"approved\",\n      \"thankYouList\": [\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": false,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"theme\": \"string\",\n      \"waitingLabel\": \"string\",\n      \"createdAt\": \"2024-07-31T04:49:20.083Z\",\n      \"description\": \"string\",\n      \"id\": 6547,\n      \"name\": \"string\",\n      \"updatedAt\": \"1963-04-17T10:21:02.124Z\",\n      \"url\": \"string\"\n    },\n    {\n      \"buttonLabel\": \"string\",\n      \"buttonLocation\": 6594,\n      \"folder\": {\n        \"id\": 2922,\n        \"type\": \"Folder\"\n      },\n      \"fontFamily\": \"string\",\n      \"fontSize\": \"string\",\n      \"knownVisitor\": {\n        \"template\": \"string\",\n        \"type\": \"string\"\n      },\n      \"labelPosition\": \"string\",\n      \"language\": \"string\",\n      \"locale\": \"string\",\n      \"progressiveProfiling\": false,\n      \"status\": \"draft\",\n      \"thankYouList\": [\n        {\n          \"default\": true,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"default\": false,\n          \"followupType\": \"string\",\n          \"followupValue\": {},\n          \"operator\": \"string\",\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ],\n      \"theme\": \"string\",\n      \"waitingLabel\": \"string\",\n      \"createdAt\": \"2006-07-23T03:19:13.584Z\",\n      \"description\": \"string\",\n      \"id\": 3475,\n      \"name\": \"string\",\n      \"updatedAt\": \"2026-08-02T15:01:50.012Z\",\n      \"url\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6643b38-e84a-48b9-85f0-7e9eb88226b7",
+          "name": "Marketo Approve Landing Page Draft",
+          "request": {
+            "name": "Marketo Approve Landing Page Draft",
+            "description": {
+              "content": "Approves the current draft of the landing page. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "70b2d05f-0c6b-4597-a2a3-1802c19d2b29",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 7997\n    },\n    {\n      \"id\": 4631\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0013e1ca-783b-433e-9d5b-a856d405fcd4",
+          "name": "Marketo Approve Landing Page Template Draft",
+          "request": {
+            "name": "Marketo Approve Landing Page Template Draft",
+            "description": {
+              "content": "Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPageTemplate",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bf68adf8-5adf-4304-915a-a54908c3a1b3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPageTemplate",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"enableMunchkin\": true,\n      \"folder\": {\n        \"id\": 1121,\n        \"type\": \"Program\"\n      },\n      \"status\": \"string\",\n      \"templateType\": \"guided\",\n      \"createdAt\": \"1971-11-27T07:33:59.710Z\",\n      \"description\": \"string\",\n      \"id\": 8145,\n      \"name\": \"string\",\n      \"updatedAt\": \"1949-09-21T06:53:32.618Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"enableMunchkin\": true,\n      \"folder\": {\n        \"id\": 3028,\n        \"type\": \"Program\"\n      },\n      \"status\": \"string\",\n      \"templateType\": \"freeForm\",\n      \"createdAt\": \"2019-09-23T11:44:03.403Z\",\n      \"description\": \"string\",\n      \"id\": 2423,\n      \"name\": \"string\",\n      \"updatedAt\": \"1949-05-05T15:49:45.823Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "40ff73c7-2b02-4ed0-bee5-08934919c619",
+          "name": "Marketo Approve Snippet Draft",
+          "request": {
+            "name": "Marketo Approve Snippet Draft",
+            "description": {
+              "content": "Approves the current draft of the snippet. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "snippet",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8311ef98-81b0-41ba-a865-2fdac17fea76",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "snippet",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Folder\",\n        \"value\": 7828\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"1956-08-30T23:43:57.747Z\",\n      \"description\": \"string\",\n      \"id\": 5571,\n      \"name\": \"string\",\n      \"updatedAt\": \"2014-05-01T20:01:50.162Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Program\",\n        \"value\": 4420\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"2012-11-23T07:45:11.587Z\",\n      \"description\": \"string\",\n      \"id\": 2837,\n      \"name\": \"string\",\n      \"updatedAt\": \"2003-02-07T14:24:04.964Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "803e697f-2a35-45b9-9429-ec8fbbc632f7",
+    "name": "Marketo Engage Rest Approve API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

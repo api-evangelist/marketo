@@ -1,0 +1,68 @@
+generated: '2026-08-13'
+method: searched
+source:
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/custom-services
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+available: false
+finding: >-
+  Marketo Engage publishes NO sandbox, no test mode, no test-vs-live key prefix,
+  no magic test identifiers, no test clock, and no fixture tooling. There is one
+  kind of credential and it operates on live data in a live subscription. This is
+  a genuine absence, not an unsearched one — /rest/sandbox 404s, and neither the
+  REST overview, the authentication page nor the custom-services page mentions a
+  test environment.
+test_live_separation:
+  supported: false
+  key_prefixes: null
+  note: >-
+    A LaunchPoint Custom Service issues one Client Id / Client Secret pair. There
+    is no `test_` / `live_` distinction and no mode flag on the token. Whatever a
+    credential can reach, it reaches for real.
+magic_values: []
+test_clock: null
+fixtures: null
+what_exists_instead:
+  - mechanism: Separate sandbox subscription
+    detail: >-
+      Marketo sandbox instances are sold as a separate subscription with their
+      own Munchkin ID, and therefore their own base URL and their own
+      credentials. Isolation is a purchasing decision, not an API feature.
+    caveat: >-
+      Not documented in the developer guide and not verifiable from the public
+      surface — business.adobe.com refused connections from this run, so this is
+      recorded as context, not as an evidenced claim.
+  - mechanism: Least-privilege API-Only users
+    detail: >-
+      Adobe's documented substitute for a sandbox is role scoping: create a
+      separate API-Only user per integration with only the minimum "Access API"
+      permissions, so a misbehaving integration cannot write what it should not.
+    source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/custom-services
+    reference: scopes/marketo-scopes.yml
+  - mechanism: Workspaces and Partitions
+    detail: >-
+      Subscriptions with Workspaces and Partitions enabled can confine a
+      credential to one workspace and its partitions, isolating record and asset
+      access without a second instance.
+  - mechanism: Non-destructive dry-run modes on writes
+    detail: >-
+      The sync operations' `action` enum lets a caller assert intent instead of
+      guessing — `createOnly` fails rather than overwriting an existing record,
+      `updateOnly` fails rather than creating one. Combined with a per-record
+      response, this is the closest thing to a safe rehearsal the API offers.
+    reference: conventions/marketo-conventions.yml
+  - mechanism: Usage and error introspection
+    detail: >-
+      getDailyUsageUsingGET and getDailyErrorsUsingGET let an integration observe
+      what it actually did against the live instance after the fact.
+agent_risk: >-
+  Notable for agent deployment: there is no environment in which an agent can
+  rehearse a Marketo write. Every triggerCampaignUsingPOST executes real
+  marketing flow steps against real people on the first call.
+evidence:
+  - url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/sandbox
+    status: 404
+  - url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+    status: 200
+  - url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/custom-services
+    status: 200

@@ -1,0 +1,704 @@
+{
+  "item": [
+    {
+      "id": "4b7d9706-df0f-4efd-bc46-faef234c162e",
+      "name": "Static",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8db3cca-c86a-4cd2-849c-7e00a8edd828",
+          "name": "Marketo Get Static List by Id",
+          "request": {
+            "name": "Marketo Get Static List by Id",
+            "description": {
+              "content": "Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "83df359b-c624-4f1a-b550-d70f59e67167",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2007-01-03T02:28:46.658Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 7592,\n        \"type\": \"Program\"\n      },\n      \"id\": 7398,\n      \"name\": \"string\",\n      \"updatedAt\": \"1994-07-29T09:57:27.393Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1998-01-28T02:25:50.618Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 9352,\n        \"type\": \"Program\"\n      },\n      \"id\": 9996,\n      \"name\": \"string\",\n      \"updatedAt\": \"1953-05-05T16:30:50.132Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a7a6852-2681-4556-9919-097b31f06815",
+          "name": "Marketo Update Static List Metadata",
+          "request": {
+            "name": "Marketo Update Static List Metadata",
+            "description": {
+              "content": "Updates the metadata of a static list asset. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the static list"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the static list"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "880bdeb6-c46d-48c2-bec1-938b70509f9d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1980-02-24T17:19:19.796Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 6583,\n        \"type\": \"Folder\"\n      },\n      \"id\": 3968,\n      \"name\": \"string\",\n      \"updatedAt\": \"1947-03-20T08:17:07.457Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1963-05-11T23:45:16.343Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1489,\n        \"type\": \"Folder\"\n      },\n      \"id\": 4254,\n      \"name\": \"string\",\n      \"updatedAt\": \"1948-04-29T08:30:44.189Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ecd8ef6-ecf3-4516-9053-a36c1e380461",
+          "name": "Marketo Get Static Lists",
+          "request": {
+            "name": "Marketo Get Static Lists",
+            "description": {
+              "content": "Retrieves a list of Static List records. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticLists.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "folder",
+                  "value": "<string>",
+                  "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of static lists to return. Max 200, default 20."
+                },
+                {
+                  "disabled": false,
+                  "key": "earliestUpdatedAt",
+                  "value": "<string>",
+                  "description": "Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+                },
+                {
+                  "disabled": false,
+                  "key": "latestUpdatedAt",
+                  "value": "<string>",
+                  "description": "Exclude static lists after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "89ee1ef2-bc16-403d-a06e-61e3470be311",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticLists.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "folder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "earliestUpdatedAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latestUpdatedAt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1980-02-24T17:19:19.796Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 6583,\n        \"type\": \"Folder\"\n      },\n      \"id\": 3968,\n      \"name\": \"string\",\n      \"updatedAt\": \"1947-03-20T08:17:07.457Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1963-05-11T23:45:16.343Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 1489,\n        \"type\": \"Folder\"\n      },\n      \"id\": 4254,\n      \"name\": \"string\",\n      \"updatedAt\": \"1948-04-29T08:30:44.189Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "84e8e46a-cc18-432d-b3b0-ba33f5ff92ce",
+          "name": "Marketo Create Static List",
+          "request": {
+            "name": "Marketo Create Static List",
+            "description": {
+              "content": "Creates a new Static List. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticLists.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the static list"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the static list"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df9d496b-50a4-4420-b5ab-16b1ee338874",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticLists.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the static list",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2011-12-11T16:31:15.511Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 6499,\n      \"name\": \"string\",\n      \"updatedAt\": \"2016-09-15T00:26:25.582Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1980-05-06T03:02:01.633Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 6539,\n      \"name\": \"string\",\n      \"updatedAt\": \"1948-06-25T14:03:44.807Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ac3bb738-759d-40d6-a03d-02e66bb291b6",
+          "name": "Marketo Get Static List by Name",
+          "request": {
+            "name": "Marketo Get Static List by Name",
+            "description": {
+              "content": "Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of static list to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a5cfc64a-c3f0-4b21-862a-dd015000fab2",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2011-12-11T16:31:15.511Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 6499,\n      \"name\": \"string\",\n      \"updatedAt\": \"2016-09-15T00:26:25.582Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"1980-05-06T03:02:01.633Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"id\": 6539,\n      \"name\": \"string\",\n      \"updatedAt\": \"1948-06-25T14:03:44.807Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "482fd9a2-fd26-4854-ad9a-467f0de9e69a",
+          "name": "Marketo Delete Static List",
+          "request": {
+            "name": "Marketo Delete Static List",
+            "description": {
+              "content": "Deletes the designated Static List. Required Permissions: Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "id",
+                  "description": "(Required) Id of the static list to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f68ac3e0-07bd-4716-9a3d-3f67688caa61",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "id",
+                      "description": "(Required) Id of the static list to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5930\n    },\n    {\n      \"id\": 4211\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of the static list to retrieve",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<long>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "1a7421d8-67f1-4afc-a1f0-36aa8178f200",
+    "name": "Marketo Engage Rest Approve Static API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

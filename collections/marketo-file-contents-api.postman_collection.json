@@ -1,0 +1,171 @@
+{
+  "item": [
+    {
+      "id": "ae0817fa-5074-43fd-b691-ba765e88363b",
+      "name": "File  Contents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "836a079f-d80f-48f0-b656-ffadad143be4",
+          "name": "Marketo Update File Content",
+          "request": {
+            "name": "Marketo Update File Content",
+            "description": {
+              "content": "Replaces the current content of the file with the included payload. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "file",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id for file in database"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Multipart file. Content of the file."
+                },
+                {
+                  "key": "id",
+                  "value": "<integer>",
+                  "type": "text",
+                  "description": "(Required) Id of the file"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b7f11024-795d-474d-b961-bba3d48d7656",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "file",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id for file in database"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Multipart file. Content of the file.",
+                        "type": "text/plain"
+                      },
+                      "key": "file",
+                      "value": "<string>",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "(Required) Id of the file",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1967-04-06T06:55:57.504Z\",\n      \"folder\": {\n        \"id\": 3501,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 2903,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 8778,\n      \"updatedAt\": \"1997-09-03T14:46:07.268Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"createdAt\": \"1960-07-20T04:54:35.027Z\",\n      \"folder\": {\n        \"id\": 6335,\n        \"name\": \"string\",\n        \"type\": \"string\"\n      },\n      \"id\": 4918,\n      \"mimeType\": \"string\",\n      \"name\": \"string\",\n      \"size\": 9286,\n      \"updatedAt\": \"1949-04-17T19:11:30.739Z\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ed3b69ac-2cfe-4672-bfda-f162db648408",
+    "name": "Marketo Engage Rest Approve File  Contents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

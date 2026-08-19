@@ -1,0 +1,137 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Static  Lists API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Static  Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Static List by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Static List Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of static list to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of a static list asset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static Lists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticLists.json",
+            "params": [
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of static lists to return. Max 200, default 20."
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude static lists after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of Static List records. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Static List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticLists.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Creates a new Static List. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Static List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the designated Static List. Required Permissions: Read-Write Asset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

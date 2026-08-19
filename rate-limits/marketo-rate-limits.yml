@@ -1,89 +1,135 @@
-specification: API Commons Rate Limits
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+docs:
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/error-codes
 provider: Marketo
 providerId: marketo
-created: '2026-05-04'
-modified: '2026-05-04'
-tags:
-  - Adobe
-  - Automation
-  - Marketing
-  - Marketing Automation
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Marketo API surface. Captures per-tier quotas,
-  burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to be replaced
-  with published provider limits.
+supersedes: >-
+  The 2026-05-04 scaffold that previously occupied this file. That file asserted
+  X-RateLimit-* response headers, a 429 status, and free/pro tiers, none of which
+  Marketo implements. Every value below is published by Adobe.
+description: >-
+  Published rate, quota and concurrency limits for the Marketo Engage REST API.
+  Limits are per Marketo SUBSCRIPTION (instance), not per API key — every custom
+  service in an instance draws on the same budget.
 headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+  limit: null
+  remaining: null
+  reset: null
+  retryAfter: null
+  policy: null
+headers_note: >-
+  Marketo returns NO rate-limit response headers. There is no X-RateLimit-*, no
+  RFC 9331 RateLimit-*, and no Retry-After. The only runtime signals an agent
+  gets are the in-body response-level error codes below, all delivered with HTTP
+  status 200. Backoff must therefore be driven by parsing the JSON body, and
+  budget monitoring must be done by polling the Usage endpoints.
 responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+  throttled: 200
+  throttledBodyCode: '606'
+  quotaExceeded: 200
+  quotaExceededBodyCode: '607'
+  concurrencyExceeded: 200
+  concurrencyExceededBodyCode: '615'
+  note: >-
+    Marketo does not use HTTP 429. Adobe states explicitly that "when a call
+    contains an error, the API typically still returns HTTP status code 200."
+limit_count: 6
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Marketo Engage REST API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - Marketo Engage REST API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
+  - name: Rate limit
+    scope: subscription
+    metric: requests
     limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Marketo Engage REST API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Marketo Engage REST API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Marketo Engage REST API
-policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
-maintainers:
-  - FN: API Evangelist
-    url: http://apievangelist.com
-    email: info@apievangelist.com
+    window: 20 seconds
+    burst: null
+    error_code: '606'
+    error_message: 'Max rate limit `%s`; exceeded with in `%s` secs'
+    applies: All REST API calls in the instance.
+  - name: Daily quota
+    scope: subscription
+    metric: requests
+    limit: 50000
+    window: day
+    resets: 12:00 AM CST
+    error_code: '607'
+    error_message: Daily quota reached
+    increase: Contact your Adobe account manager to raise the daily quota.
+    visibility: Admin > Web Services shows the instance quota.
+  - name: Concurrency limit
+    scope: subscription
+    metric: concurrent_requests
+    limit: 10
+    window: instantaneous
+    error_code: '615'
+    error_message: Concurrent access limit reached
+  - name: Bulk extract job queue
+    scope: subscription
+    metric: queued_jobs
+    limit: 10
+    window: instantaneous
+    error_code: '1029'
+  - name: Bulk extract daily volume
+    scope: subscription
+    metric: bytes
+    limit: 524288000
+    limit_human: 500MB per day
+    window: day
+    resets: 12:00 AM CST
+    error_code: '1029'
+  - name: Bulk import queue
+    scope: subscription
+    metric: queued_imports
+    limit: 10
+    window: instantaneous
+    error_code: '1016'
+request_size_limits:
+  - name: Standard call URI length
+    limit_bytes: 8192
+    limit_human: 8 KB
+    error_status: 414
+    remediation: Retry as POST with `_method=GET` and the query string in the body.
+  - name: Standard call body size
+    limit_bytes: 1048576
+    limit_human: 1 MB
+    error_status: 413
+  - name: Bulk call body size
+    limit_bytes: 10485760
+    limit_human: 10 MB
+    error_status: 413
+  - name: Custom activity attributes array
+    limit_bytes: 65536
+    error_code: '1049'
+  - name: Merge Leads leadIds
+    limit: 25
+    error_code: '1080'
+    effective: '2026-07-31'
+  - name: Static list size for Get Lead Activities / Get Lead Changes listId
+    limit: 9999
+    error_code: '1003'
+    effective: '2026-09-30'
+    note: >-
+      From 2026-09-30 a listId naming a static list with 10,000 or more leads
+      fails. Announced in the August 2026 release notes.
+self_service_monitoring:
+  note: >-
+    Because there are no rate-limit headers, Marketo exposes usage as first-class
+    API operations. These are the only programmatic way to see budget consumption.
+  operations:
+    - operationId: getDailyUsageUsingGET
+      summary: Get Daily Usage
+      spec: openapi/marketo-lead-database-openapi-original.json
+    - operationId: getLast7DaysUsageUsingGET
+      summary: Get Weekly Usage
+      spec: openapi/marketo-lead-database-openapi-original.json
+    - operationId: getDailyErrorsUsingGET
+      summary: Get Daily Errors
+      spec: openapi/marketo-lead-database-openapi-original.json
+    - operationId: getLast7DaysErrorsUsingGET
+      summary: Get Weekly Errors
+      spec: openapi/marketo-lead-database-openapi-original.json
+free_calls:
+  note: >-
+    Adobe documents that a call returning a response-level error code is not
+    counted against the daily quota or the rate limit.

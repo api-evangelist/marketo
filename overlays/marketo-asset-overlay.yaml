@@ -1,0 +1,75 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Marketo Engage Asset API
+  version: 1.0.0
+extends: openapi/marketo-asset-openapi-original.json
+x-generated: '2026-08-13'
+x-method: generated
+x-source: >-
+  Adobe-published specification harvested verbatim from
+  https://github.com/AdobeDocs/marketo-apis/tree/main/static — enhancements
+  below are API Evangelist additions and are never written back into the
+  original.
+actions:
+  - target: $
+    description: >-
+      Replace Adobe's placeholder host. The published spec carries
+      `host: localhost:8080`, which is non-routable. Marketo's real base is
+      per-subscription and templated on the Munchkin ID, documented at
+      https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
+    update:
+      x-apievangelist-base-url: 'https://{munchkinId}.mktorest.com'
+      x-apievangelist-base-url-templated: true
+      x-apievangelist-base-url-variable: munchkinId
+      x-apievangelist-base-url-source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
+  - target: $
+    description: >-
+      Record the security scheme the provider documents but does not declare.
+      No published Marketo spec contains securityDefinitions or
+      components.securitySchemes.
+    update:
+      x-apievangelist-authentication:
+        type: oauth2
+        flow: clientCredentials
+        tokenUrl: 'https://{munchkinId}.mktorest.com/identity/oauth/token'
+        transport: 'Authorization: Bearer'
+        token_lifetime_seconds: 3600
+        scopes: none
+        authorization_model: role-permissions
+        artifact: authentication/marketo-authentication.yml
+  - target: $
+    description: >-
+      Flag the response-semantics hazard the spec cannot express. Marketo returns
+      HTTP 200 for authentication failure, rate-limit exhaustion, quota
+      exhaustion and per-record write failure; the real signal is the body's
+      `success` member.
+    update:
+      x-apievangelist-error-semantics:
+        http_status_reliable: false
+        success_field: success
+        response_error_array: errors
+        record_error_array: result[].reasons
+        catalog: errors/marketo-error-codes.yml
+  - target: $.info
+    description: Provenance, operating envelope and cross-links to the derived artifacts.
+    update:
+      x-apievangelist-provider: marketo
+      x-apievangelist-operations: 199
+      x-apievangelist-artifacts:
+        authentication: authentication/marketo-authentication.yml
+        permissions: scopes/marketo-scopes.yml
+        errors: errors/marketo-error-codes.yml
+        conventions: conventions/marketo-conventions.yml
+        rate_limits: rate-limits/marketo-rate-limits.yml
+        lifecycle: lifecycle/marketo-lifecycle.yml
+        data_model: data-model/marketo-data-model.yml
+        skills: skills/_index.yml
+      x-apievangelist-rate-limit:
+        rate: 100 calls per 20 seconds per subscription
+        daily_quota: 50000
+        concurrency: 10
+        headers: none
+        exhaustion_codes: ['606', '607', '615']
+      x-apievangelist-deprecations:
+        - item: access_token query/form parameter
+          removal_date: '2026-08-31'

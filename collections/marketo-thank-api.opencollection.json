@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Thank API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Thank",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Thank You Page by Form Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/thankYouPage.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Status filter for draft or approved versions"
+              }
+            ]
+          },
+          "docs": "Returns the thank you page configuration for a given form. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Thank You Page",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/thankYouPage.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the thank you page configuration for a given form. This update is destructive and the resulting draft will not have any memory of the previous configuration. Required Permissions: Read-Only Assets, Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

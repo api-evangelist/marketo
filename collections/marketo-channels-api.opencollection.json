@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Channels API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Channels",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Channel by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/channel/byName.json",
+            "params": [
+              {
+                "name": "Name",
+                "value": "",
+                "type": "query",
+                "description": "Name of channel to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves channels based on the provided name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Channels",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/channels.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of channels to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves all channels. Required Permissions: Read-Only Assets, Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

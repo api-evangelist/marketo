@@ -1,0 +1,212 @@
+{
+  "item": [
+    {
+      "id": "f003de5d-3f44-4bd2-96fa-9094b68e2a3c",
+      "name": "Name.json",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "05c2c002-46b5-41fd-b2ba-6d4f2fb959c7",
+          "name": "Marketo Get Smart List by Name",
+          "request": {
+            "name": "Marketo Get Smart List by Name",
+            "description": {
+              "content": "Retrieves a Smart List record by its name. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "smartList",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of smart list to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b93d321e-1e8f-47b8-8b14-27ca582f87e8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "smartList",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2000-01-07T03:57:02.558Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 4883,\n        \"type\": \"Folder\"\n      },\n      \"id\": 6086,\n      \"name\": \"string\",\n      \"updatedAt\": \"2000-09-13T23:27:56.487Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"1999-07-20T17:48:43.799Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 4737,\n        \"type\": \"Program\"\n      },\n      \"id\": 9432,\n      \"name\": \"string\",\n      \"updatedAt\": \"1999-12-11T15:09:40.959Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba545333-71de-4779-b7f5-d6b3b942367e",
+          "name": "Marketo Get Static List by Name",
+          "request": {
+            "name": "Marketo Get Static List by Name",
+            "description": {
+              "content": "Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "staticList",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of static list to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a345b3b2-008d-45a6-8f81-aa4a8fc1e81e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "staticList",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"2025-09-11T20:59:29.037Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 6003,\n        \"type\": \"Program\"\n      },\n      \"id\": 6456,\n      \"name\": \"string\",\n      \"updatedAt\": \"1954-12-17T02:23:22.147Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    },\n    {\n      \"createdAt\": \"2015-12-03T16:09:22.757Z\",\n      \"description\": \"string\",\n      \"folder\": {\n        \"id\": 9463,\n        \"type\": \"Folder\"\n      },\n      \"id\": 7209,\n      \"name\": \"string\",\n      \"updatedAt\": \"1956-04-03T15:47:31.320Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\",\n      \"computedUrl\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ae8e8d95-8b2a-4883-af59-f63e4e74bd9d",
+    "name": "Marketo Engage Rest Approve Name.json API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

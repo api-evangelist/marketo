@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Files API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Files",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get File by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/file/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the file"
+              }
+            ]
+          },
+          "docs": "Returns files records for the given name. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get File by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/file/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id for file in database"
+              }
+            ]
+          },
+          "docs": "Returns the file record for the given id. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/files.json",
+            "params": [
+              {
+                "name": "folder",
+                "value": "",
+                "type": "query",
+                "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging. Default 0"
+              },
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of files to return. Max 200, default 20"
+              }
+            ]
+          },
+          "docs": "Returns the files from the given folder. Required Permissions: Read-Only Assets, Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Create File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/files.json",
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            }
+          },
+          "docs": "Creates a new file from the included payload. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

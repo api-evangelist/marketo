@@ -1,0 +1,186 @@
+{
+  "item": [
+    {
+      "id": "be43bf41-f86b-4a33-b5d3-3541e98724cc",
+      "name": "Send",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "65691cfa-538d-4a1d-850f-8667dc9ac898",
+          "name": "Marketo Send Sample Email",
+          "request": {
+            "name": "Marketo Send Sample Email",
+            "description": {
+              "content": "Sends a sample email to the given email address. Leads may be impersonated to populate data for tokens and dynamic content. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "sendSample.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "emailAddress",
+                  "value": "<string>",
+                  "description": "(Required) Email address to receive sample email"
+                },
+                {
+                  "disabled": false,
+                  "key": "leadId",
+                  "value": "<string>",
+                  "description": "Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead."
+                },
+                {
+                  "disabled": false,
+                  "key": "textOnly",
+                  "value": "<boolean>",
+                  "description": "Whether to send to text only version along with the HTML version. Default false."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3a181e9c-2f94-45a0-9af0-62eb4a6d4edf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "sendSample.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Email address to receive sample email",
+                        "type": "text/plain"
+                      },
+                      "key": "emailAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.",
+                        "type": "text/plain"
+                      },
+                      "key": "leadId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to send to text only version along with the HTML version. Default false.",
+                        "type": "text/plain"
+                      },
+                      "key": "textOnly",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"result\": true,\n      \"service\": \"sendTestEmail\"\n    },\n    {\n      \"result\": true,\n      \"service\": \"sendTestEmail\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "89a43f35-159b-40f9-b475-57d186153aca",
+    "name": "Marketo Engage Rest Approve Send API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

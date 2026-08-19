@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Name.json API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Name.json",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of smart list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its name. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static List by Name",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/byName.json",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of static list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

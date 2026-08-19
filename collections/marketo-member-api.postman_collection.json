@@ -1,0 +1,132 @@
+{
+  "item": [
+    {
+      "id": "21aca658-1bf8-4a8e-b96a-42fc3e25d24e",
+      "name": "Member",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1034d520-2117-43cd-8739-135e090dc375",
+          "name": "Marketo Get Available Form Program Member Fields",
+          "request": {
+            "name": "Marketo Get Available Form Program Member Fields",
+            "description": {
+              "content": "Retrieves a list of all valid Program Member fields for use in forms. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                "programMemberFields.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of fields to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0f81d3ec-8b45-44d0-9c58-13f4e134cb81",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    "programMemberFields.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": \"string\",\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"description\": \"string\",\n      \"fieldMaskValues\": \"string\",\n      \"fieldWidth\": 9090,\n      \"initiallyChecked\": true,\n      \"isLabelToRight\": true,\n      \"isMultiselect\": false,\n      \"isRequired\": false,\n      \"isSensitive\": false,\n      \"labelWidth\": 8065,\n      \"maxLength\": 6273,\n      \"maximumNumber\": 8627.204774725087,\n      \"minimumNumber\": 7340.182215414358,\n      \"picklistValues\": \"string\",\n      \"placeholderText\": \"string\",\n      \"validationMessage\": \"string\",\n      \"visibleRows\": 8225\n    },\n    {\n      \"id\": \"string\",\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"description\": \"string\",\n      \"fieldMaskValues\": \"string\",\n      \"fieldWidth\": 5850,\n      \"initiallyChecked\": true,\n      \"isLabelToRight\": false,\n      \"isMultiselect\": false,\n      \"isRequired\": true,\n      \"isSensitive\": false,\n      \"labelWidth\": 2962,\n      \"maxLength\": 6686,\n      \"maximumNumber\": 9323.173425706023,\n      \"minimumNumber\": 6782.561997630559,\n      \"picklistValues\": \"string\",\n      \"placeholderText\": \"string\",\n      \"validationMessage\": \"string\",\n      \"visibleRows\": 5264\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1cba097b-64ca-42ff-b7d5-5b9471f5c889",
+    "name": "Marketo Engage Rest Approve Member API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

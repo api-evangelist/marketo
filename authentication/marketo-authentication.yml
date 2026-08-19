@@ -1,0 +1,86 @@
+generated: '2026-08-13'
+method: searched
+source: openapi/marketo-identity-openapi-original.json
+docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+note: >-
+  The five OpenAPI/Swagger documents Adobe publishes for Marketo Engage
+  (AdobeDocs/marketo-apis static/swagger-*.json) declare NO securityDefinitions
+  and NO components.securitySchemes at all, so
+  0-working/derive-authentication.py returns zero profiles for this provider.
+  Everything below is read from the provider's own authentication reference and
+  from the Identity spec's single documented operation, not derived.
+summary:
+  types: [oauth2]
+  api_key_in: []
+  oauth2_flows: [clientCredentials]
+  spec_declares_security: false
+  token_transport: Authorization Bearer header
+model:
+  standard: OAuth 2.0 (RFC 6749) — two-legged client credentials
+  identity_endpoint: https://{munchkinId}.mktorest.com/identity/oauth/token
+  identity_endpoint_note: >-
+    The Identity URL is per-subscription and is read from
+    Admin > Integration > Web Services inside the Marketo instance. It shares the
+    Munchkin-ID host with the REST base URL.
+  operations:
+    - identityUsingGET
+    - identityUsingPOST
+  request: >-
+    GET|POST <Identity URL>/oauth/token?grant_type=client_credentials
+    &client_id=<Client Id>&client_secret=<Client Secret>
+  credentials:
+    client_id: Issued by a LaunchPoint Custom Service (Admin > Integration > LaunchPoint > View Details)
+    client_secret: Issued by the same Custom Service
+    owner: >-
+      Every Custom Service is scoped to exactly one API-Only user. The service
+      inherits that user's role permissions; see scopes/marketo-scopes.yml.
+  token:
+    type: bearer
+    lifetime_seconds: 3600
+    scope_field: >-
+      The `scope` member of the token response carries the EMAIL ADDRESS of the
+      API-Only user that owns the custom service (e.g. "apis@acmeinc.com"). It is
+      an identity claim, not an OAuth permission scope. Marketo has no OAuth
+      scope vocabulary — authorization is role-permission based.
+    independence: >-
+      An access token belongs to a single custom service; its expiry is
+      independent of tokens issued to other custom services in the same instance.
+  usage:
+    header: 'Authorization: Bearer <access_token>'
+    deprecated_transport:
+      form: access_token query parameter / form parameter
+      status: deprecated
+      removal_date: '2026-08-31'
+      source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+      note: >-
+        Adobe removes support for passing the token as the `access_token` query
+        or form parameter on 2026-08-31. All integrations must move to the
+        Authorization header. This is the single most consequential live
+        auth change on this API.
+schemes:
+  - name: MarketoOAuth2ClientCredentials
+    type: oauth2
+    flow: clientCredentials
+    tokenUrl: https://{munchkinId}.mktorest.com/identity/oauth/token
+    scopes: {}
+    sources: [docs]
+    note: >-
+      Not present in any published spec — recorded here from the documentation.
+      Adobe's swagger files omit securityDefinitions entirely.
+errors:
+  - code: 401
+    where: identity endpoint
+    meaning: Invalid Client Id or Client Secret.
+  - code: '601'
+    meaning: Access token invalid.
+  - code: '602'
+    meaning: Access token expired — re-authenticate and retry.
+  - code: '603'
+    meaning: >-
+      Authenticated but not authorized. Additional Access API role permissions
+      may be required, or Allowlist for IP-Based API Access may be enabled.
+ip_allowlist:
+  supported: true
+  note: >-
+    Marketo supports "Allowlist for IP-Based API Access"; when enabled, a
+    correctly authenticated call from an unlisted address returns error 603.

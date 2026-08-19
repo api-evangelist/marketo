@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Variables API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Variables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Variable",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/variable/:variableId.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              },
+              {
+                "name": "variableId",
+                "value": "",
+                "type": "path",
+                "description": "variableId"
+              },
+              {
+                "name": "value",
+                "value": "",
+                "type": "query",
+                "description": "New value of the variable"
+              }
+            ]
+          },
+          "docs": "Updates the value of the given variable. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

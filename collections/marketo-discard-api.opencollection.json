@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Discard API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Discard",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Discard Email Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of an email. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Email Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the email template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Form Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the form. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Landing Page Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the landing page. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Landing Page Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discrads the current draft of the landing page template. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Discard Snippet Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/discardDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Discards the current draft of the snippet. Required Permissions: Read-Write Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

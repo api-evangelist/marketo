@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Rules API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Redirect Rule by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Retrieves the landing page redirect rule record. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Update an existing landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Delete a landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

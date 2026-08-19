@@ -1,0 +1,554 @@
+{
+  "item": [
+    {
+      "id": "f85018a3-441b-4e0a-b60c-fc768f93658d",
+      "name": ".Json",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "33dc280e-e95e-46bc-840b-d10c499d487c",
+          "name": "Marketo Update Email Content Section",
+          "request": {
+            "name": "Marketo Update Email Content Section",
+            "description": {
+              "content": "Updates the content in the given section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                "{{htmlId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content to set for the section."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed"
+                },
+                {
+                  "disabled": false,
+                  "key": "altText",
+                  "value": "<string>",
+                  "description": "Sets the value of the alt parameter for the resulting img element"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Overrides naitve height of the image. The resulting file will be resized to the given height"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "Multipart file that allows you to load an image from your computer"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "overWrite",
+                  "value": "<boolean>",
+                  "description": "Allows overwriting of the existing image content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "style",
+                  "value": "<string>",
+                  "description": "Sets the value of the style parameter for the content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "textValue",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "videoUrl",
+                  "value": "<string>",
+                  "description": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<integer>",
+                  "description": "Overrides native width of the image. The resulting file will be resized to the given width"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ff2f290b-abb3-4bb9-8de0-c325035279f5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    "{{htmlId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content to set for the section.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the alt parameter for the resulting img element",
+                        "type": "text/plain"
+                      },
+                      "key": "altText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "externalUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides naitve height of the image. The resulting file will be resized to the given height",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Multipart file that allows you to load an image from your computer",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allows overwriting of the existing image content section",
+                        "type": "text/plain"
+                      },
+                      "key": "overWrite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the style parameter for the content section",
+                        "type": "text/plain"
+                      },
+                      "key": "style",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "textValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo",
+                        "type": "text/plain"
+                      },
+                      "key": "videoUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides native width of the image. The resulting file will be resized to the given width",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1879\n    },\n    {\n      \"id\": 5700\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dac1a84c-ed30-4387-ad92-10d912150974",
+          "name": "Marketo Get Snippet by Id",
+          "request": {
+            "name": "Marketo Get Snippet by Id",
+            "description": {
+              "content": "Retrieves the target snippet record. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "snippet",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bc91804d-c590-434c-aeb4-e002cddfbe03",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "snippet",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Program\",\n        \"value\": 287\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"1991-05-23T13:01:53.108Z\",\n      \"description\": \"string\",\n      \"id\": 4493,\n      \"name\": \"string\",\n      \"updatedAt\": \"1996-12-04T11:51:30.876Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Program\",\n        \"value\": 9156\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"2016-05-17T15:11:54.698Z\",\n      \"description\": \"string\",\n      \"id\": 4499,\n      \"name\": \"string\",\n      \"updatedAt\": \"1961-06-25T14:33:26.922Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bbefbd7-1368-48e4-badb-21ae13c8004b",
+          "name": "Marketo Update Snippet Metadata",
+          "request": {
+            "name": "Marketo Update Snippet Metadata",
+            "description": {
+              "content": "Updates the metadata of the snippet. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "snippet",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the snippet"
+                },
+                {
+                  "disabled": false,
+                  "key": "isArchive",
+                  "value": "<string>",
+                  "description": "Archival status of the snippet"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the snippet"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "139a9964-1b47-47b6-9d2e-6d54b7a105f0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "snippet",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the snippet",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Archival status of the snippet",
+                        "type": "text/plain"
+                      },
+                      "key": "isArchive",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the snippet",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Folder\",\n        \"value\": 8922\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"1964-08-01T22:43:03.511Z\",\n      \"description\": \"string\",\n      \"id\": 6659,\n      \"name\": \"string\",\n      \"updatedAt\": \"1992-06-05T18:51:32.953Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    },\n    {\n      \"folder\": {\n        \"folderName\": \"string\",\n        \"type\": \"Folder\",\n        \"value\": 9968\n      },\n      \"status\": \"string\",\n      \"createdAt\": \"2024-04-03T14:13:22.268Z\",\n      \"description\": \"string\",\n      \"id\": 9425,\n      \"name\": \"string\",\n      \"updatedAt\": \"2025-07-22T19:41:10.203Z\",\n      \"url\": \"string\",\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) htmlId",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "htmlId"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) id",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "b5a2cb99-767e-4b88-8cdf-bd97ed542e11",
+    "name": "Marketo Engage Rest Approve .Json API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

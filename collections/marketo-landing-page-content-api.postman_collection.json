@@ -1,0 +1,1443 @@
+{
+  "item": [
+    {
+      "id": "011e9a9c-91fd-4e88-8f2f-8de825fd45a9",
+      "name": "Landing  Page  Content",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ae5caa1-e418-4e4a-89fc-d1a6384eaf1c",
+          "name": "Marketo Get Landing Page Content",
+          "request": {
+            "name": "Marketo Get Landing Page Content",
+            "description": {
+              "content": "Retrieves the list of content sections in the target landing page. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f2735995-3962-4e50-aa35-6bfde1e4f6b6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": {},\n      \"type\": \"Snippet\",\n      \"content\": {},\n      \"followupType\": \"url\",\n      \"followupValue\": \"string\",\n      \"formattingOptions\": {\n        \"array\": false,\n        \"bigDecimal\": false,\n        \"bigInteger\": true,\n        \"binary\": false,\n        \"boolean\": false,\n        \"containerNode\": false,\n        \"double\": true,\n        \"float\": false,\n        \"floatingPointNumber\": false,\n        \"int\": true,\n        \"integralNumber\": true,\n        \"long\": false,\n        \"missingNode\": false,\n        \"nodeType\": \"ARRAY\",\n        \"null\": false,\n        \"number\": true,\n        \"object\": true,\n        \"pojo\": true,\n        \"short\": true,\n        \"textual\": false,\n        \"valueNode\": true\n      },\n      \"index\": 4769\n    },\n    {\n      \"id\": {},\n      \"type\": \"DynamicContent\",\n      \"content\": {},\n      \"followupType\": \"lp\",\n      \"followupValue\": \"string\",\n      \"formattingOptions\": {\n        \"array\": true,\n        \"bigDecimal\": true,\n        \"bigInteger\": false,\n        \"binary\": false,\n        \"boolean\": true,\n        \"containerNode\": false,\n        \"double\": false,\n        \"float\": true,\n        \"floatingPointNumber\": false,\n        \"int\": true,\n        \"integralNumber\": false,\n        \"long\": true,\n        \"missingNode\": false,\n        \"nodeType\": \"NUMBER\",\n        \"null\": true,\n        \"number\": true,\n        \"object\": false,\n        \"pojo\": true,\n        \"short\": false,\n        \"textual\": true,\n        \"valueNode\": false\n      },\n      \"index\": 6650\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24d30ef4-3570-4b16-add9-dd581b97f70c",
+          "name": "Marketo Add Landing Page Content Section",
+          "request": {
+            "name": "Marketo Add Landing Page Content Section",
+            "description": {
+              "content": "Adds a content section to the target landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "contentId",
+                  "value": "<string>",
+                  "description": "(Required) Id of the content section. Also the HTML id of the section."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "backgroundColor",
+                  "value": "<string>",
+                  "description": "background-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderColor",
+                  "value": "<string>",
+                  "description": "border-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderStyle",
+                  "value": "<string>",
+                  "description": "border-style property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderWidth",
+                  "value": "<string>",
+                  "description": "border-width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<string>",
+                  "description": "height property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideDesktop",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a desktop browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideMobile",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a mobile browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageOpenNewWindow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "left",
+                  "value": "<string>",
+                  "description": "left property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>",
+                  "description": "URL parameter of a link type section"
+                },
+                {
+                  "disabled": false,
+                  "key": "opacity",
+                  "value": "<string>",
+                  "description": "opacity property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<string>",
+                  "description": "top property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<string>",
+                  "description": "width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "zIndex",
+                  "value": "<string>",
+                  "description": "z-index property of the HTML section"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e404b1c8-1988-4302-90d9-bf8a08f7dabd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Id of the content section. Also the HTML id of the section.",
+                        "type": "text/plain"
+                      },
+                      "key": "contentId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "background-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "backgroundColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-style property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderStyle",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderWidth",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "height property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a desktop browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideDesktop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a mobile browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideMobile",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "imageOpenNewWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "left property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "left",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL parameter of a link type section",
+                        "type": "text/plain"
+                      },
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "opacity property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "opacity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "top property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "top",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "z-index property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "zIndex",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 7075\n    },\n    {\n      \"id\": 8276\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "86168618-53da-47dc-9356-a32a18999c9f",
+          "name": "Marketo Update Landing Page Content Section",
+          "request": {
+            "name": "Marketo Update Landing Page Content Section",
+            "description": {
+              "content": "Updates a content section the landing page. Parameters must be sent as application/x-www-form-urlencoded (not JSON). Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "content",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "backgroundColor",
+                  "value": "<string>",
+                  "description": "background-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderColor",
+                  "value": "<string>",
+                  "description": "border-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderStyle",
+                  "value": "<string>",
+                  "description": "border-style property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderWidth",
+                  "value": "<string>",
+                  "description": "border-width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<string>",
+                  "description": "height property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideDesktop",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a desktop browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideMobile",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a mobile browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageOpenNewWindow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "index",
+                  "value": "<integer>",
+                  "description": "Index of the content section. Determines the order of the section in the landing page"
+                },
+                {
+                  "disabled": false,
+                  "key": "left",
+                  "value": "<string>",
+                  "description": "left property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>",
+                  "description": "URL parameter of a link type section"
+                },
+                {
+                  "disabled": false,
+                  "key": "opacity",
+                  "value": "<string>",
+                  "description": "opacity property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<string>",
+                  "description": "top property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<string>",
+                  "description": "width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "zIndex",
+                  "value": "<string>",
+                  "description": "z-index property of the HTML section"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8e90fea8-9516-44a7-83b3-67fb18cabcf6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "content",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "background-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "backgroundColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-style property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderStyle",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderWidth",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "height property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a desktop browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideDesktop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a mobile browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideMobile",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "imageOpenNewWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Index of the content section. Determines the order of the section in the landing page",
+                        "type": "text/plain"
+                      },
+                      "key": "index",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "left property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "left",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL parameter of a link type section",
+                        "type": "text/plain"
+                      },
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "opacity property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "opacity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "top property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "top",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "z-index property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "zIndex",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1503\n    },\n    {\n      \"id\": 7583\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93564fb5-993c-4e36-bdf7-6ffe46665a5a",
+          "name": "Marketo Delete Landing Page Content Section",
+          "request": {
+            "name": "Marketo Delete Landing Page Content Section",
+            "description": {
+              "content": "Removes the target content section from the parent landing page. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "content",
+                ":contentId",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of landing page"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contentId",
+                  "description": "(Required) Id of landing page content section"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7f923a8f-1512-49b4-b254-90f78a10567f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "content",
+                    ":contentId",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of landing page"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contentId",
+                      "description": "(Required) Id of landing page content section"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1503\n    },\n    {\n      \"id\": 7583\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0711416d-65cf-42a8-9c39-ceffd605cbd4",
+          "name": "Marketo Get Landing Page Dynamic Content",
+          "request": {
+            "name": "Marketo Get Landing Page Dynamic Content",
+            "description": {
+              "content": "Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "093a0bfd-ad11-4466-a9e1-a35ac64e9e6f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": [\n        {\n          \"content\": {},\n          \"segmentId\": 7482,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        },\n        {\n          \"content\": {},\n          \"segmentId\": 8067,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1983-02-12T20:19:21.980Z\",\n      \"id\": 1107,\n      \"segmentation\": 49,\n      \"updatedAt\": \"1976-12-03T09:38:12.313Z\"\n    },\n    {\n      \"content\": [\n        {\n          \"content\": {},\n          \"segmentId\": 9714,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        },\n        {\n          \"content\": {},\n          \"segmentId\": 8761,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1975-04-10T08:01:37.057Z\",\n      \"id\": 728,\n      \"segmentation\": 4,\n      \"updatedAt\": \"1996-11-15T02:53:13.246Z\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ee26ce0-9001-4bf4-9ebd-008db9680635",
+          "name": "Marketo Update Landing Page Dynamic Content Section",
+          "request": {
+            "name": "Marketo Update Landing Page Dynamic Content Section",
+            "description": {
+              "content": "Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "backgroundColor",
+                  "value": "<string>",
+                  "description": "background-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderColor",
+                  "value": "<string>",
+                  "description": "border-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderStyle",
+                  "value": "<string>",
+                  "description": "border-style property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderWidth",
+                  "value": "<string>",
+                  "description": "border-width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<string>",
+                  "description": "height property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideDesktop",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a desktop browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideMobile",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a mobile browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageOpenNewWindow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "left",
+                  "value": "<string>",
+                  "description": "left property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>",
+                  "description": "URL parameter of a link type section"
+                },
+                {
+                  "disabled": false,
+                  "key": "opacity",
+                  "value": "<string>",
+                  "description": "opacity property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment",
+                  "value": "<string>",
+                  "description": "Name of the segment to display content section for"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<string>",
+                  "description": "top property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<string>",
+                  "description": "width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "zIndex",
+                  "value": "<string>",
+                  "description": "z-index property of the HTML section"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "3b7e7e22-7e27-4bc4-9da0-42340097be3c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "background-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "backgroundColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-style property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderStyle",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderWidth",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "height property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a desktop browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideDesktop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a mobile browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideMobile",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "imageOpenNewWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "left property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "left",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL parameter of a link type section",
+                        "type": "text/plain"
+                      },
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "opacity property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "opacity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the segment to display content section for",
+                        "type": "text/plain"
+                      },
+                      "key": "segment",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "top property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "top",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "z-index property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "zIndex",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1503\n    },\n    {\n      \"id\": 7583\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of landing page content section",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "contentId"
+    }
+  ],
+  "info": {
+    "_postman_id": "87d43256-351a-497a-9504-cd37d82cb9d0",
+    "name": "Marketo Engage Rest Approve Landing  Page  Content API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

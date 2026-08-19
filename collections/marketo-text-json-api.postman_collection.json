@@ -1,0 +1,156 @@
+{
+  "item": [
+    {
+      "id": "dfd34da6-7f26-4116-b66a-791c571e0be2",
+      "name": "Text.json",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "abb4f6a8-bddd-44cb-9546-2281abb52cd8",
+          "name": "Marketo Add Rich Text Field",
+          "request": {
+            "name": "Marketo Add Rich Text Field",
+            "description": {
+              "content": "Adds a rich-text type field to the form. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "richText.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "text",
+                  "value": "<string>",
+                  "description": "(Required) Multipart file. HTML Content for the rich text field."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e95646d7-69c1-4154-896e-66796f99b9f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "richText.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Multipart file. HTML Content for the rich text field.",
+                        "type": "text/plain"
+                      },
+                      "key": "text",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"blankFields\": 259,\n      \"columnNumber\": 1893,\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"fieldMetaData\": {},\n      \"fieldWidth\": 9784,\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"formPrefill\": false,\n      \"isSensitive\": true,\n      \"hintText\": \"string\",\n      \"id\": \"string\",\n      \"instructions\": \"string\",\n      \"label\": \"string\",\n      \"labelWidth\": 4115,\n      \"maxLength\": 2708,\n      \"required\": true,\n      \"rowNumber\": 4612,\n      \"text\": \"string\",\n      \"validationMessage\": {},\n      \"visibilityRules\": {\n        \"ruleType\": \"string\",\n        \"rules\": [\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"blankFields\": 9949,\n      \"columnNumber\": 5024,\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"fieldMetaData\": {},\n      \"fieldWidth\": 8073,\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"formPrefill\": true,\n      \"isSensitive\": false,\n      \"hintText\": \"string\",\n      \"id\": \"string\",\n      \"instructions\": \"string\",\n      \"label\": \"string\",\n      \"labelWidth\": 8759,\n      \"maxLength\": 883,\n      \"required\": false,\n      \"rowNumber\": 5327,\n      \"text\": \"string\",\n      \"validationMessage\": {},\n      \"visibilityRules\": {\n        \"ruleType\": \"string\",\n        \"rules\": [\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3303e5a1-93f9-4235-a715-c23944ba3f7a",
+    "name": "Marketo Engage Rest Approve Text.json API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

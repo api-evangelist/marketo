@@ -1,0 +1,932 @@
+{
+  "item": [
+    {
+      "id": "ac97e3bb-b486-498f-839e-0d1fb0c2cd61",
+      "name": "Folders",
+      "description": {
+        "content": "Folder Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ace0129-e52e-4050-af5e-5c1825ff77fe",
+          "name": "Marketo Get Folder by Name",
+          "request": {
+            "name": "Marketo Get Folder by Name",
+            "description": {
+              "content": "Returns a folder record for the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the folder. Not applicable for Programs"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of folder. 'Folder' or 'Program'"
+                },
+                {
+                  "disabled": false,
+                  "key": "root",
+                  "value": "<string>",
+                  "description": "Parent folder reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "workSpace",
+                  "value": "<string>",
+                  "description": "Name of the workspace"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "24134912-704c-4eeb-8b33-fc69bde75b6e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "root",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "workSpace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1958-04-19T03:00:43.773Z\",\n      \"folderId\": {\n        \"id\": 7273,\n        \"type\": \"Program\"\n      },\n      \"folderType\": \"Email Batch Program\",\n      \"id\": 8539,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 4294,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1951-03-30T23:03:23.292Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 5588,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"1989-08-25T14:45:59.140Z\",\n      \"folderId\": {\n        \"id\": 3943,\n        \"type\": \"Program\"\n      },\n      \"folderType\": \"Revenue Cycle Model\",\n      \"id\": 9804,\n      \"isArchive\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 3664,\n        \"type\": \"Folder\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1986-02-07T09:24:12.653Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 6982,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "edd5f965-5935-4894-8f28-126b6c85d132",
+          "name": "Marketo Get Folder by Id",
+          "request": {
+            "name": "Marketo Get Folder by Id",
+            "description": {
+              "content": "Returns the folder record with the given id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "Folder",
+                  "description": "(Required) Type of folder. 'Folder' or 'Program'"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "36c194d0-4227-4176-b642-95c4a753ec96",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "Folder"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1970-02-25T01:58:21.043Z\",\n      \"folderId\": {\n        \"id\": 4589,\n        \"type\": \"Folder\"\n      },\n      \"folderType\": \"Marketing Program\",\n      \"id\": 2177,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 7710,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"2000-01-10T06:23:25.755Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 2141,\n      \"description\": \"string\",\n      \"isSystem\": false,\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"2016-06-03T03:04:42.487Z\",\n      \"folderId\": {\n        \"id\": 2780,\n        \"type\": \"Program\"\n      },\n      \"folderType\": \"Email Template\",\n      \"id\": 9505,\n      \"isArchive\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 4864,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1970-05-03T10:40:13.271Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 8089,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "99976216-0ca2-406d-8b72-88be20954e7f",
+          "name": "Marketo Update Folder Metadata",
+          "request": {
+            "name": "Marketo Update Folder Metadata",
+            "description": {
+              "content": "Updates the metadata for a given folder. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of folder. 'Folder' or 'Program'"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "isArchive",
+                  "value": "<boolean>",
+                  "description": "Whether the folder is archived or not. Toggling this value will change the archival status of the folder"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the Folder"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5d287841-4a5d-40f3-b7dd-2263d383f394",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of folder. 'Folder' or 'Program'",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the folder is archived or not. Toggling this value will change the archival status of the folder",
+                        "type": "text/plain"
+                      },
+                      "key": "isArchive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the Folder",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1970-02-25T01:58:21.043Z\",\n      \"folderId\": {\n        \"id\": 4589,\n        \"type\": \"Folder\"\n      },\n      \"folderType\": \"Marketing Program\",\n      \"id\": 2177,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 7710,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"2000-01-10T06:23:25.755Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 2141,\n      \"description\": \"string\",\n      \"isSystem\": false,\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"2016-06-03T03:04:42.487Z\",\n      \"folderId\": {\n        \"id\": 2780,\n        \"type\": \"Program\"\n      },\n      \"folderType\": \"Email Template\",\n      \"id\": 9505,\n      \"isArchive\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 4864,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1970-05-03T10:40:13.271Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 8089,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "93ff96ea-e692-4291-acda-f0298b0c986c",
+          "name": "Marketo Get Folder Contents",
+          "request": {
+            "name": "Marketo Get Folder Contents",
+            "description": {
+              "content": "Returns records for the contents of a given folder. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of channels to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of folder. 'Folder' or 'Program'. Default is 'Folder'"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the folder to retrieve"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "336ad830-8a63-44a6-afef-244125a182ac",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the folder to retrieve"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 8681,\n      \"type\": \"string\"\n    },\n    {\n      \"id\": 8845,\n      \"type\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e900370f-9fc0-43d5-ad3b-48b2d3a01620",
+          "name": "Marketo Delete Folder",
+          "request": {
+            "name": "Marketo Delete Folder",
+            "description": {
+              "content": "Deletes the designated folder. Deletion will fail if the folder has content. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folder",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the folder to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "Folder",
+                  "description": "(Required) type"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "070b84e7-3f84-43fb-8d3a-733683ca9399",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folder",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the folder to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) type",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "Folder"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 3414\n    },\n    {\n      \"id\": 6261\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fe625b9d-5e69-4fd1-b655-6ccb5357daea",
+          "name": "Marketo Get Folders",
+          "request": {
+            "name": "Marketo Get Folders",
+            "description": {
+              "content": "Retrieves child folders from within a given root folder. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folders.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "root",
+                  "value": "<string>",
+                  "description": "Parent folder reference"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxDepth",
+                  "value": "<integer>",
+                  "description": "Maximum folder depth to traverse, Default 2"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of folders to return. Default 20, maximum 200"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging. Default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "workSpace",
+                  "value": "<string>",
+                  "description": "Name of the workspace"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4ef14140-2e53-4eb9-9c4e-367a0106ed24",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "root",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "maxDepth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "workSpace",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1970-02-25T01:58:21.043Z\",\n      \"folderId\": {\n        \"id\": 4589,\n        \"type\": \"Folder\"\n      },\n      \"folderType\": \"Marketing Program\",\n      \"id\": 2177,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 7710,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"2000-01-10T06:23:25.755Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 2141,\n      \"description\": \"string\",\n      \"isSystem\": false,\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"2016-06-03T03:04:42.487Z\",\n      \"folderId\": {\n        \"id\": 2780,\n        \"type\": \"Program\"\n      },\n      \"folderType\": \"Email Template\",\n      \"id\": 9505,\n      \"isArchive\": true,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": 4864,\n        \"type\": \"Program\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1970-05-03T10:40:13.271Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 8089,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9014d645-b054-42ba-8afd-682b82c3b1fc",
+          "name": "Marketo Create Folder",
+          "request": {
+            "name": "Marketo Create Folder",
+            "description": {
+              "content": "Creates a new folder. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "folders.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the Folder"
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6cb9c02f-989c-4d38-9be6-395c43debf64",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "folders.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the Folder",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"createdAt\": \"1988-07-09T06:09:47.961Z\",\n      \"folderId\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"folderType\": \"Email Template\",\n      \"id\": 3254,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1963-09-27T01:41:05.730Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 5473,\n      \"description\": \"string\",\n      \"isSystem\": true,\n      \"workspace\": \"string\"\n    },\n    {\n      \"createdAt\": \"1994-08-20T19:14:24.120Z\",\n      \"folderId\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"folderType\": \"Landing Page Form\",\n      \"id\": 1554,\n      \"isArchive\": false,\n      \"name\": \"string\",\n      \"parent\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"path\": \"string\",\n      \"updatedAt\": \"1988-03-27T16:53:02.493Z\",\n      \"url\": \"string\",\n      \"accessZoneId\": 6029,\n      \"description\": \"string\",\n      \"isSystem\": false,\n      \"workspace\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of the folder to retrieve",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    }
+  ],
+  "info": {
+    "_postman_id": "45972501-fd13-451c-8ff9-841729114391",
+    "name": "Marketo Engage Rest Approve Folders API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

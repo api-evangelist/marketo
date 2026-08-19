@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Approve",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Approve Email Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/email/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of an email. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Email Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/emailTemplate/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the email template. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Form Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/form/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the form. This will delete the current approved version of the form. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Landing Page Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPage/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the landing page. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Landing Page Template Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageTemplate/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current landing page template draft. This will delete the current approved version of the template if there is one. Required Permissions: Approve Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Approve Snippet Draft",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/snippet/:id/approveDraft.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "id"
+              }
+            ]
+          },
+          "docs": "Approves the current draft of the snippet. Required Permissions: Approve Assets"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

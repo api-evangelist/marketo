@@ -1,0 +1,94 @@
+generated: '2026-08-13'
+method: searched
+source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/custom-services
+docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/custom-services
+model: role-permissions
+note: >-
+  Marketo Engage has NO OAuth scope vocabulary. Its OAuth 2.0 client-credentials
+  flow takes no `scope` request parameter, and the `scope` member of the token
+  response carries the API-Only user's email address, not a permission grant.
+  Authorization is instead expressed as role permissions under the "Access API"
+  tree, assigned to the API-Only user that owns the LaunchPoint Custom Service
+  the credentials belong to. This file records that permission vocabulary in the
+  scopes/ slot because it is the artifact an agent needs in order to know what a
+  given credential may do. 0-working/derive-oauth-scopes.py returns zero for this
+  provider because Adobe's published specs declare no securitySchemes at all.
+schemes:
+  - name: MarketoOAuth2ClientCredentials
+    type: oauth2
+    flow: clientCredentials
+    tokenUrl: https://{munchkinId}.mktorest.com/identity/oauth/token
+    scopes_declared: 0
+    source: docs
+authorization:
+  unit: role permission
+  assignment: >-
+    Permissions are granted to a role (Admin > Users & Roles > Roles), the role
+    is assigned to an API-Only user, and a LaunchPoint Custom Service scoped to
+    that user issues the Client Id / Client Secret. Only permissions in the
+    "Access API" group apply to API users — assigning all admin permissions does
+    NOT grant API permissions.
+  workspace_scoping: >-
+    In subscriptions with Workspaces and Partitions enabled, permissions are
+    assigned per workspace. A user who can read or write lead records in a
+    workspace can reach every record in the partitions that workspace can see.
+  guidance: >-
+    Adobe's own advice is least privilege — "assign only the minimum permissions
+    required" — and a separate API-Only user per integration, because API call
+    usage and errors are tracked per user.
+scopes:
+  - scope: Approve Assets
+    description: Approve assets.
+  - scope: Execute Campaign
+    description: Request or Schedule a campaign.
+  - scope: Read-Only Activity
+    description: Retrieve lead activities.
+  - scope: Read-Only Activity Metadata
+    description: Retrieve lead activity metadata.
+  - scope: Read-Only Assets
+    description: Retrieve asset details.
+  - scope: Read-Only Campaign
+    description: Retrieve campaign details.
+  - scope: Read-Only Company
+    description: Retrieve company details.
+  - scope: Read-Only Custom Object
+    description: Retrieve custom object details.
+  - scope: Read-Only Lead
+    description: Retrieve lead details.
+  - scope: Read-Only Named Account
+    description: Retrieve named account details.
+  - scope: Read-Only Named Account List
+    description: Retrieve named account list details.
+  - scope: Read-Only Opportunity
+    description: Retrieve opportunity details.
+  - scope: Read-Only Sales Person
+    description: Retrieve sales person details.
+  - scope: Read-Write Activity
+    description: Retrieve and create lead activities.
+  - scope: Read-Write Activity Metadata
+    description: Retrieve and create lead activity metadata.
+  - scope: Read-Write Assets
+    description: Retrieve, create, and update assets.
+  - scope: Read-Write Campaign
+    description: Retrieve, create, and update campaigns.
+  - scope: Read-Write Company
+    description: Retrieve, create, and update companies.
+  - scope: Read-Write Custom Object
+    description: Retrieve, create, and update custom objects.
+  - scope: Read-Write Lead
+    description: Retrieve, create, and update lead details.
+  - scope: Read-Write Named Account
+    description: Retrieve, create, and update named accounts.
+  - scope: Read-Write Named Account List
+    description: Retrieve, create, and update named account lists.
+  - scope: Read-Write Opportunity
+    description: Retrieve, create, and update opportunities.
+  - scope: Read-Write Sales Person
+    description: Retrieve, create, and update sales persons.
+scope_count: 24
+enforcement:
+  insufficient_permission_error: '603 Access denied'
+  note: >-
+    Individual operation descriptions in Adobe's specs name the permission they
+    require, e.g. "Required Permissions: Read-Only Activity" on
+    getExportActivitiesUsingGET.

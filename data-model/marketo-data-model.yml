@@ -1,0 +1,246 @@
+generated: '2026-08-13'
+method: derived
+source:
+  - openapi/marketo-lead-database-openapi-original.json
+  - openapi/marketo-asset-openapi-original.json
+docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+note: >-
+  Entity graph derived from the 175 schema definitions in the Lead Database spec
+  and the Asset spec's object set, plus the id-reference fields those schemas
+  carry. Marketo's data model has an unusual property worth stating first: the
+  FIELD SET OF EVERY CORE ENTITY IS PER-SUBSCRIPTION AND RUNTIME-DISCOVERED. The
+  Lead schema declares only id, membership, reason and status and says "may have
+  any number of other fields, depending on the fields available in the target
+  instance". An agent cannot know a Marketo record's shape from the spec — it
+  must call a describe operation first. That is a modelling fact, not a gap.
+id_conventions:
+  - form: integer
+    applies: [Lead, Company, Opportunity, StaticList, Campaign, Program, Activity, SalesPerson, Folder, and all Asset API objects]
+    note: 32-bit or 64-bit integer surrogate keys, unique within the subscription.
+  - form: GUID
+    applies: [CustomObject, NamedAccount, Opportunity record, custom activity record]
+    field: marketoGUID
+  - form: caller-owned external key
+    applies: [Company, Opportunity, SalesPerson]
+    fields: [externalCompanyId, externalOpportunityId, externalSalesPersonId]
+    note: >-
+      The caller supplies these. They are the dedupe keys for the sync
+      operations, and the closest thing this API has to an idempotency key.
+  - form: sequence position
+    field: seq
+    note: >-
+      Batch responses carry `seq` correlating each result to the position of the
+      input record. Response-only; never submitted.
+domains:
+  - name: Lead Database
+    spec: openapi/marketo-lead-database-openapi-original.json
+    entities: [Lead, LeadField, LeadPartition, Activity, ActivityType, LeadChange, Company, Opportunity, OpportunityRole, SalesPerson, NamedAccount, NamedAccountList, CustomObject, CustomObjectType, StaticList, Campaign, Program, ProgramMember]
+  - name: Assets
+    spec: openapi/marketo-asset-openapi-original.json
+    entities: [Email, EmailTemplate, LandingPage, LandingPageTemplate, LandingPageContent, LandingPageRedirectRule, Form, FormField, Snippet, Fragment, Segment, Segmentation, Channel, Folder, File, Tag, Token, SmartCampaign, SmartList, StaticList, Program]
+  - name: Administration
+    spec: openapi/marketo-user-management-openapi-original.json
+    entities: [User, Role, Workspace, Invitation]
+entities:
+  - name: Lead
+    aka: Person
+    id: id (int32)
+    dynamic_fields: true
+    describe: describeUsingGET_6
+    note: >-
+      The root entity. Always contains id; every other field is
+      subscription-defined. `membership` is only populated by Get Leads By
+      Program Id.
+  - name: Activity
+    id: id (int64)
+    required: [activityDate, activityTypeId, attributes, id, leadId]
+    note: >-
+      Append-only event record with a typed `activityTypeId` and an `attributes`
+      array of secondary values (max 20 attributes; 65,536-byte ceiling).
+  - name: ActivityType
+    id: id (int32)
+    note: >-
+      Vocabulary of activity types, extensible per subscription via the custom
+      activity type operations.
+  - name: ProgramMember
+    required: [seq, leadId, reachedSuccess, programId, acquiredBy, membershipDate]
+    note: The join entity between Lead and Program, carrying status and success.
+  - name: Company
+    id: id (int)
+    external_key: externalCompanyId
+  - name: Opportunity
+    id: marketoGUID
+    external_key: externalOpportunityId
+  - name: OpportunityRole
+    note: The join entity between Lead and Opportunity.
+  - name: SalesPerson
+    id: id (int64)
+    external_key: externalSalesPersonId
+  - name: NamedAccount
+    id: marketoGUID
+  - name: NamedAccountList
+    note: A collection of NamedAccounts.
+  - name: CustomObject
+    id: marketoGUID
+    dynamic_fields: true
+    describe: describeCustomObjectTypeUsingGET
+    note: >-
+      Entirely subscription-defined. Type, fields, dedupe fields and link fields
+      are all created through the API; nothing about a custom object is knowable
+      from the spec.
+  - name: StaticList
+    id: id (int32)
+    required: [createdAt, id, name, updatedAt]
+  - name: Campaign
+    aka: Smart Campaign
+    id: id (int32)
+    required: [createdAt, id, name, type, updatedAt]
+    note: 'type distinguishes trigger from batch; `active` applies only to trigger campaigns.'
+  - name: LeadPartition
+    note: Data-isolation boundary. A lead belongs to exactly one partition.
+  - name: Workspace
+    note: >-
+      Permission and asset boundary. A workspace has access to one or more
+      partitions; role permissions are assigned per workspace.
+relationships:
+  - from: Lead
+    to: Activity
+    kind: has_many
+    via: leadId
+  - from: Activity
+    to: ActivityType
+    kind: belongs_to
+    via: activityTypeId
+  - from: Activity
+    to: Campaign
+    kind: belongs_to
+    via: campaignId
+    optional: true
+  - from: Lead
+    to: ProgramMember
+    kind: has_many
+    via: leadId
+  - from: Program
+    to: ProgramMember
+    kind: has_many
+    via: programId
+  - from: ProgramMember
+    to: Lead
+    kind: belongs_to
+    via: leadId
+  - from: ProgramMember
+    to: Program
+    kind: belongs_to
+    via: programId
+  - from: Lead
+    to: StaticList
+    kind: has_many
+    via: list membership (addLeadsToListUsingPOST / getListMembershipUsingGET)
+  - from: StaticList
+    to: Lead
+    kind: has_many
+    via: getLeadsByListIdUsingGET
+  - from: Lead
+    to: Company
+    kind: belongs_to
+    via: externalCompanyId
+  - from: Lead
+    to: LeadPartition
+    kind: belongs_to
+    via: partitionName
+  - from: Opportunity
+    to: OpportunityRole
+    kind: has_many
+    via: externalOpportunityId
+  - from: OpportunityRole
+    to: Lead
+    kind: belongs_to
+    via: leadId
+  - from: Opportunity
+    to: SalesPerson
+    kind: belongs_to
+    via: externalSalesPersonId
+  - from: NamedAccountList
+    to: NamedAccount
+    kind: has_many
+    via: marketoGUID
+  - from: CustomObject
+    to: Lead
+    kind: belongs_to
+    via: link field declared on the custom object type
+  - from: CustomObject
+    to: Company
+    kind: belongs_to
+    via: link field declared on the custom object type
+  - from: CustomObjectType
+    to: CustomObject
+    kind: has_many
+    via: apiName
+  - from: Program
+    to: Campaign
+    kind: has_many
+    via: programId
+  - from: Program
+    to: Channel
+    kind: belongs_to
+    via: channel
+  - from: Campaign
+    to: SmartList
+    kind: has_one
+    via: smart campaign definition
+  - from: Folder
+    to: Asset
+    kind: has_many
+    via: folder
+    note: Emails, landing pages, forms, snippets, files and programs are all foldered.
+  - from: LandingPage
+    to: LandingPageTemplate
+    kind: belongs_to
+    via: template
+  - from: Email
+    to: EmailTemplate
+    kind: belongs_to
+    via: template
+    note: Error 709 Business Rule Violation when creating an email without a template.
+  - from: Form
+    to: FormField
+    kind: has_many
+    via: form id
+  - from: Segmentation
+    to: Segment
+    kind: has_many
+    via: segmentation id
+  - from: Workspace
+    to: LeadPartition
+    kind: has_many
+    via: workspace configuration
+  - from: User
+    to: Role
+    kind: has_many
+    via: userid
+  - from: Role
+    to: Workspace
+    kind: belongs_to
+    via: workspace
+runtime_discovery:
+  note: >-
+    These operations are not optional for an agent — they are how the schema is
+    obtained at all.
+  operations:
+    - describeUsingGET_6      # Describe Lead2
+    - describeUsingGET_2      # Describe Lead
+    - getLeadFieldsUsingGET
+    - describeUsingGET        # Describe Companies
+    - describeUsingGET_4      # Describe Opportunity
+    - describeOpportunityRoleUsingGET
+    - describeUsingGET_3      # Describe NamedAccounts
+    - describeUsingGET_1      # Describe Custom Objects
+    - describeCustomObjectTypeUsingGET
+    - describeProgramMemberUsingGET
+    - describeCustomActivityTypeUsingGET
+    - getAllActivityTypesUsingGET
+counts:
+  schema_definitions_lead_database: 175
+  entities_modelled: 21
+  relationships: 27
+render: null

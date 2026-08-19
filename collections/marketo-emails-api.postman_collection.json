@@ -1,0 +1,3791 @@
+{
+  "item": [
+    {
+      "id": "37d42ea1-c6fd-4bdc-98d2-8cbc5e30a93e",
+      "name": "Emails",
+      "description": {
+        "content": "Email Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8dd5f1e7-5491-4848-afa0-796d1288bb4c",
+          "name": "Marketo Get Email by Name",
+          "request": {
+            "name": "Marketo Get Email by Name",
+            "description": {
+              "content": "Returns an email records based on the given name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the email"
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                },
+                {
+                  "disabled": false,
+                  "key": "folder",
+                  "value": "<string>",
+                  "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2c1c306f-4562-4c75-b8cd-21f6ac59af80",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folder",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": true,\n      \"folder\": {\n        \"id\": 7973,\n        \"type\": \"Folder\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": false,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": true,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 8207,\n      \"textOnly\": true,\n      \"webView\": false,\n      \"createdAt\": \"1972-08-16T11:59:10.406Z\",\n      \"description\": \"string\",\n      \"id\": 1436,\n      \"name\": \"string\",\n      \"updatedAt\": \"1995-08-05T01:39:56.775Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": true,\n      \"folder\": {\n        \"id\": 9881,\n        \"type\": \"Program\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 1277,\n      \"textOnly\": true,\n      \"webView\": true,\n      \"createdAt\": \"1991-12-19T08:33:47.592Z\",\n      \"description\": \"string\",\n      \"id\": 1258,\n      \"name\": \"string\",\n      \"updatedAt\": \"1994-09-09T02:14:59.480Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ab53f5e2-140c-4f5a-9cd6-6aa08c326612",
+          "name": "Marketo Get Email By Id",
+          "request": {
+            "name": "Marketo Get Email By Id",
+            "description": {
+              "content": "Returns an email records by its id. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "96163cce-42f0-4d4a-a1b7-e3b5519e96ee",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": 2179,\n        \"type\": \"Folder\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": false,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 8228,\n      \"textOnly\": true,\n      \"webView\": true,\n      \"createdAt\": \"2004-07-11T18:55:23.732Z\",\n      \"description\": \"string\",\n      \"id\": 3531,\n      \"name\": \"string\",\n      \"updatedAt\": \"2014-12-28T13:28:07.988Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": 7664,\n        \"type\": \"Folder\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": true,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 3087,\n      \"textOnly\": true,\n      \"webView\": false,\n      \"createdAt\": \"1985-03-20T23:29:46.511Z\",\n      \"description\": \"string\",\n      \"id\": 470,\n      \"name\": \"string\",\n      \"updatedAt\": \"1993-06-03T13:24:52.463Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dfc91979-d7e5-4fb3-aa93-4a9f4d876460",
+          "name": "Marketo Update Email Metadata",
+          "request": {
+            "name": "Marketo Update Email Metadata",
+            "description": {
+              "content": "Updates the metadata of an email asset. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                "{{id}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Name of the Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "preHeader",
+                  "value": "<string>",
+                  "description": "Preheader text for the email"
+                },
+                {
+                  "disabled": false,
+                  "key": "operational",
+                  "value": "<boolean>",
+                  "description": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false"
+                },
+                {
+                  "disabled": false,
+                  "key": "published",
+                  "value": "<boolean>",
+                  "description": "Whether the email has been published to Sales Insight. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "textOnly",
+                  "value": "<boolean>",
+                  "description": "Setting to include text-only version of email when sent"
+                },
+                {
+                  "disabled": false,
+                  "key": "webView",
+                  "value": "<boolean>",
+                  "description": "Whether the email has been enabled to allow the 'View as Web Page' when received"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b1e601c5-b467-4eb4-96fd-fa6fd31b4633",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    "{{id}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the Email",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Preheader text for the email",
+                        "type": "text/plain"
+                      },
+                      "key": "preHeader",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false",
+                        "type": "text/plain"
+                      },
+                      "key": "operational",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the email has been published to Sales Insight. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "published",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Setting to include text-only version of email when sent",
+                        "type": "text/plain"
+                      },
+                      "key": "textOnly",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the email has been enabled to allow the 'View as Web Page' when received",
+                        "type": "text/plain"
+                      },
+                      "key": "webView",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": 2179,\n        \"type\": \"Folder\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": false,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 8228,\n      \"textOnly\": true,\n      \"webView\": true,\n      \"createdAt\": \"2004-07-11T18:55:23.732Z\",\n      \"description\": \"string\",\n      \"id\": 3531,\n      \"name\": \"string\",\n      \"updatedAt\": \"2014-12-28T13:28:07.988Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": 7664,\n        \"type\": \"Folder\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": true,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 3087,\n      \"textOnly\": true,\n      \"webView\": false,\n      \"createdAt\": \"1985-03-20T23:29:46.511Z\",\n      \"description\": \"string\",\n      \"id\": 470,\n      \"name\": \"string\",\n      \"updatedAt\": \"1993-06-03T13:24:52.463Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5146aa8d-9642-4773-9680-202b88a08e41",
+          "name": "Marketo Approve Email Draft",
+          "request": {
+            "name": "Marketo Approve Email Draft",
+            "description": {
+              "content": "Approves the current draft of an email. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "approveDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebc2dc5d-f8f8-4f73-881e-fb3a96036187",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "approveDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5528\n    },\n    {\n      \"id\": 8154\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b3c94464-baa1-406e-8578-aaf991f57bf8",
+          "name": "Marketo Clone Email",
+          "request": {
+            "name": "Marketo Clone Email",
+            "description": {
+              "content": "Clones the target email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "clone.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the new email asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "operational",
+                  "value": "<boolean>",
+                  "description": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8ac9aafa-0537-4281-87c0-4d85a99326df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "clone.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the new email asset",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false",
+                        "type": "text/plain"
+                      },
+                      "key": "operational",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": true,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": true,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 3170,\n      \"textOnly\": true,\n      \"webView\": false,\n      \"createdAt\": \"1993-04-21T22:30:39.445Z\",\n      \"description\": \"string\",\n      \"id\": 3608,\n      \"name\": \"string\",\n      \"updatedAt\": \"1961-11-01T02:07:18.689Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"fromName\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"string\",\n        \"value\": \"string\"\n      },\n      \"template\": 5910,\n      \"textOnly\": false,\n      \"webView\": true,\n      \"createdAt\": \"1962-07-09T11:28:11.343Z\",\n      \"description\": \"string\",\n      \"id\": 2690,\n      \"name\": \"string\",\n      \"updatedAt\": \"1998-03-14T19:29:32.661Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b87bb5bc-8bbc-4630-aa4d-1d67c5865fe4",
+          "name": "Marketo Get Email Content",
+          "request": {
+            "name": "Marketo Get Email Content",
+            "description": {
+              "content": "Returns the content of the designated email. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "156d9a1c-0e36-420f-84b9-8531a56c7722",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"contentType\": \"string\",\n      \"htmlId\": \"string\",\n      \"value\": {},\n      \"index\": 9247,\n      \"isLocked\": true,\n      \"parentHtmlId\": \"string\"\n    },\n    {\n      \"contentType\": \"string\",\n      \"htmlId\": \"string\",\n      \"value\": {},\n      \"index\": 398,\n      \"isLocked\": false,\n      \"parentHtmlId\": \"string\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1a1ad81d-7679-4a60-ab7a-613c28a70cf2",
+          "name": "Marketo Update Email Content",
+          "request": {
+            "name": "Marketo Update Email Content",
+            "description": {
+              "content": "Updates the content of an email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cd387173-2606-4174-ac00-0b31ee5c8e1a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0b0e40c2-1f32-4d6d-bfd9-41f21f60c4ab",
+          "name": "Marketo Rearrange Email Modules",
+          "request": {
+            "name": "Marketo Rearrange Email Modules",
+            "description": {
+              "content": "Rearranges the modules in an email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                "rearrange.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "0",
+                  "value": "<"
+                },
+                {
+                  "disabled": false,
+                  "key": "1",
+                  "value": "s"
+                },
+                {
+                  "disabled": false,
+                  "key": "2",
+                  "value": "t"
+                },
+                {
+                  "disabled": false,
+                  "key": "3",
+                  "value": "r"
+                },
+                {
+                  "disabled": false,
+                  "key": "4",
+                  "value": "i"
+                },
+                {
+                  "disabled": false,
+                  "key": "5",
+                  "value": "n"
+                },
+                {
+                  "disabled": false,
+                  "key": "6",
+                  "value": "g"
+                },
+                {
+                  "disabled": false,
+                  "key": "7",
+                  "value": ">"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "736db615-3e1b-463b-bdd7-13897455c5b5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    "rearrange.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "0",
+                      "value": "<"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "1",
+                      "value": "s"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "2",
+                      "value": "t"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "3",
+                      "value": "r"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "4",
+                      "value": "i"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "5",
+                      "value": "n"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "6",
+                      "value": "g"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "7",
+                      "value": ">"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 2538\n    },\n    {\n      \"id\": 3427\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f7f98fd5-4f0f-414b-a754-0e45a2afbbfc",
+          "name": "Marketo Update Email Content Section",
+          "request": {
+            "name": "Marketo Update Email Content Section",
+            "description": {
+              "content": "Updates the content in the given section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                "{{htmlId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content to set for the section."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed"
+                },
+                {
+                  "disabled": false,
+                  "key": "altText",
+                  "value": "<string>",
+                  "description": "Sets the value of the alt parameter for the resulting img element"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Overrides naitve height of the image. The resulting file will be resized to the given height"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "Multipart file that allows you to load an image from your computer"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "overWrite",
+                  "value": "<boolean>",
+                  "description": "Allows overwriting of the existing image content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "style",
+                  "value": "<string>",
+                  "description": "Sets the value of the style parameter for the content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "textValue",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "videoUrl",
+                  "value": "<string>",
+                  "description": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<integer>",
+                  "description": "Overrides native width of the image. The resulting file will be resized to the given width"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e0296e60-0aaa-4667-a96a-4a1c5fb21cbe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    "{{htmlId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content to set for the section.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the alt parameter for the resulting img element",
+                        "type": "text/plain"
+                      },
+                      "key": "altText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "externalUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides naitve height of the image. The resulting file will be resized to the given height",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Multipart file that allows you to load an image from your computer",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allows overwriting of the existing image content section",
+                        "type": "text/plain"
+                      },
+                      "key": "overWrite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the style parameter for the content section",
+                        "type": "text/plain"
+                      },
+                      "key": "style",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "textValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo",
+                        "type": "text/plain"
+                      },
+                      "key": "videoUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides native width of the image. The resulting file will be resized to the given width",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbe41a31-6c73-4dd3-b06a-31a45ddd6c88",
+          "name": "Marketo Add Email Module",
+          "request": {
+            "name": "Marketo Add Email Module",
+            "description": {
+              "content": "Adds a new module to an email, with the given id. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                ":moduleId",
+                "add.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the module"
+                },
+                {
+                  "disabled": false,
+                  "key": "index",
+                  "value": "<integer>",
+                  "description": "(Required) Index of the module. Determines the order of the module in the email."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moduleId",
+                  "description": "(Required) moduleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "427d6c7e-7818-4169-ae1b-b5f7034aa018",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    ":moduleId",
+                    "add.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "index",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moduleId",
+                      "description": "(Required) moduleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4661\n    },\n    {\n      \"id\": 3034\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9031a2d4-e973-47da-a0bb-b6930475bf47",
+          "name": "Marketo Delete Module",
+          "request": {
+            "name": "Marketo Delete Module",
+            "description": {
+              "content": "Deletes the given module from the email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                ":moduleId",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moduleId",
+                  "description": "(Required) moduleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c3f4031b-6692-4595-a230-1ee2c1b0f5b7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    ":moduleId",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moduleId",
+                      "description": "(Required) moduleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4661\n    },\n    {\n      \"id\": 3034\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3cfb215d-2933-4b90-8c0d-0db3d0679591",
+          "name": "Marketo Duplicate Email Module",
+          "request": {
+            "name": "Marketo Duplicate Email Module",
+            "description": {
+              "content": "Creates a copy of the designated module in an email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                ":moduleId",
+                "duplicate.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the new module"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moduleId",
+                  "description": "(Required) moduleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "305a4173-9bdd-4b0e-b084-b871f209e9f4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    ":moduleId",
+                    "duplicate.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moduleId",
+                      "description": "(Required) moduleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4661\n    },\n    {\n      \"id\": 3034\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4da67ea-d881-42f3-843e-4f1dbb24996f",
+          "name": "Marketo Rename Email Module",
+          "request": {
+            "name": "Marketo Rename Email Module",
+            "description": {
+              "content": "Renames a module. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "content",
+                ":moduleId",
+                "rename.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) New module name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "moduleId",
+                  "description": "(Required) moduleId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d1f63924-2205-40a5-86b9-6d3757de5243",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "content",
+                    ":moduleId",
+                    "rename.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "moduleId",
+                      "description": "(Required) moduleId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 4661\n    },\n    {\n      \"id\": 3034\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8fd30e8f-ab86-4b3d-b691-6000a7408c68",
+          "name": "Marketo Delete Email",
+          "request": {
+            "name": "Marketo Delete Email",
+            "description": {
+              "content": "Deletes the target email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f93ad870-ef66-4ca5-82cf-fc6a6bf2aa51",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fd55c160-660f-4ef3-b443-efcce7d681ff",
+          "name": "Marketo Discard Email Draft",
+          "request": {
+            "name": "Marketo Discard Email Draft",
+            "description": {
+              "content": "Discards the current draft of an email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "discardDraft.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d24a3f34-3dfb-42dd-aa5b-e4cb52a2bbbf",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "discardDraft.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5ee3dee3-312d-411e-8273-19ec2e960098",
+          "name": "Marketo Get Email Dynamic Content",
+          "request": {
+            "name": "Marketo Get Email Dynamic Content",
+            "description": {
+              "content": "Retrieves the dyanmic content record for the given section. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4dffb5cc-65ab-4532-b49f-55f4c35a9f5d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": [\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1953-08-15T11:10:34.813Z\",\n      \"id\": 6010,\n      \"segmentation\": 1469,\n      \"updatedAt\": \"1981-12-13T00:49:25.434Z\"\n    },\n    {\n      \"content\": [\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1970-06-09T11:58:45.026Z\",\n      \"id\": 1329,\n      \"segmentation\": 8424,\n      \"updatedAt\": \"1956-12-10T22:28:28.642Z\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67022c9d-2e40-49f2-ad94-7b9998a69bfb",
+          "name": "Marketo Update Email Dynamic Content Section",
+          "request": {
+            "name": "Marketo Update Email Dynamic Content Section",
+            "description": {
+              "content": "Updates dynamic content in the given section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content to set for the section."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed"
+                },
+                {
+                  "disabled": false,
+                  "key": "altText",
+                  "value": "<string>",
+                  "description": "Sets the value of the alt parameter for the resulting img element"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Overrides naitve height of the image. The resulting file will be resized to the given height"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "Multipart file that allows you to add an image from your computer"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "overWrite",
+                  "value": "<boolean>",
+                  "description": "Allows overwriting of the existing image content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "style",
+                  "value": "<string>",
+                  "description": "Sets the value of the style parameter for the content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "videoUrl",
+                  "value": "<string>",
+                  "description": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<integer>",
+                  "description": "Overrides native width of the image. The resulting file will be resized to the given width"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2424cdf4-124a-48c6-be51-d10aee81b8de",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content to set for the section.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the alt parameter for the resulting img element",
+                        "type": "text/plain"
+                      },
+                      "key": "altText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "externalUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides naitve height of the image. The resulting file will be resized to the given height",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Multipart file that allows you to add an image from your computer",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allows overwriting of the existing image content section",
+                        "type": "text/plain"
+                      },
+                      "key": "overWrite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the style parameter for the content section",
+                        "type": "text/plain"
+                      },
+                      "key": "style",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo",
+                        "type": "text/plain"
+                      },
+                      "key": "videoUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides native width of the image. The resulting file will be resized to the given width",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "37e43ed2-174d-4aeb-9523-dda49bfd6659",
+          "name": "Marketo Send Sample Email",
+          "request": {
+            "name": "Marketo Send Sample Email",
+            "description": {
+              "content": "Sends a sample email to the given email address. Leads may be impersonated to populate data for tokens and dynamic content. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "sendSample.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "emailAddress",
+                  "value": "<string>",
+                  "description": "(Required) Email address to receive sample email"
+                },
+                {
+                  "disabled": false,
+                  "key": "leadId",
+                  "value": "<string>",
+                  "description": "Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead."
+                },
+                {
+                  "disabled": false,
+                  "key": "textOnly",
+                  "value": "<boolean>",
+                  "description": "Whether to send to text only version along with the HTML version. Default false."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "9aa1aa9b-7603-4c72-a51c-7f521e41a0e9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "sendSample.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Email address to receive sample email",
+                        "type": "text/plain"
+                      },
+                      "key": "emailAddress",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.",
+                        "type": "text/plain"
+                      },
+                      "key": "leadId",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether to send to text only version along with the HTML version. Default false.",
+                        "type": "text/plain"
+                      },
+                      "key": "textOnly",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"result\": true,\n      \"service\": \"sendTestEmail\"\n    },\n    {\n      \"result\": true,\n      \"service\": \"sendTestEmail\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2a65c6e-3185-4506-abdf-92f3a9ea11fa",
+          "name": "Marketo Unapprove Email",
+          "request": {
+            "name": "Marketo Unapprove Email",
+            "description": {
+              "content": "Unapproves the email and reverts it to a draft-only state. Required Permissions: Approve Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "unapprove.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0102fb43-6127-418c-8ac0-a3a2fcc13b8d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "unapprove.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5050\n    },\n    {\n      \"id\": 4976\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "25627b85-1ee6-4b9c-9f1e-c0e9b933b7f0",
+          "name": "Marketo Update Email Variable",
+          "request": {
+            "name": "Marketo Update Email Variable",
+            "description": {
+              "content": "Updates the value of a given variable in an email. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "variable",
+                "{{name}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Value to update variable with"
+                },
+                {
+                  "disabled": false,
+                  "key": "moduleId",
+                  "value": "<string>",
+                  "description": "Module that variable is associated with. Required for updating module variables. Not needed for global variables."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f2ae9456-7cf6-4bd5-9e9b-8d560985c96f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "variable",
+                    "{{name}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Value to update variable with",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Module that variable is associated with. Required for updating module variables. Not needed for global variables.",
+                        "type": "text/plain"
+                      },
+                      "key": "moduleId",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"moduleScope\": true,\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"moduleId\": \"string\"\n    },\n    {\n      \"moduleScope\": false,\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"moduleId\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "622e6f14-0906-45f8-8af8-ecf2dcbd0b04",
+          "name": "Marketo Get Email Variables",
+          "request": {
+            "name": "Marketo Get Email Variables",
+            "description": {
+              "content": "Returns a list of the available variables in an email. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "variables.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c4d033ad-1585-4167-9664-e43ff7c744e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "variables.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"moduleScope\": false,\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"moduleId\": \"string\"\n    },\n    {\n      \"moduleScope\": true,\n      \"name\": \"string\",\n      \"value\": \"string\",\n      \"moduleId\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4eaa17f7-94ea-46f0-a35a-5ac2076112c1",
+          "name": "Marketo Get Email CC Fields",
+          "request": {
+            "name": "Marketo Get Email CC Fields",
+            "description": {
+              "content": "Returns the set of fields enabled for Email CC in the target instance. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                "ccFields.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4eb0ed6d-ec01-4edc-b124-b55407640303",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    "ccFields.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"apiName\": \"string\",\n      \"attributeId\": \"string\",\n      \"displayName\": \"string\",\n      \"objectName\": \"string\"\n    },\n    {\n      \"apiName\": \"string\",\n      \"attributeId\": \"string\",\n      \"displayName\": \"string\",\n      \"objectName\": \"string\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "90d344da-623e-4b50-b7eb-ec78d0bd1148",
+          "name": "Marketo Get Emails",
+          "request": {
+            "name": "Marketo Get Emails",
+            "description": {
+              "content": "Returns a list of emails matching the given filter parameters. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "emails.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                },
+                {
+                  "disabled": false,
+                  "key": "folder",
+                  "value": "<string>",
+                  "description": "JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of emails to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "earliestUpdatedAt",
+                  "value": "<string>",
+                  "description": "Exclude emails prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+                },
+                {
+                  "disabled": false,
+                  "key": "latestUpdatedAt",
+                  "value": "<string>",
+                  "description": "Exclude emails after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ac923530-38a8-48f8-ab0f-c7ea8556d0cd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "emails.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "folder",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "earliestUpdatedAt",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "latestUpdatedAt",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": true,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"fromName\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"template\": 947,\n      \"textOnly\": true,\n      \"webView\": true,\n      \"createdAt\": \"1964-11-25T15:30:51.414Z\",\n      \"description\": \"string\",\n      \"id\": 2837,\n      \"name\": \"string\",\n      \"updatedAt\": \"1992-06-10T03:22:29.910Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"fromName\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"operational\": false,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"template\": 2509,\n      \"textOnly\": false,\n      \"webView\": true,\n      \"createdAt\": \"1947-01-31T13:20:52.850Z\",\n      \"description\": \"string\",\n      \"id\": 6756,\n      \"name\": \"string\",\n      \"updatedAt\": \"2025-12-05T11:09:44.383Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fa0ded7a-500c-4a97-9302-7d67932f910a",
+          "name": "Marketo Create Email",
+          "request": {
+            "name": "Marketo Create Email",
+            "description": {
+              "content": "Creates a new email asset. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "emails.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<integer>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "fromEmail",
+                  "value": "<string>",
+                  "description": "(Required) From-address of the Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "fromName",
+                  "value": "<string>",
+                  "description": "(Required) From-name of the Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the email"
+                },
+                {
+                  "disabled": false,
+                  "key": "replyEmail",
+                  "value": "<string>",
+                  "description": "(Required) Reply-To address of the Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "subject",
+                  "value": "<string>",
+                  "description": "(Required) Subject Line of the Email"
+                },
+                {
+                  "disabled": false,
+                  "key": "template",
+                  "value": "<integer>",
+                  "description": "(Required) Id of the parent template"
+                },
+                {
+                  "disabled": false,
+                  "key": "description",
+                  "value": "<string>",
+                  "description": "Description of the asset"
+                },
+                {
+                  "disabled": false,
+                  "key": "operational",
+                  "value": "<boolean>",
+                  "description": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false"
+                },
+                {
+                  "disabled": false,
+                  "key": "textOnly",
+                  "value": "<string>",
+                  "description": "Setting to include text-only version of email when sent"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4a9877f8-d922-4172-9a15-9501c6ceb990",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "emails.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "id",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) ",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) From-address of the Email",
+                        "type": "text/plain"
+                      },
+                      "key": "fromEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) From-name of the Email",
+                        "type": "text/plain"
+                      },
+                      "key": "fromName",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Name of the email",
+                        "type": "text/plain"
+                      },
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Reply-To address of the Email",
+                        "type": "text/plain"
+                      },
+                      "key": "replyEmail",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Subject Line of the Email",
+                        "type": "text/plain"
+                      },
+                      "key": "subject",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Id of the parent template",
+                        "type": "text/plain"
+                      },
+                      "key": "template",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Description of the asset",
+                        "type": "text/plain"
+                      },
+                      "key": "description",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false",
+                        "type": "text/plain"
+                      },
+                      "key": "operational",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Setting to include text-only version of email when sent",
+                        "type": "text/plain"
+                      },
+                      "key": "textOnly",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"autoCopyToText\": true,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"fromName\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"operational\": true,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"template\": 947,\n      \"textOnly\": true,\n      \"webView\": true,\n      \"createdAt\": \"1964-11-25T15:30:51.414Z\",\n      \"description\": \"string\",\n      \"id\": 2837,\n      \"name\": \"string\",\n      \"updatedAt\": \"1992-06-10T03:22:29.910Z\",\n      \"url\": \"string\",\n      \"version\": 2,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    },\n    {\n      \"autoCopyToText\": false,\n      \"folder\": {\n        \"id\": \"<integer>\",\n        \"type\": \"<string>\"\n      },\n      \"fromEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"fromName\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"operational\": false,\n      \"preHeader\": \"string\",\n      \"publishToMSI\": false,\n      \"replyEmail\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"status\": \"string\",\n      \"subject\": {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      \"template\": 2509,\n      \"textOnly\": false,\n      \"webView\": true,\n      \"createdAt\": \"1947-01-31T13:20:52.850Z\",\n      \"description\": \"string\",\n      \"id\": 6756,\n      \"name\": \"string\",\n      \"updatedAt\": \"2025-12-05T11:09:44.383Z\",\n      \"url\": \"string\",\n      \"version\": 1,\n      \"workspace\": \"string\",\n      \"ccFields\": [\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        },\n        {\n          \"apiName\": \"string\",\n          \"attributeId\": \"string\",\n          \"displayName\": \"string\",\n          \"objectName\": \"string\"\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a43d8249-a6b0-4ddc-ab38-6b4072fb21dc",
+          "name": "Marketo Get Email Full Content",
+          "request": {
+            "name": "Marketo Get Email Full Content",
+            "description": {
+              "content": "Returns the serialized HTML version of the email. Required Permissions: Read-Only Assets, Read-Write Assets. If leadId is passed in the request: Read-Only Lead, Read-Write Lead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "fullContent.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions. Defaults to approved if asset is approved, draft if not."
+                },
+                {
+                  "disabled": false,
+                  "key": "leadId",
+                  "value": "<integer>",
+                  "description": "The lead id to impersonate. Email is rendered as though it was received by this lead."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Email content type to return. Default is HTML."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4c282c70-f7ef-46ca-b2db-33d283a355da",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "fullContent.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "leadId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": \"string\",\n      \"id\": 8889,\n      \"status\": \"draft\"\n    },\n    {\n      \"content\": \"string\",\n      \"id\": 6913,\n      \"status\": \"approved\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20f2fd75-4631-41d6-b5d7-aa9fa3d748f7",
+          "name": "Marketo Update Email Full Content",
+          "request": {
+            "name": "Marketo Update Email Full Content",
+            "description": {
+              "content": "Replaces the HTML of an Email that has had its relationship broken from its template. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "fullContent.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "(Required) Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "665ad868-48d1-4986-aa53-b30918db47f7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "fullContent.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags.",
+                        "type": "text/plain"
+                      },
+                      "key": "content",
+                      "value": "<string>",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 8631\n    },\n    {\n      \"id\": 4660\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) id",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) htmlId",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "htmlId"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of email dynamic content section",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "contentId"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) name",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "name"
+    }
+  ],
+  "info": {
+    "_postman_id": "e97222e4-a180-400a-9645-19c6981721ea",
+    "name": "Marketo Engage Rest Approve Emails API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

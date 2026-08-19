@@ -1,0 +1,146 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Id API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Id",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Smart List by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart list to retrieve"
+              },
+              {
+                "name": "includeRules",
+                "value": "",
+                "type": "query",
+                "description": "Set true to populate smart list rules. Default false"
+              }
+            ]
+          },
+          "docs": "Retrieves a Smart List record by its id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Smart List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the smart list to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the designated Smart List. Required Permissions: Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Clone Smart List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/smartList/:id/clone.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of smart list to clone"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Clones the designated Smart List. Required Permissions: Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Static List by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to retrieve"
+              }
+            ]
+          },
+          "docs": "Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Static List Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of static list to update"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Updates the metadata of a static list asset. Required Permissions: Read-Write Assets"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Static List",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/staticList/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of the static list to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the designated Static List. Required Permissions: Read-Write Asset"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

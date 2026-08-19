@@ -1,0 +1,168 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Marketo Engage Rest Approve Landing  Page  Redirect  Rules API",
+    "version": "1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Landing  Page  Redirect  Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Redirect Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRules.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of landing page redirect rules to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              },
+              {
+                "name": "redirectTolandingPageId",
+                "value": "",
+                "type": "query",
+                "description": "Landing page id of landing page to redirect to"
+              },
+              {
+                "name": "redirectToPath",
+                "value": "",
+                "type": "query",
+                "description": "Path of landing page to redirect to"
+              },
+              {
+                "name": "earliestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude landing page redirect rules prior to this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              },
+              {
+                "name": "latestUpdatedAt",
+                "value": "",
+                "type": "query",
+                "description": "Exclude landing page redirect rules after this date. Must be valid ISO-8601 string. See <a href=\"http://developers.marketo.com/rest-api/lead-database/fields/field-types/\">Datetime</a> field type description."
+              }
+            ]
+          },
+          "docs": "Retrieves a list of landing page redirect rules from the target instance. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Create Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRules.json",
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Create a new landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Redirect Rule by Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Retrieves the landing page redirect rule record. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Update Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ],
+            "body": {
+              "type": "form-urlencoded",
+              "data": []
+            }
+          },
+          "docs": "Update an existing landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Delete Landing Page Redirect Rule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://localhost:8080/rest/asset/v1/redirectRule/:id/delete.json",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Id of landing page redirect rule"
+              }
+            ]
+          },
+          "docs": "Delete a landing page redirect rule. Required Permissions: Read Write Redirect Rules"
+        },
+        {
+          "info": {
+            "name": "Marketo Get Landing Page Domains",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://localhost:8080/rest/asset/v1/landingPageDomains.json",
+            "params": [
+              {
+                "name": "maxReturn",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of landing page domains and domain aliases to return. Max 200, default 20"
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "Integer offset for paging"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of landing page domain and domain aliases. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

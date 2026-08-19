@@ -1,0 +1,861 @@
+{
+  "item": [
+    {
+      "id": "47248c28-9994-49c1-8fed-452206342f3c",
+      "name": "Fields",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a3e9e76d-4ecc-4aad-b050-9d72ff2ebcaf",
+          "name": "Marketo Add Form Field Visibility Rules",
+          "request": {
+            "name": "Marketo Add Form Field Visibility Rules",
+            "description": {
+              "content": "Adds a visibility rule to the target form field. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":formId",
+                "field",
+                ":fieldId",
+                "visibility.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "formId",
+                  "description": "(Required) formId"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fieldId",
+                  "description": "(Required) fieldId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "ruleType",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "rules",
+                  "value": "[{\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"altLabel\":\"<string>\",\"pickListValues\":[{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"},{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"}]},{\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"altLabel\":\"<string>\",\"pickListValues\":[{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"},{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"}]}]"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "33e9e171-18eb-4907-8b84-7cbb7d24e0a7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":formId",
+                    "field",
+                    ":fieldId",
+                    "visibility.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "formId",
+                      "description": "(Required) formId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fieldId",
+                      "description": "(Required) fieldId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "key": "ruleType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "rules",
+                      "value": "[{\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"altLabel\":\"<string>\",\"pickListValues\":[{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"},{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"}]},{\"operator\":\"<string>\",\"subjectField\":\"<string>\",\"values\":[\"<string>\",\"<string>\"],\"altLabel\":\"<string>\",\"pickListValues\":[{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"},{\"isDefault\":\"<boolean>\",\"label\":\"<string>\",\"selected\":\"<boolean>\",\"value\":\"<string>\"}]}]"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"formFieldId\": \"string\",\n      \"ruleType\": \"string\",\n      \"rules\": [\n        {\n          \"altLabel\": \"string\",\n          \"operator\": \"string\",\n          \"picklistFilterValues\": [\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"altLabel\": \"string\",\n          \"operator\": \"string\",\n          \"picklistFilterValues\": [\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    },\n    {\n      \"formFieldId\": \"string\",\n      \"ruleType\": \"string\",\n      \"rules\": [\n        {\n          \"altLabel\": \"string\",\n          \"operator\": \"string\",\n          \"picklistFilterValues\": [\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        },\n        {\n          \"altLabel\": \"string\",\n          \"operator\": \"string\",\n          \"picklistFilterValues\": [\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"isDefault\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"label\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"selected\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"value\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"subjectField\": \"string\",\n          \"values\": [\n            \"string\",\n            \"string\"\n          ]\n        }\n      ]\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "fb3b6fd3-58c2-480d-a005-dc7e7a901daf",
+          "name": "Marketo Update Form Field",
+          "request": {
+            "name": "Marketo Update Form Field",
+            "description": {
+              "content": "Updates the configuration for that target field. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "field",
+                "{{fieldId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "blankFields",
+                  "value": "<integer>",
+                  "description": "Number of blank fields to show when progressive profiling is enabled"
+                },
+                {
+                  "disabled": false,
+                  "key": "defaultValue",
+                  "value": "<string>",
+                  "description": "Optional default value for the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldType",
+                  "value": "<string>",
+                  "description": "Type of field"
+                },
+                {
+                  "disabled": false,
+                  "key": "fieldWidth",
+                  "value": "<integer>",
+                  "description": "Width of the input or select element"
+                },
+                {
+                  "disabled": false,
+                  "key": "formPrefill",
+                  "value": "<boolean>",
+                  "description": "Whether the field should prefill. Default true"
+                },
+                {
+                  "disabled": false,
+                  "key": "isSensitive",
+                  "value": "<boolean>",
+                  "description": "Whether the field is marked as sensitive. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "hintText",
+                  "value": "<string>",
+                  "description": "Hint text for the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "initiallyChecked",
+                  "value": "<boolean>",
+                  "description": "Whether the field should be checked upon loading. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "instructions",
+                  "value": "<string>",
+                  "description": "Instructions for the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "label",
+                  "value": "<string>",
+                  "description": "Label of the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "labelToRight",
+                  "value": "<boolean>",
+                  "description": "Whether the field label should be displayed to the right of the input/select element. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "labelWidth",
+                  "value": "<integer>",
+                  "description": "Width of the field label element"
+                },
+                {
+                  "disabled": false,
+                  "key": "maskInput",
+                  "value": "<string>",
+                  "description": "Optional input mask for the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxLength",
+                  "value": "<integer>",
+                  "description": "Maximum length for text type fields"
+                },
+                {
+                  "disabled": false,
+                  "key": "maxValue",
+                  "value": "<float>",
+                  "description": "Maximum value accepted by the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "minValue",
+                  "value": "<float>",
+                  "description": "Minimum value accepted by the field"
+                },
+                {
+                  "disabled": false,
+                  "key": "multiSelect",
+                  "value": "<boolean>",
+                  "description": "Whether the field should allow multiple selections. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "required",
+                  "value": "<boolean>",
+                  "description": "Whether the field is required to submit the form. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "validationMessage",
+                  "value": "<string>",
+                  "description": "Validation message to display on failed validation"
+                },
+                {
+                  "disabled": false,
+                  "key": "values",
+                  "value": "<string>",
+                  "description": "Array of JSON objects that contain field attributes. Only for select-field types. Example: values=[{'label':'Select...','value':'','isDefault':true,'selected':true}, {'label':'MR','value':'Mr'}, {'label':'MS','value':'Ms'}, {'label':'MRS','value':'Mrs'}, {'label':'DR','value':'Dr'}, {'label':'PROF','value':'Prof'}]"
+                },
+                {
+                  "disabled": false,
+                  "key": "visibleLines",
+                  "value": "<integer>",
+                  "description": "Number of lines to display for the field element"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "68a9bd42-c995-43b0-bd3e-365b4eeba7ad",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "field",
+                    "{{fieldId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of blank fields to show when progressive profiling is enabled",
+                        "type": "text/plain"
+                      },
+                      "key": "blankFields",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional default value for the field",
+                        "type": "text/plain"
+                      },
+                      "key": "defaultValue",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of field",
+                        "type": "text/plain"
+                      },
+                      "key": "fieldType",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Width of the input or select element",
+                        "type": "text/plain"
+                      },
+                      "key": "fieldWidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field should prefill. Default true",
+                        "type": "text/plain"
+                      },
+                      "key": "formPrefill",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field is marked as sensitive. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "isSensitive",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hint text for the field",
+                        "type": "text/plain"
+                      },
+                      "key": "hintText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field should be checked upon loading. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "initiallyChecked",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Instructions for the field",
+                        "type": "text/plain"
+                      },
+                      "key": "instructions",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Label of the field",
+                        "type": "text/plain"
+                      },
+                      "key": "label",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field label should be displayed to the right of the input/select element. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "labelToRight",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Width of the field label element",
+                        "type": "text/plain"
+                      },
+                      "key": "labelWidth",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Optional input mask for the field",
+                        "type": "text/plain"
+                      },
+                      "key": "maskInput",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum length for text type fields",
+                        "type": "text/plain"
+                      },
+                      "key": "maxLength",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Maximum value accepted by the field",
+                        "type": "text/plain"
+                      },
+                      "key": "maxValue",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Minimum value accepted by the field",
+                        "type": "text/plain"
+                      },
+                      "key": "minValue",
+                      "value": "<float>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field should allow multiple selections. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "multiSelect",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Whether the field is required to submit the form. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "required",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Validation message to display on failed validation",
+                        "type": "text/plain"
+                      },
+                      "key": "validationMessage",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Array of JSON objects that contain field attributes. Only for select-field types. Example: values=[{'label':'Select...','value':'','isDefault':true,'selected':true}, {'label':'MR','value':'Mr'}, {'label':'MS','value':'Ms'}, {'label':'MRS','value':'Mrs'}, {'label':'DR','value':'Dr'}, {'label':'PROF','value':'Prof'}]",
+                        "type": "text/plain"
+                      },
+                      "key": "values",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Number of lines to display for the field element",
+                        "type": "text/plain"
+                      },
+                      "key": "visibleLines",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"blankFields\": 7038,\n      \"columnNumber\": 5292,\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"fieldMetaData\": {},\n      \"fieldWidth\": 6493,\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"formPrefill\": true,\n      \"isSensitive\": false,\n      \"hintText\": \"string\",\n      \"id\": \"string\",\n      \"instructions\": \"string\",\n      \"label\": \"string\",\n      \"labelWidth\": 401,\n      \"maxLength\": 9345,\n      \"required\": false,\n      \"rowNumber\": 3882,\n      \"text\": \"string\",\n      \"validationMessage\": {},\n      \"visibilityRules\": {\n        \"ruleType\": \"string\",\n        \"rules\": [\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"blankFields\": 9842,\n      \"columnNumber\": 5068,\n      \"dataType\": \"string\",\n      \"defaultValue\": \"string\",\n      \"fieldMetaData\": {},\n      \"fieldWidth\": 144,\n      \"fields\": [\n        \"string\",\n        \"string\"\n      ],\n      \"formPrefill\": false,\n      \"isSensitive\": false,\n      \"hintText\": \"string\",\n      \"id\": \"string\",\n      \"instructions\": \"string\",\n      \"label\": \"string\",\n      \"labelWidth\": 408,\n      \"maxLength\": 5403,\n      \"required\": true,\n      \"rowNumber\": 7612,\n      \"text\": \"string\",\n      \"validationMessage\": {},\n      \"visibilityRules\": {\n        \"ruleType\": \"string\",\n        \"rules\": [\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          },\n          {\n            \"altLabel\": \"string\",\n            \"operator\": \"string\",\n            \"picklistFilterValues\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"subjectField\": \"string\",\n            \"values\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a0542b02-6209-4783-b25e-50146bbf1058",
+          "name": "Marketo Delete Form Field",
+          "request": {
+            "name": "Marketo Delete Form Field",
+            "description": {
+              "content": "Deletes a field from a form. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "field",
+                ":fieldId",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fieldId",
+                  "description": "(Required) fieldId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "0ae1e688-5426-4f44-b7c9-d9cda70859be",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "field",
+                    ":fieldId",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fieldId",
+                      "description": "(Required) fieldId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 5008\n    },\n    {\n      \"id\": 9699\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4115e009-450f-41fb-a374-12fd284aade4",
+          "name": "Marketo Delete Field from Fieldset",
+          "request": {
+            "name": "Marketo Delete Field from Fieldset",
+            "description": {
+              "content": "Removes the target field from the fieldset. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "form",
+                ":id",
+                "fieldSet",
+                ":fieldSetId",
+                "field",
+                ":fieldId",
+                "delete.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fieldSetId",
+                  "description": "(Required) fieldSetId"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "fieldId",
+                  "description": "(Required) fieldId"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "eb549be4-f504-4b97-bc90-92e0ee4dbf62",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "form",
+                    ":id",
+                    "fieldSet",
+                    ":fieldSetId",
+                    "field",
+                    ":fieldId",
+                    "delete.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fieldSetId",
+                      "description": "(Required) fieldSetId"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "fieldId",
+                      "description": "(Required) fieldId"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1419\n    },\n    {\n      \"id\": 1438\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) fieldId",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "fieldId"
+    }
+  ],
+  "info": {
+    "_postman_id": "16aec756-0a15-4730-a33a-1e618691c6e5",
+    "name": "Marketo Engage Rest Approve Fields API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

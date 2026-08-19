@@ -1,0 +1,220 @@
+{
+  "item": [
+    {
+      "id": "15ceb25b-31ab-4822-b15d-506caf53a3ee",
+      "name": "Channels",
+      "description": {
+        "content": "Channel Controller",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e652d94f-d8d5-4cac-adfd-95c6402b3f9f",
+          "name": "Marketo Get Channel by Name",
+          "request": {
+            "name": "Marketo Get Channel by Name",
+            "description": {
+              "content": "Retrieves channels based on the provided name. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "channel",
+                "byName.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Name",
+                  "value": "<string>",
+                  "description": "(Required) Name of channel to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "40090eab-1e0d-4418-8679-231171851ba4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "channel",
+                    "byName.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Name",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"applicableProgramType\": \"string\",\n      \"createdAt\": \"2020-10-08T06:04:36.340Z\",\n      \"id\": 6788,\n      \"name\": \"string\",\n      \"updatedAt\": \"1999-09-26T23:35:20.131Z\",\n      \"progressionStatuses\": [\n        {\n          \"description\": \"string\",\n          \"hidden\": false,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 4869,\n          \"success\": true\n        },\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 5127,\n          \"success\": true\n        }\n      ]\n    },\n    {\n      \"applicableProgramType\": \"string\",\n      \"createdAt\": \"2018-12-17T17:42:14.360Z\",\n      \"id\": 5679,\n      \"name\": \"string\",\n      \"updatedAt\": \"1996-01-02T20:54:58.796Z\",\n      \"progressionStatuses\": [\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 8544,\n          \"success\": false\n        },\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 9178,\n          \"success\": false\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8ad372cb-b8ff-4f24-89be-511d3a885078",
+          "name": "Marketo Get Channels",
+          "request": {
+            "name": "Marketo Get Channels",
+            "description": {
+              "content": "Retrieves all channels. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "channels.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "maxReturn",
+                  "value": "<integer>",
+                  "description": "Maximum number of channels to return. Max 200, default 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<integer>",
+                  "description": "Integer offset for paging"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5c1114a5-f6da-4b57-881e-8b451c97adf6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "channels.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "maxReturn",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"applicableProgramType\": \"string\",\n      \"createdAt\": \"1984-11-30T11:57:44.209Z\",\n      \"id\": 4708,\n      \"name\": \"string\",\n      \"updatedAt\": \"1947-08-12T00:41:47.434Z\",\n      \"progressionStatuses\": [\n        {\n          \"description\": \"string\",\n          \"hidden\": false,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 2024,\n          \"success\": false\n        },\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 5289,\n          \"success\": false\n        }\n      ]\n    },\n    {\n      \"applicableProgramType\": \"string\",\n      \"createdAt\": \"1956-03-18T09:44:10.143Z\",\n      \"id\": 872,\n      \"name\": \"string\",\n      \"updatedAt\": \"1972-08-22T13:10:15.229Z\",\n      \"progressionStatuses\": [\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 9040,\n          \"success\": true\n        },\n        {\n          \"description\": \"string\",\n          \"hidden\": true,\n          \"name\": \"string\",\n          \"type\": \"string\",\n          \"step\": 2686,\n          \"success\": false\n        }\n      ]\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ad50cf99-3d3c-4e44-aa61-d86af0aebc4f",
+    "name": "Marketo Engage Rest Approve Channels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

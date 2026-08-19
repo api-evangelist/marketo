@@ -1,0 +1,117 @@
+generated: '2026-08-13'
+method: searched
+source:
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+  - https://experienceleague.adobe.com/en/docs/marketo/using/release-notes/current
+  - https://status.adobe.com/
+versioning:
+  scheme: uri-path
+  current: v1
+  surfaces:
+    - name: Lead Database API
+      path_prefix: /rest/v1
+    - name: Asset API
+      path_prefix: /rest/asset/v1
+    - name: Bulk import / export
+      path_prefix: /bulk/v1
+    - name: User Management API
+      path_prefix: /userservice/management/v1
+    - name: Identity
+      path_prefix: /identity/oauth
+    - name: Data Ingestion API
+      path_prefix: /subscriptions/{munchkinId}
+      host: https://mkto-ingestion-api.adobe.io
+  docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+  note: >-
+    v1 has been the only REST version since launch. Change is delivered as
+    behaviour and limit changes inside v1 rather than as a new version, which is
+    why the release notes — not a version number — are the thing an integrator
+    must watch.
+release_cadence:
+  scheme: monthly named release
+  current: August 2026 release
+  rollout: >-
+    Standard-release-cycle features begin rolling out on a stated date and phase
+    in over the following weeks; feature availability varies by Marketo Engage
+    edition.
+  notes_url: https://experienceleague.adobe.com/en/docs/marketo/using/release-notes/current
+deprecation:
+  policy_url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+  sunset_header: false
+  deprecation_header: false
+  practice: >-
+    Marketo announces breaking changes with a dated removal in the monthly
+    release notes and in the affected reference page. It does NOT emit RFC 8594
+    Sunset or Deprecation response headers, so a running integration receives no
+    machine-readable warning — the announcement channel is prose.
+  active_deprecations:
+    - item: SOAP API
+      status: removed
+      effective: '2026-07-31'
+      detail: >-
+        "As of July 31st, 2026, the SOAP API is deprecated and is no longer
+        available. All new development should be done with the Marketo REST API."
+      source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+      impact: >-
+        Four of the community client libraries Marketo still lists, and both of
+        the two libraries it labels "Official", target this retired API. See
+        packages/marketo-packages.yml.
+    - item: access_token query/form parameter authentication
+      status: deprecated
+      removal_date: '2026-08-31'
+      detail: >-
+        Support for passing the access token as the `access_token` query
+        parameter is removed on 2026-08-31. Integrations must use the
+        `Authorization: Bearer` header.
+      source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+      severity: breaking
+    - item: Double slash in API gateway URLs
+      status: deprecated
+      removal_date: null
+      detail: >-
+        Adobe has announced deprecation of the double slash in API gateway URLs
+        via a Marketing Nation post linked from the REST API overview.
+      source: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
+    - item: listId parameter on Get Lead Activities / Get Lead Changes for large static lists
+      status: restricted
+      effective: '2026-09-30'
+      detail: >-
+        From 2026-09-30 these calls fail with record error 1003 when the target
+        static list contains 10,000 or more leads.
+      source: https://experienceleague.adobe.com/en/docs/marketo/using/release-notes/current
+      severity: breaking
+    - item: Merge Leads leadIds count
+      status: restricted
+      effective: '2026-07-31'
+      detail: >-
+        Calls with more than 25 IDs in leadIds now return error 1080 and are
+        skipped.
+      source: https://experienceleague.adobe.com/en/docs/marketo/using/release-notes/current
+      severity: breaking
+sla:
+  url: null
+  uptime_target: null
+  note: >-
+    No public SLA or uptime target is published for Marketo Engage; commitments
+    are contractual per subscription.
+status_page:
+  url: https://status.adobe.com/
+  scope: Adobe-wide status page for Adobe cloud products, including Marketo Engage.
+  http_status: 200
+  probed: '2026-08-13'
+  machine_readable: false
+  probe_note: >-
+    The served HTML carries no product names — the product/incident list is
+    rendered client-side, so the page is not machine-readable and no per-product
+    status feed was found for Marketo Engage.
+deprecated_operations: []
+deprecated_operations_note: >-
+  None of the five Adobe-published specs marks a single operation
+  `deprecated: true`. The retirements above are announced only in prose, so the
+  machine-readable contract carries no deprecation signal at all.
+support:
+  developer_docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+  community: https://experienceleaguecommunities.adobe.com/
+  community_note: nation.marketo.com now 301s to experienceleaguecommunities.adobe.com (probed 2026-08-13, HTTP 200).
+  contact: developerfeedback@marketo.com

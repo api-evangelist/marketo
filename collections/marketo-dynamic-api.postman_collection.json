@@ -1,0 +1,1136 @@
+{
+  "item": [
+    {
+      "id": "1ee018b9-c9d1-4fac-9549-f7794a5e057e",
+      "name": "Dynamic",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "e21b69b6-fbf5-413b-b553-75386bd27072",
+          "name": "Marketo Get Email Dynamic Content",
+          "request": {
+            "name": "Marketo Get Email Dynamic Content",
+            "description": {
+              "content": "Retrieves the dyanmic content record for the given section. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "26724127-3c18-438f-afec-dd43db1ee9dd",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": [\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1989-01-29T05:58:04.184Z\",\n      \"id\": 1300,\n      \"segmentation\": 9210,\n      \"updatedAt\": \"1959-07-12T23:08:28.285Z\"\n    },\n    {\n      \"content\": [\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        },\n        {\n          \"content\": \"string\",\n          \"id\": \"string\",\n          \"segmentId\": \"string\",\n          \"segmentName\": \"string\",\n          \"type\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1963-09-22T01:19:41.293Z\",\n      \"id\": 4980,\n      \"segmentation\": 2068,\n      \"updatedAt\": \"1972-08-06T07:02:10.800Z\"\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "81ca4631-18ee-4818-b9c1-3f84f5ef5e8c",
+          "name": "Marketo Update Email Dynamic Content Section",
+          "request": {
+            "name": "Marketo Update Email Dynamic Content Section",
+            "description": {
+              "content": "Updates dynamic content in the given section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "email",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of email"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of content to set for the section."
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed"
+                },
+                {
+                  "disabled": false,
+                  "key": "altText",
+                  "value": "<string>",
+                  "description": "Sets the value of the alt parameter for the resulting img element"
+                },
+                {
+                  "disabled": false,
+                  "key": "externalUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<integer>",
+                  "description": "Overrides naitve height of the image. The resulting file will be resized to the given height"
+                },
+                {
+                  "disabled": false,
+                  "key": "image",
+                  "value": "<string>",
+                  "description": "Multipart file that allows you to add an image from your computer"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "overWrite",
+                  "value": "<boolean>",
+                  "description": "Allows overwriting of the existing image content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "style",
+                  "value": "<string>",
+                  "description": "Sets the value of the style parameter for the content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "videoUrl",
+                  "value": "<string>",
+                  "description": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<integer>",
+                  "description": "Overrides native width of the image. The resulting file will be resized to the given width"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d4fb185c-4ccc-40d3-b3e2-80f13f1e4903",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "email",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of email"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Type of content to set for the section.",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "(Required) Value to set for the section. For type Text, the HTML content of the section. For type DynamicContent, the id of the segmentation to use for the content. For type Snippet, the id of the snippet to embed",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the alt parameter for the resulting img element",
+                        "type": "text/plain"
+                      },
+                      "key": "altText",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "externalUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides naitve height of the image. The resulting file will be resized to the given height",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<integer>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Multipart file that allows you to add an image from your computer",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Allows overwriting of the existing image content section",
+                        "type": "text/plain"
+                      },
+                      "key": "overWrite",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the value of the style parameter for the content section",
+                        "type": "text/plain"
+                      },
+                      "key": "style",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Sets the Url of the video element. Videos must be either from YouTube or Vimeo",
+                        "type": "text/plain"
+                      },
+                      "key": "videoUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Overrides native width of the image. The resulting file will be resized to the given width",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 3538\n    },\n    {\n      \"id\": 6318\n    }\n  ],\n  \"success\": true,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "35001ae9-cb05-442c-bf76-3140c1c91043",
+          "name": "Marketo Get Landing Page Dynamic Content",
+          "request": {
+            "name": "Marketo Get Landing Page Dynamic Content",
+            "description": {
+              "content": "Retrieves the dynamic content from the target section. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "35119541-ba99-41e2-b07f-d85e258564df",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"content\": [\n        {\n          \"content\": {},\n          \"segmentId\": 710,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        },\n        {\n          \"content\": {},\n          \"segmentId\": 9049,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1967-09-28T17:22:35.640Z\",\n      \"id\": 6970,\n      \"segmentation\": 6521,\n      \"updatedAt\": \"2022-02-17T23:10:03.042Z\"\n    },\n    {\n      \"content\": [\n        {\n          \"content\": {},\n          \"segmentId\": 7222,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        },\n        {\n          \"content\": {},\n          \"segmentId\": 7637,\n          \"segmentName\": \"string\",\n          \"type\": \"string\",\n          \"followupType\": \"string\",\n          \"followupValue\": \"string\"\n        }\n      ],\n      \"createdAt\": \"1968-12-30T05:13:13.271Z\",\n      \"id\": 9682,\n      \"segmentation\": 6414,\n      \"updatedAt\": \"1950-06-10T01:21:04.469Z\"\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bdd367af-b0c1-4a3f-aa61-b4b3bc818c9b",
+          "name": "Marketo Update Landing Page Dynamic Content Section",
+          "request": {
+            "name": "Marketo Update Landing Page Dynamic Content Section",
+            "description": {
+              "content": "Updates the content of the target dynamic content section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "landingPage",
+                ":id",
+                "dynamicContent",
+                "{{contentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) Id of the landing page"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "backgroundColor",
+                  "value": "<string>",
+                  "description": "background-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderColor",
+                  "value": "<string>",
+                  "description": "border-color property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderStyle",
+                  "value": "<string>",
+                  "description": "border-style property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "borderWidth",
+                  "value": "<string>",
+                  "description": "border-width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "height",
+                  "value": "<string>",
+                  "description": "height property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideDesktop",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a desktop browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "hideMobile",
+                  "value": "<boolean>",
+                  "description": "Hide the section when displayed on a mobile browser. Default false"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageOpenNewWindow",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "left",
+                  "value": "<string>",
+                  "description": "left property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "linkUrl",
+                  "value": "<string>",
+                  "description": "URL parameter of a link type section"
+                },
+                {
+                  "disabled": false,
+                  "key": "opacity",
+                  "value": "<string>",
+                  "description": "opacity property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "segment",
+                  "value": "<string>",
+                  "description": "Name of the segment to display content section for"
+                },
+                {
+                  "disabled": false,
+                  "key": "top",
+                  "value": "<string>",
+                  "description": "top property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Type of content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "width",
+                  "value": "<string>",
+                  "description": "width property of the HTML section"
+                },
+                {
+                  "disabled": false,
+                  "key": "zIndex",
+                  "value": "<string>",
+                  "description": "z-index property of the HTML section"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "62c2f8d8-7ac2-47bf-b426-b3b63a893ebe",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "landingPage",
+                    ":id",
+                    "dynamicContent",
+                    "{{contentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) Id of the landing page"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "background-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "backgroundColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-color property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderColor",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-style property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderStyle",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "border-width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "borderWidth",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "height property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "height",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a desktop browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideDesktop",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Hide the section when displayed on a mobile browser. Default false",
+                        "type": "text/plain"
+                      },
+                      "key": "hideMobile",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "disabled": false,
+                      "key": "imageOpenNewWindow",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "left property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "left",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "URL parameter of a link type section",
+                        "type": "text/plain"
+                      },
+                      "key": "linkUrl",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "opacity property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "opacity",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Name of the segment to display content section for",
+                        "type": "text/plain"
+                      },
+                      "key": "segment",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "top property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "top",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of content section",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "width property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "width",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "z-index property of the HTML section",
+                        "type": "text/plain"
+                      },
+                      "key": "zIndex",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1665\n    },\n    {\n      \"id\": 6554\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "df596d4f-2da2-4bc3-b33f-7811a23dc169",
+          "name": "Marketo Get Dynamic Content",
+          "request": {
+            "name": "Marketo Get Dynamic Content",
+            "description": {
+              "content": "Gets the list of dynamic content sections for the snippet. Required Permissions: Read-Only Assets, Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "snippet",
+                ":id",
+                "dynamicContent.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Status filter for draft or approved versions"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d9eec738-1b67-4650-b5e0-c6898b92e55b",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "snippet",
+                    ":id",
+                    "dynamicContent.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a6009f24-644b-4fa0-aa05-3db5aee14510",
+          "name": "Marketo Update Snippet Dynamic Content",
+          "request": {
+            "name": "Marketo Update Snippet Dynamic Content",
+            "description": {
+              "content": "Updates the target dynamic content section. Required Permissions: Read-Write Assets",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "asset",
+                "v1",
+                "snippet",
+                ":id",
+                "dynamicContent",
+                "{{segmentId}}.json"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) id"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "Type of dynamic content section"
+                },
+                {
+                  "disabled": false,
+                  "key": "value",
+                  "value": "<string>",
+                  "description": "Value of the dynamic content section"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6d132a7c-dd20-493b-a1d7-f9b55218269f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "asset",
+                    "v1",
+                    "snippet",
+                    ":id",
+                    "dynamicContent",
+                    "{{segmentId}}.json"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) id"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Type of dynamic content section",
+                        "type": "text/plain"
+                      },
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "disabled": false,
+                      "description": {
+                        "content": "Value of the dynamic content section",
+                        "type": "text/plain"
+                      },
+                      "key": "value",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"code\": \"string\",\n      \"message\": \"string\"\n    }\n  ],\n  \"requestId\": \"string\",\n  \"result\": [\n    {\n      \"id\": 1665\n    },\n    {\n      \"id\": 6554\n    }\n  ],\n  \"success\": false,\n  \"warnings\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://localhost:8080/",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Id of email dynamic content section",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "contentId"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) segmentId",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<integer>",
+      "key": "segmentId"
+    }
+  ],
+  "info": {
+    "_postman_id": "d089798b-5ad7-4d73-a09a-996a0a465538",
+    "name": "Marketo Engage Rest Approve Dynamic API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.\n\nContact Support:\n Name: Adobe Developer Relations\n Email: developerfeedback@marketo.com",
+      "type": "text/plain"
+    }
+  }
+}

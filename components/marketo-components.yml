@@ -1,0 +1,104 @@
+generated: '2026-08-13'
+method: searched
+source:
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/forms-api-reference
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/forms-api-reference
+note: >-
+  Marketo ships client-side embeddable surfaces that are distinct from its REST
+  API and from the SDKs in packages/. These are the pieces a developer drops onto
+  a customer's own web page, and they are how most Marketo data actually gets
+  created — a form embed and a tracking script, not an API call.
+families:
+  - family: Forms 2.0
+    kind: embeddable form
+    loader: null
+    loader_note: >-
+      Adobe does not publish the embed snippet in the developer docs. Its
+      Javascript API page states that "the embed code is unique to your Marketo
+      instance because it contains an account identifier" and that it must be
+      copied from the Marketo user interface, so there is no canonical script URL
+      to record. .loadForm() takes baseUrl + munchkinId explicitly, which is the
+      documented evidence that the loader is per-subscription.
+    namespaces:
+      - name: MktoForms2
+        role: Top-level public namespace — creates, loads and retrieves Form objects.
+        methods:
+          - signature: .loadForm(baseUrl, munchkinId, formId, callback)
+            description: Loads a form descriptor from Marketo servers and creates a new Form object.
+          - signature: .lightbox(form, opts)
+            description: Renders a lightbox modal containing a Form object. Returns an object with .show() and .hide().
+            options: [onSuccess, closeBtn]
+          - signature: .newForm(formData, callback)
+            description: Creates a Form object from a Form Descriptor object produced by the Forms V2 editor.
+          - signature: .getForm(formId)
+            description: Retrieves a previously created Form object by form Vid.
+          - signature: .allForms()
+            description: Returns an array of every Form object constructed on the page.
+          - signature: .getPageFields()
+            description: Returns URL and referrer data useful for tracking.
+          - signature: .whenReady(callback)
+            description: >-
+              Fires once per form on the page when the form exists, has rendered,
+              and has run its initial callbacks. Fires immediately for forms
+              already ready.
+      - name: Form
+        role: An individual embedded form instance.
+    identifier: form Vid (form version id)
+    docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/forms-api-reference
+    authoring_api: >-
+      The server-side counterpart is the Asset API form surface —
+      browseForms2UsingGET, createLpFormsUsingPOST, updateFormsUsingPOST,
+      addFieldToAFormUsingPOST and the form-field operations in
+      openapi/marketo-asset-openapi-original.json.
+  - family: Munchkin
+    kind: web tracking script
+    role: >-
+      Lead tracking / anonymous-visitor identification. Sets the Marketo tracking
+      cookie whose value is the `cookie` parameter accepted by
+      associateLeadUsingPOST, which is how an anonymous web session is bound to a
+      known person record.
+    api_link:
+      operation: associateLeadUsingPOST
+      spec: openapi/marketo-lead-database-openapi-original.json
+      error: Error 1012 "Invalid cookie value '%s'" when the cookie value is malformed.
+    docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/javascript-api
+    setup: Admin > Munchkin panel in the Marketo user interface.
+  - family: Web Personalization
+    kind: client-side personalization
+    role: >-
+      Real-time on-site personalization based on visitor identity and behaviour.
+      Documented as one of the four Marketo client-side JavaScript integrations.
+    docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/javascript-api
+  - family: Predictive Content
+    kind: embeddable recommendation widget
+    role: >-
+      Machine-learning content recommendations embedded on a customer's own
+      pages; multiple recommendation blocks per page.
+    docs: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/javascriptapi/javascript-api
+  - family: Landing Pages
+    kind: hosted page surface
+    role: >-
+      Marketo-hosted landing pages and landing-page templates, authored through
+      the Asset API and rendered on the subscription's own page host. Free-form
+      and guided templates with Marketo-defined editable regions.
+    authoring_api: >-
+      getLpFormByIdUsingGET, the landing-page, landing-page-content,
+      landing-page-template and landing-page-redirect-rule operations in
+      openapi/marketo-asset-openapi-original.json.
+  - family: Email Script / Velocity tokens
+    kind: server-side templating
+    role: >-
+      Email scripting and token substitution inside Marketo-authored emails and
+      landing pages. Tokens resolve Lead, Trigger, Campaign, Program and System
+      values at send time — the same token vocabulary that populates outbound
+      webhook payload templates.
+    related: asyncapi/marketo-events-asyncapi.yml
+  - family: Mobile Engagement SDKs
+    kind: native mobile SDK
+    role: Push, in-app messaging and mobile activity tracking.
+    packages:
+      - com.marketo:MarketoSDK (Android)
+      - Marketo/ios-sdk (iOS)
+    note: Catalogued in packages/marketo-packages.yml; listed here as the mobile client surface.
+family_count: 7

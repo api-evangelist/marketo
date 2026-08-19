@@ -1,0 +1,152 @@
+generated: '2026-08-13'
+method: derived
+source:
+  - openapi/marketo-lead-database-openapi-original.json
+  - openapi/marketo-asset-openapi-original.json
+  - openapi/marketo-data-ingestion-openapi-original.json
+  - openapi/marketo-identity-openapi-original.json
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
+  - https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/error-codes
+  - https://www.adobe.com/.well-known/security.txt
+note: >-
+  Standards conformance derived from the five Adobe-published specs plus the
+  provider's own reference pages. This file asserts STANDARDS conformance only —
+  it makes no claim about certifications or a compliance program, because
+  adobe.com/trust.html, business.adobe.com/trust-center and helpx.adobe.com all
+  refused connections from this run (curl exit 000 across three user agents), so
+  no certification could be verified. No Compliance pointer is emitted.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      OAuth 2.0 two-legged client-credentials grant documented at
+      /rest/authentication; token endpoint /identity/oauth/token returns
+      access_token, token_type=bearer, expires_in, scope.
+    caveat: >-
+      No securitySchemes are declared in ANY published spec, so conformance is
+      documented, not machine-readable.
+  - id: rfc6750-bearer-token
+    conforms: true
+    evidence: 'Authorization: Bearer <access_token> is the mandated transport from 2026-08-31.'
+  - id: rfc6749-scopes
+    conforms: false
+    evidence: >-
+      No scope request parameter and no scope vocabulary. The `scope` response
+      member carries the API-Only user's email address, an identity claim.
+      Authorization is role-permission based — see scopes/marketo-scopes.yml.
+  - id: openidconnect
+    conforms: false
+    evidence: No /.well-known/openid-configuration and no id_token.
+  - id: rfc8414-oauth-authorization-server-metadata
+    conforms: false
+    evidence: >-
+      /.well-known/oauth-authorization-server probed on developer.adobe.com and
+      experienceleague.adobe.com; no real document served.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Proprietary {requestId, success, errors[{code,message}]} envelope. No
+      application/problem+json anywhere in the specs.
+  - id: http-status-semantics
+    conforms: false
+    evidence: >-
+      Marketo returns HTTP 200 for authentication failures, rate-limit
+      exhaustion, quota exhaustion and per-record failures. Adobe's own docs
+      instruct callers not to evaluate the HTTP reason phrase. The exception is
+      the Data Ingestion API, which uses 202/400/401 correctly.
+  - id: rfc6585-429-too-many-requests
+    conforms: false
+    evidence: Rate-limit exhaustion is signalled as body code 606 with HTTP 200.
+  - id: rfc9331-ratelimit-headers
+    conforms: false
+    evidence: No RateLimit-* or X-RateLimit-* response headers.
+  - id: rfc7231-retry-after
+    conforms: false
+    evidence: No Retry-After header on 606/607/615.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: >-
+      Three dated breaking changes are live (access_token parameter removal
+      2026-08-31, listId static-list limit 2026-09-30, Merge Leads 25-id limit
+      2026-07-31) and none is signalled by a Sunset or Deprecation header.
+  - id: rfc9116-security-txt
+    conforms: true
+    evidence: >-
+      https://www.adobe.com/.well-known/security.txt returned HTTP 200,
+      text/plain, PGP-signed, with Contact, Expires, Policy, Encryption,
+      Acknowledgments, Preferred-Languages, Canonical and Hiring fields.
+    caveat: Served on adobe.com; marketo.com serves none and 301s to Adobe.
+  - id: openapi-3
+    conforms: partial
+    evidence: >-
+      Only the Data Ingestion API is OpenAPI 3.0.1. The four surfaces that carry
+      360 of the 367 operations — Lead Database, Asset, User Management, Identity
+      — are still Swagger 2.0.
+  - id: asyncapi
+    conforms: false
+    evidence: >-
+      Marketo publishes no AsyncAPI. asyncapi/marketo-events-asyncapi.yml in this
+      repo is an API Evangelist description of the documented webhook and
+      activity-feed surfaces, not a provider artifact.
+  - id: webhooks
+    conforms: true
+    evidence: >-
+      Outbound webhooks documented at /marketo/webhooks/webhooks — GET or POST to
+      a customer URL from a Smart Campaign "Call Webhook" flow step, with author-
+      defined payload templates, custom headers, and response mappings written
+      back to lead fields. Only 2xx responses are honored; 30-second timeout.
+    caveat: >-
+      There is no fixed event schema. The payload is whatever template the Smart
+      Campaign author writes, so no machine-readable event contract exists.
+  - id: json-schema
+    conforms: partial
+    evidence: >-
+      175 schema definitions in the Lead Database spec and a large components
+      block in the Asset spec, expressed as Swagger 2.0 definitions rather than
+      JSON Schema 2020-12.
+  - id: pagination
+    conforms: true
+    evidence: >-
+      Token pagination (nextPageToken / moreResult, batchSize max 300) on the
+      Lead Database and activity feeds; offset pagination (offset / maxReturn,
+      max 200, default 20) across the Asset API.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No Idempotency-Key header or parameter in any spec or doc page. Replay
+      safety is expressed as natural-key upsert via lookupField plus the action
+      enum — see conventions/marketo-conventions.yml.
+  - id: soap
+    conforms: false
+    evidence: SOAP API deprecated and removed 2026-07-31.
+  - id: graphql
+    conforms: false
+    evidence: No GraphQL endpoint is published.
+  - id: mcp
+    conforms: false
+    evidence: >-
+      No provider MCP server. Adobe's llms.txt lists only AEM MCP servers and
+      states an Experience League content server is not yet generally available.
+  - id: a2a
+    conforms: false
+    evidence: >-
+      /.well-known/agent-card.json and /.well-known/agent.json probed on
+      developers.marketo.com, experienceleague.adobe.com, developer.adobe.com and
+      www.adobe.com — no real AgentCard document on any host.
+  - id: llms-txt
+    conforms: partial
+    evidence: >-
+      experienceleague.adobe.com/llms.txt returns HTTP 200, text/plain, 52,729
+      bytes, spec-conformant H1 + blockquote, version 1.8 dated 2026-08-05. It is
+      an Adobe-wide document with a Marketo Engage section, not a Marketo one,
+      and it covers product documentation rather than the developer API surface.
+summary:
+  conforms: 6
+  partial: 3
+  does_not_conform: 14
+  strongest: RFC 9116 security.txt, documented OAuth 2.0, published webhooks, consistent pagination.
+  weakest: >-
+    HTTP semantics. Returning 200 for auth failure, rate-limit exhaustion and
+    per-record failure is the single largest agent-readiness liability on this
+    API — an agent that trusts status codes will silently treat failures as
+    successes.

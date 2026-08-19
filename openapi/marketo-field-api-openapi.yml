@@ -12,7 +12,17 @@ info:
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
   version: '1.0'
 servers:
-- url: https://localhost:8080/
+- url: https://{munchkinId}.mktorest.com
+  description: >-
+    Per-subscription Marketo Engage REST host. The Munchkin ID is unique to each
+    subscription and is read from Admin > Integration > Web Services. Adobe's
+    published specification carries the non-routable placeholder
+    https://localhost:8080/; corrected here from
+    https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
+  variables:
+    munchkinId:
+      default: 000-AAA-000
+      description: The subscription's Munchkin ID / account ID, e.g. 284-RPR-133.
 tags:
 - name: Field
 paths:
