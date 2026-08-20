@@ -281,6 +281,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - Email Templates
+  tags_raw:
   - Email  Templates
   properties:
   - type: OpenAPI
@@ -383,6 +385,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - File
+  tags_raw:
   - Files
   properties:
   - type: OpenAPI
@@ -451,6 +455,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - Form Fields
+  tags_raw:
   - Form  Fields
   properties:
   - type: OpenAPI
@@ -519,6 +525,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - JSON
+  tags_raw:
   - .Json
   properties:
   - type: OpenAPI
@@ -606,6 +614,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - Landing Pages
+  tags_raw:
   - Landing  Pages
   properties:
   - type: OpenAPI
@@ -759,6 +769,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - REST
+  tags_raw:
   - Rest
   properties:
   - type: OpenAPI
@@ -861,6 +873,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - SMART
+  tags_raw:
   - Smart
   properties:
   - type: OpenAPI
@@ -1211,6 +1225,9 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/authentication
   baseURL: https://{munchkinId}.mktorest.com/identity
   tags:
+  - Identity
+  - Authentication
+  tags_raw:
   - Identity
   - Authentication
   - OAuth
