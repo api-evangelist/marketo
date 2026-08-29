@@ -15,6 +15,18 @@ description: >-
   role-permission rather than OAuth-scope based, and most failures — including
   rate-limit and quota exhaustion — are returned inside an HTTP 200 body.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
@@ -1101,6 +1113,9 @@ apis:
   - type: Documentation
     url: https://developer.adobe.com/marketo-apis/
 common:
+- type: CapabilityMap
+  url: capabilities/marketo-capability-edges.yml
+  name: Marketo Business Capability Map
 - type: Overlay
   url: overlays/marketo-asset-overlay.yaml
 - type: Overlay
