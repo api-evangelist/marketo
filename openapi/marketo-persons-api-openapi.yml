@@ -1,0 +1,140 @@
+openapi: 3.2.0
+info:
+  title: Marketo Data Ingestion Persons API
+  description: High volume, low latency, highly available service designed to handle ingestion of large amounts of person and person-related data efficiently and with minimal delays. Data is ingested by submitting requests that execute asynchronously. Request status can be retrieved by subscribing to events from the Marketo Observability Data Stream.
+  version: v1
+servers:
+- url: https://mkto-ingestion-api.adobe.io
+  description: Marketo Data Ingestion API
+tags:
+- name: Persons
+  description: Upsert (insert or update) person/lead records
+paths:
+  /subscriptions/{munchkinId}/persons:
+    post:
+      tags:
+      - Persons
+      summary: Sync Persons
+      description: 'Upsert (insert or update) a list of person/lead records. Required permission: `Read-Write Lead`.'
+      operationId: syncPersons
+      parameters:
+      - name: munchkinId
+        in: path
+        description: Marketo subscription Munchkin ID
+        required: true
+        schema:
+          type: string
+          example: 556-RJS-213
+      - name: X-Mkto-User-Token
+        in: header
+        description: Marketo API access token
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-Id
+        in: header
+        description: Arbitrary string (max 255 characters). Used to trace requests through the system via Marketo Observability Data Stream.
+        schema:
+          type: string
+      - name: X-Request-Source
+        in: header
+        description: Arbitrary string (max 50 characters). Used to trace the source of requests.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncPersonsRequest'
+            example:
+              priority: high
+              partitionName: EMEA
+              dedupeFields:
+                field1: email
+                field2: firstName
+              persons:
+              - email: brooklyn.parker@karnv.com
+                firstName: Brooklyn
+                lastName: Parker
+                company: Karnv
+              - email: johnny.neal@yvu30.com
+                firstName: Johnny
+                lastName: Neal
+                company: Acme Inc
+      responses:
+        '202':
+          description: Accepted – request accepted for async processing
+          headers:
+            X-Request-Id:
+              description: Unique request ID
+              schema:
+                type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized – OAuth token is invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Person:
+      type: object
+      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
+      additionalProperties: true
+      example:
+        email: brooklyn.parker@karnv.com
+        firstName: Brooklyn
+        lastName: Parker
+        company: Karnv
+    DedupeFields:
+      type: object
+      description: 'Attributes to deduplicate on. One or two attribute names are allowed. Two attributes are used in an AND operation. Supported attributes: id, email, sfdcAccountId, sfdcContactId, sfdcLeadId, sfdcLeadOwnerId, custom attributes (string and integer type only).'
+      properties:
+        field1:
+          type: string
+          example: email
+        field2:
+          type: string
+          example: firstName
+    SyncPersonsRequest:
+      required:
+      - persons
+      type: object
+      properties:
+        priority:
+          type: string
+          description: Priority of the request.
+          enum:
+          - normal
+          - high
+          default: normal
+        partitionName:
+          type: string
+          description: Name of person partition.
+          default: Default
+        dedupeFields:
+          $ref: '#/components/schemas/DedupeFields'
+        persons:
+          type: array
+          description: List of attribute name-value pairs for the person.
+          items:
+            $ref: '#/components/schemas/Person'
+    ErrorResponse:
+      type: object
+      description: Error response body returned for non-202 responses.
+      properties:
+        error_code:
+          type: string
+          description: Error code.
+          example: '4000801'
+        message:
+          type: string
+          description: Error message.
+          example: Bad request

@@ -1,0 +1,440 @@
+openapi: 3.2.0
+info:
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Named Account Lists API
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: ''
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Named Account Lists
+  description: Named Account Lists Controller
+paths:
+  /rest/v1/namedAccountList/{id}/namedAccounts.json:
+    get:
+      tags:
+      - Named Account Lists
+      summary: Get Named Account List Members
+      description: 'Retrieves the named accounts which are members of the given list. Required Permissions: Read-Only Named Account, Read-Write Named Account'
+      operationId: getNamedAccountListMembersUsingGET
+      parameters:
+      - name: id
+        in: path
+        description: Id of the named account list
+        required: true
+        schema:
+          type: string
+      - name: fields
+        in: query
+        description: Comma-separated list of fields to include in the response
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: batchSize
+        in: query
+        description: The batch size to return. The max and default value is 300.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nextPageToken
+        in: query
+        description: A token will be returned by this endpoint if the result set is greater than the batch size and can be passed in a subsequent call through this parameter. See Paging Tokens for more info.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccount'
+    post:
+      tags:
+      - Named Account Lists
+      summary: Add Named Account List Members
+      description: 'Adds named account records to a named account list. Required Permissions: Read-Write Named Account'
+      operationId: addNamedAccountListMembersUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of target named account list
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccount'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddNamedAccountListMemberRequest'
+        description: addNamedAccountListMemberRequest
+        required: true
+  /rest/v1/namedAccountList/{id}/namedAccounts/remove.json:
+    post:
+      tags:
+      - Named Account Lists
+      summary: Remove Named Account List Members
+      description: 'Removes named account members from a named account list. Required Permissions: Read-Write Named Account'
+      operationId: removeNamedAccountListMembersUsingPOST
+      parameters:
+      - name: id
+        in: path
+        description: Id of target named account list
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccount'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveNamedAccountListMemberRequest'
+        description: removeNamedAccountListMemberRequest
+        required: true
+  /rest/v1/namedAccountLists.json:
+    get:
+      tags:
+      - Named Account Lists
+      summary: Get Named Account Lists
+      description: 'Retrieves a list of named account list records based on the filter type and values given. Required Permissions: Read-Only Named Account List, Read-Write Named Account List'
+      operationId: getNamedAccountListsUsingGET
+      parameters:
+      - name: filterType
+        in: query
+        description: The named account list field to filter on ("dedupeFields" or "idFields").
+        required: true
+        schema:
+          type: string
+      - name: filterValues
+        in: query
+        description: Comma-separated list of values to match against
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: batchSize
+        in: query
+        description: The batch size to return. The max and default value is 300.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nextPageToken
+        in: query
+        description: A token will be returned by this endpoint if the result set is greater than the batch size and can be passed in a subsequent call through this parameter. See Paging Tokens for more info.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccountList'
+    post:
+      tags:
+      - Named Account Lists
+      summary: Sync Named Account Lists
+      description: 'Creates and/or updates named account list records. Required Permissions: Read-Write Named Account List'
+      operationId: syncNamedAccountListsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccountList'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SyncNamedAccountListRequest'
+        description: syncNamedAccountListRequest
+        required: true
+  /rest/v1/namedAccountLists/delete.json:
+    post:
+      tags:
+      - Named Account Lists
+      summary: Delete Named Account Lists
+      description: 'Delete named account lists by dedupe fields, or by id field. Required Permissions: Read-Write Named Account List'
+      operationId: deleteNamedAccountListsUsingPOST
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfNamedAccountList'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteNamedAccountListRequest'
+        description: deleteNamedAccountListRequest
+        required: true
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    AddNamedAccountListMemberRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccount'
+    NamedAccount:
+      type: object
+      required:
+      - marketoGUID
+      - seq
+      properties:
+        marketoGUID:
+          type: string
+          description: Unique GUID of the custom object records
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
+          type: string
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
+    ResponseOfNamedAccount:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/NamedAccount'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfNamedAccountList:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/NamedAccountList'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    RemoveNamedAccountListMemberRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccount'
+    NamedAccountList:
+      type: object
+      required:
+      - marketoGUID
+      - seq
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the named account list was created
+        marketoGUID:
+          type: string
+          description: Unique GUID of the custom object records
+        name:
+          type: string
+          description: Name of named account list
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
+          type: string
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
+        type:
+          type: string
+          description: Type of named account list ("default" if created by user or API, "external" if managed by CRM-View)
+        updateable:
+          type: boolean
+          example: false
+          description: Whether the list is updateable (true if created by user or API, false if managed by CRM-View)
+        updatedAt:
+          type: string
+          description: Datetime when the named account list was most recently updated
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    DeleteNamedAccountListRequest:
+      type: object
+      required:
+      - input
+      properties:
+        deleteBy:
+          type: string
+          description: Key to use for deletion of the record
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccountList'
+    SyncNamedAccountListRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccountList'

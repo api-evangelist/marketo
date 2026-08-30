@@ -1,0 +1,156 @@
+openapi: 3.2.0
+info:
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Tags API
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: ''
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Tags
+  description: Tag Controller
+paths:
+  /rest/asset/v1/tagType/byName.json:
+    get:
+      tags:
+      - Tags
+      summary: Get Tag By Name
+      description: 'Retrieves a tag by its name. This will also return the set of valid values for the tag. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getTagByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of the tag
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfTagResponse'
+  /rest/asset/v1/tagTypes.json:
+    get:
+      tags:
+      - Tags
+      summary: Get Tag Types
+      description: 'Retrieves a list of available tag types. Required Permissions: Read-Only Assets, Read-Write Assets'
+      operationId: getTagTypesUsingGET
+      parameters:
+      - name: maxReturn
+        in: query
+        description: Maximum number of records to return. Max 200, default 20
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: offset
+        in: query
+        description: Integer offset for paging
+        required: false
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfTagResponseGetAll'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfTagResponseGetAll:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponseGetAll'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    TagResponseGetAll:
+      type: object
+      required:
+      - applicableProgramTypes
+      - required
+      - tagType
+      properties:
+        applicableProgramTypes:
+          type: string
+          description: Types of programs to which the tag can apply
+        required:
+          type: boolean
+          description: Whether the tag is required for its applicable program types
+        tagType:
+          type: string
+          description: Name of the tag
+    TagResponse:
+      type: object
+      required:
+      - applicableProgramTypes
+      - required
+      - tagType
+      properties:
+        allowableValues:
+          type: string
+          description: The list of acceptable values for the tag type
+        applicableProgramTypes:
+          type: string
+          description: Types of programs to which the tag can apply
+        required:
+          type: boolean
+          description: Whether the tag is required for its applicable program types
+        tagType:
+          type: string
+          description: Name of the tag
+    ResponseOfTagResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string

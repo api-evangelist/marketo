@@ -1,0 +1,961 @@
+openapi: 3.2.0
+info:
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Email Templates (New) API
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: ''
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Email Templates (New)
+  description: API endpoints for managing email templates created with the new Email Designer in Marketo Engage.
+paths:
+  /rest/asset/v2/emailtemplate:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Create Email Template
+      description: 'Creates a new email template. Required Permissions: Read-Write Assets, Access Design Studio, Edit Email Template.'
+      operationId: createContentUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateEmailTemplateV2Request'
+        description: createEmailTemplateRequest
+        required: true
+  /rest/asset/v2/emailtemplate/clone:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Clone Email Template
+      description: 'Clones an existing email template. Required Permissions: Read-Write Assets, Access Design Studio, Edit Email Template.'
+      operationId: cloneContentUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloneAssetRequest'
+        description: cloneAssetRequest
+        required: true
+  /rest/asset/v2/emailtemplate/filter:
+    get:
+      tags:
+      - Email Templates (New)
+      summary: List Email Templates
+      description: 'Filters and lists email templates by the given criteria. Required Permissions: Read-Only Assets, Access Design Studio, Access Email Template.'
+      operationId: filterContentUsingGET_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      - name: workspaceId
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: folderId
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: folderType
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - Folder
+          - Program
+      - name: status
+        in: query
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: pageIndex
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: Maximum value is 50.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: createdAtEnd
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: createdAtStart
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modifiedAtStart
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: modifiedAtEnd
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: name
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sortKey
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: sortOrder
+        in: query
+        required: false
+        schema:
+          type: string
+          enum:
+          - ASC
+          - DESC
+      - name: isCreatedByMe
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: isModifiedByMe
+        in: query
+        required: false
+        schema:
+          type: boolean
+      - name: scriptEngine
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: isValueNonNullable
+        in: query
+        required: false
+        schema:
+          type: string
+      - name: includeArchived
+        in: query
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateFilterResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /rest/asset/v2/emailtemplate/state/transition:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Update Email Template Status
+      description: 'Performs a state transition on an email template. Required Permissions: Read-Write Assets, Access Design Studio, Approve Email Template.'
+      operationId: stateTransitionUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StateTransitionRequest'
+        description: stateTransitionRequest
+        required: true
+  /rest/asset/v2/emailtemplate/usedby:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Get Email Template Used By
+      description: 'Returns a list of assets that reference the specified email template. Required Permissions: Read-Only Assets, Access Design Studio.'
+      operationId: getContentUsedByUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsedByResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsedByRequestDto'
+        description: usedByRequest
+        required: true
+  /rest/asset/v2/emailtemplate/{id}:
+    get:
+      tags:
+      - Email Templates (New)
+      summary: Get Email Template by Id
+      description: 'Retrieves an email template by its ID. Required Permissions: Read-Only Assets, Access Design Studio, Access Email Template.'
+      operationId: getContentUsingGET_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /rest/asset/v2/emailtemplate/{id}/delete:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Delete Email Template
+      description: 'Deletes an email template by its ID. Required Permissions: Read-Write Assets, Access Design Studio, Delete Email Template.'
+      operationId: deleteContentUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /rest/asset/v2/emailtemplate/{id}/update:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Update Email Template
+      description: 'Updates an existing email template. Required Permissions: Read-Write Assets, Access Design Studio, Edit Email Template.'
+      operationId: updateContentUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+          enum:
+          - marketo
+      - name: id
+        in: path
+        description: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateEmailTemplateRequest'
+        description: updateEmailTemplateRequest
+  /rest/asset/v2/emailtemplate/bulk/get:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Bulk Get Email Templates
+      description: 'Retrieves multiple email templates by their IDs in a single request; each asset is returned in full, including its content. Maximum 20 assets per request. Required Permissions: Read-Only Assets, Access Design Studio, Access Email Template.'
+      operationId: bulkGetUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplateNewResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkGetRequest'
+        description: bulkGetRequest
+        required: true
+  /rest/asset/v2/emailtemplate/bulk/delete:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Bulk Delete Email Templates
+      description: 'Deletes multiple email templates by their IDs in a single request. Maximum 20 assets per request. Required Permissions: Read-Write Assets, Access Design Studio, Delete Email Template.'
+      operationId: bulkDeleteUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkDeleteRequest'
+        description: bulkDeleteRequest
+        required: true
+  /rest/asset/v2/emailtemplate/bulk/usedby:
+    post:
+      tags:
+      - Email Templates (New)
+      summary: Bulk Get Email Templates Used By
+      description: 'Returns, for each of the specified email templates, whether it is used and the number of places it is used (count) — not the referencing assets themselves. Maximum 50 assets per request. Required Permissions: Read-Only Assets, Access Design Studio.'
+      operationId: bulkUsedByUsingPOST_emailtemplate
+      parameters:
+      - name: access_token
+        in: query
+        description: Token for Authorization
+        required: true
+        schema:
+          type: string
+      - name: x-app-type
+        in: header
+        description: Application type header
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BulkUsedByResponse'
+        default:
+          description: Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BulkUsedByRequest'
+        description: bulkUsedByRequest
+        required: true
+components:
+  schemas:
+    DataDTO:
+      type: object
+      properties:
+        html:
+          $ref: '#/components/schemas/HtmlDataDTO'
+        text:
+          $ref: '#/components/schemas/TextDataDTO'
+      title: DataDTO
+    DeleteResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+      title: DeleteResponse
+    UpdateEmailTemplateRequest:
+      type: object
+      description: Request body for updating an email template.
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+      title: UpdateEmailTemplateRequest
+    UsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        channel:
+          type: string
+        contentType:
+          type: string
+        externalId:
+          type: string
+      title: UsedByItemDTO
+    BulkUsedByRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Asset IDs to query. Maximum 50 per request.
+          items:
+            type: string
+      title: BulkUsedByRequest
+    AssociatedStateDTO:
+      type: object
+      description: A version/state of the asset (e.g. draft or approved).
+      properties:
+        contentId:
+          type: string
+        externalId:
+          type: string
+        state:
+          type: string
+      title: AssociatedStateDTO
+    EmailTemplateContentDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        appType:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/ContentMetadataDTO'
+        status:
+          type: string
+        state:
+          type: string
+        virtualId:
+          type: string
+        associatedStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/AssociatedStateDTO'
+        version:
+          type: integer
+          format: int32
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        externalId:
+          type: string
+        scriptEngine:
+          type: string
+      title: EmailTemplateContentDTO
+    AppDataDTO:
+      type: object
+      properties:
+        editorType:
+          type: string
+        folderId:
+          type: string
+        workspaceId:
+          type: string
+      title: AppDataDTO
+    CreateEmailTemplateV2Request:
+      type: object
+      required:
+      - name
+      - appData
+      description: 'Request body for creating an email template. appData must include at least one of: folderId or workspaceId.'
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+      title: CreateEmailTemplateRequest
+    EmailTemplateFilterResult:
+      allOf:
+      - $ref: '#/components/schemas/PageDetailsDTO'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/EmailTemplateContentDTO'
+      title: EmailTemplateFilterResult
+    EmailTemplateDetailDTO:
+      allOf:
+      - $ref: '#/components/schemas/EmailTemplateContentDTO'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/DataDTO'
+      title: EmailTemplateDetailDTO
+    EmailTemplateFilterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          $ref: '#/components/schemas/EmailTemplateFilterResult'
+      title: EmailTemplateFilterResponse
+    BulkUsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+          format: int32
+          description: Number of places the asset is used.
+        used:
+          type: boolean
+          description: Whether the asset is used by any other asset.
+      title: BulkUsedByItemDTO
+    HtmlDataDTO:
+      type: object
+      properties:
+        body:
+          type: string
+      title: HtmlDataDTO
+    BulkUsedByResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUsedByItemDTO'
+      title: BulkUsedByResponse
+    StateTransitionRequest:
+      type: object
+      required:
+      - contentId
+      - action
+      properties:
+        contentId:
+          type: string
+        action:
+          type: string
+          description: The state transition action to perform on the asset
+          enum:
+          - approve
+          - unapprove
+          - discard
+          - create_draft
+      title: StateTransitionRequest
+    CloneNewAsset:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      title: CloneNewAsset
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentWaveErrorDTO'
+      title: ErrorResponse
+    UsedByRequestDto:
+      type: object
+      required:
+      - assetId
+      properties:
+        assetId:
+          type: string
+        pageIndex:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        type:
+          type: string
+      title: UsedByRequestDto
+    EmailTemplateNewResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateDetailDTO'
+      title: EmailTemplateNewResponse
+    UsedByResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/UsedByItemDTO'
+        pageDetails:
+          $ref: '#/components/schemas/PageDetailsDTO'
+      title: UsedByResponse
+    ContentWaveErrorDTO:
+      type: object
+      description: An entry in the errors array. The type field marks it as info, warning, or error — there is no separate warnings array; warnings appear here with type "warning".
+      properties:
+        key:
+          type: string
+        message:
+          type: string
+        code:
+          type: string
+        dynamicMessage:
+          type: string
+        type:
+          type: string
+          description: 'Severity of the entry: info, warning, or error.'
+        source:
+          type: string
+          description: Origin of the entry, e.g. validation, template, fragment, message_render, asset_publish.
+        errorMessage:
+          type: string
+        errorPosition:
+          type: object
+          description: Location in the content the entry refers to (for script/validation errors).
+          properties:
+            line:
+              type: integer
+              format: int32
+            column:
+              type: integer
+              format: int32
+      title: ContentWaveErrorDTO
+    ContentMetadataDTO:
+      type: object
+      description: Audit information for the asset.
+      properties:
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        createdById:
+          type: string
+        createdByAepId:
+          type: string
+        modifiedBy:
+          type: string
+        modifiedAt:
+          type: string
+        modifiedById:
+          type: string
+        modifiedByAepId:
+          type: string
+      title: ContentMetadataDTO
+    EditorContextDto:
+      type: object
+      properties:
+        dynamicContent:
+          type: object
+      title: EditorContextDto
+    TextDataDTO:
+      type: object
+      properties:
+        body:
+          type: string
+        syncFromHtml:
+          type: boolean
+      title: TextDataDTO
+    PageDetailsDTO:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+      title: PageDetailsDTO
+    BulkDeleteRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Set of asset IDs to delete. Maximum 20 per request.
+          items:
+            type: string
+        ignoreUsedBy:
+          type: boolean
+          description: If true, deletes assets even if they are referenced by other assets.
+      title: BulkDeleteRequest
+    BulkGetRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Set of asset IDs to retrieve. Maximum 20 per request.
+          items:
+            type: string
+      title: BulkGetRequest
+    CloneAssetRequest:
+      type: object
+      required:
+      - assetId
+      - newAsset
+      properties:
+        assetId:
+          type: string
+        newAsset:
+          $ref: '#/components/schemas/CloneNewAsset'
+      title: CloneAssetRequest

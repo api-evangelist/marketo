@@ -1,0 +1,212 @@
+openapi: 3.2.0
+info:
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Bulk Import Program Members API
+  termsOfService: https://www.adobe.com/legal.html
+  contact:
+    name: Adobe Developer Relations
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
+    email: ''
+  license:
+    name: API License Agreement
+    url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
+servers:
+- url: https://localhost:8080/
+tags:
+- name: Bulk Import Program Members
+  description: Bulk Import Program Members Controller
+paths:
+  /bulk/v1/program/{programId}/members/import.json:
+    post:
+      tags:
+      - Bulk Import Program Members
+      summary: Import Program Members
+      description: 'Imports a file containing data records into the target instance. Required Permissions: Read-Write Lead'
+      operationId: importProgramMemberUsingPOST
+      parameters:
+      - name: programId
+        in: path
+        description: Id of the program to add members to.
+        required: true
+        schema:
+          type: string
+      - name: programMemberStatus
+        in: query
+        description: Program member status for members being added.
+        required: true
+        schema:
+          type: string
+      - name: format
+        in: query
+        description: Import file format.
+        required: true
+        schema:
+          type: string
+          enum:
+          - CSV
+          - TSV
+          - SSV
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfImportProgramMemberResponse'
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  description: File containing the data records to import.
+                  format: binary
+              required:
+              - file
+  /bulk/v1/program/members/import/{batchId}/failures.json:
+    get:
+      tags:
+      - Bulk Import Program Members
+      summary: Get Import Program Member Failures
+      description: 'Returns the list of failures for the import batch job. Required Permissions: Read-Write Lead'
+      operationId: getImportProgramMemberFailuresUsingGET
+      parameters:
+      - name: batchId
+        in: path
+        description: Id of the import batch job.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservableOfInputStreamContent'
+  /bulk/v1/program/members/import/{batchId}/status.json:
+    get:
+      tags:
+      - Bulk Import Program Members
+      summary: Get Import Program Member Status
+      description: 'Returns the status of an import batch job. Required Permissions: Read-Write Lead'
+      operationId: getImportProgramMemberStatusUsingGET
+      parameters:
+      - name: batchId
+        in: path
+        description: Id of the import batch job.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfImportProgramMemberResponse'
+  /bulk/v1/program/members/import/{batchId}/warnings.json:
+    get:
+      tags:
+      - Bulk Import Program Members
+      summary: Get Import Program Member Warnings
+      description: 'Returns the list of warnings for the import batch job. Required Permissions: Read-Write Lead'
+      operationId: getImportProgramMemberWarningsUsingGET
+      parameters:
+      - name: batchId
+        in: path
+        description: Id of the import batch job.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ObservableOfInputStreamContent'
+components:
+  schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ImportProgramMemberResponse:
+      type: object
+      required:
+      - batchId
+      - importId
+      - status
+      properties:
+        batchId:
+          type: integer
+          format: int32
+          description: Unique integer id of the import job
+        importId:
+          type: string
+          description: Unique integer id of the import job
+        status:
+          type: string
+          description: Status of the import job
+      description: Response containing import status information
+    ResponseOfImportProgramMemberResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ImportProgramMemberResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    ObservableOfInputStreamContent:
+      type: object
