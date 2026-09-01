@@ -98,7 +98,7 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
-  - Email  Templates
+  - Email Templates
   tags_raw:
   - Email  Templates
   properties:
@@ -187,7 +187,7 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
-  - Form  Fields
+  - Form Fields
   tags_raw:
   - Form  Fields
   properties:
@@ -276,7 +276,7 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
-  - Landing  Pages
+  - Landing Pages
   tags_raw:
   - Landing  Pages
   properties:
