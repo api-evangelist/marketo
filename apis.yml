@@ -37,9 +37,10 @@ accessModel:
   confidence: medium
   source:
   - plans
+  - {url: 'https://developers.marketo.com/', status: 301, note: 'declared website redirects to https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home — a different registrable domain (marketo.com -> adobe.com), possible rename or acquisition (probed 2026-09-03, roadmap#169)'}
   generated: '2026-07-22'
   method: derived
-position: Consumer
+position: Consuming
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/marketo.png
 url: https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/apis.yml
@@ -1187,8 +1188,9 @@ common:
   url: data-model/marketo-data-model.yml
 - type: Components
   url: components/marketo-components.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/marketo-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: ToolCrosswalk
   url: mcp/marketo-tool-crosswalk.yml
 - type: AgentSkill
