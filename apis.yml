@@ -1116,6 +1116,8 @@ apis:
   - type: Documentation
     url: https://developer.adobe.com/marketo-apis/
 common:
+- type: Website
+  url: https://www.adobe.com/
 - type: CapabilityMap
   url: capabilities/marketo-capability-edges.yml
   name: Marketo Business Capability Map
