@@ -1,20 +1,754 @@
-generated: '2026-07-15'
+generated: '2026-09-16'
 method: generated
-source: openapi/marketo-engage-rest-api-openapi.yml
+source: openapi/marketo-activities-api-openapi.yml, openapi/marketo-bulk-export-activities-api-openapi.yml,
+  openapi/marketo-bulk-export-custom-objects-api-openapi.yml, openapi/marketo-bulk-export-leads-api-openapi.yml,
+  openapi/marketo-bulk-export-program-members-api-openapi.yml, openapi/marketo-bulk-import-custom-objects-api-openapi.yml,
+  openapi/marketo-bulk-import-leads-api-openapi.yml, openapi/marketo-bulk-import-program-members-api-openapi.yml,
+  openapi/marketo-campaigns-api-openapi.yml, openapi/marketo-channels-api-openapi.yml, openapi/marketo-companies-api-openapi.yml,
+  openapi/marketo-custom-objects-api-openapi.yml, openapi/marketo-email-templates-api-openapi.yml,
+  openapi/marketo-email-templates-new-api-openapi.yml, openapi/marketo-emails-api-openapi.yml,
+  openapi/marketo-emails-new-api-openapi.yml, openapi/marketo-file-contents-api-openapi.yml,
+  openapi/marketo-files-api-openapi.yml, openapi/marketo-folders-api-openapi.yml, openapi/marketo-form-fields-api-openapi.yml,
+  openapi/marketo-forms-api-openapi.yml, openapi/marketo-fragments-new-api-openapi.yml, openapi/marketo-identity-api-openapi.yml,
+  openapi/marketo-landing-page-content-api-openapi.yml, openapi/marketo-landing-page-redirect-rules-api-openapi.yml,
+  openapi/marketo-landing-page-templates-api-openapi.yml, openapi/marketo-landing-pages-api-openapi.yml,
+  openapi/marketo-leads-api-openapi.yml, openapi/marketo-lists-api-openapi.yml, openapi/marketo-named-account-lists-api-openapi.yml,
+  openapi/marketo-named-accounts-api-openapi.yml, openapi/marketo-opportunities-api-openapi.yml,
+  openapi/marketo-persons-api-openapi.yml, openapi/marketo-program-members-api-openapi.yml,
+  openapi/marketo-programs-api-openapi.yml, openapi/marketo-salespersons-api-openapi.yml, openapi/marketo-segments-api-openapi.yml,
+  openapi/marketo-smart-campaigns-api-openapi.yml, openapi/marketo-smart-lists-api-openapi.yml,
+  openapi/marketo-snippets-api-openapi.yml, openapi/marketo-static-lists-api-openapi.yml, openapi/marketo-tags-api-openapi.yml,
+  openapi/marketo-tokens-api-openapi.yml, openapi/marketo-usage-api-openapi.yml, openapi/marketo-user-management-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 166
+  operations: 367
   by_action_class:
-    connected: 68
-    acting: 98
+    connected: 162
+    acting: 205
   by_consequence:
-    read: 68
-    write: 97
+    read: 162
+    write: 204
     physical: 1
   human_in_the_loop_required: 0
 operations:
+- path: /rest/v1/activities.json
+  method: get
+  operationId: getLeadActivitiesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/deletedleads.json
+  method: get
+  operationId: getDeletedLeadsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/external.json
+  method: post
+  operationId: addCustomActivityUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type.json
+  method: post
+  operationId: createCustomActivityTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}.json
+  method: post
+  operationId: updateCustomActivityTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/approve.json
+  method: post
+  operationId: approveCustomActivityTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/attributes/create.json
+  method: post
+  operationId: createCustomActivityTypeAttributesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/attributes/delete.json
+  method: post
+  operationId: deleteCustomActivityTypeAttributesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/attributes/update.json
+  method: post
+  operationId: updateCustomActivityTypeAttributesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/delete.json
+  method: post
+  operationId: deleteCustomActivityTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/type/{apiName}/describe.json
+  method: get
+  operationId: describeCustomActivityTypeUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/external/type/{apiName}/discardDraft.json
+  method: post
+  operationId: discardDraftofCustomActivityTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/activities/external/types.json
+  method: get
+  operationId: getCustomActivityTypeUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/leadchanges.json
+  method: get
+  operationId: getLeadChangesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/pagingtoken.json
+  method: get
+  operationId: getActivitiesPagingTokenUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/activities/types.json
+  method: get
+  operationId: getAllActivityTypesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/activities/export.json
+  method: get
+  operationId: getExportActivitiesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/activities/export/create.json
+  method: post
+  operationId: createExportActivitiesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/activities/export/{exportId}/cancel.json
+  method: post
+  operationId: cancelExportActivitiesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/activities/export/{exportId}/enqueue.json
+  method: post
+  operationId: enqueueExportActivitiesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/activities/export/{exportId}/file.json
+  method: get
+  operationId: getExportActivitiesFileUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/activities/export/{exportId}/status.json
+  method: get
+  operationId: getExportActivitiesStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/export.json
+  method: get
+  operationId: getExportCustomObjectsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/export/create.json
+  method: post
+  operationId: createExportCustomObjectsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/customobjects/{apiName}/export/{exportId}/cancel.json
+  method: post
+  operationId: cancelExportCustomObjectsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/customobjects/{apiName}/export/{exportId}/enqueue.json
+  method: post
+  operationId: enqueueExportCustomObjectsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/customobjects/{apiName}/export/{exportId}/file.json
+  method: get
+  operationId: getExportCustomObjectsFileUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/export/{exportId}/status.json
+  method: get
+  operationId: getExportCustomObjectsStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads/export.json
+  method: get
+  operationId: getExportLeadsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads/export/create.json
+  method: post
+  operationId: createExportLeadsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/leads/export/{exportId}/cancel.json
+  method: post
+  operationId: cancelExportLeadsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/leads/export/{exportId}/enqueue.json
+  method: post
+  operationId: enqueueExportLeadsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/leads/export/{exportId}/file.json
+  method: get
+  operationId: getExportLeadsFileUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads/export/{exportId}/status.json
+  method: get
+  operationId: getExportLeadsStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/members/export.json
+  method: get
+  operationId: getExportProgramMembersUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/members/export/create.json
+  method: post
+  operationId: createExportProgramMembersUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/program/members/export/{exportId}/cancel.json
+  method: post
+  operationId: cancelExportProgramMembersUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/program/members/export/{exportId}/enqueue.json
+  method: post
+  operationId: enqueueExportProgramMembersUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/program/members/export/{exportId}/file.json
+  method: get
+  operationId: getExportProgramMembersFileUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/members/export/{exportId}/status.json
+  method: get
+  operationId: getExportProgramMembersStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/import.json
+  method: post
+  operationId: importCustomObjectUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/customobjects/{apiName}/import/{batchId}/failures.json
+  method: get
+  operationId: getImportCustomObjectFailuresUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/import/{batchId}/status.json
+  method: get
+  operationId: getImportCustomObjectStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/customobjects/{apiName}/import/{batchId}/warnings.json
+  method: get
+  operationId: getImportCustomObjectWarningsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads.json
+  method: post
+  operationId: importLeadUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/leads/batch/{batchId}.json
+  method: get
+  operationId: getImportLeadStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads/batch/{batchId}/failures.json
+  method: get
+  operationId: getImportLeadFailuresUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/leads/batch/{batchId}/warnings.json
+  method: get
+  operationId: getImportLeadWarningsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/{programId}/members/import.json
+  method: post
+  operationId: importProgramMemberUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /bulk/v1/program/members/import/{batchId}/failures.json
+  method: get
+  operationId: getImportProgramMemberFailuresUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/members/import/{batchId}/status.json
+  method: get
+  operationId: getImportProgramMemberStatusUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /bulk/v1/program/members/import/{batchId}/warnings.json
+  method: get
+  operationId: getImportProgramMemberWarningsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/campaigns.json
+  method: get
+  operationId: getCampaignsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/campaigns/{campaignId}.json
+  method: get
+  operationId: getCampaignByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/campaigns/{campaignId}/schedule.json
+  method: post
+  operationId: scheduleCampaignUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/campaigns/{campaignId}/trigger.json
+  method: post
+  operationId: triggerCampaignUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /rest/asset/v1/channel/byName.json
   method: get
   operationId: getChannelByNameUsingGET
@@ -35,6 +769,676 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /subscriptions/{munchkinId}/companies
+  method: post
+  operationId: syncCompanies
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/companies.json
+  method: get
+  operationId: getCompaniesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/companies.json
+  method: post
+  operationId: syncCompaniesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/companies/delete.json
+  method: post
+  operationId: deleteCompaniesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/companies/describe.json
+  method: get
+  operationId: describeUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/companies/schema/fields/{fieldApiName}.json
+  method: get
+  operationId: getCompanyFieldByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/companies/schema/fields.json
+  method: get
+  operationId: getCompanyFieldsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/{munchkinId}/customobjects/{customObjectAPIName}
+  method: post
+  operationId: syncCustomObjects
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects.json
+  method: get
+  operationId: listCustomObjectsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/{customObjectName}.json
+  method: get
+  operationId: getCustomObjectsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/{customObjectName}.json
+  method: post
+  operationId: syncCustomObjectsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/{customObjectName}/delete.json
+  method: post
+  operationId: deleteCustomObjectsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/{customObjectName}/describe.json
+  method: get
+  operationId: describeUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/schema.json
+  method: get
+  operationId: listCustomObjectTypesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/schema.json
+  method: post
+  operationId: syncCustomObjectTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/approve.json
+  method: post
+  operationId: approveCustomObjectTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/discardDraft.json
+  method: post
+  operationId: discardCustomObjectTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/delete.json
+  method: post
+  operationId: deleteCustomObjectTypeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/describe.json
+  method: get
+  operationId: describeCustomObjectTypeUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/schema/{apiName}/addField.json
+  method: post
+  operationId: addCustomObjectTypeFieldsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/deleteField.json
+  method: post
+  operationId: deleteCustomObjectTypeFieldsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/{apiName}/{fieldApiName}/updateField.json
+  method: post
+  operationId: updateCustomObjectTypeFieldUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/customobjects/schema/fieldDataTypes.json
+  method: get
+  operationId: getCustomObjectTypeFieldDataTypesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/schema/linkableObjects.json
+  method: get
+  operationId: getCustomObjectTypeLinkableObjectsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/customobjects/schema/{apiName}/dependentAssets.json
+  method: get
+  operationId: getCustomObjectTypeDependentAssetsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/emailTemplate/byName.json
+  method: get
+  operationId: getTemplateByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/emailTemplate/{id}.json
+  method: get
+  operationId: getTemplateByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/emailTemplate/{id}.json
+  method: post
+  operationId: updateEmailTemplateUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/approveDraft.json
+  method: post
+  operationId: approveDraftUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/clone.json
+  method: post
+  operationId: cloneTemplateUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/content
+  method: get
+  operationId: getTemplateContentByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/emailTemplate/{id}/content.json
+  method: post
+  operationId: updateEmailTemplateContentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/delete.json
+  method: post
+  operationId: deleteTemplateUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
+  method: post
+  operationId: discardDraftUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplate/{id}/unapprove.json
+  method: post
+  operationId: unapproveDraftUsingPOST_1
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplates.json
+  method: get
+  operationId: getEmailTemplatesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/emailTemplates.json
+  method: post
+  operationId: createEmailTemplateUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
+  method: get
+  operationId: getEmailTemplateUsedByUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/emailtemplate
+  method: post
+  operationId: createContentUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/clone
+  method: post
+  operationId: cloneContentUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/filter
+  method: get
+  operationId: filterContentUsingGET_emailtemplate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/emailtemplate/state/transition
+  method: post
+  operationId: stateTransitionUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/usedby
+  method: post
+  operationId: getContentUsedByUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/{id}
+  method: get
+  operationId: getContentUsingGET_emailtemplate
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/emailtemplate/{id}/delete
+  method: post
+  operationId: deleteContentUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/{id}/update
+  method: post
+  operationId: updateContentUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/bulk/get
+  method: post
+  operationId: bulkGetUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/bulk/delete
+  method: post
+  operationId: bulkDeleteUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/emailtemplate/bulk/usedby
+  method: post
+  operationId: bulkUsedByUsingPOST_emailtemplate
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /rest/asset/v1/email/byName.json
   method: get
   operationId: getEmailByNameUsingGET
@@ -353,184 +1757,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/emailTemplate/byName.json
-  method: get
-  operationId: getTemplateByNameUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/emailTemplate/{id}.json
-  method: get
-  operationId: getTemplateByIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/emailTemplate/{id}.json
-  method: post
-  operationId: updateEmailTemplateUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/approveDraft.json
-  method: post
-  operationId: approveDraftUsingPOST_1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/clone.json
-  method: post
-  operationId: cloneTemplateUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/content
-  method: get
-  operationId: getTemplateContentByIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/emailTemplate/{id}/content.json
-  method: post
-  operationId: updateEmailTemplateContentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/delete.json
-  method: post
-  operationId: deleteTemplateUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/discardDraft.json
-  method: post
-  operationId: discardDraftUsingPOST_1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplate/{id}/unapprove.json
-  method: post
-  operationId: unapproveDraftUsingPOST_1
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplates.json
-  method: get
-  operationId: getEmailTemplatesUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/emailTemplates.json
-  method: post
-  operationId: createEmailTemplateUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/emailTemplates/{id}/usedBy.json
-  method: get
-  operationId: getEmailTemplateUsedByUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /rest/asset/v1/emails.json
   method: get
   operationId: getEmailUsingGET
@@ -583,6 +1809,186 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /rest/asset/v2/email
+  method: post
+  operationId: createContentUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/clone
+  method: post
+  operationId: cloneContentUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/filter
+  method: get
+  operationId: filterContentUsingGET_email
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/email/state/transition
+  method: post
+  operationId: stateTransitionUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/usedby
+  method: post
+  operationId: getContentUsedByUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/{id}
+  method: get
+  operationId: getContentUsingGET_email
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/email/{id}/delete
+  method: post
+  operationId: deleteContentUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/{id}/update
+  method: post
+  operationId: updateContentUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/bulk/get
+  method: post
+  operationId: bulkGetUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/bulk/delete
+  method: post
+  operationId: bulkDeleteUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/email/bulk/usedby
+  method: post
+  operationId: bulkUsedByUsingPOST_email
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/file/{id}/content.json
+  method: post
+  operationId: updateContentUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /rest/asset/v1/file/byName.json
   method: get
   operationId: getFileByNameUsingGET
@@ -603,22 +2009,6 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/file/{id}/content.json
-  method: post
-  operationId: updateContentUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /rest/asset/v1/files.json
   method: get
   operationId: getFilesUsingGET
@@ -707,48 +2097,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/folder/{id}/tokens.json
-  method: get
-  operationId: getTokensByFolderIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/folder/{id}/tokens.json
-  method: post
-  operationId: addTokenTOFolderUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/folder/{id}/tokens/delete.json
-  method: post
-  operationId: deleteTokenByNameUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /rest/asset/v1/folders.json
   method: get
   operationId: getFolderUsingGET
@@ -775,16 +2123,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/form/byName.json
-  method: get
-  operationId: getLpFormByNameUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
 - path: /rest/asset/v1/form/fields.json
   method: get
   operationId: getAllFieldsUsingGET
@@ -808,96 +2146,6 @@ operations:
 - path: /rest/asset/v1/form/{formId}/field/{fieldId}/visibility.json
   method: post
   operationId: addFormFieldVisibilityRuleUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/form/{id}.json
-  method: get
-  operationId: getLpFormByIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/form/{id}.json
-  method: post
-  operationId: updateFormsUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/form/{id}/approveDraft.json
-  method: post
-  operationId: approveFromUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/form/{id}/clone.json
-  method: post
-  operationId: cloneLpFormsUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/form/{id}/delete.json
-  method: post
-  operationId: deleteFormByIdUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/form/{id}/discardDraft.json
-  method: post
-  operationId: discardFormByIdUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1033,6 +2281,106 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /rest/asset/v1/form/byName.json
+  method: get
+  operationId: getLpFormByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/form/{id}.json
+  method: get
+  operationId: getLpFormByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/form/{id}.json
+  method: post
+  operationId: updateFormsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/form/{id}/approveDraft.json
+  method: post
+  operationId: approveFromUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/form/{id}/clone.json
+  method: post
+  operationId: cloneLpFormsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/form/{id}/delete.json
+  method: post
+  operationId: deleteFormByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/form/{id}/discardDraft.json
+  method: post
+  operationId: discardFormByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
 - path: /rest/asset/v1/form/{id}/submitButton.json
   method: post
   operationId: updateFormSubmitButtonUsingPOST
@@ -1111,29 +2459,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/landingPage/byName.json
-  method: get
-  operationId: getLandingPageByNameUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/landingPage/{id}.json
-  method: get
-  operationId: getLandingPageByIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/landingPage/{id}.json
+- path: /rest/asset/v2/fragment
   method: post
-  operationId: updateLandingPageUsingPOST
+  operationId: createContentUsingPOST_fragment
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1147,9 +2475,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/landingPage/{id}/approveDraft.json
+- path: /rest/asset/v2/fragment/clone
   method: post
-  operationId: approveLandingPageUsingPOST
+  operationId: cloneContentUsingPOST_fragment
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1163,9 +2491,151 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/landingPage/{id}/clone.json
+- path: /rest/asset/v2/fragment/filter
+  method: get
+  operationId: filterContentUsingGET_fragment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/fragment/state/transition
   method: post
-  operationId: cloneLandingPageUsingPOST
+  operationId: stateTransitionUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/usedby
+  method: post
+  operationId: getContentUsedByUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/{id}
+  method: get
+  operationId: getContentUsingGET_fragment
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v2/fragment/{id}/delete
+  method: post
+  operationId: deleteContentUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/{id}/update
+  method: post
+  operationId: updateContentUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/bulk/get
+  method: post
+  operationId: bulkGetUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/bulk/delete
+  method: post
+  operationId: bulkDeleteUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v2/fragment/bulk/usedby
+  method: post
+  operationId: bulkUsedByUsingPOST_fragment
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /identity/oauth/token
+  method: get
+  operationId: identityUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /identity/oauth/token
+  method: post
+  operationId: identityUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1237,38 +2707,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/landingPage/{id}/delete.json
-  method: post
-  operationId: deleteLandingPageByIdUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/landingPage/{id}/discardDraft.json
-  method: post
-  operationId: discardLandingPageByIdUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /rest/asset/v1/landingPage/{id}/dynamicContent/{contentId}.json
   method: get
   operationId: getLandingPageDynamicContentsUsingGET
@@ -1295,41 +2733,77 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/landingPage/{id}/unapprove.json
-  method: post
-  operationId: unapproveLandingPageByIdUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/landingPage/{id}/variable/{variableId}.json
-  method: post
-  operationId: updateLandingPageVariableUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/landingPage/{id}/variables.json
+- path: /rest/asset/v1/redirectRules.json
   method: get
-  operationId: getVariablesUsingGET
+  operationId: getLandingPageRedirectRulesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/redirectRules.json
+  method: post
+  operationId: createLandingPageRedirectRuleUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/redirectRule/{id}.json
+  method: get
+  operationId: getLandingPageRedirectRuleByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/redirectRule/{id}.json
+  method: post
+  operationId: updateLandingPageRedirectRuleUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/redirectRule/{id}/delete.json
+  method: post
+  operationId: deleteLandingPageRedirectRuleUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPageDomains.json
+  method: get
+  operationId: getLandingPageDomainsUsingGET
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1505,6 +2979,148 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /rest/asset/v1/landingPage/byName.json
+  method: get
+  operationId: getLandingPageByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/landingPage/{id}.json
+  method: get
+  operationId: getLandingPageByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/landingPage/{id}.json
+  method: post
+  operationId: updateLandingPageUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/approveDraft.json
+  method: post
+  operationId: approveLandingPageUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/clone.json
+  method: post
+  operationId: cloneLandingPageUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/delete.json
+  method: post
+  operationId: deleteLandingPageByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/discardDraft.json
+  method: post
+  operationId: discardLandingPageByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/unapprove.json
+  method: post
+  operationId: unapproveLandingPageByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/variable/{variableId}.json
+  method: post
+  operationId: updateLandingPageVariableUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/landingPage/{id}/variables.json
+  method: get
+  operationId: getVariablesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v1/landingPages.json
   method: get
   operationId: browseLandingPagesUsingGET
@@ -1541,9 +3157,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/redirectRules.json
+- path: /rest/v1/lead/{leadId}.json
   method: get
-  operationId: getLandingPageRedirectRulesUsingGET
+  operationId: getLeadByIdUsingGET
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1551,25 +3167,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/redirectRules.json
-  method: post
-  operationId: createLandingPageRedirectRuleUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/redirectRule/{id}.json
+- path: /rest/v1/leads.json
   method: get
-  operationId: getLandingPageRedirectRuleByIdUsingGET
+  operationId: getLeadsByFilterUsingGET
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1577,9 +3177,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /rest/asset/v1/redirectRule/{id}.json
+- path: /rest/v1/leads.json
   method: post
-  operationId: updateLandingPageRedirectRuleUsingPOST
+  operationId: syncLeadUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1593,9 +3193,9 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/redirectRule/{id}/delete.json
+- path: /rest/v1/leads/delete.json
   method: post
-  operationId: deleteLandingPageRedirectRuleUsingPOST
+  operationId: deleteLeadsUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -1609,9 +3209,707 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/landingPageDomains.json
+- path: /rest/v1/leads/describe.json
   method: get
-  operationId: getLandingPageDomainsUsingGET
+  operationId: describeUsingGET_2
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/describe2.json
+  method: get
+  operationId: describeUsingGET_6
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/schema/fields/{fieldApiName}.json
+  method: get
+  operationId: getLeadFieldByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/schema/fields/{fieldApiName}.json
+  method: post
+  operationId: updateLeadFieldUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/schema/fields.json
+  method: get
+  operationId: getLeadFieldsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/schema/fields.json
+  method: post
+  operationId: createLeadFieldUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/program/members/describe.json
+  method: get
+  operationId: describeProgramMemberUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/partitions.json
+  method: get
+  operationId: getLeadPartitionsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/partitions.json
+  method: post
+  operationId: updatePartitionsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/programs/{programId}.json
+  method: get
+  operationId: getLeadsByProgramIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/programs/{programId}/status.json
+  method: post
+  operationId: changeLeadProgramStatusUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/push.json
+  method: post
+  operationId: pushToMarketoUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/submitForm.json
+  method: post
+  operationId: SubmitFormUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/{leadId}/associate.json
+  method: post
+  operationId: associateLeadUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/{leadId}/merge.json
+  method: post
+  operationId: mergeLeadsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/leads/{leadId}/listMembership.json
+  method: get
+  operationId: getListMembershipUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/{leadId}/programMembership.json
+  method: get
+  operationId: getProgramMembershipUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/leads/{leadId}/smartCampaignMembership.json
+  method: get
+  operationId: getSmartCampaignMembershipUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/{munchkinId}/lists
+  method: post
+  operationId: addToList
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{munchkinId}/lists/remove
+  method: post
+  operationId: removeFromList
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedAccountList/{id}/namedAccounts.json
+  method: get
+  operationId: getNamedAccountListMembersUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/namedAccountList/{id}/namedAccounts.json
+  method: post
+  operationId: addNamedAccountListMembersUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedAccountList/{id}/namedAccounts/remove.json
+  method: post
+  operationId: removeNamedAccountListMembersUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedAccountLists.json
+  method: get
+  operationId: getNamedAccountListsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/namedAccountLists.json
+  method: post
+  operationId: syncNamedAccountListsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedAccountLists/delete.json
+  method: post
+  operationId: deleteNamedAccountListsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedaccounts/schema/fields/{fieldApiName}.json
+  method: get
+  operationId: getNamedAccountFieldByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/namedaccounts/schema/fields.json
+  method: get
+  operationId: getNamedAccountFieldsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/namedaccounts.json
+  method: get
+  operationId: getNamedAccountsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/namedaccounts.json
+  method: post
+  operationId: syncNamedAccountsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedaccounts/delete.json
+  method: post
+  operationId: deleteNamedAccountsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/namedaccounts/describe.json
+  method: get
+  operationId: describeUsingGET_3
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities/schema/fields/{fieldApiName}.json
+  method: get
+  operationId: getOpportunityFieldByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities/schema/fields.json
+  method: get
+  operationId: getOpportunityFieldsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities.json
+  method: get
+  operationId: getOpportunitiesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities.json
+  method: post
+  operationId: syncOpportunitiesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/opportunities/delete.json
+  method: post
+  operationId: deleteOpportunitiesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/opportunities/describe.json
+  method: get
+  operationId: describeUsingGET_4
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities/roles.json
+  method: get
+  operationId: getOpportunityRolesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/opportunities/roles.json
+  method: post
+  operationId: syncOpportunityRolesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/opportunities/roles/delete.json
+  method: post
+  operationId: deleteOpportunityRolesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/opportunities/roles/describe.json
+  method: get
+  operationId: describeOpportunityRoleUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /subscriptions/{munchkinId}/persons
+  method: post
+  operationId: syncPersons
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{munchkinId}/programmembers
+  method: post
+  operationId: syncProgramMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /subscriptions/{munchkinId}/programmembers/delete
+  method: post
+  operationId: deleteProgramMembers
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/members/schema/fields/{fieldApiName}.json
+  method: get
+  operationId: getProgramMemberFieldByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/programs/members/schema/fields/{fieldApiName}.json
+  method: post
+  operationId: updateProgramMemberFieldUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/members/schema/fields.json
+  method: get
+  operationId: getProgramMemberFieldsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/programs/members/schema/fields.json
+  method: post
+  operationId: createProgramMemberFieldUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/{programId}/members/status.json
+  method: post
+  operationId: syncProgramMemberStatusUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/{programId}/members.json
+  method: get
+  operationId: getProgramMembersUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/programs/{programId}/members.json
+  method: post
+  operationId: syncProgramMemberDataUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/{programId}/members/delete.json
+  method: post
+  operationId: deleteProgramMemberUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/programs/members/describe.json
+  method: get
+  operationId: describeProgramMemberUsingGET2
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -1765,6 +4063,58 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /rest/v1/salespersons.json
+  method: get
+  operationId: getSalesPersonUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/salespersons.json
+  method: post
+  operationId: syncSalesPersonsUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/salespersons/delete.json
+  method: post
+  operationId: deleteSalesPersonUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/salespersons/describe.json
+  method: get
+  operationId: describeUsingGET_5
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v1/segmentation.json
   method: get
   operationId: getSegmentationUsingGET
@@ -1908,6 +4258,68 @@ operations:
 - path: /rest/asset/v1/smartCampaign/{id}/delete.json
   method: post
   operationId: deleteSmartCampaignUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/smartList/{id}.json
+  method: get
+  operationId: getSmartListByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/smartList/byName.json
+  method: get
+  operationId: getSmartListByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/smartList/{id}/delete.json
+  method: post
+  operationId: deleteSmartListByIdUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/smartLists.json
+  method: get
+  operationId: getSmartListsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/smartList/{id}/clone.json
+  method: post
+  operationId: cloneSmartListUsingPOST
   x-agentic-access:
     action-class: acting
     consequence: write
@@ -2105,78 +4517,6 @@ operations:
       - abnormal
       - high-value
     audit: required
-- path: /rest/asset/v1/tagType/byName.json
-  method: get
-  operationId: getTagByNameUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/smartList/{id}.json
-  method: get
-  operationId: getSmartListByIdUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/smartList/byName.json
-  method: get
-  operationId: getSmartListByNameUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/smartList/{id}/delete.json
-  method: post
-  operationId: deleteSmartListByIdUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
-- path: /rest/asset/v1/smartLists.json
-  method: get
-  operationId: getSmartListsUsingGET
-  x-agentic-access:
-    action-class: connected
-    consequence: read
-    subject: optional
-    token:
-      max-ttl: 3600
-    audit: none
-- path: /rest/asset/v1/smartList/{id}/clone.json
-  method: post
-  operationId: cloneSmartListUsingPOST
-  x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
-    token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
 - path: /rest/asset/v1/staticList/{id}.json
   method: get
   operationId: getStaticListByIdUsingGET
@@ -2255,9 +4595,339 @@ operations:
       - abnormal
       - high-value
     audit: required
+- path: /rest/v1/list/{listId}/leads.json
+  method: get
+  operationId: getLeadsByListIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/lists.json
+  method: get
+  operationId: getListsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/lists/{listId}.json
+  method: get
+  operationId: getListByIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/lists/{listId}/leads.json
+  method: get
+  operationId: getLeadsByListIdUsingGET_1
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/lists/{listId}/leads.json
+  method: post
+  operationId: addLeadsToListUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/lists/{listId}/leads.json
+  method: delete
+  operationId: removeLeadsFromListUsingDELETE
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/lists/{listId}/leads/ismember.json
+  method: get
+  operationId: areLeadsMemberOfListUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/tagType/byName.json
+  method: get
+  operationId: getTagByNameUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v1/tagTypes.json
   method: get
   operationId: getTagTypesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/folder/{id}/tokens.json
+  method: get
+  operationId: getTokensByFolderIdUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/asset/v1/folder/{id}/tokens.json
+  method: post
+  operationId: addTokenTOFolderUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/asset/v1/folder/{id}/tokens/delete.json
+  method: post
+  operationId: deleteTokenByNameUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /rest/v1/stats/errors.json
+  method: get
+  operationId: getDailyErrorsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/stats/errors/last7days.json
+  method: get
+  operationId: getLast7DaysErrorsUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/stats/usage.json
+  method: get
+  operationId: getDailyUsageUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/v1/stats/usage/last7days.json
+  method: get
+  operationId: getLast7DaysUsageUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/allusers.json
+  method: get
+  operationId: getUsersUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/invite.json
+  method: post
+  operationId: inviteUserUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/roles.json
+  method: get
+  operationId: getRolesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/workspaces.json
+  method: get
+  operationId: getWorkspacesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/{userid}/delete.json
+  method: post
+  operationId: deleteUserUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/{userid}/invite/delete.json
+  method: post
+  operationId: deleteInvitedUserUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/{userid}/update.json
+  method: post
+  operationId: updateUserAttributeUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/{userid}/roles.json
+  method: get
+  operationId: getUserRolesAndWorkspacesUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/{userid}/roles/create.json
+  method: post
+  operationId: addRolesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/{userid}/roles/delete.json
+  method: post
+  operationId: deleteRolesUsingPOST
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /userservice/management/v1/users/{userid}/user.json
+  method: get
+  operationId: getUserUsingGET
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /userservice/management/v1/users/{userid}/invite.json
+  method: get
+  operationId: getInvitedUserUsingGET
   x-agentic-access:
     action-class: connected
     consequence: read
