@@ -119,6 +119,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - Email
+  tags_raw:
   - Emails
   properties:
   - type: OpenAPI
@@ -1094,6 +1096,8 @@ apis:
   humanURL: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/rest-api
   baseURL: https://{munchkinId}.mktorest.com/rest
   tags:
+  - Sales Persons
+  tags_raw:
   - Salespersons
   properties:
   - type: OpenAPI
