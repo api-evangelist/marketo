@@ -1,0 +1,126 @@
+slug: marketo
+provider: Marketo
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 11
+edges:
+- tag: Campaigns
+  spec_file: marketo-campaigns-api-openapi.yml
+  capability_id: BC-400.40
+  capability_id_l1: BC-400
+  capability_name: Demand Generation Management
+  confidence: 0.8
+  evidence: '"Schedule Campaign", "Request Campaign" (POST /rest/v1/campaigns/{campaignId}/trigger.json),
+    schemas "TriggerCampaignRequest", "InputLead"'
+  reason: Operations list, schedule and trigger marketing campaigns against lead inputs in a B2B marketing
+    automation platform — campaign execution for lead generation, i.e. Demand Generation Management. Slight
+    residual ambiguity with marketing operations, hence 0.8.
+- tag: Opportunities
+  spec_file: marketo-opportunities-api-openapi.yml
+  capability_id: BC-410.30
+  capability_id_l1: BC-410
+  capability_name: Opportunity & Pipeline Management
+  confidence: 0.8
+  evidence: GET /rest/v1/opportunities.json  getOpportunitiesUsingGET  Get Opportunities; POST /rest/v1/opportunities/roles.json  syncOpportunityRolesUsingPOST  Sync
+    Opportunity Roles
+  reason: Operations read, sync and delete sales opportunity records and opportunity contact roles — the
+    deal/opportunity object of the lead-to-order motion, i.e. opportunity and pipeline management.
+- tag: User Management
+  spec_file: marketo-user-management-api-openapi.yml
+  capability_id: BC-620.20
+  capability_id_l1: BC-620
+  capability_name: Identity & Access Management
+  confidence: 0.8
+  evidence: POST /userservice/management/v1/users/invite.json  Invite User; POST .../users/{userid}/roles/create.json  Add
+    Roles; GET .../users/roles.json  Get Roles; schema UserRoleWorkspace
+  reason: Administrative user lifecycle — invite, delete, update attributes — plus role and workspace
+    assignment. This is identity and access administration for the platform, not HR employee records.
+    Some ambiguity with tenant identity administration, hence 0.8.
+- tag: Landing Pages
+  spec_file: marketo-landing-pages-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.78
+  evidence: Create Landing Page / Approve Landing Page Draft / Get Landing Page Variables
+  reason: Full lifecycle of marketing landing pages in a marketing automation platform — squarely web/digital
+    marketing management.
+- tag: Landing Page Content
+  spec_file: marketo-landing-page-content-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.72
+  evidence: Add Landing Page Content Section / Update Landing Page Dynamic Content Section — schema SegmentContent
+  reason: Authoring and segment-targeted dynamic content on marketing landing pages — web content management
+    within digital marketing.
+- tag: Companies
+  spec_file: marketo-companies-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: '"Sync Companies", "Delete Companies", "Get Company Fields", schemas "Company", "SyncCompaniesRequest",
+    "ObjectMetaData"'
+  reason: CRUD plus field-schema description over company (account) records in the lead database — maintenance
+    of the customer/account master record. Alternative reading as Account Management is weaker since no
+    relationship or engagement operations exist, only record sync and schema introspection.
+- tag: Emails
+  spec_file: marketo-emails-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: '"Update Email Content", "Add Email Module", "Rearrange Email Modules", schemas "SendSampleEmailRequest",
+    "EmailDynamicContentResponse"'
+  reason: Operations build and edit marketing email assets, including modular content, dynamic content
+    and sample sends, in Adobe Marketo Engage — email marketing execution within digital marketing/marketing
+    automation.
+- tag: Emails (New)
+  spec_file: marketo-emails-new-api-openapi.yml
+  capability_id: BC-400.60
+  capability_id_l1: BC-400
+  capability_name: Digital Marketing Management
+  confidence: 0.7
+  evidence: '"Create Email", "Update Email Status", "List Emails", schemas "EmailContentDTO", "EmailHeadersDTO"'
+  reason: v2 email asset lifecycle (create, clone, update content/headers, status transition, bulk operations)
+    in a marketing automation platform — email marketing asset creation and management.
+- tag: Persons
+  spec_file: marketo-persons-api-openapi.yml
+  capability_id: BC-420.10
+  capability_id_l1: BC-420
+  capability_name: Customer Data Management
+  confidence: 0.7
+  evidence: 'POST /subscriptions/{munchkinId}/persons  syncPersons  Sync Persons; schemas: Person, DedupeFields,
+    SyncPersonsRequest'
+  reason: A single ingestion operation that upserts person records with dedupe fields — maintenance of
+    the person/lead master record (golden record, identity resolution) in the marketing database.
+- tag: Segments
+  spec_file: marketo-segments-api-openapi.yml
+  capability_id: BC-420.20
+  capability_id_l1: BC-420
+  capability_name: Customer Segmentation Management
+  confidence: 0.7
+  evidence: GET /rest/asset/v1/segmentation.json  getSegmentationUsingGET  Get Segmentations; GET /rest/asset/v1/segmentation/{id}/segments.json  Get
+    Segments For Segmentation
+  reason: Read access to segmentations and their constituent segments — definition of audience segments
+    used for differentiated treatment/dynamic content, i.e. customer segmentation management.
+- tag: Snippets
+  spec_file: marketo-snippets-api-openapi.yml
+  capability_id: BC-400.70
+  capability_id_l1: BC-400
+  capability_name: Content Marketing Management
+  confidence: 0.7
+  evidence: POST /rest/asset/v1/snippet/{id}/content.json  updateContentUsingPOST_1  Update Snippet Content;
+    POST /rest/asset/v1/snippet/{id}/dynamicContent/{segmentId}.json  Update Snippet Dynamic Content
+  reason: Authoring, approval and versioning of reusable marketing content blocks including segment-specific
+    dynamic content — content production and distribution for marketing, i.e. content marketing management.
