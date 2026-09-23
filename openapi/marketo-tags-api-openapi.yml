@@ -81,25 +81,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ResponseOfTagResponseGetAll:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TagResponseGetAll'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
     TagResponseGetAll:
       type: object
       required:
@@ -148,6 +129,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TagResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfTagResponseGetAll:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponseGetAll'
         success:
           type: boolean
         warnings:

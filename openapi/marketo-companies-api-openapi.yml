@@ -254,33 +254,6 @@ paths:
     - url: https://localhost:8080/
 components:
   schemas:
-    Company:
-      type: object
-      description: Company record. When dedupeBy=dedupeFields, externalCompanyId is required. When dedupeBy=idField, id is required. Additional standard or custom company fields are supported.
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Marketo internal company ID. Required when dedupeBy is idField and action is updateOnly.
-        externalCompanyId:
-          type: string
-          description: External company identifier. Required when dedupeBy is dedupeFields.
-        company:
-          type: string
-          description: Company name.
-      additionalProperties: true
-    ErrorResponse:
-      type: object
-      description: Error response body returned for non-202 responses.
-      properties:
-        error_code:
-          type: string
-          description: Error code.
-          example: '4000801'
-        message:
-          type: string
-          description: Error message.
-          example: Bad request
     SyncCompaniesRequest:
       required:
       - input
@@ -306,41 +279,97 @@ components:
           description: List of company attribute name-value pairs.
           items:
             $ref: '#/components/schemas/Company'
-    DeleteCompanyRequest:
+    ErrorResponse:
       type: object
+      description: Error response body returned for non-202 responses.
       properties:
-        deleteBy:
+        error_code:
           type: string
-          description: Field to delete company records by. Key may be "dedupeFields" or "idField"
-        input:
-          type: array
-          description: List of company objects. Companies in the list should only contain a member matching the dedupeBy value. Each 'Company' object contains a 'searchableField' for lookup purposes which can be retrieved using the Describe Companies endpoint
-          items:
-            $ref: '#/components/schemas/Company_2'
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+          description: Error code.
+          example: '4000801'
         message:
           type: string
-          description: Message describing the cause of the error
-    RelatedObject:
+          description: Error message.
+          example: Bad request
+    Company:
+      type: object
+      description: Company record. When dedupeBy=dedupeFields, externalCompanyId is required. When dedupeBy=idField, id is required. Additional standard or custom company fields are supported.
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Marketo internal company ID. Required when dedupeBy is idField and action is updateOnly.
+        externalCompanyId:
+          type: string
+          description: External company identifier. Required when dedupeBy is dedupeFields.
+        company:
+          type: string
+          description: Company name.
+      additionalProperties: true
+    CompanyResponse:
       type: object
       required:
-      - field
-      - name
+      - id
+      - seq
       properties:
-        field:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of the company record
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
           type: string
-          description: Name of link field (within link object)
-        name:
+          description: Status of the operation performed on the record
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
+      description: Company record. May include any additional fields listed in the corresponding describe method
+    ResponseOfCompany:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
           type: string
-          description: Name of the link object
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/CompanyResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ObjectMetaData:
       type: object
       required:
@@ -416,6 +445,191 @@ components:
           enum:
           - draft
           - approved
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfObjectMetaData:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ObjectMetaData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ObjectRelation:
+      type: object
+      required:
+      - field
+      - relatedTo
+      - type
+      properties:
+        field:
+          type: string
+          description: API Name of link field
+        relatedTo:
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
+          type: string
+          description: Type of the relationship field
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    DeleteCompanyRequest:
+      type: object
+      properties:
+        deleteBy:
+          type: string
+          description: Field to delete company records by. Key may be "dedupeFields" or "idField"
+        input:
+          type: array
+          description: List of company objects. Companies in the list should only contain a member matching the dedupeBy value. Each 'Company' object contains a 'searchableField' for lookup purposes which can be retrieved using the Describe Companies endpoint
+          items:
+            $ref: '#/components/schemas/Company_2'
+    SyncCompanyRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records. Each 'Company' object contains a 'searchableField' for lookup purposes, and one or more 'fields' to create or update. Both can be retrieved using the Describe Companies endpoint
+          items:
+            $ref: '#/components/schemas/Company_2'
+    ResponseOfLeadField:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadField'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    RelatedObject:
+      type: object
+      required:
+      - field
+      - name
+      properties:
+        field:
+          type: string
+          description: Name of link field (within link object)
+        name:
+          type: string
+          description: Name of the link object
+    Company_2:
+      type: object
+      description: Company record. May include any additional 'fields' listed in the Describe Companies endpoint
+      properties:
+        externalCompanyId:
+          type: string
+          description: Unique id of the company record
+        id:
+          type: integer
+          description: Unique integer id of the company record
+        company:
+          type: string
+          description: Unique name of the company record
     LeadField:
       type: object
       description: Lead field record
@@ -466,184 +680,6 @@ components:
           type: boolean
           example: false
           description: If set to true, field was created using REST API
-    ResponseOfObjectMetaData:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ObjectMetaData'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ResponseOfCompany:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/CompanyResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ResponseOfLeadField:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadField'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Company_2:
-      type: object
-      description: Company record. May include any additional 'fields' listed in the Describe Companies endpoint
-      properties:
-        externalCompanyId:
-          type: string
-          description: Unique id of the company record
-        id:
-          type: integer
-          description: Unique integer id of the company record
-        company:
-          type: string
-          description: Unique name of the company record
-    CompanyResponse:
-      type: object
-      required:
-      - id
-      - seq
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of the company record
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-        status:
-          type: string
-          description: Status of the operation performed on the record
-          enum:
-          - created
-          - updated
-          - deleted
-          - skipped
-          - added
-          - removed
-      description: Company record. May include any additional fields listed in the corresponding describe method
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
     ObjectField:
       type: object
       properties:
@@ -668,42 +704,6 @@ components:
           type: boolean
           example: false
           description: Whether the field is managed by CRM (native sync)
-    ObjectRelation:
-      type: object
-      required:
-      - field
-      - relatedTo
-      - type
-      properties:
-        field:
-          type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
-          type: string
-          description: Type of the relationship field
-    SyncCompanyRequest:
-      type: object
-      required:
-      - input
-      properties:
-        action:
-          type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
-        input:
-          type: array
-          description: List of input records. Each 'Company' object contains a 'searchableField' for lookup purposes, and one or more 'fields' to create or update. Both can be retrieved using the Describe Companies endpoint
-          items:
-            $ref: '#/components/schemas/Company_2'
 x-refined-from:
 - marketo-data-ingestion-openapi-original.json
 - marketo-lead-database-openapi-original.json

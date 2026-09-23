@@ -84,15 +84,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Person:
-      type: object
-      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
-      additionalProperties: true
-      example:
-        email: brooklyn.parker@karnv.com
-        firstName: Brooklyn
-        lastName: Parker
-        company: Karnv
     DedupeFields:
       type: object
       description: 'Attributes to deduplicate on. One or two attribute names are allowed. Two attributes are used in an AND operation. Supported attributes: id, email, sfdcAccountId, sfdcContactId, sfdcLeadId, sfdcLeadOwnerId, custom attributes (string and integer type only).'
@@ -103,6 +94,27 @@ components:
         field2:
           type: string
           example: firstName
+    ErrorResponse:
+      type: object
+      description: Error response body returned for non-202 responses.
+      properties:
+        error_code:
+          type: string
+          description: Error code.
+          example: '4000801'
+        message:
+          type: string
+          description: Error message.
+          example: Bad request
+    Person:
+      type: object
+      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
+      additionalProperties: true
+      example:
+        email: brooklyn.parker@karnv.com
+        firstName: Brooklyn
+        lastName: Parker
+        company: Karnv
     SyncPersonsRequest:
       required:
       - persons
@@ -126,15 +138,3 @@ components:
           description: List of attribute name-value pairs for the person.
           items:
             $ref: '#/components/schemas/Person'
-    ErrorResponse:
-      type: object
-      description: Error response body returned for non-202 responses.
-      properties:
-        error_code:
-          type: string
-          description: Error code.
-          example: '4000801'
-        message:
-          type: string
-          description: Error message.
-          example: Bad request

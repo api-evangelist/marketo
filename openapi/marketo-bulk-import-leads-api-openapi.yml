@@ -153,37 +153,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ImportLeadResponse:
-      type: object
-      required:
-      - batchId
-      - numOfLeadsProcessed
-      - status
-      properties:
-        batchId:
-          type: integer
-          format: int32
-          description: Unique integer id of the import batch
-        importId:
-          type: string
-        message:
-          type: string
-        numOfLeadsProcessed:
-          type: integer
-          format: int32
-          description: Number of rows processed so far
-        numOfRowsFailed:
-          type: integer
-          format: int32
-          description: Number of rows failed so far
-        numOfRowsWithWarning:
-          type: integer
-          format: int32
-          description: Number of rows with a warning so far
-        status:
-          type: string
-          description: Status of the batch
-      description: Response containing import status information
     Warning:
       type: object
       required:
@@ -237,3 +206,34 @@ components:
             $ref: '#/components/schemas/Warning'
     ObservableOfInputStreamContent:
       type: object
+    ImportLeadResponse:
+      type: object
+      required:
+      - batchId
+      - numOfLeadsProcessed
+      - status
+      properties:
+        batchId:
+          type: integer
+          format: int32
+          description: Unique integer id of the import batch
+        importId:
+          type: string
+        message:
+          type: string
+        numOfLeadsProcessed:
+          type: integer
+          format: int32
+          description: Number of rows processed so far
+        numOfRowsFailed:
+          type: integer
+          format: int32
+          description: Number of rows failed so far
+        numOfRowsWithWarning:
+          type: integer
+          format: int32
+          description: Number of rows with a warning so far
+        status:
+          type: string
+          description: Status of the batch
+      description: Response containing import status information

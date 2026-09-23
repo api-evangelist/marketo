@@ -160,7 +160,10 @@ paths:
       tags:
       - Leads
       summary: Describe Lead
-      description: 'Returns metadata about lead objects in the target instance, including a list of all fields available for interaction via the APIs. Required Permissions: Read-Only Lead, Read-Write Lead<br><br><b>Note: This endpoint has been superseded.</b>  Use <a href="https://developer.adobe.com/marketo-apis/api/mapi/#operation/describeUsingGET_6">Describe Lead2</a> endpoint instead.'
+      description: 'Returns metadata about lead objects in the target instance, including a list of all fields available for interaction via the APIs. Required Permissions: Read-Only Lead, Read-Write Lead
+
+
+        Note: This endpoint has been superseded. Use Describe Lead2 endpoint instead.'
       operationId: describeUsingGET_2
       responses:
         '200':
@@ -208,7 +211,7 @@ paths:
       tags:
       - Leads
       summary: Update Lead Field
-      description: 'Update metadata for a lead field in the target instance. See update rules <a href="https://developers.marketo.com/rest-api/lead-database/leads/#update_field">here</a>. Required Permissions: Read-Write Schema Standard Field, Read-Write Schema Custom Field'
+      description: 'Update metadata for a lead field in the target instance. See update rules here. Required Permissions: Read-Write Schema Standard Field, Read-Write Schema Custom Field'
       operationId: updateLeadFieldUsingPOST
       parameters:
       - name: fieldApiName
@@ -284,7 +287,10 @@ paths:
       tags:
       - Leads
       summary: Describe Program Member
-      description: 'Returns metadata about program member objects in the target instance, including a list of all fields available for interaction via the APIs. Required Permissions: Read-Only Lead, Read-Write Lead<br><br><b>Note: This endpoint has been superseded.</b>  Use <a href="https://developer.adobe.com/marketo-apis/api/mapi/#operation/describeProgramMemberUsingGET2">Describe Program Member</a> endpoint instead.'
+      description: 'Returns metadata about program member objects in the target instance, including a list of all fields available for interaction via the APIs. Required Permissions: Read-Only Lead, Read-Write Lead
+
+
+        Note: This endpoint has been superseded. Use Describe Program Member endpoint instead.'
       operationId: describeProgramMemberUsingGET
       responses:
         '200':
@@ -377,7 +383,10 @@ paths:
       tags:
       - Leads
       summary: Change Lead Program Status
-      description: 'Changes the program status of a list of leads in a target program. Only existing members of the program may have their status changed with this API. Required Permissions: Read-Write Lead<br><br><b>Note: This endpoint has been superseded.</b>  Use <a href="https://developer.adobe.com/marketo-apis/api/mapi/#operation/syncProgramMemberStatusUsingPOST">Sync Program Member Status</a> endpoint instead.'
+      description: 'Changes the program status of a list of leads in a target program. Only existing members of the program may have their status changed with this API. Required Permissions: Read-Write Lead
+
+
+        Note: This endpoint has been superseded. Use Sync Program Member Status endpoint instead.'
       operationId: changeLeadProgramStatusUsingPOST
       parameters:
       - name: programId
@@ -664,137 +673,61 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaigns'
 components:
   schemas:
-    ResponseWithoutResult:
+    ProgramMemberAttribute:
       type: object
       required:
-      - requestId
-      - success
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token returned from a previous response
-        requestId:
-          type: string
-          description: Id of the request made
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ResponseOfLeadAttribute:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadAttribute'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Lead:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of a lead record
-        membership:
-          description: Membership data for the parent program. Only returned via Get Leads By Program Id
-          $ref: '#/components/schemas/ProgramMembership'
-        reason:
-          description: Reason object describing why an operation did not succeed for a record
-          $ref: '#/components/schemas/Reason'
-        status:
-          type: string
-          description: Status of the operation performed on the record
-      description: Lead record. Always contains id, but may have any number of other fields, depending on the fields available in the target instance.
-    ResponseOfLeadAttribute2:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadAttribute2'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    LeadMapAttribute:
-      type: object
-      required:
-      - name
+      - fields
       properties:
         name:
           type: string
-          description: Name of the attribute
-        readOnly:
+          description: '"API Program Member"'
+        fields:
+          type: array
+          description: Description of searchable fields
+          items:
+            $ref: '#/components/schemas/LeadAttribute2Fields'
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    ProgramMembership:
+      type: object
+      required:
+      - membershipDate
+      - progressionStatus
+      properties:
+        acquiredBy:
           type: boolean
           example: false
-          description: Whether the attribute is read only
+          description: Whether the lead was acquired by the parent program
+        isExhausted:
+          type: boolean
+          example: false
+          description: Whether the lead is currently exhausted in the stream, if applicable
+        membershipDate:
+          type: string
+          description: Date the lead first became a member of the program
+        nurtureCadence:
+          type: string
+          description: Cadence of the parent stream if applicable
+        progressionStatus:
+          type: string
+          description: Program status of the lead in the parent program
+        reachedSuccess:
+          type: boolean
+          example: false
+          description: Whether the lead is in a success-status in the parent program
+        stream:
+          type: string
+          description: Stream that the lead is a member of, if the parent program is an engagement program
     ResponseOfProgramMemberAttributes:
       type: object
       required:
@@ -833,33 +766,78 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    LeadAttribute:
+    ResponseOfLeadAttribute2:
       type: object
       required:
-      - dataType
-      - displayName
-      - id
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        dataType:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
           type: string
-          description: Datatype of the field
-        displayName:
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
           type: string
-          description: UI display-name of the field
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadAttribute2'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    LeadFieldStatus:
+      type: object
+      required:
+      - name
+      - status
+      description: Lead field update status
+      properties:
+        name:
+          type: string
+          description: API name of the field
+        status:
+          type: string
+          description: Status of the operation performed on the record
+          enum:
+          - created
+          - updated
+    ChangeLeadProgramStatusOutputData:
+      type: object
+      required:
+      - id
+      - status
+      properties:
         id:
           type: integer
-          format: int32
-          description: Unique integer id of the field
-        length:
-          type: integer
-          format: int32
-          description: Max length of the field. Only applicable to text, string, and text area.
-        rest:
-          description: Description of REST API usage attributes
-          $ref: '#/components/schemas/LeadMapAttribute'
-        soap:
-          description: Description of SOAP API usage attributes
-          $ref: '#/components/schemas/LeadMapAttribute'
+          format: int64
+          description: Unique integer id of a lead record
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        status:
+          type: string
+          description: Program status of the record. Permissible values can be retrieve from the Get Channel by Name API for the designated program's channel
     LeadFormFields:
       type: object
       required:
@@ -869,69 +847,7 @@ components:
           type: string
           description: Email address used as primary key during lead upsert
       description: Form fields. Always contains email, but may have any number of other fields depending on the fields available in the form.
-    ProgramMemberAttribute:
-      type: object
-      required:
-      - fields
-      properties:
-        name:
-          type: string
-          description: '"API Program Member"'
-        fields:
-          type: array
-          description: Description of searchable fields
-          items:
-            $ref: '#/components/schemas/LeadAttribute2Fields'
-    LeadAttribute2Fields:
-      type: object
-      required:
-      - name
-      - displayName
-      - dataType
-      - updateable
-      - crmManaged
-      properties:
-        name:
-          type: string
-          description: REST API name of field
-        displayName:
-          type: string
-          description: Display name of field (friendly name)
-        dataType:
-          type: string
-          description: Data type of field
-        length:
-          type: integer
-          description: Length of field
-        updateable:
-          type: boolean
-          description: Is field updateable
-        crmManaged:
-          type: boolean
-          description: Is field managed by CRM
-    CreateLeadFieldRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of lead fields for input
-          items:
-            $ref: '#/components/schemas/CreateLeadField'
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
-    ResponseOfSmartCampaigns:
+    ResponseOfLeadField:
       type: object
       required:
       - errors
@@ -959,7 +875,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/SmartCampaign'
+            $ref: '#/components/schemas/LeadField'
         success:
           type: boolean
           example: false
@@ -969,278 +885,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    FormResponse:
-      type: object
-      description: Disposition of lead
-      required:
-      - id
-      - status
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of lead
-        status:
-          type: string
-          enum:
-          - created
-          - updated
-          - skipped
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-    UpdateLeadPartition:
-      type: object
-      required:
-      - id
-      - partitionName
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of a lead record
-        partitionName:
-          type: string
-          description: Name of the partition
-    ResponseOfCreateLeadField:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadFieldStatus'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ResponseOfPushLeadToMarketo:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/Lead'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    LeadAttribute2:
-      type: object
-      required:
-      - name
-      - searchableFields
-      - fields
-      properties:
-        name:
-          type: string
-          description: '"API Lead"'
-        searchableFields:
-          type: array
-          description: List of searchable fields
-          items:
-            $ref: '#/components/schemas/LeadAttribute2SearchableFields'
-        fields:
-          type: array
-          description: Description of searchable fields
-          items:
-            $ref: '#/components/schemas/LeadAttribute2Fields'
-    ResponseOfLists:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/List'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    DeleteLeadRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of leads for input
-          items:
-            $ref: '#/components/schemas/LeadInputData'
-    Program:
-      type: object
-      required:
-      - id
-      - progressionStatus
-      - isExhausted
-      - acquiredBy
-      - reachedSuccess
-      - membershipDate
-      - updatedAt
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a program record
-        acquiredBy:
-          type: boolean
-          example: false
-          description: Whether the lead was acquired by the parent program
-        isExhausted:
-          type: boolean
-          example: false
-          description: Whether the lead is currently exhausted in the stream, if applicable
-        membershipDate:
-          type: string
-          description: Date the lead first became a member of the program
-        nurtureCadence:
-          type: string
-          description: Cadence of the parent stream if applicable
-        progressionStatus:
-          type: string
-          description: Program status of the lead in the parent program
-        reachedSuccess:
-          type: boolean
-          example: false
-          description: Whether the lead is in a success-status in the parent program
-        stream:
-          type: string
-          description: Stream that the lead is a member of, if the parent program is an engagement program
-        updatedAt:
-          type: string
-          description: Datetime when the program was most recently updated
-    VisitorData:
-      type: object
-      properties:
-        pageURL:
-          type: string
-          description: Web page that hosts the form. Must be a fully formed URL
-        queryString:
-          type: string
-          description: Web page query string. Contains one or more ampersand delimited key=value pairs
-        leadClientIpAddress:
-          type: string
-          description: Client IP address. IPv4 format. Used to populate inferred fields on upserted lead record.
-        userAgentString:
-          type: string
-          description: User agent of browser hosting the form
-      description: Page visit related data. Used to populate additional activity fields for filtering and triggering.
-    ProgramMembership:
-      type: object
-      required:
-      - membershipDate
-      - progressionStatus
-      properties:
-        acquiredBy:
-          type: boolean
-          example: false
-          description: Whether the lead was acquired by the parent program
-        isExhausted:
-          type: boolean
-          example: false
-          description: Whether the lead is currently exhausted in the stream, if applicable
-        membershipDate:
-          type: string
-          description: Date the lead first became a member of the program
-        nurtureCadence:
-          type: string
-          description: Cadence of the parent stream if applicable
-        progressionStatus:
-          type: string
-          description: Program status of the lead in the parent program
-        reachedSuccess:
-          type: boolean
-          example: false
-          description: Whether the lead is in a success-status in the parent program
-        stream:
-          type: string
-          description: Stream that the lead is a member of, if the parent program is an engagement program
     ResponseOfChangeLeadProgramStatusOutputData:
       type: object
       required:
@@ -1279,7 +923,26 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ResponseOfLead:
+    SubmitFormRequest:
+      type: object
+      required:
+      - input
+      - formId
+      properties:
+        input:
+          type: array
+          description: Single array item that contains form fields and visitor data to use during a form submittal
+          items:
+            $ref: '#/components/schemas/Form'
+        formId:
+          type: integer
+          format: int32
+          description: Id of the form
+        programId:
+          type: integer
+          format: int32
+          description: Id of the program to add lead and/or program member custom fields to
+    ResponseOfPrograms:
       type: object
       required:
       - errors
@@ -1307,7 +970,318 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
+            $ref: '#/components/schemas/Program'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    PushLead:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of a lead record
+        reason:
+          description: Reason object describing why an operation did not succeed for a record
+          $ref: '#/components/schemas/Reason'
+        status:
+          type: string
+          description: Status of the operation performed on the record
+      description: Lead record. Always contains id, but may have any number of other fields, depending on the fields available in the target instance.
+    PushLeadToMarketoRequest:
+      type: object
+      properties:
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/PushLead'
+        lookupField:
+          type: string
+        partitionName:
+          type: string
+        programName:
+          type: string
+        programStatus:
+          type: string
+        reason:
+          type: string
+        source:
+          type: string
+    SyncLeadRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform. Defaults to createOrUpdate if unset
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+          - createDuplicate
+        asyncProcessing:
+          type: boolean
+          example: false
+          description: If set to true, the call will return immediately
+        input:
+          type: array
+          description: List of leads for input
+          items:
             $ref: '#/components/schemas/Lead'
+        lookupField:
+          type: string
+          description: Field to deduplicate on. The field must be present in each lead record of the input. Defaults to email if unset
+        partitionName:
+          type: string
+          description: Name of the partition to operate on, if applicable. Should be set whenever possible, when interacting with an instance where partitions are enabled.
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    FormResponse:
+      type: object
+      description: Disposition of lead
+      required:
+      - id
+      - status
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of lead
+        status:
+          type: string
+          enum:
+          - created
+          - updated
+          - skipped
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+    LeadMapAttribute:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the attribute
+        readOnly:
+          type: boolean
+          example: false
+          description: Whether the attribute is read only
+    ResponseOfLeadPartition:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadPartition'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    CreateLeadFieldRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of lead fields for input
+          items:
+            $ref: '#/components/schemas/CreateLeadField'
+    ResponseOfLeadAttribute:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadAttribute'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfLists:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/List'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    SmartCampaign:
+      type: object
+      required:
+      - createdAt
+      - smartCampaignId
+      - updatedAt
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the smart campaign was created
+        smartCampaignId:
+          type: integer
+          format: int32
+          description: Unique integer id of the smart campaign
+        updatedAt:
+          type: string
+          description: Datetime when the smart campaign was most recently updated
+    Form:
+      type: object
+      required:
+      - leadFormFields
+      properties:
+        leadFormFields:
+          description: List of form fields. Email is required field
+          $ref: '#/components/schemas/LeadFormFields'
+        visitorData:
+          description: Page visit-related data
+          $ref: '#/components/schemas/VisitorData'
+        cookie:
+          type: string
+          description: Munchkin cookie value used to associate new lead with anonymous activities. e.g. id:123-XYZ-456&tooken:_mch-marketo.com-1594662481190-60776
+      description: Form field data. May have any number of fields depending on the fields available in the form.
+    UpdateLeadPartitionRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/UpdateLeadPartition'
+    ResponseOfCreateLeadField:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadFieldStatus'
         success:
           type: boolean
           example: false
@@ -1333,19 +1307,99 @@ components:
         name:
           type: string
           description: Name of the partition
-    Warning:
+    ResponseOfPushLeadToMarketo:
       type: object
       required:
-      - code
-      - message
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
           type: string
-          description: Message describing the warning
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Lead'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ChangeLeadProgramStatusRequest:
+      type: object
+      required:
+      - input
+      - status
+      properties:
+        input:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/LeadLookupInputData'
+        status:
+          type: string
+          description: Program status of the record. Permissible values can be retrieve from the Get Channel by Name API for the designated program's channel
+    DeleteLeadRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/LeadInputData'
+    ResponseOfUpdateLeadField:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadFieldStatus'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ResponseOfSubmitForm:
       type: object
       required:
@@ -1377,6 +1431,32 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    UpdateLeadPartition:
+      type: object
+      required:
+      - id
+      - partitionName
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of a lead record
+        partitionName:
+          type: string
+          description: Name of the partition
     CreateLeadField:
       type: object
       required:
@@ -1422,179 +1502,53 @@ components:
           type: boolean
           example: false
           description: If set to true, field is marked as sensitive. Default is false
-    Form:
-      type: object
-      required:
-      - leadFormFields
-      properties:
-        leadFormFields:
-          description: List of form fields. Email is required field
-          $ref: '#/components/schemas/LeadFormFields'
-        visitorData:
-          description: Page visit-related data
-          $ref: '#/components/schemas/VisitorData'
-        cookie:
-          type: string
-          description: Munchkin cookie value used to associate new lead with anonymous activities. e.g. id:123-XYZ-456&tooken:_mch-marketo.com-1594662481190-60776
-      description: Form field data. May have any number of fields depending on the fields available in the form.
-    LeadFieldStatus:
+    LeadAttribute2Fields:
       type: object
       required:
       - name
-      - status
-      description: Lead field update status
+      - displayName
+      - dataType
+      - updateable
+      - crmManaged
       properties:
         name:
           type: string
-          description: API name of the field
-        status:
+          description: REST API name of field
+        displayName:
           type: string
-          description: Status of the operation performed on the record
-          enum:
-          - created
-          - updated
-    LeadInputData:
-      type: object
-      required:
-      - id
-      properties:
-        id:
+          description: Display name of field (friendly name)
+        dataType:
+          type: string
+          description: Data type of field
+        length:
           type: integer
-          format: int64
-          description: Unique integer id of a lead record
-      description: Lead record containing only lead id
-    LeadAttribute2SearchableFields:
-      type: array
-      description: List of searchable fields
-      items:
-        type: string
-        description: Searchable field
-    ResponseOfPrograms:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
+          description: Length of field
+        updateable:
           type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/Program'
-        success:
+          description: Is field updateable
+        crmManaged:
           type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    List:
+          description: Is field managed by CRM
+    LeadAttribute2:
       type: object
       required:
-      - createdAt
-      - listId
-      - updatedAt
+      - name
+      - searchableFields
+      - fields
       properties:
-        createdAt:
+        name:
           type: string
-          description: Datetime when the static list was created
-        listId:
-          type: integer
-          format: int32
-          description: Unique integer id of the static list
-        updatedAt:
-          type: string
-          description: Datetime when the static list was most recently updated
-    UpdateLeadFieldRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
+          description: '"API Lead"'
+        searchableFields:
           type: array
-          description: Single lead field for input
+          description: List of searchable fields
           items:
-            $ref: '#/components/schemas/UpdateLeadField'
-    SyncLeadRequest:
-      type: object
-      required:
-      - input
-      properties:
-        action:
-          type: string
-          description: Type of sync operation to perform. Defaults to createOrUpdate if unset
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-          - createDuplicate
-        asyncProcessing:
-          type: boolean
-          example: false
-          description: If set to true, the call will return immediately
-        input:
+            $ref: '#/components/schemas/LeadAttribute2SearchableFields'
+        fields:
           type: array
-          description: List of leads for input
+          description: Description of searchable fields
           items:
-            $ref: '#/components/schemas/Lead'
-        lookupField:
-          type: string
-          description: Field to deduplicate on. The field must be present in each lead record of the input. Defaults to email if unset
-        partitionName:
-          type: string
-          description: Name of the partition to operate on, if applicable. Should be set whenever possible, when interacting with an instance where partitions are enabled.
-    PushLeadToMarketoRequest:
-      type: object
-      properties:
-        input:
-          type: array
-          items:
-            $ref: '#/components/schemas/PushLead'
-        lookupField:
-          type: string
-        partitionName:
-          type: string
-        programName:
-          type: string
-        programStatus:
-          type: string
-        reason:
-          type: string
-        source:
-          type: string
-    ChangeLeadProgramStatusRequest:
-      type: object
-      required:
-      - input
-      - status
-      properties:
-        input:
-          type: array
-          description: List of leads for input
-          items:
-            $ref: '#/components/schemas/LeadLookupInputData'
-        status:
-          type: string
-          description: Program status of the record. Permissible values can be retrieve from the Get Channel by Name API for the designated program's channel
+            $ref: '#/components/schemas/LeadAttribute2Fields'
     LeadField:
       type: object
       description: Lead field record
@@ -1645,16 +1599,7 @@ components:
           type: boolean
           example: false
           description: If set to true, field was created using REST API
-    LeadLookupInputData:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-    ResponseOfLeadField:
+    ResponseOfLead:
       type: object
       required:
       - errors
@@ -1682,7 +1627,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/LeadField'
+            $ref: '#/components/schemas/Lead'
         success:
           type: boolean
           example: false
@@ -1692,89 +1637,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ResponseOfUpdateLeadField:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadFieldStatus'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ChangeLeadProgramStatusOutputData:
-      type: object
-      required:
-      - id
-      - status
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        status:
-          type: string
-          description: Program status of the record. Permissible values can be retrieve from the Get Channel by Name API for the designated program's channel
-    SmartCampaign:
-      type: object
-      required:
-      - createdAt
-      - smartCampaignId
-      - updatedAt
-      properties:
-        createdAt:
-          type: string
-          description: Datetime when the smart campaign was created
-        smartCampaignId:
-          type: integer
-          format: int32
-          description: Unique integer id of the smart campaign
-        updatedAt:
-          type: string
-          description: Datetime when the smart campaign was most recently updated
-    UpdateLeadPartitionRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of leads for input
-          items:
-            $ref: '#/components/schemas/UpdateLeadPartition'
     UpdateLeadField:
       type: object
       description: Lead field record for update
@@ -1797,7 +1659,171 @@ components:
           type: boolean
           example: false
           description: If set to true, field is marked as sensitive. Default is false
-    ResponseOfLeadPartition:
+    Lead:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of a lead record
+        membership:
+          description: Membership data for the parent program. Only returned via Get Leads By Program Id
+          $ref: '#/components/schemas/ProgramMembership'
+        reason:
+          description: Reason object describing why an operation did not succeed for a record
+          $ref: '#/components/schemas/Reason'
+        status:
+          type: string
+          description: Status of the operation performed on the record
+      description: Lead record. Always contains id, but may have any number of other fields, depending on the fields available in the target instance.
+    LeadAttribute:
+      type: object
+      required:
+      - dataType
+      - displayName
+      - id
+      properties:
+        dataType:
+          type: string
+          description: Datatype of the field
+        displayName:
+          type: string
+          description: UI display-name of the field
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the field
+        length:
+          type: integer
+          format: int32
+          description: Max length of the field. Only applicable to text, string, and text area.
+        rest:
+          description: Description of REST API usage attributes
+          $ref: '#/components/schemas/LeadMapAttribute'
+        soap:
+          description: Description of SOAP API usage attributes
+          $ref: '#/components/schemas/LeadMapAttribute'
+    List:
+      type: object
+      required:
+      - createdAt
+      - listId
+      - updatedAt
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the static list was created
+        listId:
+          type: integer
+          format: int32
+          description: Unique integer id of the static list
+        updatedAt:
+          type: string
+          description: Datetime when the static list was most recently updated
+    Program:
+      type: object
+      required:
+      - id
+      - progressionStatus
+      - isExhausted
+      - acquiredBy
+      - reachedSuccess
+      - membershipDate
+      - updatedAt
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a program record
+        acquiredBy:
+          type: boolean
+          example: false
+          description: Whether the lead was acquired by the parent program
+        isExhausted:
+          type: boolean
+          example: false
+          description: Whether the lead is currently exhausted in the stream, if applicable
+        membershipDate:
+          type: string
+          description: Date the lead first became a member of the program
+        nurtureCadence:
+          type: string
+          description: Cadence of the parent stream if applicable
+        progressionStatus:
+          type: string
+          description: Program status of the lead in the parent program
+        reachedSuccess:
+          type: boolean
+          example: false
+          description: Whether the lead is in a success-status in the parent program
+        stream:
+          type: string
+          description: Stream that the lead is a member of, if the parent program is an engagement program
+        updatedAt:
+          type: string
+          description: Datetime when the program was most recently updated
+    LeadLookupInputData:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+    UpdateLeadFieldRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: Single lead field for input
+          items:
+            $ref: '#/components/schemas/UpdateLeadField'
+    LeadAttribute2SearchableFields:
+      type: array
+      description: List of searchable fields
+      items:
+        type: string
+        description: Searchable field
+    LeadInputData:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
+    ResponseWithoutResult:
+      type: object
+      required:
+      - requestId
+      - success
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token returned from a previous response
+        requestId:
+          type: string
+          description: Id of the request made
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfSmartCampaigns:
       type: object
       required:
       - errors
@@ -1825,7 +1851,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/LeadPartition'
+            $ref: '#/components/schemas/SmartCampaign'
         success:
           type: boolean
           example: false
@@ -1835,36 +1861,19 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    SubmitFormRequest:
-      type: object
-      required:
-      - input
-      - formId
-      properties:
-        input:
-          type: array
-          description: Single array item that contains form fields and visitor data to use during a form submittal
-          items:
-            $ref: '#/components/schemas/Form'
-        formId:
-          type: integer
-          format: int32
-          description: Id of the form
-        programId:
-          type: integer
-          format: int32
-          description: Id of the program to add lead and/or program member custom fields to
-    PushLead:
+    VisitorData:
       type: object
       properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of a lead record
-        reason:
-          description: Reason object describing why an operation did not succeed for a record
-          $ref: '#/components/schemas/Reason'
-        status:
+        pageURL:
           type: string
-          description: Status of the operation performed on the record
-      description: Lead record. Always contains id, but may have any number of other fields, depending on the fields available in the target instance.
+          description: Web page that hosts the form. Must be a fully formed URL
+        queryString:
+          type: string
+          description: Web page query string. Contains one or more ampersand delimited key=value pairs
+        leadClientIpAddress:
+          type: string
+          description: Client IP address. IPv4 format. Used to populate inferred fields on upserted lead record.
+        userAgentString:
+          type: string
+          description: User agent of browser hosting the form
+      description: Page visit related data. Used to populate additional activity fields for filtering and triggering.

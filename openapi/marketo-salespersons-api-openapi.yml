@@ -14,13 +14,13 @@ info:
 servers:
 - url: https://localhost:8080/
 tags:
-- name: Sales Persons
+- name: Salespersons
   description: Sales Persons Controller
 paths:
   /rest/v1/salespersons.json:
     get:
       tags:
-      - Sales Persons
+      - Salespersons
       summary: Get SalesPersons
       description: 'Retrieves salesperson records from the destination instance based on the submitted filter. Required Permissions: Read-Only Sales Person, Read-Write Sales Person'
       operationId: getSalesPersonUsingGET
@@ -71,7 +71,7 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSalesPerson'
     post:
       tags:
-      - Sales Persons
+      - Salespersons
       summary: Sync SalesPersons
       description: 'Allows inserts, updates, or upserts of salespersons to the target instance. Required Permissions: Read-Write Sales Person'
       operationId: syncSalesPersonsUsingPOST
@@ -92,7 +92,7 @@ paths:
   /rest/v1/salespersons/delete.json:
     post:
       tags:
-      - Sales Persons
+      - Salespersons
       summary: Delete SalesPersons
       description: 'Deletes a list of salesperson records from the target instance. Input records should have only one member, based on the value of ''dedupeBy''. Required Permissions: Read-Write Sales Person'
       operationId: deleteSalesPersonUsingPOST
@@ -113,7 +113,7 @@ paths:
   /rest/v1/salespersons/describe.json:
     get:
       tags:
-      - Sales Persons
+      - Salespersons
       summary: Describe SalesPersons
       description: 'Returns metadata about salespersons and the fields available for interaction via the API. Required Permissions: Read-Only Sales Person, Read-Write Sales Person'
       operationId: describeUsingGET_5
@@ -126,19 +126,45 @@ paths:
                 $ref: '#/components/schemas/ResponseOfObjectMetaData'
 components:
   schemas:
-    RelatedObject:
+    ResponseOfSalesPerson:
       type: object
       required:
-      - field
-      - name
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        field:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
           type: string
-          description: Name of link field (within link object)
-        name:
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
           type: string
-          description: Name of the link object
-    Error:
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/SalesPerson'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Reason:
       type: object
       required:
       - code
@@ -146,10 +172,30 @@ components:
       properties:
         code:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+          description: Integer code of the reason
         message:
           type: string
-          description: Message describing the cause of the error
+          description: Message describing the reason for the status of the operation
+    SyncSalesPersonRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/SalesPerson'
     ObjectMetaData:
       type: object
       required:
@@ -225,6 +271,18 @@ components:
           enum:
           - draft
           - approved
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     ResponseOfObjectMetaData:
       type: object
       required:
@@ -263,39 +321,22 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
+    ObjectRelation:
       type: object
       required:
-      - code
-      - message
+      - field
+      - relatedTo
+      - type
       properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
+        field:
           type: string
-          description: Message describing the warning
-    SyncSalesPersonRequest:
-      type: object
-      required:
-      - input
-      properties:
-        action:
+          description: API Name of link field
+        relatedTo:
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
           type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/SalesPerson'
+          description: Type of the relationship field
     DeleteSalesPersonRequest:
       type: object
       required:
@@ -309,6 +350,31 @@ components:
           description: List of input records
           items:
             $ref: '#/components/schemas/SalesPerson'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    RelatedObject:
+      type: object
+      required:
+      - field
+      - name
+      properties:
+        field:
+          type: string
+          description: Name of link field (within link object)
+        name:
+          type: string
+          description: Name of the link object
     SalesPerson:
       type: object
       properties:
@@ -335,18 +401,6 @@ components:
           - skipped
           - added
           - removed
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
     ObjectField:
       type: object
       properties:
@@ -371,57 +425,3 @@ components:
           type: boolean
           example: false
           description: Whether the field is managed by CRM (native sync)
-    ObjectRelation:
-      type: object
-      required:
-      - field
-      - relatedTo
-      - type
-      properties:
-        field:
-          type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
-          type: string
-          description: Type of the relationship field
-    ResponseOfSalesPerson:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/SalesPerson'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'

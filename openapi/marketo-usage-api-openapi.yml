@@ -88,6 +88,24 @@ components:
         errorCode:
           type: string
           description: Integer error code of the error
+    UsageData:
+      type: object
+      required:
+      - date
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: Date of the collected calls
+        total:
+          type: integer
+          format: int32
+          description: Total number of calls in the time period
+        users:
+          type: array
+          description: Counts for individual users
+          items:
+            $ref: '#/components/schemas/UserCount'
     ErrorsData:
       type: object
       required:
@@ -118,57 +136,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    UserCount:
-      type: object
-      required:
-      - count
-      - userId
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of calls made in the time period
-        userId:
-          type: string
-          description: Id of the user
-    ResponseOfErrorsData:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ErrorsData'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
     Warning:
       type: object
       required:
@@ -182,24 +149,19 @@ components:
         message:
           type: string
           description: Message describing the warning
-    UsageData:
+    UserCount:
       type: object
       required:
-      - date
+      - count
+      - userId
       properties:
-        date:
-          type: string
-          format: date-time
-          description: Date of the collected calls
-        total:
+        count:
           type: integer
           format: int32
-          description: Total number of calls in the time period
-        users:
-          type: array
-          description: Counts for individual users
-          items:
-            $ref: '#/components/schemas/UserCount'
+          description: Number of calls made in the time period
+        userId:
+          type: string
+          description: Id of the user
     ResponseOfUsageData:
       type: object
       required:
@@ -229,6 +191,44 @@ components:
           description: Array of results for individual records in the operation, may be empty
           items:
             $ref: '#/components/schemas/UsageData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfErrorsData:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ErrorsData'
         success:
           type: boolean
           example: false

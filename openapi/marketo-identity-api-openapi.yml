@@ -22,9 +22,7 @@ paths:
       tags:
       - Identity
       summary: Identity
-      description: 'Retrieve an access token from Marketo Engage. Calls to this endpoint are not counted towards API call limit.
-
-        '
+      description: Retrieve an access token from Marketo Engage. Calls to this endpoint are not counted towards API call limit.
       operationId: identityUsingGET
       x-badges:
       - name: MCP
@@ -65,9 +63,7 @@ paths:
       tags:
       - Identity
       summary: Identity
-      description: 'Retrieve an access token from Marketo. Calls to this endpoint are not counted towards API call limit.
-
-        '
+      description: Retrieve an access token from Marketo. Calls to this endpoint are not counted towards API call limit.
       operationId: identityUsingPOST
       x-badges:
       - name: MCP

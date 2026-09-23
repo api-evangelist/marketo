@@ -1,36 +1,27 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Marketo Engage Rest Approve Landing  Page  Redirect  Rules API
-  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Landing Page Redirect Rules API
   termsOfService: https://www.adobe.com/legal.html
   contact:
     name: Adobe Developer Relations
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
-    email: developerfeedback@marketo.com
+    email: ''
   license:
     name: API License Agreement
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
-  version: '1.0'
 servers:
-- url: https://{munchkinId}.mktorest.com
-  description: >-
-    Per-subscription Marketo Engage REST host. The Munchkin ID is unique to each
-    subscription and is read from Admin > Integration > Web Services. Adobe's
-    published specification carries the non-routable placeholder
-    https://localhost:8080/; corrected here from
-    https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
-  variables:
-    munchkinId:
-      default: 000-AAA-000
-      description: The subscription's Munchkin ID / account ID, e.g. 284-RPR-133.
+- url: https://localhost:8080/
 tags:
-- name: Landing  Page  Redirect  Rules
+- name: Landing Page Redirect Rules
+  description: Landing Page Redirect Rule Controller
 paths:
   /rest/asset/v1/redirectRules.json:
     get:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Get Landing Page Redirect Rules
+      - Landing Page Redirect Rules
+      summary: Get Landing Page Redirect Rules
       description: 'Retrieves a list of landing page redirect rules from the target instance. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules'
       operationId: getLandingPageRedirectRulesUsingGET
       parameters:
@@ -75,17 +66,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Create Landing Page Redirect Rule
+      - Landing Page Redirect Rules
+      summary: Create Landing Page Redirect Rule
       description: 'Create a new landing page redirect rule. Required Permissions: Read Write Redirect Rules'
       operationId: createLandingPageRedirectRuleUsingPOST
-      requestBody:
-        description: createLandingPageRedirectRuleRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CreateLandingPageRedirectRuleRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -93,12 +77,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
-      x-codegen-request-body-name: createLandingPageRedirectRuleRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateLandingPageRedirectRuleRequest'
+        description: createLandingPageRedirectRuleRequest
+        required: true
   /rest/asset/v1/redirectRule/{id}.json:
     get:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Get Landing Page Redirect Rule by Id
+      - Landing Page Redirect Rules
+      summary: Get Landing Page Redirect Rule by Id
       description: 'Retrieves the landing page redirect rule record. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules'
       operationId: getLandingPageRedirectRuleByIdUsingGET
       parameters:
@@ -118,8 +108,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
     post:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Update Landing Page Redirect Rule
+      - Landing Page Redirect Rules
+      summary: Update Landing Page Redirect Rule
       description: 'Update an existing landing page redirect rule. Required Permissions: Read Write Redirect Rules'
       operationId: updateLandingPageRedirectRuleUsingPOST
       parameters:
@@ -130,13 +120,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: updateLandingPageRedirectRuleRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/UpdateLandingPageRedirectRuleRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -144,12 +127,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfLandingPageRedirectRules'
-      x-codegen-request-body-name: updateLandingPageRedirectRuleRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateLandingPageRedirectRuleRequest'
+        description: updateLandingPageRedirectRuleRequest
+        required: true
   /rest/asset/v1/redirectRule/{id}/delete.json:
     post:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Delete Landing Page Redirect Rule
+      - Landing Page Redirect Rules
+      summary: Delete Landing Page Redirect Rule
       description: 'Delete a landing page redirect rule. Required Permissions: Read Write Redirect Rules'
       operationId: deleteLandingPageRedirectRuleUsingPOST
       parameters:
@@ -170,8 +159,8 @@ paths:
   /rest/asset/v1/landingPageDomains.json:
     get:
       tags:
-      - Landing  Page  Redirect  Rules
-      summary: Marketo Get Landing Page Domains
+      - Landing Page Redirect Rules
+      summary: Get Landing Page Domains
       description: 'Retrieves a list of landing page domain and domain aliases. Required Permissions: Read Only Redirect Rules, Read Write Redirect Rules'
       operationId: getLandingPageDomainsUsingGET
       parameters:
@@ -215,16 +204,22 @@ components:
           type: array
           items:
             type: string
-    UpdateLandingPageRedirectRuleRequest:
+    RedirectTo:
       type: object
+      required:
+      - type
+      - value
       properties:
-        hostname:
+        type:
           type: string
-          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
-        redirectFrom:
-          $ref: '#/components/schemas/RedirectFrom'
-        redirectTo:
-          $ref: '#/components/schemas/RedirectTo'
+          description: Type of redirect landing page
+          enum:
+          - landingPageId
+          - url
+        value:
+          type: string
+          description: Value for redirect landing page
+      description: JSON representation of 'to' redirect landing page rule
     ResponseOfLandingPageRedirectRules:
       type: object
       properties:
@@ -244,41 +239,11 @@ components:
           type: array
           items:
             type: string
-    CreateLandingPageRedirectRuleRequest:
-      required:
-      - hostname
-      - redirectFrom
-      - redirectTo
-      type: object
-      properties:
-        hostname:
-          type: string
-          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
-        redirectFrom:
-          $ref: '#/components/schemas/RedirectFrom'
-        redirectTo:
-          $ref: '#/components/schemas/RedirectTo'
-    RedirectTo:
-      required:
-      - type
-      - value
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of redirect landing page
-          enum:
-          - landingPageId
-          - url
-        value:
-          type: string
-          description: Value for redirect landing page
-      description: JSON representation of 'to' redirect landing page rule
     RedirectFrom:
+      type: object
       required:
       - type
       - value
-      type: object
       properties:
         type:
           type: string
@@ -290,43 +255,33 @@ components:
           type: string
           description: Value for redirect landing page. If type is 'path' this must not begin with forward slash
       description: JSON representation of 'from' redirect landing page rule
-    LandingPageRedirectRule:
-      required:
-      - createdAt
-      - hostname
-      - id
-      - redirectFrom
-      - redirectFromUrl
-      - redirectTo
-      - redirectToUrl
-      - updatedAt
+    Error:
       type: object
+      required:
+      - code
+      - message
       properties:
-        id:
-          type: integer
-          description: Internal id for landing page redirect rule
-          format: int64
-        redirectFromUrl:
+        code:
           type: string
-          description: Redirect 'from' URL of the Landing Page. Combination of the hostname and redirectFrom landing page or path
-        redirectToUrl:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Redirect 'to' URL of the Landing Page. Could be a Marketo landing page or non-Marketo URL.
+          description: Message describing the cause of the error
+    LandingPageDomain:
+      type: object
+      required:
+      - hostname
+      - type
+      properties:
         hostname:
           type: string
-          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters.
-        redirectFrom:
-          $ref: '#/components/schemas/RedirectFrom'
-        redirectTo:
-          $ref: '#/components/schemas/RedirectTo'
-        createdAt:
+          description: The hostname for the landing pages
+        type:
           type: string
-          description: Datetime the landing page redirect rule was created
-          format: date-time
-        updatedAt:
-          type: string
-          description: Datetime the landing page redirect rule was most recently updated
-          format: date-time
+          description: Specifies type of hostname
+          enum:
+          - domain
+          - domain-alias
     ResponseOfIdResponse:
       type: object
       properties:
@@ -346,40 +301,79 @@ components:
           type: array
           items:
             type: string
-    LandingPageDomain:
+    LandingPageRedirectRule:
+      type: object
+      required:
+      - id
+      - redirectFromUrl
+      - redirectToUrl
+      - hostname
+      - redirectFrom
+      - redirectTo
+      - createdAt
+      - updatedAt
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Internal id for landing page redirect rule
+        redirectFromUrl:
+          type: string
+          description: Redirect 'from' URL of the Landing Page. Combination of the hostname and redirectFrom landing page or path
+        redirectToUrl:
+          type: string
+          description: Redirect 'to' URL of the Landing Page. Could be a Marketo landing page or non-Marketo URL.
+        hostname:
+          type: string
+          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters.
+        redirectFrom:
+          description: JSON representation of redirect from landing page, with members 'type' which may be 'landingPageId' or 'path', and 'value'
+          $ref: '#/components/schemas/RedirectFrom'
+        redirectTo:
+          description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'
+          $ref: '#/components/schemas/RedirectTo'
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime the landing page redirect rule was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime the landing page redirect rule was most recently updated
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
+    CreateLandingPageRedirectRuleRequest:
+      type: object
       required:
       - hostname
-      - type
+      - redirectFrom
+      - redirectTo
+      properties:
+        hostname:
+          type: string
+          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
+        redirectFrom:
+          $ref: '#/components/schemas/RedirectFrom'
+          description: JSON representation of redirect from landing page, with members 'type' which may be 'landingPageId' or 'path', and 'value'
+        redirectTo:
+          $ref: '#/components/schemas/RedirectTo'
+          description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'
+    UpdateLandingPageRedirectRuleRequest:
       type: object
       properties:
         hostname:
           type: string
-          description: The hostname for the landing pages
-        type:
-          type: string
-          description: Specifies type of hostname
-          enum:
-          - domain
-          - domain-alias
-    IdResponse:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the asset
-          format: int32
-    Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-x-original-swagger-version: '2.0'
+          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
+        redirectFrom:
+          $ref: '#/components/schemas/RedirectFrom'
+          description: JSON representation of redirect from landing page, with members 'type' which may be 'landingPageId' or 'path', and 'value'
+        redirectTo:
+          $ref: '#/components/schemas/RedirectTo'
+          description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'

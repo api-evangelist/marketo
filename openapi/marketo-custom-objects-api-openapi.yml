@@ -602,16 +602,6 @@ components:
           description: List of attribute name-value pairs for the object.
           items:
             $ref: '#/components/schemas/CustomObject'
-    CustomObject:
-      type: object
-      description: Custom object record. Fields depend on the custom object schema definition.
-      additionalProperties: true
-      example:
-        email: brooklyn.parker@karnv.com
-        vin: 20UYA31581L000000
-        make: BMW
-        model: 3-Series 330i
-        year: 2003
     ErrorResponse:
       type: object
       description: Error response body returned for non-202 responses.
@@ -624,6 +614,71 @@ components:
           type: string
           description: Error message.
           example: Bad request
+    CustomObject:
+      type: object
+      description: Custom object record. Fields depend on the custom object schema definition.
+      additionalProperties: true
+      example:
+        email: brooklyn.parker@karnv.com
+        vin: 20UYA31581L000000
+        make: BMW
+        model: 3-Series 330i
+        year: 2003
+    CustomObjectTypeFieldRelatedTo:
+      type: object
+      required:
+      - name
+      - field
+      properties:
+        name:
+          type: string
+          description: Name of linkable object type
+        field:
+          type: string
+          description: Foreign field to which the parent is linked
+    ResponseOfObjectLinkableObject:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: List of permissible objects to use as custom object link field
+          items:
+            $ref: '#/components/schemas/ObjectLinkableObject'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
     ObjectMetaData:
       type: object
       required:
@@ -699,6 +754,16 @@ components:
           enum:
           - draft
           - approved
+    DeleteCustomObjectTypeFieldsRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of fields to delete from the custom object type
+          items:
+            $ref: '#/components/schemas/DeleteCustomObjectTypeField'
     DeleteCustomObjectRequest:
       type: object
       required:
@@ -712,26 +777,16 @@ components:
           description: List of input records
           items:
             $ref: '#/components/schemas/CustomObject_2'
-    SyncCustomObjectRequest:
+    AddCustomObjectTypeFieldsRequest:
       type: object
       required:
       - input
       properties:
-        action:
-          type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
         input:
           type: array
-          description: List of input records
+          description: List of fields to add to custom object type
           items:
-            $ref: '#/components/schemas/CustomObject_2'
+            $ref: '#/components/schemas/AddCustomObjectTypeField'
     ResponseOfCustomObject:
       type: object
       required:
@@ -770,248 +825,34 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ResponseOfObjectLinkableObject:
+    SyncCustomObjectTypeRequest:
       type: object
       required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: List of permissible objects to use as custom object link field
-          items:
-            $ref: '#/components/schemas/ObjectLinkableObject'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
-    RelatedObject:
-      type: object
-      required:
-      - field
-      - name
-      properties:
-        field:
-          type: string
-          description: Name of link field (within link object)
-        name:
-          type: string
-          description: Name of the link object
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    CustomObject_2:
-      type: object
-      required:
-      - marketoGUID
-      - seq
-      properties:
-        marketoGUID:
-          type: string
-          description: Unique GUID of the custom object records
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-    LookupCustomObjectRequest:
-      type: object
-      required:
-      - input
-      properties:
-        batchSize:
-          type: integer
-          format: int32
-          description: Maximum number of records to return in the response. Max and default is 300
-        fields:
-          type: array
-          description: 'List of fields to return. If not specified, will return the following fields: marketoGuid, dedupeFields, updatedAt, createdAt, filterType'
-          items:
-            type: string
-        filterType:
-          type: string
-          description: 'Field to search on. Valid values are: dedupeFields, idFields, and any field defined in searchableFields attribute of Describe endpoint. Default is dedupeFields'
-        input:
-          type: array
-          description: Search values when using a compound key. Each element must include each of the fields in the compound key. Compound keys are determined by the contents of "dedupeFields" in the Describe result for the object
-          items:
-            $ref: '#/components/schemas/CustomObject_2'
-        nextPageToken:
-          type: string
-          description: Paging token returned from a previous response
-    DeleteCustomObjectTypeField:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: API Name of custom object type field
-    CustomObjectTypeFieldRelatedTo:
-      type: object
-      required:
-      - name
-      - field
-      properties:
-        name:
-          type: string
-          description: Name of linkable object type
-        field:
-          type: string
-          description: Foreign field to which the parent is linked
-    ObjectField:
-      type: object
-      properties:
-        dataType:
-          type: string
-          description: Datatype of the field
-        displayName:
-          type: string
-          description: UI display-name of the field
-        length:
-          type: integer
-          format: int32
-          description: Max length of the field. Only applicable to text, string, and text area.
-        name:
-          type: string
-          description: Name of the field
-        updateable:
-          type: boolean
-          example: false
-          description: Whether the field is updateable
-        crmManaged:
-          type: boolean
-          example: false
-          description: Whether the field is managed by CRM (native sync)
-    ObjectLinkableObjectField:
-      type: object
-      required:
-      - name
+      - apiName
       - displayName
-      - dataType
       properties:
-        name:
+        action:
           type: string
-          description: Link field API name
+          description: Type of sync operation to perform. Default is createOrUpdate.
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
         displayName:
           type: string
-          description: Link field name
-        dataType:
+          description: UI display-name of the custom object type
+        apiName:
           type: string
-          description: Link field data type
-    ResponseOfCustomObjectType:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+          description: API name of the custom object type
+        pluralName:
           type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Empty array
-          items:
-            $ref: '#/components/schemas/Empty'
-        success:
+          description: UI plural-name of the custom object type
+        description:
+          type: string
+          description: Description of the custom object type
+        showInLeadDetail:
           type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    DeleteCustomObjectTypeFieldsRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of fields to delete from the custom object type
-          items:
-            $ref: '#/components/schemas/DeleteCustomObjectTypeField'
-    ResponseOfObjectDependentAssets:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: List of dependent assets for a custom object type
-          items:
-            $ref: '#/components/schemas/ObjectDependentAsset'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Whether to show custom object type in lead detail of UI. Default is false
     ResponseOfCustomObjectTypeFieldDataTypes:
       type: object
       required:
@@ -1043,62 +884,65 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
+    Error:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
         message:
           type: string
-          description: Message describing the warning
-    ObjectLinkableObject:
+          description: Message describing the cause of the error
+    ResponseOfCustomObjectType:
       type: object
       required:
-      - name
-      - displayName
-      - fields
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        name:
-          type: string
-          description: Link object API name
-        displayName:
-          type: string
-          description: Link object UI display-name
-        fields:
+        errors:
           type: array
-          description: List of fields available on the link object
+          description: Array of errors that occurred if the request was unsuccessful
           items:
-            $ref: '#/components/schemas/ObjectLinkableObjectField'
-    AddCustomObjectTypeField:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Empty array
+          items:
+            $ref: '#/components/schemas/Empty'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ObjectRelation:
       type: object
       required:
-      - name
-      - displayName
-      - dataType
+      - field
+      - relatedTo
+      - type
       properties:
-        name:
+        field:
           type: string
-          description: API Name of custom object field
-        displayName:
-          type: string
-          description: UI display-name of the custom object field
-        dataType:
-          type: string
-          description: Datatype of the custom object field
-        description:
-          type: string
-          description: Description of the custom object field
-        isDedupeField:
-          type: boolean
-          description: Set to true to enable field as unique identifier for deduplicating records. Default is false
+          description: API Name of link field
         relatedTo:
-          description: Define custom object link field
-          $ref: '#/components/schemas/CustomObjectTypeFieldRelatedTo'
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
+          type: string
+          description: Type of the relationship field
     UpdateCustomObjectTypeFieldRequest:
       type: object
       properties:
@@ -1120,22 +964,78 @@ components:
         relatedTo:
           description: Define custom object link field
           $ref: '#/components/schemas/CustomObjectTypeFieldRelatedTo'
-    ObjectRelation:
+    RelatedObject:
       type: object
       required:
       - field
-      - relatedTo
-      - type
+      - name
       properties:
         field:
           type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
+          description: Name of link field (within link object)
+        name:
           type: string
-          description: Type of the relationship field
+          description: Name of the link object
+    ObjectLinkableObject:
+      type: object
+      required:
+      - name
+      - displayName
+      - fields
+      properties:
+        name:
+          type: string
+          description: Link object API name
+        displayName:
+          type: string
+          description: Link object UI display-name
+        fields:
+          type: array
+          description: List of fields available on the link object
+          items:
+            $ref: '#/components/schemas/ObjectLinkableObjectField'
+    ObjectDependentAsset:
+      type: object
+      required:
+      - assetType
+      - assetId
+      - assetName
+      properties:
+        assetType:
+          type: string
+          description: Type of asset
+        assetId:
+          type: integer
+          format: int32
+          description: ID of asset
+        assetName:
+          type: string
+          description: Name of asset
+        usedFields:
+          type: array
+          description: List of associated fields
+          items:
+            type: string
+    SyncCustomObjectRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/CustomObject_2'
     ResponseOfObjectMetaData:
       type: object
       required:
@@ -1174,67 +1074,167 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    SyncCustomObjectTypeRequest:
+    Warning:
       type: object
       required:
-      - apiName
-      - displayName
+      - code
+      - message
       properties:
-        action:
-          type: string
-          description: Type of sync operation to perform. Default is createOrUpdate.
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        displayName:
-          type: string
-          description: UI display-name of the custom object type
-        apiName:
-          type: string
-          description: API name of the custom object type
-        pluralName:
-          type: string
-          description: UI plural-name of the custom object type
-        description:
-          type: string
-          description: Description of the custom object type
-        showInLeadDetail:
-          type: boolean
-          description: Whether to show custom object type in lead detail of UI. Default is false
-    Empty: {}
-    ObjectDependentAsset:
-      type: object
-      required:
-      - assetType
-      - assetId
-      - assetName
-      properties:
-        assetType:
-          type: string
-          description: Type of asset
-        assetId:
+        code:
           type: integer
           format: int32
-          description: ID of asset
-        assetName:
+          description: Integer code of the warning
+        message:
           type: string
-          description: Name of asset
-        usedFields:
+          description: Message describing the warning
+    AddCustomObjectTypeField:
+      type: object
+      required:
+      - name
+      - displayName
+      - dataType
+      properties:
+        name:
+          type: string
+          description: API Name of custom object field
+        displayName:
+          type: string
+          description: UI display-name of the custom object field
+        dataType:
+          type: string
+          description: Datatype of the custom object field
+        description:
+          type: string
+          description: Description of the custom object field
+        isDedupeField:
+          type: boolean
+          description: Set to true to enable field as unique identifier for deduplicating records. Default is false
+        relatedTo:
+          description: Define custom object link field
+          $ref: '#/components/schemas/CustomObjectTypeFieldRelatedTo'
+    ResponseOfObjectDependentAssets:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
           type: array
-          description: List of associated fields
+          description: Array of errors that occurred if the request was unsuccessful
           items:
-            type: string
-    AddCustomObjectTypeFieldsRequest:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: List of dependent assets for a custom object type
+          items:
+            $ref: '#/components/schemas/ObjectDependentAsset'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    LookupCustomObjectRequest:
       type: object
       required:
       - input
       properties:
+        batchSize:
+          type: integer
+          format: int32
+          description: Maximum number of records to return in the response. Max and default is 300
+        fields:
+          type: array
+          description: 'List of fields to return. If not specified, will return the following fields: marketoGuid, dedupeFields, updatedAt, createdAt, filterType'
+          items:
+            type: string
+        filterType:
+          type: string
+          description: 'Field to search on. Valid values are: dedupeFields, idFields, and any field defined in searchableFields attribute of Describe endpoint. Default is dedupeFields'
         input:
           type: array
-          description: List of fields to add to custom object type
+          description: Search values when using a compound key. Each element must include each of the fields in the compound key. Compound keys are determined by the contents of "dedupeFields" in the Describe result for the object
           items:
-            $ref: '#/components/schemas/AddCustomObjectTypeField'
+            $ref: '#/components/schemas/CustomObject_2'
+        nextPageToken:
+          type: string
+          description: Paging token returned from a previous response
+    DeleteCustomObjectTypeField:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: API Name of custom object type field
+    Empty: {}
+    CustomObject_2:
+      type: object
+      required:
+      - marketoGUID
+      - seq
+      properties:
+        marketoGUID:
+          type: string
+          description: Unique GUID of the custom object records
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+    ObjectLinkableObjectField:
+      type: object
+      required:
+      - name
+      - displayName
+      - dataType
+      properties:
+        name:
+          type: string
+          description: Link field API name
+        displayName:
+          type: string
+          description: Link field name
+        dataType:
+          type: string
+          description: Link field data type
+    ObjectField:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Datatype of the field
+        displayName:
+          type: string
+          description: UI display-name of the field
+        length:
+          type: integer
+          format: int32
+          description: Max length of the field. Only applicable to text, string, and text area.
+        name:
+          type: string
+          description: Name of the field
+        updateable:
+          type: boolean
+          example: false
+          description: Whether the field is updateable
+        crmManaged:
+          type: boolean
+          example: false
+          description: Whether the field is managed by CRM (native sync)
 x-refined-from:
 - marketo-data-ingestion-openapi-original.json
 - marketo-lead-database-openapi-original.json

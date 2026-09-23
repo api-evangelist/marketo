@@ -1,36 +1,27 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Marketo Engage Rest Approve Smart  Campaigns API
-  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Smart Campaigns API
   termsOfService: https://www.adobe.com/legal.html
   contact:
     name: Adobe Developer Relations
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
-    email: developerfeedback@marketo.com
+    email: ''
   license:
     name: API License Agreement
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
-  version: '1.0'
 servers:
-- url: https://{munchkinId}.mktorest.com
-  description: >-
-    Per-subscription Marketo Engage REST host. The Munchkin ID is unique to each
-    subscription and is read from Admin > Integration > Web Services. Adobe's
-    published specification carries the non-routable placeholder
-    https://localhost:8080/; corrected here from
-    https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
-  variables:
-    munchkinId:
-      default: 000-AAA-000
-      description: The subscription's Munchkin ID / account ID, e.g. 284-RPR-133.
+- url: https://localhost:8080/
 tags:
-- name: Smart  Campaigns
+- name: Smart Campaigns
+  description: Smart Campaign Controller
 paths:
   /rest/asset/v1/smartCampaign/{id}.json:
     get:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Get Smart Campaign by Id
+      - Smart Campaigns
+      summary: Get Smart Campaign by Id
       description: 'Returns the smart campaign for the given id. Required Permissions: Read-Only Assets, Read-Write Assets'
       operationId: getSmartCampaignByIdUsingGET
       parameters:
@@ -50,8 +41,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Update Smart Campaign
+      - Smart Campaigns
+      summary: Update Smart Campaign
       description: 'Update the smart campaign for the given id. Required Permissions: Read-Write Assets'
       operationId: updateSmartCampaignUsingPOST
       parameters:
@@ -62,13 +53,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: updateSmartCampaignRequest
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateSmartCampaignRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -76,12 +60,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
-      x-codegen-request-body-name: updateSmartCampaignRequest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSmartCampaignRequest'
+        description: updateSmartCampaignRequest
+        required: true
   /rest/asset/v1/smartCampaign/byName.json:
     get:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Get Smart Campaign by Name
+      - Smart Campaigns
+      summary: Get Smart Campaign by Name
       description: 'Returns the smart campaign for the given name. Required Permissions: Read-Only Assets, Read-Write Assets'
       operationId: getSmartCampaignByNameUsingGET
       parameters:
@@ -101,8 +91,8 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/smartList.json:
     get:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Get Smart List by Smart Campaign Id
+      - Smart Campaigns
+      summary: Get Smart List by Smart Campaign Id
       description: 'Retrieves a Smart List record by its Smart Campaign id. Required Permissions: Read-Asset or Read-Write Asset'
       operationId: getSmartListBySmartCampaignIdUsingGET
       parameters:
@@ -116,6 +106,7 @@ paths:
       - name: includeRules
         in: query
         description: Set true to populate smart list rules. Default false
+        required: false
         schema:
           type: boolean
       responses:
@@ -128,41 +119,47 @@ paths:
   /rest/asset/v1/smartCampaigns.json:
     get:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Get Smart Campaigns
+      - Smart Campaigns
+      summary: Get Smart Campaigns
       description: 'Retrieves all smart campaigns. Required Permissions: Read-Only Assets, Read-Write Assets'
       operationId: getAllSmartCampaignsGET
       parameters:
       - name: maxReturn
         in: query
         description: Maximum number of smart campaigns to return. Max 200, default 20
+        required: false
         schema:
           type: integer
           format: int32
       - name: offset
         in: query
         description: Integer offset for paging
+        required: false
         schema:
           type: integer
           format: int32
       - name: folder
         in: query
         description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        required: false
         schema:
           type: string
       - name: earliestUpdatedAt
         in: query
         description: Exclude smart campaigns prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        required: false
         schema:
           type: string
       - name: latestUpdatedAt
         in: query
         description: Exclude smart campaigns after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        required: false
         schema:
           type: string
       - name: isActive
         in: query
         description: Set true to return only active campaigns. Default false
+        required: false
         schema:
           type: boolean
       responses:
@@ -174,17 +171,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Create Smart Campaign
+      - Smart Campaigns
+      summary: Create Smart Campaign
       description: 'Creates a new smart campaign. Required Permissions: Read-Write Assets'
       operationId: createSmartCampaignUsingPOST
-      requestBody:
-        description: createSmartCampaignRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CreateSmartCampaignRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -192,12 +182,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
-      x-codegen-request-body-name: createSmartCampaignRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateSmartCampaignRequest'
+        description: createSmartCampaignRequest
+        required: true
   /rest/asset/v1/smartCampaign/{id}/activate.json:
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Activate Smart Campaign
+      - Smart Campaigns
+      summary: Activate Smart Campaign
       description: 'Activates a trigger smart campaign. Required Permissions: Activate Campaign'
       operationId: activateSmartCampaignUsingPOST
       parameters:
@@ -218,8 +214,8 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/deactivate.json:
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Deactivate Smart Campaign
+      - Smart Campaigns
+      summary: Deactivate Smart Campaign
       description: 'Deactivates a trigger smart campaign. Required Permissions: Deactivate Campaign'
       operationId: deactivateSmartCampaignUsingPOST
       parameters:
@@ -240,8 +236,8 @@ paths:
   /rest/asset/v1/smartCampaign/{id}/clone.json:
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Clone Smart Campaign
+      - Smart Campaigns
+      summary: Clone Smart Campaign
       description: 'Clones a smart campaign. Required Permissions: Read-Write Assets'
       operationId: cloneSmartCampaignUsingPOST
       parameters:
@@ -252,13 +248,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: cloneSmartCampaignRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CloneSmartCampaignRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -266,12 +255,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfSmartCampaignResponse'
-      x-codegen-request-body-name: cloneSmartCampaignRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CloneSmartCampaignRequest'
+        description: cloneSmartCampaignRequest
+        required: true
   /rest/asset/v1/smartCampaign/{id}/delete.json:
     post:
       tags:
-      - Smart  Campaigns
-      summary: Marketo Delete Smart Campaign
+      - Smart Campaigns
+      summary: Delete Smart Campaign
       description: 'Deletes a smart campaign. Required Permissions: Read-Write Assets'
       operationId: deleteSmartCampaignUsingPOST
       parameters:
@@ -292,64 +287,35 @@ paths:
 components:
   schemas:
     CreateSmartCampaignRequest:
+      type: object
       required:
       - folder
       - name
-      type: object
       properties:
         description:
           type: string
           description: Description of the smart campaign
         folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
           $ref: '#/components/schemas/Folder'
         name:
           type: string
           description: Name of the smart campaign
-    Folder:
-      required:
-      - id
-      - type
+    CloneSmartCampaignRequest:
       type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the folder
-          format: int32
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    SmartListConditions:
       required:
-      - activityAttributeId
-      - activityAttributeName
-      - isPrimary
-      - operator
-      - values
-      type: object
+      - folder
+      - name
       properties:
-        activityAttributeId:
-          type: integer
-          description: Id of the activity attribute
-          format: int32
-        activityAttributeName:
+        description:
           type: string
-          description: Name of activity attribute
-        operator:
+          description: Description of the smart campaign
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
           type: string
-          description: Value of operator
-        values:
-          type: array
-          description: List of values
-          items:
-            type: string
-        isPrimary:
-          type: boolean
-          description: Whether the condition is primary or not (first condition of the smart list)
-      description: JSON representation of smart list conditions
+          description: Name of the smart campaign
     ResponseOfSmartCampaignResponse:
       type: object
       properties:
@@ -369,127 +335,18 @@ components:
           type: array
           items:
             type: string
-    CloneSmartCampaignRequest:
+    Error:
+      type: object
       required:
-      - folder
-      - name
-      type: object
+      - code
+      - message
       properties:
-        description:
+        code:
           type: string
-          description: Description of the smart campaign
-        folder:
-          $ref: '#/components/schemas/Folder'
-        name:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Name of the smart campaign
-    UpdateSmartCampaignRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the smart campaign
-        name:
-          type: string
-          description: Name of the smart campaign
-    SmartListRules:
-      required:
-      - filterMatchType
-      - filters
-      - triggers
-      type: object
-      properties:
-        filterMatchType:
-          type: string
-          description: Smart list filter match type (rule logic)
-          enum:
-          - All
-          - Any
-          - Advanced
-        triggers:
-          type: array
-          description: List of smart list triggers
-          items:
-            type: string
-        filters:
-          type: array
-          description: List of smart list filters
-          items:
-            $ref: '#/components/schemas/SmartListFilters'
-      description: JSON representation of smart list rules
-    SmartListFilters:
-      required:
-      - conditions
-      - id
-      - name
-      - operator
-      - ruleType
-      - ruleTypeId
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the filter
-          format: int32
-        name:
-          type: string
-          description: Name of filter
-        ruleTypeId:
-          type: integer
-          description: Id of the rule type
-          format: int32
-        ruleType:
-          type: string
-          description: Name of rule type
-        operator:
-          type: string
-          description: Name of operator
-        conditions:
-          type: array
-          description: List of smart list conditions
-          items:
-            $ref: '#/components/schemas/SmartListConditions'
-      description: JSON representation of smart list filters
-    SmartListResponseWithRules:
-      required:
-      - createdAt
-      - description
-      - folder
-      - id
-      - name
-      - updatedAt
-      - url
-      - workspace
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the smart list
-          format: int64
-        name:
-          type: string
-          description: Name of the smart list
-        description:
-          type: string
-          description: Description of the smart list
-        createdAt:
-          type: string
-          description: Datetime the smart list was created
-          format: date-time
-        updatedAt:
-          type: string
-          description: Datetime the smart list was most recently updated
-          format: date-time
-        url:
-          type: string
-          description: Url of the smart list in the Marketo UI
-        folder:
-          $ref: '#/components/schemas/Folder'
-        workspace:
-          type: string
-          description: Name of the workspace
-        rules:
-          $ref: '#/components/schemas/SmartListRules'
+          description: Message describing the cause of the error
     ResponseOfIdResponse:
       type: object
       properties:
@@ -510,33 +367,33 @@ components:
           items:
             type: string
     SmartCampaignResponse:
+      type: object
       required:
-      - createdAt
+      - id
+      - name
       - description
+      - type
+      - isSystem
+      - isActive
+      - isRequestable
+      - recurrence
+      - qualificationRuleType
+      - qualificationRuleInterval
+      - qualificationRuleUnit
+      - maxMembers
+      - isCommunicationLimitEnabled
+      - smartListId
       - flowId
       - folder
-      - id
-      - isActive
-      - isCommunicationLimitEnabled
-      - isRequestable
-      - isSystem
-      - maxMembers
-      - name
-      - qualificationRuleInterval
-      - qualificationRuleType
-      - qualificationRuleUnit
-      - recurrence
-      - smartListId
-      - status
-      - type
+      - createdAt
       - updatedAt
       - workspace
-      type: object
+      - status
       properties:
         id:
           type: integer
-          description: Id of the smart campaign (system managed)
           format: int32
+          description: Id of the smart campaign (system managed)
         name:
           type: string
           description: Name of the smart campaign
@@ -560,6 +417,7 @@ components:
           type: boolean
           description: Whether smart campaign is requestable (is active and contains 'Campaign is Requested' trigger with Source of 'Web Service API'). Defaults to false
         recurrence:
+          description: Recurrence schedule of batch smart campaign
           $ref: '#/components/schemas/Recurrence'
         qualificationRuleType:
           type: string
@@ -581,33 +439,34 @@ components:
           - month
         maxMembers:
           type: integer
-          description: Smart campaign membership limit
           format: int32
+          description: Smart campaign membership limit
         isCommunicationLimitEnabled:
           type: boolean
           description: Whether smart campaign communication limit is enabled (i.e. block non-operational emails). Defaults to false
         smartListId:
           type: integer
-          description: Id of the smart campaign's child smart list
           format: int32
+          description: Id of the smart campaign's child smart list
         flowId:
           type: integer
-          description: Id of the smart campaign's child flow
           format: int32
+          description: Id of the smart campaign's child flow
         parentProgramId:
           type: integer
-          description: Parent program Id. Present if smart campaign is under program or nested folder
           format: int32
+          description: Parent program Id. Present if smart campaign is under program or nested folder
         folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
           $ref: '#/components/schemas/Folder'
         createdAt:
           type: string
-          description: Datetime when the smart campaign was created
           format: date-time
+          description: Datetime when the smart campaign was created
         updatedAt:
           type: string
-          description: Datetime when the smart campaign was most recently updated
           format: date-time
+          description: Datetime when the smart campaign was most recently updated
         workspace:
           type: string
           description: Name of the smart campaign workspace
@@ -625,87 +484,6 @@ components:
           - Active
           - Requested
           - Never Run
-    IdResponse:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the asset
-          format: int32
-    Recurrence:
-      required:
-      - dayOfMonth
-      - dayOfWeek
-      - endAt
-      - interval
-      - intervalType
-      - startAt
-      - weekOfMonth
-      - weekdayMask
-      - weekdayOnly
-      type: object
-      properties:
-        startAt:
-          type: string
-          description: Datetime of the first scheduled campaign to run. Required if setting recurrence. Not required to create a smart campaign that has no recurrence
-          format: date-time
-        endAt:
-          type: string
-          description: Datetime after which no further runs will be automatically scheduled
-          format: date-time
-        intervalType:
-          type: string
-          description: Recurrence interval. Not required to create a smart campaign that has no recurrence
-          enum:
-          - Daily
-          - Weekly
-          - Monthly
-        interval:
-          type: integer
-          description: Number of interval units between recurrences
-          format: int32
-        weekdayOnly:
-          type: boolean
-          description: Only run smart campaign on weekdays. May only be set if intervalType is 'Daily'. Defaults to false
-        weekdayMask:
-          type: array
-          description: String array of empty or one or more of 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'. May only be set if intervalType is 'Weekly'
-          items:
-            type: string
-        dayOfMonth:
-          type: integer
-          description: Day of the month to recur. Permissible range 1-31. May only be set if intervalType is 'Monthly' and dayOfWeek and weekOfMonth are unset.
-          format: int32
-        dayOfWeek:
-          type: string
-          description: Day of the week to recur. May only be set if dayOfMonth is not set, and weekOfMonth is set
-          format: int32
-          enum:
-          - Monday
-          - Tuesday
-          - Wednesday
-          - Thursday
-          - Friday
-          - Saturday
-          - Sunday
-        weekOfMonth:
-          type: integer
-          description: Week of the month to recur. Permissible range 1-4. May only be set if dayOfMonth is not set, and dayOfWeek is set
-          format: int32
-    Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     ResponseOfSmartListResponseWithRules:
       type: object
       properties:
@@ -725,4 +503,226 @@ components:
           type: array
           items:
             type: string
-x-original-swagger-version: '2.0'
+    SmartListRules:
+      type: object
+      required:
+      - filterMatchType
+      - triggers
+      - filters
+      description: JSON representation of smart list rules
+      properties:
+        filterMatchType:
+          type: string
+          description: Smart list filter match type (rule logic)
+          enum:
+          - All
+          - Any
+          - Advanced
+        triggers:
+          type: array
+          description: List of smart list triggers
+          items:
+            type: string
+        filters:
+          type: array
+          description: List of smart list filters
+          items:
+            $ref: '#/components/schemas/SmartListFilters'
+    UpdateSmartCampaignRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the smart campaign
+        name:
+          type: string
+          description: Name of the smart campaign
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    SmartListFilters:
+      type: object
+      required:
+      - id
+      - name
+      - ruleTypeId
+      - ruleType
+      - operator
+      - conditions
+      description: JSON representation of smart list filters
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the filter
+        name:
+          type: string
+          description: Name of filter
+        ruleTypeId:
+          type: integer
+          format: int32
+          description: Id of the rule type
+        ruleType:
+          type: string
+          description: Name of rule type
+        operator:
+          type: string
+          description: Name of operator
+        conditions:
+          type: array
+          description: List of smart list conditions
+          items:
+            $ref: '#/components/schemas/SmartListConditions'
+    Recurrence:
+      type: object
+      required:
+      - startAt
+      - endAt
+      - intervalType
+      - interval
+      - weekdayOnly
+      - weekdayMask
+      - dayOfMonth
+      - dayOfWeek
+      - weekOfMonth
+      properties:
+        startAt:
+          type: string
+          format: date-time
+          description: Datetime of the first scheduled campaign to run. Required if setting recurrence. Not required to create a smart campaign that has no recurrence
+        endAt:
+          type: string
+          format: date-time
+          description: Datetime after which no further runs will be automatically scheduled
+        intervalType:
+          type: string
+          description: Recurrence interval. Not required to create a smart campaign that has no recurrence
+          enum:
+          - Daily
+          - Weekly
+          - Monthly
+        interval:
+          type: integer
+          format: int32
+          description: Number of interval units between recurrences
+        weekdayOnly:
+          type: boolean
+          description: Only run smart campaign on weekdays. May only be set if intervalType is 'Daily'. Defaults to false
+        weekdayMask:
+          type: array
+          description: String array of empty or one or more of 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'. May only be set if intervalType is 'Weekly'
+          items:
+            type: string
+        dayOfMonth:
+          type: integer
+          format: int32
+          description: Day of the month to recur. Permissible range 1-31. May only be set if intervalType is 'Monthly' and dayOfWeek and weekOfMonth are unset.
+        dayOfWeek:
+          type: string
+          format: int32
+          description: Day of the week to recur. May only be set if dayOfMonth is not set, and weekOfMonth is set
+          enum:
+          - Monday
+          - Tuesday
+          - Wednesday
+          - Thursday
+          - Friday
+          - Saturday
+          - Sunday
+        weekOfMonth:
+          type: integer
+          format: int32
+          description: Week of the month to recur. Permissible range 1-4. May only be set if dayOfMonth is not set, and dayOfWeek is set
+    SmartListResponseWithRules:
+      type: object
+      required:
+      - id
+      - name
+      - description
+      - createdAt
+      - updatedAt
+      - url
+      - folder
+      - workspace
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Id of the smart list
+        name:
+          type: string
+          description: Name of the smart list
+        description:
+          type: string
+          description: Description of the smart list
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime the smart list was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime the smart list was most recently updated
+        url:
+          type: string
+          description: Url of the smart list in the Marketo UI
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+        rules:
+          description: Rules contained in the smart list
+          $ref: '#/components/schemas/SmartListRules'
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
+    SmartListConditions:
+      type: object
+      required:
+      - activityAttributeId
+      - activityAttributeName
+      - operator
+      - values
+      - isPrimary
+      description: JSON representation of smart list conditions
+      properties:
+        activityAttributeId:
+          type: integer
+          format: int32
+          description: Id of the activity attribute
+        activityAttributeName:
+          type: string
+          description: Name of activity attribute
+        operator:
+          type: string
+          description: Value of operator
+        values:
+          type: array
+          description: List of values
+          items:
+            type: string
+        isPrimary:
+          type: boolean
+          description: Whether the condition is primary or not (first condition of the smart list)

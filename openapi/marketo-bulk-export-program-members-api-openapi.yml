@@ -129,7 +129,15 @@ paths:
       tags:
       - Bulk Export Program Members
       summary: Get Export Program Member File
-      description: 'Returns the file content of an export job. The export job must be in "Completed" state. Use Get Export Program Member Job Status endpoint to retrieve status of export job. Required Permissions: Read-Only Lead<br><br>The file format is specified by calling the Create Export Program Member Job endpoint. The following is an example of the default file format ("CSV").<br><br><code>firstName,lastName,email</code><br><code>Marvin,Gaye,marvin.gaye@motown.com</code>'
+      description: 'Returns the file content of an export job. The export job must be in "Completed" state. Use Get Export Program Member Job Status endpoint to retrieve status of export job. Required Permissions: Read-Only Lead
+
+
+        The file format is specified by calling the Create Export Program Member Job endpoint. The following is an example of the default file format ("CSV").
+
+
+        firstName,lastName,email
+
+        Marvin,Gaye,marvin.gaye@motown.com'
       operationId: getExportProgramMembersFileUsingGET
       parameters:
       - name: exportId
@@ -174,18 +182,6 @@ paths:
                 $ref: '#/components/schemas/ResponseOfExportResponse'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     ResponseOfExportResponseWithToken:
       type: object
       required:
@@ -220,80 +216,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ExportProgramMemberFilter:
-      type: object
-      properties:
-        programId:
-          type: integer
-          format: int32
-          description: Id of program to retrieve members from. Cannot be used in combination with "programIds" filter
-        programIds:
-          type: array
-          description: Array of program ids to retrieve members from. Cannot be used in combination with "programId" filter
-          items:
-            type: integer
-            format: int32
-        isExhausted:
-          type: boolean
-          description: Filter program membership records for people who have exhausted content
-        nurtureCadence:
-          type: string
-          description: Filter program membership records for a given nurture cadence
-          enum:
-          - paused
-          - normal
-        statusNames:
-          type: array
-          description: Array of program member status names. Can be default and/or user-defined. Multiple status names are ORed together.
-          items:
-            type: string
-        updatedAt:
-          description: Date range to filter program members on
-          $ref: '#/components/schemas/DateRange'
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
     ObservableOfInputStreamRangeContent:
       type: object
     ColumnHeaderNames:
@@ -308,15 +230,6 @@ components:
         value:
           type: string
           description: Value for header field
-    DateRange:
-      type: object
-      properties:
-        endAt:
-          type: string
-          description: End of date range filter (ISO 8601-format)
-        startAt:
-          type: string
-          description: Start of date range filter (ISO-8601 format)
     ExportResponse:
       type: object
       required:
@@ -363,6 +276,79 @@ components:
           type: string
           description: Status of the export job ("Created","Queued","Processing","Canceled","Completed","Failed")
       description: Response containing export job status information
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ExportProgramMemberFilter:
+      type: object
+      properties:
+        programId:
+          type: integer
+          format: int32
+          description: Id of program to retrieve members from. Cannot be used in combination with "programIds" filter
+        programIds:
+          type: array
+          description: Array of program ids to retrieve members from. Cannot be used in combination with "programId" filter
+          items:
+            type: integer
+            format: int32
+        isExhausted:
+          type: boolean
+          description: Filter program membership records for people who have exhausted content
+        nurtureCadence:
+          type: string
+          description: Filter program membership records for a given nurture cadence
+          enum:
+          - paused
+          - normal
+        statusNames:
+          type: array
+          description: Array of program member status names. Can be default and/or user-defined. Multiple status names are ORed together.
+          items:
+            type: string
+        updatedAt:
+          description: Date range to filter program members on
+          $ref: '#/components/schemas/DateRange'
     ExportProgramMemberRequest:
       type: object
       required:
@@ -383,3 +369,25 @@ components:
         format:
           type: string
           description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    DateRange:
+      type: object
+      properties:
+        endAt:
+          type: string
+          description: End of date range filter (ISO 8601-format)
+        startAt:
+          type: string
+          description: Start of date range filter (ISO-8601 format)

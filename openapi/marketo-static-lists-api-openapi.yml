@@ -1,36 +1,27 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Marketo Engage Rest Approve Static  Lists API
-  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
-  termsOfService: https://www.adobe.com/legal.html
+  title: Marketo Static Lists API
+  version: '1.0'
   contact:
     name: Adobe Developer Relations
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
-    email: developerfeedback@marketo.com
+    email: ''
   license:
     name: API License Agreement
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
-  version: '1.0'
+  termsOfService: https://www.adobe.com/legal.html
+  description: 'Operations tagged Static Lists across 2 of this provider''s published API definitions: marketo-asset-openapi-original.json, marketo-lead-database-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
-- url: https://{munchkinId}.mktorest.com
-  description: >-
-    Per-subscription Marketo Engage REST host. The Munchkin ID is unique to each
-    subscription and is read from Admin > Integration > Web Services. Adobe's
-    published specification carries the non-routable placeholder
-    https://localhost:8080/; corrected here from
-    https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
-  variables:
-    munchkinId:
-      default: 000-AAA-000
-      description: The subscription's Munchkin ID / account ID, e.g. 284-RPR-133.
+- url: https://localhost:8080/
 tags:
-- name: Static  Lists
+- name: Static Lists
+  description: Static List Controller
 paths:
   /rest/asset/v1/staticList/{id}.json:
     get:
       tags:
-      - Static  Lists
-      summary: Marketo Get Static List by Id
+      - Static Lists
+      summary: Get Static List by Id
       description: 'Retrieves a Static List record by its id. Required Permissions: Read-Asset or Read-Write Asset'
       operationId: getStaticListByIdUsingGET
       parameters:
@@ -50,8 +41,8 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-      - Static  Lists
-      summary: Marketo Update Static List Metadata
+      - Static Lists
+      summary: Update Static List Metadata
       description: 'Updates the metadata of a static list asset. Required Permissions: Read-Write Assets'
       operationId: updateStaticListUsingPOST
       parameters:
@@ -62,13 +53,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: updateStaticListRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/UpdateStaticListRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -76,40 +60,53 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
-      x-codegen-request-body-name: updateStaticListRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/UpdateStaticListRequest'
+        description: updateStaticListRequest
+        required: true
+    servers:
+    - url: https://localhost:8080/
   /rest/asset/v1/staticLists.json:
     get:
       tags:
-      - Static  Lists
-      summary: Marketo Get Static Lists
+      - Static Lists
+      summary: Get Static Lists
       description: 'Retrieves a list of Static List records. Required Permissions: Read-Asset or Read-Write Asset'
       operationId: getStaticListsUsingGET
       parameters:
       - name: folder
         in: query
         description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        required: false
         schema:
           type: string
       - name: offset
         in: query
         description: Integer offset for paging
+        required: false
         schema:
           type: integer
           format: int32
       - name: maxReturn
         in: query
         description: Maximum number of static lists to return. Max 200, default 20.
+        required: false
         schema:
           type: integer
           format: int32
       - name: earliestUpdatedAt
         in: query
         description: Exclude static lists prior to this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        required: false
         schema:
           type: string
       - name: latestUpdatedAt
         in: query
         description: Exclude static lists after this date. Must be valid ISO-8601 string. See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        required: false
         schema:
           type: string
       responses:
@@ -121,17 +118,10 @@ paths:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
     post:
       tags:
-      - Static  Lists
-      summary: Marketo Create Static List
+      - Static Lists
+      summary: Create Static List
       description: 'Creates a new Static List. Required Permissions: Read-Write Assets'
       operationId: createStaticListUsingPOST
-      requestBody:
-        description: createStaticListRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CreateStaticListRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -139,12 +129,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfStaticListResponse'
-      x-codegen-request-body-name: createStaticListRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateStaticListRequest'
+        description: createStaticListRequest
+        required: true
+    servers:
+    - url: https://localhost:8080/
+  /rest/asset/v1/staticList/byName.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Get Static List by Name
+      description: 'Retrieves a Static List record by its name. Required Permissions: Read-Asset or Read-Write Asset'
+      operationId: getStaticListByNameUsingGET
+      parameters:
+      - name: name
+        in: query
+        description: Name of static list to retrieve
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticListResponse'
+    servers:
+    - url: https://localhost:8080/
   /rest/asset/v1/staticList/{id}/delete.json:
     post:
       tags:
-      - Static  Lists
-      summary: Marketo Delete Static List
+      - Static Lists
+      summary: Delete Static List
       description: 'Deletes the designated Static List. Required Permissions: Read-Write Asset'
       operationId: deleteStaticListByIdUsingPOST
       parameters:
@@ -162,65 +183,332 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfIdResponse'
+    servers:
+    - url: https://localhost:8080/
+  /rest/v1/list/{listId}/leads.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Get Leads By List Id
+      description: 'Retrieves person records which are members of the given static list. Required Permissions: Read-Only Lead, Read-Write Lead'
+      operationId: getLeadsByListIdUsingGET
+      parameters:
+      - name: listId
+        in: path
+        description: Id of the static list to retrieve records from
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fields
+        in: query
+        description: Comma-separated list of lead fields to return for each record. If unset will return email, updatedAt, createdAt, lastName, firstName and id
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: batchSize
+        in: query
+        description: The batch size to return. The max and default value is 300.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nextPageToken
+        in: query
+        description: A token will be returned by this endpoint if the result set is greater than the batch size and can be passed in a subsequent call through this parameter. See Paging Tokens for more info.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLeadByListId'
+    servers:
+    - url: https://localhost:8080/
+  /rest/v1/lists.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Get Lists
+      description: 'Returns a set of static list records based on given filter parameters. Required Permissions: Read-Only Lead, Read-Write Lead'
+      operationId: getListsUsingGET
+      parameters:
+      - name: id
+        in: query
+        description: Comma-separated list of static list ids to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      - name: name
+        in: query
+        description: Comma-separated list of static list names to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: programName
+        in: query
+        description: Comma-separated list of program names. If set will return all static lists that are children of the given programs
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: workspaceName
+        in: query
+        description: Comma-separated list of workspace names. If set will return all static lists that are children of the given workspaces
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: batchSize
+        in: query
+        description: The batch size to return. The max and default value is 300.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nextPageToken
+        in: query
+        description: A token will be returned by this endpoint if the result set is greater than the batch size and can be passed in a subsequent call through this parameter. See Paging Tokens for more info.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticList'
+    servers:
+    - url: https://localhost:8080/
+  /rest/v1/lists/{listId}.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Get List by Id
+      description: 'Returns a list record by its id. Required Permissions: Read-Only Lead, Read-Write Lead'
+      operationId: getListByIdUsingGET
+      parameters:
+      - name: listId
+        in: path
+        description: Id of the static list to retrieve records from
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfStaticList'
+    servers:
+    - url: https://localhost:8080/
+  /rest/v1/lists/{listId}/leads.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Get Leads By List Id
+      description: 'Retrieves person records which are members of the given static list. Required Permissions: Read-Only Lead, Read-Write Lead'
+      operationId: getLeadsByListIdUsingGET_1
+      parameters:
+      - name: listId
+        in: path
+        description: Id of the static list to retrieve records from
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: fields
+        in: query
+        description: Comma-separated list of lead fields to return for each record. If unset will return email, updatedAt, createdAt, lastName, firstName and id
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: string
+      - name: batchSize
+        in: query
+        description: The batch size to return. The max and default value is 300.
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: nextPageToken
+        in: query
+        description: A token will be returned by this endpoint if the result set is greater than the batch size and can be passed in a subsequent call through this parameter. See Paging Tokens for more info.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfLead'
+    post:
+      tags:
+      - Static Lists
+      summary: Add to List
+      description: 'Adds a given set of person records to a target static list. There is a limit of 300 lead ids per request. Required Permissions: Read-Write Lead'
+      operationId: addLeadsToListUsingPOST
+      parameters:
+      - name: listId
+        in: path
+        description: Id of target list
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: id
+        in: query
+        description: Comma-separated list of lead ids to add to the list
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfListOperationOutputData'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOperationRequest'
+        description: Optional JSON request body for submitting leads
+    delete:
+      tags:
+      - Static Lists
+      summary: Remove from List
+      description: 'Removes a given set of person records from a target static list. Required Permissions: Read-Write Lead'
+      operationId: removeLeadsFromListUsingDELETE
+      parameters:
+      - name: listId
+        in: path
+        description: Id of static list to remove leads from
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: id
+        in: query
+        description: id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfListOperationOutputData'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOperationRequest'
+        description: listOperationRequest
+        required: true
+    servers:
+    - url: https://localhost:8080/
+  /rest/v1/lists/{listId}/leads/ismember.json:
+    get:
+      tags:
+      - Static Lists
+      summary: Member of List
+      description: 'Checks if leads are members of a given static list. Required Permissions: Read-Write Lead'
+      operationId: areLeadsMemberOfListUsingGET
+      parameters:
+      - name: listId
+        in: path
+        description: Id of the static list to check against
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: id
+        in: query
+        description: Comma-separated list of lead ids to check
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: array
+          items:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseOfListOperationOutputData'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ListOperationRequest'
+        description: Optional JSON request body
+    servers:
+    - url: https://localhost:8080/
 components:
   schemas:
-    Folder:
-      required:
-      - id
-      - type
+    CreateStaticListRequest:
       type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the folder
-          format: int32
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    StaticListResponse:
       required:
-      - createdAt
-      - description
-      - folder
-      - id
       - name
-      - updatedAt
-      - url
-      - workspace
-      type: object
+      - folder
       properties:
-        id:
-          type: integer
-          description: Id of the static list
-          format: int64
-        name:
-          type: string
-          description: Name of the static list
         description:
           type: string
           description: Description of the static list
-        createdAt:
+        name:
           type: string
-          description: Datetime the static list was created
-          format: date-time
-        updatedAt:
-          type: string
-          description: Datetime the static list was most recently updated
-          format: date-time
-        url:
-          type: string
-          description: Url of the static list in the Marketo UI
+          description: Name of the static list
         folder:
+          description: Folder object describing the parent folder
           $ref: '#/components/schemas/Folder'
-        workspace:
-          type: string
-          description: Name of the workspace
-        computedUrl:
-          type: string
     ResponseOfStaticListResponse:
       type: object
       properties:
@@ -240,15 +528,59 @@ components:
           type: array
           items:
             type: string
-    UpdateStaticListRequest:
+    StaticListResponse:
       type: object
+      required:
+      - id
+      - name
+      - description
+      - createdAt
+      - updatedAt
+      - url
+      - folder
+      - workspace
       properties:
-        description:
-          type: string
-          description: Description of the static list
+        id:
+          type: integer
+          format: int64
+          description: Id of the static list
         name:
           type: string
           description: Name of the static list
+        description:
+          type: string
+          description: Description of the static list
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime the static list was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime the static list was most recently updated
+        url:
+          type: string
+          description: Url of the static list in the Marketo UI
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        workspace:
+          type: string
+          description: Name of the workspace
+        computedUrl:
+          type: string
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     ResponseOfIdResponse:
       type: object
       properties:
@@ -268,10 +600,33 @@ components:
           type: array
           items:
             type: string
-    CreateStaticListRequest:
+    IdResponse:
+      type: object
       required:
-      - folder
-      - name
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    UpdateStaticListRequest:
       type: object
       properties:
         description:
@@ -280,27 +635,289 @@ components:
         name:
           type: string
           description: Name of the static list
-        folder:
-          $ref: '#/components/schemas/Folder'
-    IdResponse:
+    ResponseOfLead:
+      type: object
       required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Lead'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    StaticList:
+      type: object
+      required:
+      - createdAt
       - id
+      - name
+      - updatedAt
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the list was created
+        description:
+          type: string
+          description: Description of the static list
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the static list
+        name:
+          type: string
+          description: Name of the static list
+        programName:
+          type: string
+          description: Name of the program
+        updatedAt:
+          type: string
+          description: Datetime when the list was most recently updated
+        workspaceName:
+          type: string
+          description: Name of the parent workspace, if applicable
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    ProgramMembership:
+      type: object
+      required:
+      - membershipDate
+      - progressionStatus
+      properties:
+        acquiredBy:
+          type: boolean
+          example: false
+          description: Whether the lead was acquired by the parent program
+        isExhausted:
+          type: boolean
+          example: false
+          description: Whether the lead is currently exhausted in the stream, if applicable
+        membershipDate:
+          type: string
+          description: Date the lead first became a member of the program
+        nurtureCadence:
+          type: string
+          description: Cadence of the parent stream if applicable
+        progressionStatus:
+          type: string
+          description: Program status of the lead in the parent program
+        reachedSuccess:
+          type: boolean
+          example: false
+          description: Whether the lead is in a success-status in the parent program
+        stream:
+          type: string
+          description: Stream that the lead is a member of, if the parent program is an engagement program
+    Lead:
       type: object
       properties:
         id:
           type: integer
-          description: Id of the asset
           format: int32
-    Error:
+          description: Unique integer id of a lead record
+        membership:
+          description: Membership data for the parent program. Only returned via Get Leads By Program Id
+          $ref: '#/components/schemas/ProgramMembership'
+        reason:
+          description: Reason object describing why an operation did not succeed for a record
+          $ref: '#/components/schemas/Reason'
+        status:
+          type: string
+          description: Status of the operation performed on the record
+      description: Lead record. Always contains id, but may have any number of other fields, depending on the fields available in the target instance.
+    ListOperationRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/LeadInputData'
+    ResponseOfStaticList:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/StaticList'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
       required:
       - code
       - message
-      type: object
       properties:
         code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+          type: integer
+          format: int32
+          description: Integer code of the warning
         message:
           type: string
-          description: Message describing the cause of the error
-x-original-swagger-version: '2.0'
+          description: Message describing the warning
+    ListOperationOutputData:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        status:
+          type: string
+          description: Status of the operation performed on the record
+    LeadInputData:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
+    ResponseOfListOperationOutputData:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ListOperationOutputData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfLeadByListId:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Lead'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+x-refined-from:
+- marketo-asset-openapi-original.json
+- marketo-lead-database-openapi-original.json

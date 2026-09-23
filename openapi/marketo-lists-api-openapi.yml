@@ -137,17 +137,18 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    Lead:
-      required:
-      - leadId
+    ErrorResponse:
       type: object
-      description: Lead reference for list membership.
+      description: Error response body returned for non-202 responses.
       properties:
-        leadId:
-          type: integer
-          format: int64
-          description: The Marketo lead ID.
-          example: 10001
+        error_code:
+          type: string
+          description: Error code.
+          example: '4000801'
+        message:
+          type: string
+          description: Error message.
+          example: Bad request
     ListOperationRequest:
       required:
       - listId
@@ -164,15 +165,14 @@ components:
           description: List of lead references to add to or remove from the list.
           items:
             $ref: '#/components/schemas/Lead'
-    ErrorResponse:
+    Lead:
+      required:
+      - leadId
       type: object
-      description: Error response body returned for non-202 responses.
+      description: Lead reference for list membership.
       properties:
-        error_code:
-          type: string
-          description: Error code.
-          example: '4000801'
-        message:
-          type: string
-          description: Error message.
-          example: Bad request
+        leadId:
+          type: integer
+          format: int64
+          description: The Marketo lead ID.
+          example: 10001

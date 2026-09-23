@@ -1,28 +1,18 @@
-openapi: 3.0.1
+openapi: 3.2.0
 info:
-  title: Marketo Engage Rest Approve Tokens API
-  description: Marketo exposes a REST API which allows for remote execution of many of the systems capabilities. From creating programs to bulk lead import, there are many options which allow fine-grained control of a Marketo instance.
+  description: Marketo Engage Rest API
+  version: '1.0'
+  title: Marketo Engage Rest Tokens API
   termsOfService: https://www.adobe.com/legal.html
   contact:
     name: Adobe Developer Relations
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/home
-    email: developerfeedback@marketo.com
+    email: ''
   license:
     name: API License Agreement
     url: https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/api-license
-  version: '1.0'
 servers:
-- url: https://{munchkinId}.mktorest.com
-  description: >-
-    Per-subscription Marketo Engage REST host. The Munchkin ID is unique to each
-    subscription and is read from Admin > Integration > Web Services. Adobe's
-    published specification carries the non-routable placeholder
-    https://localhost:8080/; corrected here from
-    https://experienceleague.adobe.com/en/docs/marketo-developer/marketo/rest/base-url
-  variables:
-    munchkinId:
-      default: 000-AAA-000
-      description: The subscription's Munchkin ID / account ID, e.g. 284-RPR-133.
+- url: https://localhost:8080/
 tags:
 - name: Tokens
   description: Token Controller
@@ -31,7 +21,7 @@ paths:
     get:
       tags:
       - Tokens
-      summary: Marketo Get Tokens by Folder Id
+      summary: Get Tokens by Folder Id
       description: 'Retrieves the list of available My Tokens in the target folder. Required Permissions: Read-Only Assets, Read-Write Assets'
       operationId: getTokensByFolderIdUsingGET
       parameters:
@@ -45,12 +35,13 @@ paths:
       - name: folderType
         in: query
         description: Type of folder. 'Folder' or 'Program'
+        required: false
         schema:
           type: string
-          default: Folder
           enum:
           - Folder
           - Program
+          default: Folder
       responses:
         '200':
           description: OK
@@ -61,7 +52,7 @@ paths:
     post:
       tags:
       - Tokens
-      summary: Marketo Create Token
+      summary: Create Token
       description: 'Create or update a token in the parent folder. Required Permissions: Read-Write Assets'
       operationId: addTokenTOFolderUsingPOST
       parameters:
@@ -72,13 +63,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: createTokenRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/CreateTokenRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -86,12 +70,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfTokenResponse'
-      x-codegen-request-body-name: createTokenRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/CreateTokenRequest'
+        description: createTokenRequest
+        required: true
   /rest/asset/v1/folder/{id}/tokens/delete.json:
     post:
       tags:
       - Tokens
-      summary: Marketo Delete Token by Name
+      summary: Delete Token by Name
       description: 'Deletes a token with the given name from the parent folder. Required Permissions: Read-Write Assets'
       operationId: deleteTokenByNameUsingPOST
       parameters:
@@ -102,13 +92,6 @@ paths:
         schema:
           type: integer
           format: int32
-      requestBody:
-        description: deleteTokenRequest
-        content:
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/DeleteTokenRequest'
-        required: true
       responses:
         '200':
           description: OK
@@ -116,23 +99,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseOfIdResponse'
-      x-codegen-request-body-name: deleteTokenRequest
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/DeleteTokenRequest'
+        description: deleteTokenRequest
+        required: true
 components:
   schemas:
-    TokenResponse:
-      required:
-      - folder
+    ResponseOfTokenResponse:
       type: object
       properties:
-        folder:
-          type: string
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          example: '{"id":1001,"type":"Program"}'
-        tokens:
+        errors:
           type: array
-          description: List of tokens in the folder
           items:
-            $ref: '#/components/schemas/TokenDTO'
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     TokenDTO:
       type: object
       properties:
@@ -144,6 +138,18 @@ components:
           type: string
         value:
           type: string
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     ResponseOfIdResponse:
       type: object
       properties:
@@ -164,12 +170,12 @@ components:
           items:
             type: string
     CreateTokenRequest:
+      type: object
       required:
       - folderType
       - name
       - type
       - value
-      type: object
       properties:
         folderType:
           type: string
@@ -193,46 +199,6 @@ components:
         value:
           type: string
           description: Value of the token
-    IdResponse:
-      required:
-      - id
-      type: object
-      properties:
-        id:
-          type: integer
-          description: Id of the asset
-          format: int32
-    ResponseOfTokenResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    Error:
-      required:
-      - code
-      - message
-      type: object
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     DeleteTokenRequest:
       type: object
       properties:
@@ -245,4 +211,26 @@ components:
           type: string
         type:
           type: string
-x-original-swagger-version: '2.0'
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
+    TokenResponse:
+      type: object
+      required:
+      - folder
+      properties:
+        folder:
+          type: string
+          example: '{"id":1001,"type":"Program"}'
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        tokens:
+          type: array
+          description: List of tokens in the folder
+          items:
+            $ref: '#/components/schemas/TokenDTO'

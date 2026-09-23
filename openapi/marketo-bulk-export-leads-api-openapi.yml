@@ -129,7 +129,15 @@ paths:
       tags:
       - Bulk Export Leads
       summary: Get Export Lead File
-      description: 'Returns the file content of an export job. The export job must be in "Completed" state. Use Get Export Lead Job Status endpoint to retrieve status of export job. Required Permissions: Read-Only Lead<br><br>The file format is specified by calling the Create Export Lead Job endpoint. The following is an example of the default file format ("CSV").<br><br><code>firstName,lastName,email</code><br><code>Marvin,Gaye,marvin.gaye@motown.com</code>'
+      description: 'Returns the file content of an export job. The export job must be in "Completed" state. Use Get Export Lead Job Status endpoint to retrieve status of export job. Required Permissions: Read-Only Lead
+
+
+        The file format is specified by calling the Create Export Lead Job endpoint. The following is an example of the default file format ("CSV").
+
+
+        firstName,lastName,email
+
+        Marvin,Gaye,marvin.gaye@motown.com'
       operationId: getExportLeadsFileUsingGET
       parameters:
       - name: exportId
@@ -174,38 +182,6 @@ paths:
                 $ref: '#/components/schemas/ResponseOfExportResponse'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ExportLeadRequest:
-      type: object
-      required:
-      - fields
-      - filter
-      properties:
-        columnHeaderNames:
-          description: File header field names override (corresponds with REST API name)
-          $ref: '#/components/schemas/ColumnHeaderNames'
-        fields:
-          type: array
-          description: Comma-separated list of fields to include in the file
-          items:
-            type: string
-        filter:
-          description: 'Lead record selection criteria. Can be one of the following: "createdAt", "updatedAt", "staticListName", "staticListId", "smartListName", "smartListId"'
-          $ref: '#/components/schemas/ExportLeadFilter'
-        format:
-          type: string
-          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
     ResponseOfExportResponseWithToken:
       type: object
       required:
@@ -240,73 +216,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ExportLeadFilter:
-      type: object
-      properties:
-        createdAt:
-          description: Date range to filter new leads on
-          $ref: '#/components/schemas/DateRange'
-        smartListId:
-          type: integer
-          format: int32
-          description: Id of smart list to retrieve leads from
-        smartListName:
-          type: string
-          description: Name of smart list to retrieve leads from
-        staticListId:
-          type: integer
-          format: int32
-          description: Id of static list to retrieve leads from
-        staticListName:
-          type: string
-          description: Name of static list to retrieve leads from
-        updatedAt:
-          description: Date range to filter updated leads on
-          $ref: '#/components/schemas/DateRange'
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
     ObservableOfInputStreamRangeContent:
       type: object
     ColumnHeaderNames:
@@ -321,15 +230,6 @@ components:
         value:
           type: string
           description: Value for header field
-    DateRange:
-      type: object
-      properties:
-        endAt:
-          type: string
-          description: End of date range filter (ISO 8601-format)
-        startAt:
-          type: string
-          description: Start of date range filter (ISO-8601 format)
     ExportResponse:
       type: object
       required:
@@ -376,3 +276,111 @@ components:
           type: string
           description: Status of the export job ("Created","Queued","Processing","Canceled","Completed","Failed")
       description: Response containing export job status information
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ExportLeadFilter:
+      type: object
+      properties:
+        createdAt:
+          description: Date range to filter new leads on
+          $ref: '#/components/schemas/DateRange'
+        smartListId:
+          type: integer
+          format: int32
+          description: Id of smart list to retrieve leads from
+        smartListName:
+          type: string
+          description: Name of smart list to retrieve leads from
+        staticListId:
+          type: integer
+          format: int32
+          description: Id of static list to retrieve leads from
+        staticListName:
+          type: string
+          description: Name of static list to retrieve leads from
+        updatedAt:
+          description: Date range to filter updated leads on
+          $ref: '#/components/schemas/DateRange'
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    DateRange:
+      type: object
+      properties:
+        endAt:
+          type: string
+          description: End of date range filter (ISO 8601-format)
+        startAt:
+          type: string
+          description: Start of date range filter (ISO-8601 format)
+    ExportLeadRequest:
+      type: object
+      required:
+      - fields
+      - filter
+      properties:
+        columnHeaderNames:
+          description: File header field names override (corresponds with REST API name)
+          $ref: '#/components/schemas/ColumnHeaderNames'
+        fields:
+          type: array
+          description: Comma-separated list of fields to include in the file
+          items:
+            type: string
+        filter:
+          description: 'Lead record selection criteria. Can be one of the following: "createdAt", "updatedAt", "staticListName", "staticListId", "smartListName", "smartListId"'
+          $ref: '#/components/schemas/ExportLeadFilter'
+        format:
+          type: string
+          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"

@@ -574,73 +574,17 @@ paths:
         required: true
 components:
   schemas:
-    DataDTO:
-      type: object
-      properties:
-        html:
-          $ref: '#/components/schemas/HtmlDataDTO'
-        text:
-          $ref: '#/components/schemas/TextDataDTO'
-      title: DataDTO
-    DeleteResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-      title: DeleteResponse
-    UpdateEmailTemplateRequest:
-      type: object
-      description: Request body for updating an email template.
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        data:
-          $ref: '#/components/schemas/DataDTO'
-        editorContext:
-          $ref: '#/components/schemas/EditorContextDto'
-      title: UpdateEmailTemplateRequest
-    UsedByItemDTO:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        appData:
-          $ref: '#/components/schemas/AppDataDTO'
-        channel:
-          type: string
-        contentType:
-          type: string
-        externalId:
-          type: string
-      title: UsedByItemDTO
-    BulkUsedByRequest:
+    CloneAssetRequest:
       type: object
       required:
-      - assetIds
+      - assetId
+      - newAsset
       properties:
-        assetIds:
-          type: array
-          description: Asset IDs to query. Maximum 50 per request.
-          items:
-            type: string
-      title: BulkUsedByRequest
-    AssociatedStateDTO:
-      type: object
-      description: A version/state of the asset (e.g. draft or approved).
-      properties:
-        contentId:
+        assetId:
           type: string
-        externalId:
-          type: string
-        state:
-          type: string
-      title: AssociatedStateDTO
+        newAsset:
+          $ref: '#/components/schemas/CloneNewAsset'
+      title: CloneAssetRequest
     EmailTemplateContentDTO:
       type: object
       properties:
@@ -674,16 +618,6 @@ components:
         scriptEngine:
           type: string
       title: EmailTemplateContentDTO
-    AppDataDTO:
-      type: object
-      properties:
-        editorType:
-          type: string
-        folderId:
-          type: string
-        workspaceId:
-          type: string
-      title: AppDataDTO
     CreateEmailTemplateV2Request:
       type: object
       required:
@@ -702,56 +636,7 @@ components:
         editorContext:
           $ref: '#/components/schemas/EditorContextDto'
       title: CreateEmailTemplateRequest
-    EmailTemplateFilterResult:
-      allOf:
-      - $ref: '#/components/schemas/PageDetailsDTO'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/EmailTemplateContentDTO'
-      title: EmailTemplateFilterResult
-    EmailTemplateDetailDTO:
-      allOf:
-      - $ref: '#/components/schemas/EmailTemplateContentDTO'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/DataDTO'
-      title: EmailTemplateDetailDTO
-    EmailTemplateFilterResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-        result:
-          $ref: '#/components/schemas/EmailTemplateFilterResult'
-      title: EmailTemplateFilterResponse
-    BulkUsedByItemDTO:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        count:
-          type: integer
-          format: int32
-          description: Number of places the asset is used.
-        used:
-          type: boolean
-          description: Whether the asset is used by any other asset.
-      title: BulkUsedByItemDTO
-    HtmlDataDTO:
-      type: object
-      properties:
-        body:
-          type: string
-      title: HtmlDataDTO
-    BulkUsedByResponse:
+    EmailTemplateNewResponse:
       type: object
       properties:
         success:
@@ -761,8 +646,8 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/BulkUsedByItemDTO'
-      title: BulkUsedByResponse
+            $ref: '#/components/schemas/EmailTemplateDetailDTO'
+      title: EmailTemplateNewResponse
     StateTransitionRequest:
       type: object
       required:
@@ -780,56 +665,59 @@ components:
           - discard
           - create_draft
       title: StateTransitionRequest
-    CloneNewAsset:
+    BulkDeleteRequest:
       type: object
       required:
-      - name
+      - assetIds
       properties:
-        name:
-          type: string
-        description:
-          type: string
-      title: CloneNewAsset
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-        errors:
+        assetIds:
           type: array
+          description: Set of asset IDs to delete. Maximum 20 per request.
           items:
-            $ref: '#/components/schemas/ContentWaveErrorDTO'
-      title: ErrorResponse
-    UsedByRequestDto:
-      type: object
-      required:
-      - assetId
-      properties:
-        assetId:
-          type: string
-        pageIndex:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        type:
-          type: string
-      title: UsedByRequestDto
-    EmailTemplateNewResponse:
-      type: object
-      properties:
-        success:
+            type: string
+        ignoreUsedBy:
           type: boolean
-        requestId:
-          type: string
-        result:
-          type: array
+          description: If true, deletes assets even if they are referenced by other assets.
+      title: BulkDeleteRequest
+    EmailTemplateDetailDTO:
+      allOf:
+      - $ref: '#/components/schemas/EmailTemplateContentDTO'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/DataDTO'
+      title: EmailTemplateDetailDTO
+    EmailTemplateFilterResult:
+      allOf:
+      - $ref: '#/components/schemas/PageDetailsDTO'
+      - type: object
+        properties:
           items:
-            $ref: '#/components/schemas/EmailTemplateDetailDTO'
-      title: EmailTemplateNewResponse
+            type: array
+            items:
+              $ref: '#/components/schemas/EmailTemplateContentDTO'
+      title: EmailTemplateFilterResult
+    ContentMetadataDTO:
+      type: object
+      description: Audit information for the asset.
+      properties:
+        createdBy:
+          type: string
+        createdAt:
+          type: string
+        createdById:
+          type: string
+        createdByAepId:
+          type: string
+        modifiedBy:
+          type: string
+        modifiedAt:
+          type: string
+        modifiedById:
+          type: string
+        modifiedByAepId:
+          type: string
+      title: ContentMetadataDTO
     UsedByResponse:
       type: object
       properties:
@@ -875,33 +763,6 @@ components:
               type: integer
               format: int32
       title: ContentWaveErrorDTO
-    ContentMetadataDTO:
-      type: object
-      description: Audit information for the asset.
-      properties:
-        createdBy:
-          type: string
-        createdAt:
-          type: string
-        createdById:
-          type: string
-        createdByAepId:
-          type: string
-        modifiedBy:
-          type: string
-        modifiedAt:
-          type: string
-        modifiedById:
-          type: string
-        modifiedByAepId:
-          type: string
-      title: ContentMetadataDTO
-    EditorContextDto:
-      type: object
-      properties:
-        dynamicContent:
-          type: object
-      title: EditorContextDto
     TextDataDTO:
       type: object
       properties:
@@ -910,6 +771,65 @@ components:
         syncFromHtml:
           type: boolean
       title: TextDataDTO
+    HtmlDataDTO:
+      type: object
+      properties:
+        body:
+          type: string
+      title: HtmlDataDTO
+    UsedByRequestDto:
+      type: object
+      required:
+      - assetId
+      properties:
+        assetId:
+          type: string
+        pageIndex:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        type:
+          type: string
+      title: UsedByRequestDto
+    UpdateEmailTemplateRequest:
+      type: object
+      description: Request body for updating an email template.
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+      title: UpdateEmailTemplateRequest
+    DeleteResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+      title: DeleteResponse
+    EditorContextDto:
+      type: object
+      properties:
+        dynamicContent:
+          type: object
+      title: EditorContextDto
+    EmailTemplateFilterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          $ref: '#/components/schemas/EmailTemplateFilterResult'
+      title: EmailTemplateFilterResponse
     PageDetailsDTO:
       type: object
       properties:
@@ -923,20 +843,99 @@ components:
           type: integer
           format: int32
       title: PageDetailsDTO
-    BulkDeleteRequest:
+    AppDataDTO:
+      type: object
+      properties:
+        editorType:
+          type: string
+        folderId:
+          type: string
+        workspaceId:
+          type: string
+      title: AppDataDTO
+    DataDTO:
+      type: object
+      properties:
+        html:
+          $ref: '#/components/schemas/HtmlDataDTO'
+        text:
+          $ref: '#/components/schemas/TextDataDTO'
+      title: DataDTO
+    AssociatedStateDTO:
+      type: object
+      description: A version/state of the asset (e.g. draft or approved).
+      properties:
+        contentId:
+          type: string
+        externalId:
+          type: string
+        state:
+          type: string
+      title: AssociatedStateDTO
+    BulkUsedByRequest:
       type: object
       required:
       - assetIds
       properties:
         assetIds:
           type: array
-          description: Set of asset IDs to delete. Maximum 20 per request.
+          description: Asset IDs to query. Maximum 50 per request.
           items:
             type: string
-        ignoreUsedBy:
+      title: BulkUsedByRequest
+    UsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        channel:
+          type: string
+        contentType:
+          type: string
+        externalId:
+          type: string
+      title: UsedByItemDTO
+    CloneNewAsset:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+      title: CloneNewAsset
+    BulkUsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+          format: int32
+          description: Number of places the asset is used.
+        used:
           type: boolean
-          description: If true, deletes assets even if they are referenced by other assets.
-      title: BulkDeleteRequest
+          description: Whether the asset is used by any other asset.
+      title: BulkUsedByItemDTO
+    BulkUsedByResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUsedByItemDTO'
+      title: BulkUsedByResponse
     BulkGetRequest:
       type: object
       required:
@@ -948,14 +947,15 @@ components:
           items:
             type: string
       title: BulkGetRequest
-    CloneAssetRequest:
+    ErrorResponse:
       type: object
-      required:
-      - assetId
-      - newAsset
       properties:
-        assetId:
+        success:
+          type: boolean
+        requestId:
           type: string
-        newAsset:
-          $ref: '#/components/schemas/CloneNewAsset'
-      title: CloneAssetRequest
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentWaveErrorDTO'
+      title: ErrorResponse
