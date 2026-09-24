@@ -75,8 +75,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-channels-api
   name: Marketo Channels API
   description: Channel Controller
@@ -92,8 +90,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-email-templates-api
   name: Marketo Email  Templates API
   description: The Email  Templates API from Marketo — 10 operation(s) for email  templates.
@@ -111,8 +107,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-emails-api
   name: Marketo Emails API
   description: Email Controller
@@ -130,8 +124,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-file-contents-api
   name: Marketo File  Contents API
   description: The File  Contents API from Marketo — 1 operation(s) for file  contents.
@@ -147,8 +139,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-files-api
   name: Marketo Files API
   description: File Controller
@@ -166,8 +156,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-folders-api
   name: Marketo Folders API
   description: Folder Controller
@@ -183,8 +171,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-form-fields-api
   name: Marketo Form  Fields API
   description: The Form  Fields API from Marketo — 9 operation(s) for form  fields.
@@ -202,8 +188,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-forms-api
   name: Marketo Forms API
   description: Form Controller
@@ -219,8 +203,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-landing-page-content-api
   name: Marketo Landing  Page  Content API
   description: The Landing  Page  Content API from Marketo — 4 operation(s) for landing  page  content.
@@ -236,8 +218,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-landing-page-redirect-rules-api
   name: Marketo Landing  Page  Redirect  Rules API
   description: >-
@@ -254,8 +234,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-landing-page-templates-api
   name: Marketo Landing  Page  Templates API
   description: >-
@@ -272,8 +250,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-landing-pages-api
   name: Marketo Landing  Pages API
   description: The Landing  Pages API from Marketo — 11 operation(s) for landing  pages.
@@ -291,8 +267,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-programs-api
   name: Marketo Programs API
   description: Program Controller
@@ -308,8 +282,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-segments-api
   name: Marketo Segments API
   description: Segment Controller
@@ -325,8 +297,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-smart-campaigns-api
   name: Marketo Smart  Campaigns API
   description: The Smart  Campaigns API from Marketo — 8 operation(s) for smart  campaigns.
@@ -342,8 +312,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-smart-lists-api
   name: Marketo Smart  Lists API
   description: The Smart  Lists API from Marketo — 4 operation(s) for smart  lists.
@@ -359,8 +327,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-snippets-api
   name: Marketo Snippets API
   description: Snippet Controller
@@ -376,8 +342,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-static-lists-api
   name: Marketo Static  Lists API
   description: The Static  Lists API from Marketo — 3 operation(s) for static  lists.
@@ -393,8 +357,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-tokens-api
   name: Marketo Tokens API
   description: Token Controller
@@ -410,8 +372,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/marketo/refs/heads/main/asyncapi/marketo-events-asyncapi.yml
-  - type: GraphQL
-    url: graphql/marketo-graphql.md
 - aid: marketo:marketo-activities-api
   name: Marketo Activities API
   description: Activities Controller
