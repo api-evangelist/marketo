@@ -106,15 +106,6 @@ components:
           type: string
           description: Error message.
           example: Bad request
-    Person:
-      type: object
-      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
-      additionalProperties: true
-      example:
-        email: brooklyn.parker@karnv.com
-        firstName: Brooklyn
-        lastName: Parker
-        company: Karnv
     SyncPersonsRequest:
       required:
       - persons
@@ -138,3 +129,12 @@ components:
           description: List of attribute name-value pairs for the person.
           items:
             $ref: '#/components/schemas/Person'
+    Person:
+      type: object
+      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
+      additionalProperties: true
+      example:
+        email: brooklyn.parker@karnv.com
+        firstName: Brooklyn
+        lastName: Parker
+        company: Karnv

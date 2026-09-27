@@ -202,145 +202,30 @@ paths:
         description: Dynamic content properties
 components:
   schemas:
-    JsonNode:
+    LandingPageDynamicContentResponse:
       type: object
       properties:
-        array:
-          type: boolean
-        bigDecimal:
-          type: boolean
-        bigInteger:
-          type: boolean
-        binary:
-          type: boolean
-        boolean:
-          type: boolean
-        containerNode:
-          type: boolean
-        double:
-          type: boolean
-        float:
-          type: boolean
-        floatingPointNumber:
-          type: boolean
-        int:
-          type: boolean
-        integralNumber:
-          type: boolean
-        long:
-          type: boolean
-        missingNode:
-          type: boolean
-        nodeType:
-          type: string
-          enum:
-          - ARRAY
-          - BINARY
-          - BOOLEAN
-          - MISSING
-          - 'NULL'
-          - NUMBER
-          - OBJECT
-          - POJO
-          - STRING
-        'null':
-          type: boolean
-        number:
-          type: boolean
-        object:
-          type: boolean
-        pojo:
-          type: boolean
-        short:
-          type: boolean
-        textual:
-          type: boolean
-        valueNode:
-          type: boolean
-    UpdateLandingPageDynamicContentRequest:
-      type: object
-      properties:
-        backgroundColor:
-          type: string
-          description: background-color property of the HTML section
-        borderColor:
-          type: string
-          description: border-color property of the HTML section
-        borderStyle:
-          type: string
-          description: border-style property of the HTML section
-        borderWidth:
-          type: string
-          description: border-width property of the HTML section
-        height:
-          type: string
-          description: height property of the HTML section
-        hideDesktop:
-          type: boolean
-          description: Hide the section when displayed on a desktop browser. Default false
-        hideMobile:
-          type: boolean
-          description: Hide the section when displayed on a mobile browser. Default false
-        imageOpenNewWindow:
-          type: string
-        left:
-          type: string
-          description: left property of the HTML section
-        linkUrl:
-          type: string
-          description: URL parameter of a link type section
-        opacity:
-          type: string
-          description: opacity property of the HTML section
-        segment:
-          type: string
-          description: Name of the segment to display content section for
-        top:
-          type: string
-          description: top property of the HTML section
-        type:
-          type: string
-          description: Type of content section
-        value:
-          type: string
-          description: Type of content section
-        width:
-          type: string
-          description: width property of the HTML section
-        zIndex:
-          type: string
-          description: z-index property of the HTML section
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfLandingPageDynamicContentResponse:
-      type: object
-      properties:
-        errors:
+        content:
           type: array
+          description: List of variations in the section
           items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+            $ref: '#/components/schemas/SegmentContent'
+        createdAt:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          format: date-time
+          description: Datetime when the section was created
+        id:
+          type: integer
+          format: int32
+          description: Id of the dnamic content section
+        segmentation:
+          type: integer
+          format: int32
+          description: Segmentation to which the section is linked
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime when the section was last updated
     ResponseOfLandingPageContentResponse:
       type: object
       properties:
@@ -404,6 +289,197 @@ components:
           - Poll
           - ReferralOffer
           - Sweepstakes
+    UpdateLandingPageDynamicContentRequest:
+      type: object
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        segment:
+          type: string
+          description: Name of the segment to display content section for
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    UpdateLandingPageContentRequest:
+      type: object
+      required:
+      - type
+      properties:
+        backgroundColor:
+          type: string
+          description: background-color property of the HTML section
+        borderColor:
+          type: string
+          description: border-color property of the HTML section
+        borderStyle:
+          type: string
+          description: border-style property of the HTML section
+        borderWidth:
+          type: string
+          description: border-width property of the HTML section
+        height:
+          type: string
+          description: height property of the HTML section
+        hideDesktop:
+          type: boolean
+          description: Hide the section when displayed on a desktop browser. Default false
+        hideMobile:
+          type: boolean
+          description: Hide the section when displayed on a mobile browser. Default false
+        imageOpenNewWindow:
+          type: string
+        index:
+          type: integer
+          format: int32
+          description: Index of the content section. Determines the order of the section in the landing page
+        left:
+          type: string
+          description: left property of the HTML section
+        linkUrl:
+          type: string
+          description: URL parameter of a link type section
+        opacity:
+          type: string
+          description: opacity property of the HTML section
+        top:
+          type: string
+          description: top property of the HTML section
+        type:
+          type: string
+          description: Type of content section
+          enum:
+          - Image
+          - Form
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - DynamicContent
+        value:
+          type: string
+          description: Type of content section
+        width:
+          type: string
+          description: width property of the HTML section
+        zIndex:
+          type: string
+          description: z-index property of the HTML section
+    ResponseOfLandingPageDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    JsonNode:
+      type: object
+      properties:
+        array:
+          type: boolean
+        bigDecimal:
+          type: boolean
+        bigInteger:
+          type: boolean
+        binary:
+          type: boolean
+        boolean:
+          type: boolean
+        containerNode:
+          type: boolean
+        double:
+          type: boolean
+        float:
+          type: boolean
+        floatingPointNumber:
+          type: boolean
+        int:
+          type: boolean
+        integralNumber:
+          type: boolean
+        long:
+          type: boolean
+        missingNode:
+          type: boolean
+        nodeType:
+          type: string
+          enum:
+          - ARRAY
+          - BINARY
+          - BOOLEAN
+          - MISSING
+          - 'NULL'
+          - NUMBER
+          - OBJECT
+          - POJO
+          - STRING
+        'null':
+          type: boolean
+        number:
+          type: boolean
+        object:
+          type: boolean
+        pojo:
+          type: boolean
+        short:
+          type: boolean
+        textual:
+          type: boolean
+        valueNode:
+          type: boolean
     ResponseOfIdResponse:
       type: object
       properties:
@@ -511,70 +587,18 @@ components:
         type:
           type: string
           description: Type of content section
-    UpdateLandingPageContentRequest:
+    Error:
       type: object
       required:
-      - type
+      - code
+      - message
       properties:
-        backgroundColor:
+        code:
           type: string
-          description: background-color property of the HTML section
-        borderColor:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: border-color property of the HTML section
-        borderStyle:
-          type: string
-          description: border-style property of the HTML section
-        borderWidth:
-          type: string
-          description: border-width property of the HTML section
-        height:
-          type: string
-          description: height property of the HTML section
-        hideDesktop:
-          type: boolean
-          description: Hide the section when displayed on a desktop browser. Default false
-        hideMobile:
-          type: boolean
-          description: Hide the section when displayed on a mobile browser. Default false
-        imageOpenNewWindow:
-          type: string
-        index:
-          type: integer
-          format: int32
-          description: Index of the content section. Determines the order of the section in the landing page
-        left:
-          type: string
-          description: left property of the HTML section
-        linkUrl:
-          type: string
-          description: URL parameter of a link type section
-        opacity:
-          type: string
-          description: opacity property of the HTML section
-        top:
-          type: string
-          description: top property of the HTML section
-        type:
-          type: string
-          description: Type of content section
-          enum:
-          - Image
-          - Form
-          - Rectangle
-          - Snippet
-          - RichText
-          - HTML
-          - DynamicContent
-        value:
-          type: string
-          description: Type of content section
-        width:
-          type: string
-          description: width property of the HTML section
-        zIndex:
-          type: string
-          description: z-index property of the HTML section
+          description: Message describing the cause of the error
     IdResponse:
       type: object
       required:
@@ -584,27 +608,3 @@ components:
           type: integer
           format: int32
           description: Id of the asset
-    LandingPageDynamicContentResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          description: List of variations in the section
-          items:
-            $ref: '#/components/schemas/SegmentContent'
-        createdAt:
-          type: string
-          format: date-time
-          description: Datetime when the section was created
-        id:
-          type: integer
-          format: int32
-          description: Id of the dnamic content section
-        segmentation:
-          type: integer
-          format: int32
-          description: Segmentation to which the section is linked
-        updatedAt:
-          type: string
-          format: date-time
-          description: Datetime when the section was last updated

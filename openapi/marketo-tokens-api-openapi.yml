@@ -108,67 +108,18 @@ paths:
         required: true
 components:
   schemas:
-    ResponseOfTokenResponse:
+    DeleteTokenRequest:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        folderType:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    TokenDTO:
-      type: object
-      properties:
-        computedUrl:
-          type: string
+          enum:
+          - Program
+          - Folder
         name:
           type: string
         type:
           type: string
-        value:
-          type: string
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfIdResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
     CreateTokenRequest:
       type: object
       required:
@@ -199,27 +150,6 @@ components:
         value:
           type: string
           description: Value of the token
-    DeleteTokenRequest:
-      type: object
-      properties:
-        folderType:
-          type: string
-          enum:
-          - Program
-          - Folder
-        name:
-          type: string
-        type:
-          type: string
-    IdResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset
     TokenResponse:
       type: object
       required:
@@ -234,3 +164,73 @@ components:
           description: List of tokens in the folder
           items:
             $ref: '#/components/schemas/TokenDTO'
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    TokenDTO:
+      type: object
+      properties:
+        computedUrl:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        value:
+          type: string
+    ResponseOfTokenResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset

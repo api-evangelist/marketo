@@ -432,6 +432,16 @@ paths:
     - url: https://localhost:8080/
 components:
   schemas:
+    DeleteProgramMembersRequest:
+      required:
+      - programs
+      type: object
+      properties:
+        programs:
+          type: array
+          description: List of program delete operations.
+          items:
+            $ref: '#/components/schemas/DeleteProgramOperation'
     SyncProgramMembersRequest:
       required:
       - programs
@@ -442,28 +452,6 @@ components:
           description: List of program operations. Each specifies a program, a target status, and the leads to sync.
           items:
             $ref: '#/components/schemas/ProgramOperation'
-    ProgramOperation:
-      required:
-      - programId
-      - status
-      - members
-      type: object
-      description: A program sync operation.
-      properties:
-        programId:
-          type: integer
-          format: int64
-          description: The Marketo program ID. Must be a positive integer.
-          example: 1001
-        status:
-          type: string
-          description: The program member status to set (e.g. 'Member', 'Influenced'). Must not be 'Not in Program'; use the delete endpoint instead.
-          example: Member
-        members:
-          type: array
-          description: List of lead references to add or update in the program.
-          items:
-            $ref: '#/components/schemas/ProgramMember'
     ErrorResponse:
       type: object
       description: Error response body returned for non-202 responses.
@@ -493,6 +481,28 @@ components:
           description: List of lead references to remove from the program.
           items:
             $ref: '#/components/schemas/ProgramMember'
+    ProgramOperation:
+      required:
+      - programId
+      - status
+      - members
+      type: object
+      description: A program sync operation.
+      properties:
+        programId:
+          type: integer
+          format: int64
+          description: The Marketo program ID. Must be a positive integer.
+          example: 1001
+        status:
+          type: string
+          description: The program member status to set (e.g. 'Member', 'Influenced'). Must not be 'Not in Program'; use the delete endpoint instead.
+          example: Member
+        members:
+          type: array
+          description: List of lead references to add or update in the program.
+          items:
+            $ref: '#/components/schemas/ProgramMember'
     ProgramMember:
       required:
       - leadId
@@ -504,29 +514,26 @@ components:
           format: int64
           description: The Marketo lead ID.
           example: 10001
-    DeleteProgramMembersRequest:
-      required:
-      - programs
-      type: object
-      properties:
-        programs:
-          type: array
-          description: List of program delete operations.
-          items:
-            $ref: '#/components/schemas/DeleteProgramOperation'
-    Reason:
+    LeadAttribute2SearchableFields:
+      type: array
+      description: List of searchable fields
+      items:
+        type: string
+        description: Searchable field
+    Warning:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: string
-          description: Integer code of the reason
+          type: integer
+          format: int32
+          description: Integer code of the warning
         message:
           type: string
-          description: Message describing the reason for the status of the operation
-    ResponseOfProgramMember:
+          description: Message describing the warning
+    ResponseOfProgramMemberDelete:
       type: object
       required:
       - errors
@@ -554,7 +561,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/ProgramMember_2'
+            $ref: '#/components/schemas/ProgramMemberDeleteResponse'
         success:
           type: boolean
           example: false
@@ -564,98 +571,91 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    LeadFieldStatus:
+    UpdateLeadField:
+      type: object
+      description: Lead field record for update
+      properties:
+        displayName:
+          type: string
+          description: UI display-name of the field
+        description:
+          type: string
+          description: Description of the field
+        isHidden:
+          type: boolean
+          example: false
+          description: If set to true, the field is hidden. Default is false
+        isHtmlEncodingInEmail:
+          type: boolean
+          example: false
+          description: If set to true, field is encoded as HTML in email. Default is true
+        isSensitive:
+          type: boolean
+          example: false
+          description: If set to true, field is marked as sensitive. Default is false
+    DeleteProgramMemberRequest:
       type: object
       required:
-      - name
-      - status
-      description: Lead field update status
+      - input
       properties:
-        name:
-          type: string
-          description: API name of the field
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/ProgramMemberDelete'
+    ProgramMemberStatusResponse:
+      type: object
+      required:
+      - status
+      - leadId
+      - seq
+      properties:
         status:
           type: string
           description: Status of the operation performed on the record
           enum:
-          - created
           - updated
-    ProgramMemberAttribute2:
+          - skipped
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        leadId:
+          type: integer
+          format: int64
+          description: Id of the lead associated to the program member
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+    LeadAttribute2Fields2:
       type: object
       required:
       - name
-      - description
-      - createdAt
-      - updatedAt
-      - dedupeFields
-      - searchableFields
-      - fields
+      - displayName
+      - dataType
+      - updateable
+      - crmManaged
       properties:
         name:
           type: string
-          description: '"API Program Member"'
-        description:
+          description: REST API name of field
+        displayName:
           type: string
-          description: '"API Program Member Map"'
-        createdAt:
+          description: Display name of field (friendly name)
+        dataType:
           type: string
-          description: Datetime when created
-        updatedAt:
-          type: string
-          description: Datetime updated
-        dedupeFields:
-          type: array
-          description: List of dedupe fields
-          items:
-            type: string
-        searchableFields:
-          type: array
-          description: List of searchable fields
-          items:
-            $ref: '#/components/schemas/LeadAttribute2SearchableFields'
-        fields:
-          type: array
-          description: Description of searchable fields
-          items:
-            $ref: '#/components/schemas/LeadAttribute2Fields2'
-    ResponseOfProgramMemberData:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
+          description: Data type of field
+        length:
+          type: integer
+          description: Length of field
+        updateable:
           type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ProgramMemberStatusResponse'
-        success:
+          description: Is field updateable
+        crmManaged:
           type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Is field managed by CRM
     ResponseOfLeadField:
       type: object
       required:
@@ -694,40 +694,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ProgramMember_2:
-      type: object
-      description: Program member record. Always contains lead id, but may have any number of other fields, depending on the fields available in the target instance.
-      required:
-      - seq
-      - leadId
-      - reachedSuccess
-      - programId
-      - acquiredBy
-      - membershipDate
-      properties:
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-        leadId:
-          type: integer
-          format: int32
-          description: Unique integer id of a lead record
-        reachedSuccess:
-          type: boolean
-          example: false
-          description: Boolean indicating if program member has reached success criteria for program
-        programId:
-          type: integer
-          format: int32
-          description: Unique integer id of a program
-        acquiredBy:
-          type: boolean
-          example: false
-          description: Boolean indicating if program member was acquired by program
-        membershipDate:
-          type: string
-          description: Date the lead first became a member of the program
     ResponseOfProgramMemberStatus:
       type: object
       required:
@@ -766,70 +732,44 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ProgramMemberData:
+    ResponseOfProgramMemberData:
       type: object
       required:
-      - leadId
-      - '{fieldApiName}'
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        leadId:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-        '{fieldApiName}':
-          type: string
-          description: API Name of field to update. Must be updateable as described by <a href="/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Leads/describeProgramMemberUsingGET2">Describe Program Member</a> endpoint.
-        '{fieldApiName2}':
-          type: string
-          description: API Name of another field to update (and so forth). Must be updateable as described by <a href="/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Leads/describeProgramMemberUsingGET2">Describe Program Member</a> endpoint.
-    ProgramMemberDeleteResponse:
-      type: object
-      required:
-      - status
-      - leadId
-      - seq
-      properties:
-        status:
-          type: string
-          description: Status of the operation performed on the record
-          enum:
-          - deleted
-          - skipped
-        reasons:
+        errors:
           type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          description: Array of errors that occurred if the request was unsuccessful
           items:
-            $ref: '#/components/schemas/Reason'
-        leadId:
-          type: integer
-          format: int64
-          description: Id of the lead associated to the program member
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
           type: string
-          description: Message describing the cause of the error
-    CreateLeadFieldRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
+          description: Id of the request made
+        result:
           type: array
-          description: List of lead fields for input
+          description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/CreateLeadField'
+            $ref: '#/components/schemas/ProgramMemberStatusResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ResponseOfCreateLeadField:
       type: object
       required:
@@ -868,43 +808,23 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ProgramMemberStatus:
-      type: object
-      required:
-      - leadId
-      properties:
-        leadId:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-    LeadAttribute2Fields2:
+    LeadFieldStatus:
       type: object
       required:
       - name
-      - displayName
-      - dataType
-      - updateable
-      - crmManaged
+      - status
+      description: Lead field update status
       properties:
         name:
           type: string
-          description: REST API name of field
-        displayName:
+          description: API name of the field
+        status:
           type: string
-          description: Display name of field (friendly name)
-        dataType:
-          type: string
-          description: Data type of field
-        length:
-          type: integer
-          description: Length of field
-        updateable:
-          type: boolean
-          description: Is field updateable
-        crmManaged:
-          type: boolean
-          description: Is field managed by CRM
-    DeleteProgramMemberRequest:
+          description: Status of the operation performed on the record
+          enum:
+          - created
+          - updated
+    SyncProgramMemberDataRequest:
       type: object
       required:
       - input
@@ -913,8 +833,34 @@ components:
           type: array
           description: List of input records
           items:
-            $ref: '#/components/schemas/ProgramMemberDelete'
-    ResponseOfUpdateLeadField:
+            $ref: '#/components/schemas/ProgramMemberData'
+    ProgramMemberDeleteResponse:
+      type: object
+      required:
+      - status
+      - leadId
+      - seq
+      properties:
+        status:
+          type: string
+          description: Status of the operation performed on the record
+          enum:
+          - deleted
+          - skipped
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        leadId:
+          type: integer
+          format: int64
+          description: Id of the lead associated to the program member
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+    ResponseOfProgramMember:
       type: object
       required:
       - errors
@@ -942,7 +888,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/LeadFieldStatus'
+            $ref: '#/components/schemas/ProgramMember_2'
         success:
           type: boolean
           example: false
@@ -952,19 +898,25 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
+    ProgramMemberDelete:
       type: object
       required:
-      - code
-      - message
+      - leadId
       properties:
-        code:
+        leadId:
           type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
+          format: int64
+          description: Unique integer id of a lead record
+    UpdateLeadFieldRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: Single lead field for input
+          items:
+            $ref: '#/components/schemas/UpdateLeadField'
     CreateLeadField:
       type: object
       required:
@@ -1010,46 +962,6 @@ components:
           type: boolean
           example: false
           description: If set to true, field is marked as sensitive. Default is false
-    SyncProgramMemberStatusRequest:
-      type: object
-      required:
-      - statusName
-      - input
-      properties:
-        statusName:
-          type: string
-          description: Program member status
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/ProgramMemberStatus'
-    ProgramMemberStatusResponse:
-      type: object
-      required:
-      - status
-      - leadId
-      - seq
-      properties:
-        status:
-          type: string
-          description: Status of the operation performed on the record
-          enum:
-          - updated
-          - skipped
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        leadId:
-          type: integer
-          format: int64
-          description: Id of the lead associated to the program member
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
     LeadField:
       type: object
       description: Lead field record
@@ -1100,6 +1012,68 @@ components:
           type: boolean
           example: false
           description: If set to true, field was created using REST API
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    ResponseOfUpdateLeadField:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadFieldStatus'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     ResponseOfProgramMemberAttributes2:
       type: object
       required:
@@ -1138,67 +1112,85 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    UpdateLeadField:
-      type: object
-      description: Lead field record for update
-      properties:
-        displayName:
-          type: string
-          description: UI display-name of the field
-        description:
-          type: string
-          description: Description of the field
-        isHidden:
-          type: boolean
-          example: false
-          description: If set to true, the field is hidden. Default is false
-        isHtmlEncodingInEmail:
-          type: boolean
-          example: false
-          description: If set to true, field is encoded as HTML in email. Default is true
-        isSensitive:
-          type: boolean
-          example: false
-          description: If set to true, field is marked as sensitive. Default is false
-    ResponseOfProgramMemberDelete:
+    ProgramMemberAttribute2:
       type: object
       required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
+      - name
+      - description
+      - createdAt
+      - updatedAt
+      - dedupeFields
+      - searchableFields
+      - fields
       properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
+        name:
           type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
+          description: '"API Program Member"'
+        description:
           type: string
-          description: Id of the request made
-        result:
+          description: '"API Program Member Map"'
+        createdAt:
+          type: string
+          description: Datetime when created
+        updatedAt:
+          type: string
+          description: Datetime updated
+        dedupeFields:
           type: array
-          description: Array of results for individual records in the operation, may be empty
+          description: List of dedupe fields
           items:
-            $ref: '#/components/schemas/ProgramMemberDeleteResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
+            type: string
+        searchableFields:
           type: array
-          description: Array of warnings given for the operation
+          description: List of searchable fields
           items:
-            $ref: '#/components/schemas/Warning'
-    ProgramMemberDelete:
+            $ref: '#/components/schemas/LeadAttribute2SearchableFields'
+        fields:
+          type: array
+          description: Description of searchable fields
+          items:
+            $ref: '#/components/schemas/LeadAttribute2Fields2'
+    CreateLeadFieldRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of lead fields for input
+          items:
+            $ref: '#/components/schemas/CreateLeadField'
+    SyncProgramMemberStatusRequest:
+      type: object
+      required:
+      - statusName
+      - input
+      properties:
+        statusName:
+          type: string
+          description: Program member status
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/ProgramMemberStatus'
+    ProgramMemberData:
+      type: object
+      required:
+      - leadId
+      - '{fieldApiName}'
+      properties:
+        leadId:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+        '{fieldApiName}':
+          type: string
+          description: API Name of field to update. Must be updateable as described by <a href="/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Leads/describeProgramMemberUsingGET2">Describe Program Member</a> endpoint.
+        '{fieldApiName2}':
+          type: string
+          description: API Name of another field to update (and so forth). Must be updateable as described by <a href="/rest-api/endpoint-reference/lead-database-endpoint-reference/#/Leads/describeProgramMemberUsingGET2">Describe Program Member</a> endpoint.
+    ProgramMemberStatus:
       type: object
       required:
       - leadId
@@ -1207,32 +1199,40 @@ components:
           type: integer
           format: int64
           description: Unique integer id of a lead record
-    SyncProgramMemberDataRequest:
+    ProgramMember_2:
       type: object
+      description: Program member record. Always contains lead id, but may have any number of other fields, depending on the fields available in the target instance.
       required:
-      - input
+      - seq
+      - leadId
+      - reachedSuccess
+      - programId
+      - acquiredBy
+      - membershipDate
       properties:
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/ProgramMemberData'
-    UpdateLeadFieldRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: Single lead field for input
-          items:
-            $ref: '#/components/schemas/UpdateLeadField'
-    LeadAttribute2SearchableFields:
-      type: array
-      description: List of searchable fields
-      items:
-        type: string
-        description: Searchable field
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        leadId:
+          type: integer
+          format: int32
+          description: Unique integer id of a lead record
+        reachedSuccess:
+          type: boolean
+          example: false
+          description: Boolean indicating if program member has reached success criteria for program
+        programId:
+          type: integer
+          format: int32
+          description: Unique integer id of a program
+        acquiredBy:
+          type: boolean
+          example: false
+          description: Boolean indicating if program member was acquired by program
+        membershipDate:
+          type: string
+          description: Date the lead first became a member of the program
 x-refined-from:
 - marketo-data-ingestion-openapi-original.json
 - marketo-lead-database-openapi-original.json

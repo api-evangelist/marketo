@@ -338,38 +338,77 @@ paths:
         required: true
 components:
   schemas:
-    CreateProgramRequest:
+    SmartListFilters:
       type: object
       required:
-      - folder
+      - id
       - name
-      - type
-      - channel
+      - ruleTypeId
+      - ruleType
+      - operator
+      - conditions
+      description: JSON representation of smart list filters
       properties:
-        channel:
-          type: string
-          description: Channel of the program
-        costs:
-          type: array
-          description: Lists of associated period costs
-          items:
-            $ref: '#/components/schemas/CostRequest'
-        description:
-          type: string
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
+        id:
+          type: integer
+          format: int32
+          description: Id of the filter
         name:
           type: string
-          description: Name of the program
-        tags:
-          type: array
-          description: List of associated program tags
-          items:
-            $ref: '#/components/schemas/TagRequest'
-        type:
+          description: Name of filter
+        ruleTypeId:
+          type: integer
+          format: int32
+          description: Id of the rule type
+        ruleType:
           type: string
-          description: Type of the program
+          description: Name of rule type
+        operator:
+          type: string
+          description: Name of operator
+        conditions:
+          type: array
+          description: List of smart list conditions
+          items:
+            $ref: '#/components/schemas/SmartListConditions'
+    ResponseOfProgramResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProgramResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfSmartListResponseWithRules:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartListResponseWithRules'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     ProgramResponse:
       type: object
       required:
@@ -450,6 +489,112 @@ components:
         workspace:
           type: string
           description: Name of the workspace
+    UpdateProgramRequest:
+      type: object
+      properties:
+        costs:
+          type: array
+          description: Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true
+          items:
+            $ref: '#/components/schemas/CostRequest'
+        costsDestructiveUpdate:
+          type: boolean
+          description: Set true to destroy existing costs and replace them with the specified costs
+        description:
+          type: string
+          description: Updated description for the program
+        endDate:
+          type: string
+          description: End date of the program. Applicable to event, email, and webinar type programs
+        name:
+          type: string
+          description: Name of the program
+        startDate:
+          type: string
+          description: Start date of program. Applicable to event, email and webinar type programs
+        tags:
+          type: array
+          description: List of associated program tags
+          items:
+            $ref: '#/components/schemas/TagRequest'
+    CreateProgramRequest:
+      type: object
+      required:
+      - folder
+      - name
+      - type
+      - channel
+      properties:
+        channel:
+          type: string
+          description: Channel of the program
+        costs:
+          type: array
+          description: Lists of associated period costs
+          items:
+            $ref: '#/components/schemas/CostRequest'
+        description:
+          type: string
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the program
+        tags:
+          type: array
+          description: List of associated program tags
+          items:
+            $ref: '#/components/schemas/TagRequest'
+        type:
+          type: string
+          description: Type of the program
+    Tags:
+      type: object
+      required:
+      - tagType
+      - tagValue
+      properties:
+        tagType:
+          type: string
+          description: Name of the tag
+        tagValue:
+          type: string
+          description: Value of the tag
+    CostRequest:
+      type: object
+      required:
+      - cost
+      - startDate
+      properties:
+        cost:
+          type: integer
+          format: int32
+          description: Amount of the cost
+        note:
+          type: string
+          description: Notes on the cost
+        startDate:
+          type: string
+          format: date-time
+          description: Start date of the period cost
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
     SmartListRules:
       type: object
       required:
@@ -475,6 +620,100 @@ components:
           description: List of smart list filters
           items:
             $ref: '#/components/schemas/SmartListFilters'
+    SmartListConditions:
+      type: object
+      required:
+      - activityAttributeId
+      - activityAttributeName
+      - operator
+      - values
+      - isPrimary
+      description: JSON representation of smart list conditions
+      properties:
+        activityAttributeId:
+          type: integer
+          format: int32
+          description: Id of the activity attribute
+        activityAttributeName:
+          type: string
+          description: Name of activity attribute
+        operator:
+          type: string
+          description: Value of operator
+        values:
+          type: array
+          description: List of values
+          items:
+            type: string
+        isPrimary:
+          type: boolean
+          description: Whether the condition is primary or not (first condition of the smart list)
+    ResponseOfBrowseAllPrograms:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BrowseAllPrograms'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    TagRequest:
+      type: object
+      properties:
+        tagType:
+          type: string
+          description: Type of program tag
+        tagValue:
+          type: string
+          description: Value of the tag
+    Costs:
+      type: object
+      required:
+      - cost
+      - startDate
+      properties:
+        cost:
+          type: integer
+          format: int32
+          description: Amount of the cost
+        note:
+          type: string
+          description: Notes on the cost
+        startDate:
+          type: string
+          format: date-time
+          description: Start date of the period cost
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
     BrowseAllPrograms:
       type: object
       required:
@@ -577,172 +816,6 @@ components:
         rules:
           description: Rules contained in the smart list
           $ref: '#/components/schemas/SmartListRules'
-    ResponseOfProgramResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProgramResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfBrowseAllPrograms:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/BrowseAllPrograms'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    ResponseOfSmartListResponseWithRules:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/SmartListResponseWithRules'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    Costs:
-      type: object
-      required:
-      - cost
-      - startDate
-      properties:
-        cost:
-          type: integer
-          format: int32
-          description: Amount of the cost
-        note:
-          type: string
-          description: Notes on the cost
-        startDate:
-          type: string
-          format: date-time
-          description: Start date of the period cost
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    TagRequest:
-      type: object
-      properties:
-        tagType:
-          type: string
-          description: Type of program tag
-        tagValue:
-          type: string
-          description: Value of the tag
-    CloneProgramRequest:
-      type: object
-      required:
-      - folder
-      - name
-      properties:
-        description:
-          type: string
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        name:
-          type: string
-          description: Name of the program. Max 255 characters
-    SmartListConditions:
-      type: object
-      required:
-      - activityAttributeId
-      - activityAttributeName
-      - operator
-      - values
-      - isPrimary
-      description: JSON representation of smart list conditions
-      properties:
-        activityAttributeId:
-          type: integer
-          format: int32
-          description: Id of the activity attribute
-        activityAttributeName:
-          type: string
-          description: Name of activity attribute
-        operator:
-          type: string
-          description: Value of operator
-        values:
-          type: array
-          description: List of values
-          items:
-            type: string
-        isPrimary:
-          type: boolean
-          description: Whether the condition is primary or not (first condition of the smart list)
-    Tags:
-      type: object
-      required:
-      - tagType
-      - tagValue
-      properties:
-        tagType:
-          type: string
-          description: Name of the tag
-        tagValue:
-          type: string
-          description: Value of the tag
     ResponseOfIdResponse:
       type: object
       properties:
@@ -762,90 +835,17 @@ components:
           type: array
           items:
             type: string
-    UpdateProgramRequest:
+    CloneProgramRequest:
       type: object
+      required:
+      - folder
+      - name
       properties:
-        costs:
-          type: array
-          description: Lists of associated period costs that allow you to append, replace, or delete. To append new costs, simply add them to costs array. To replace costs (destructive update), pass new costs and set costsDestructiveUpdate to true. To delete costs, do not pass costs parameter and set costsDestructiveUpdate to true
-          items:
-            $ref: '#/components/schemas/CostRequest'
-        costsDestructiveUpdate:
-          type: boolean
-          description: Set true to destroy existing costs and replace them with the specified costs
         description:
           type: string
-          description: Updated description for the program
-        endDate:
-          type: string
-          description: End date of the program. Applicable to event, email, and webinar type programs
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
         name:
           type: string
-          description: Name of the program
-        startDate:
-          type: string
-          description: Start date of program. Applicable to event, email and webinar type programs
-        tags:
-          type: array
-          description: List of associated program tags
-          items:
-            $ref: '#/components/schemas/TagRequest'
-    CostRequest:
-      type: object
-      required:
-      - cost
-      - startDate
-      properties:
-        cost:
-          type: integer
-          format: int32
-          description: Amount of the cost
-        note:
-          type: string
-          description: Notes on the cost
-        startDate:
-          type: string
-          format: date-time
-          description: Start date of the period cost
-    SmartListFilters:
-      type: object
-      required:
-      - id
-      - name
-      - ruleTypeId
-      - ruleType
-      - operator
-      - conditions
-      description: JSON representation of smart list filters
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the filter
-        name:
-          type: string
-          description: Name of filter
-        ruleTypeId:
-          type: integer
-          format: int32
-          description: Id of the rule type
-        ruleType:
-          type: string
-          description: Name of rule type
-        operator:
-          type: string
-          description: Name of operator
-        conditions:
-          type: array
-          description: List of smart list conditions
-          items:
-            $ref: '#/components/schemas/SmartListConditions'
-    IdResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset
+          description: Name of the program. Max 255 characters

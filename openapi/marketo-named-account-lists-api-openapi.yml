@@ -213,25 +213,29 @@ components:
           description: List of input records
           items:
             $ref: '#/components/schemas/NamedAccount'
-    SyncNamedAccountListRequest:
+    RemoveNamedAccountListMemberRequest:
       type: object
       required:
       - input
       properties:
-        action:
-          type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
         input:
           type: array
           description: List of input records
           items:
-            $ref: '#/components/schemas/NamedAccountList'
+            $ref: '#/components/schemas/NamedAccount'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
     NamedAccount:
       type: object
       required:
@@ -259,109 +263,25 @@ components:
           - skipped
           - added
           - removed
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    DeleteNamedAccountListRequest:
+    SyncNamedAccountListRequest:
       type: object
       required:
       - input
       properties:
-        deleteBy:
+        action:
           type: string
-          description: Key to use for deletion of the record
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
         input:
           type: array
           description: List of input records
           items:
             $ref: '#/components/schemas/NamedAccountList'
-    RemoveNamedAccountListMemberRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/NamedAccount'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    NamedAccountList:
-      type: object
-      required:
-      - marketoGUID
-      - seq
-      properties:
-        createdAt:
-          type: string
-          description: Datetime when the named account list was created
-        marketoGUID:
-          type: string
-          description: Unique GUID of the custom object records
-        name:
-          type: string
-          description: Name of named account list
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-        status:
-          type: string
-          enum:
-          - created
-          - updated
-          - deleted
-          - skipped
-          - added
-          - removed
-        type:
-          type: string
-          description: Type of named account list ("default" if created by user or API, "external" if managed by CRM-View)
-        updateable:
-          type: boolean
-          example: false
-          description: Whether the list is updateable (true if created by user or API, false if managed by CRM-View)
-        updatedAt:
-          type: string
-          description: Datetime when the named account list was most recently updated
     ResponseOfNamedAccountList:
       type: object
       required:
@@ -438,3 +358,83 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    NamedAccountList:
+      type: object
+      required:
+      - marketoGUID
+      - seq
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the named account list was created
+        marketoGUID:
+          type: string
+          description: Unique GUID of the custom object records
+        name:
+          type: string
+          description: Name of named account list
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
+          type: string
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
+        type:
+          type: string
+          description: Type of named account list ("default" if created by user or API, "external" if managed by CRM-View)
+        updateable:
+          type: boolean
+          example: false
+          description: Whether the list is updateable (true if created by user or API, false if managed by CRM-View)
+        updatedAt:
+          type: string
+          description: Datetime when the named account list was most recently updated
+    DeleteNamedAccountListRequest:
+      type: object
+      required:
+      - input
+      properties:
+        deleteBy:
+          type: string
+          description: Key to use for deletion of the record
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccountList'

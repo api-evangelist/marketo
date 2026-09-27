@@ -381,7 +381,36 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateUsedByResponse'
 components:
   schemas:
-    ResponseOfEmailTemplateUsedByResponse:
+    EmailTemplateContentResponse:
+      type: object
+      required:
+      - content
+      - id
+      - status
+      properties:
+        content:
+          type: string
+          description: HTML content of the template
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the email template
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+    UpdateEmailTemplateMetaDataRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Email Template
+    ResponseOfEmailTemplateResponse:
       type: object
       properties:
         errors:
@@ -393,7 +422,7 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/EmailTemplateUsedByResponse'
+            $ref: '#/components/schemas/EmailTemplateResponse'
         success:
           type: boolean
         warnings:
@@ -413,6 +442,59 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmailTemplateContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    CreateEmailTemplateRequest:
+      type: object
+      required:
+      - name
+      - folder
+      - content
+      properties:
+        name:
+          type: string
+          description: Name of the Email Template. Must be unique under the parent folder.
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the email template
+        content:
+          type: string
+          description: HTML content for template. Multipart file.
+    CloneEmailTemplateRequest:
+      type: object
+      required:
+      - folder
+      - name
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the Email Template
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
         success:
           type: boolean
         warnings:
@@ -448,18 +530,48 @@ components:
           type: string
           format: date-time
           description: Datetime the asset was most recently updated
-    Error:
+    ResponseOfEmailTemplateUsedByResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateUsedByResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailTemplateContentRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Content for the email template. Multipart file.
+    Folder:
       type: object
       required:
-      - code
-      - message
+      - id
+      - type
       properties:
-        code:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
     EmailTemplateResponse:
       type: object
       required:
@@ -503,57 +615,18 @@ components:
         workspace:
           type: string
           description: Name of the workspace
-    ResponseOfIdResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    CloneEmailTemplateRequest:
+    Error:
       type: object
       required:
-      - folder
-      - name
+      - code
+      - message
       properties:
-        description:
+        code:
           type: string
-          description: Description of the asset
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        name:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Name of the Email Template
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
+          description: Message describing the cause of the error
     IdResponse:
       type: object
       required:
@@ -563,76 +636,3 @@ components:
           type: integer
           format: int32
           description: Id of the asset
-    ResponseOfEmailTemplateResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailTemplateResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    EmailTemplateContentResponse:
-      type: object
-      required:
-      - content
-      - id
-      - status
-      properties:
-        content:
-          type: string
-          description: HTML content of the template
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of the email template
-        status:
-          type: string
-          description: Status filter for draft or approved versions
-          enum:
-          - approved
-          - draft
-    UpdateEmailTemplateMetaDataRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        name:
-          type: string
-          description: Name of the Email Template
-    CreateEmailTemplateRequest:
-      type: object
-      required:
-      - name
-      - folder
-      - content
-      properties:
-        name:
-          type: string
-          description: Name of the Email Template. Must be unique under the parent folder.
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        description:
-          type: string
-          description: Description of the email template
-        content:
-          type: string
-          description: HTML content for template. Multipart file.
-    UpdateEmailTemplateContentRequest:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Content for the email template. Multipart file.

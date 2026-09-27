@@ -178,12 +178,6 @@ paths:
         description: triggerCampaignRequest
 components:
   schemas:
-    ScheduleCampaignRequest:
-      type: object
-      properties:
-        input:
-          $ref: '#/components/schemas/ScheduleCampaignData'
-      description: Record describe how to schedule the campaign
     Campaign:
       type: object
       required:
@@ -242,18 +236,37 @@ components:
         value:
           type: string
           description: Value of the token
-    Error:
+    ScheduleCampaignRequest:
+      type: object
+      properties:
+        input:
+          $ref: '#/components/schemas/ScheduleCampaignData'
+      description: Record describe how to schedule the campaign
+    ScheduleCampaignData:
+      type: object
+      properties:
+        cloneToProgramName:
+          type: string
+          description: Name of the resulting program. When set, this attribute will cause the campaign, parent program, and all of its assets, to be created with the resulting new name. The parent program will be cloned and the newly created campaign will be scheduled. The resulting program is created underneath the parent. Programs with snippets, push notifications, in-app messages, static lists, reports, and social assets may not be cloned in this way
+        runAt:
+          type: string
+          format: date-time
+          description: Datetime to run the campaign at. If unset, the campaign will be run five minutes after the call is made
+        tokens:
+          type: array
+          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
+          items:
+            $ref: '#/components/schemas/Token'
+    InputLead:
       type: object
       required:
-      - code
-      - message
+      - id
       properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
     Warning:
       type: object
       required:
@@ -267,14 +280,6 @@ components:
         message:
           type: string
           description: Message describing the warning
-    TriggerCampaignRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          description: Object describing trigger configuration for the campaign
-          $ref: '#/components/schemas/TriggerCampaignData'
     ResponseOfCampaign:
       type: object
       required:
@@ -309,6 +314,14 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    TriggerCampaignRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          description: Object describing trigger configuration for the campaign
+          $ref: '#/components/schemas/TriggerCampaignData'
     TriggerCampaignData:
       type: object
       required:
@@ -324,28 +337,15 @@ components:
           description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
           items:
             $ref: '#/components/schemas/Token'
-    InputLead:
+    Error:
       type: object
       required:
-      - id
+      - code
+      - message
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-      description: Lead record containing only lead id
-    ScheduleCampaignData:
-      type: object
-      properties:
-        cloneToProgramName:
+        code:
           type: string
-          description: Name of the resulting program. When set, this attribute will cause the campaign, parent program, and all of its assets, to be created with the resulting new name. The parent program will be cloned and the newly created campaign will be scheduled. The resulting program is created underneath the parent. Programs with snippets, push notifications, in-app messages, static lists, reports, and social assets may not be cloned in this way
-        runAt:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          format: date-time
-          description: Datetime to run the campaign at. If unset, the campaign will be run five minutes after the call is made
-        tokens:
-          type: array
-          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
-          items:
-            $ref: '#/components/schemas/Token'
+          description: Message describing the cause of the error

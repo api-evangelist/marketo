@@ -149,6 +149,17 @@ components:
           type: string
           description: Error message.
           example: Bad request
+    Lead:
+      required:
+      - leadId
+      type: object
+      description: Lead reference for list membership.
+      properties:
+        leadId:
+          type: integer
+          format: int64
+          description: The Marketo lead ID.
+          example: 10001
     ListOperationRequest:
       required:
       - listId
@@ -165,14 +176,3 @@ components:
           description: List of lead references to add to or remove from the list.
           items:
             $ref: '#/components/schemas/Lead'
-    Lead:
-      required:
-      - leadId
-      type: object
-      description: Lead reference for list membership.
-      properties:
-        leadId:
-          type: integer
-          format: int64
-          description: The Marketo lead ID.
-          example: 10001
