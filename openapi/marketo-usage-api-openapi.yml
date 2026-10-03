@@ -75,44 +75,54 @@ paths:
                 $ref: '#/components/schemas/ResponseOfUsageData'
 components:
   schemas:
-    ResponseOfUsageData:
+    UsageData:
       type: object
       required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
+      - date
       properties:
+        date:
+          type: string
+          format: date-time
+          description: Date of the collected calls
+        total:
+          type: integer
+          format: int32
+          description: Total number of calls in the time period
+        users:
+          type: array
+          description: Counts for individual users
+          items:
+            $ref: '#/components/schemas/UserCount'
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ErrorsData:
+      type: object
+      required:
+      - date
+      properties:
+        date:
+          type: string
+          format: date-time
+          description: Date of the collected calls
         errors:
           type: array
-          description: Array of errors that occurred if the request was unsuccessful
+          description: Counts for individual error codes
           items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/UsageData'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+            $ref: '#/components/schemas/ErrorCount'
+        total:
+          type: integer
+          format: int32
+          description: Total number of errors in the time period
     ResponseOfErrorsData:
       type: object
       required:
@@ -164,55 +174,6 @@ components:
         message:
           type: string
           description: Message describing the warning
-    ErrorsData:
-      type: object
-      required:
-      - date
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: Date of the collected calls
-        errors:
-          type: array
-          description: Counts for individual error codes
-          items:
-            $ref: '#/components/schemas/ErrorCount'
-        total:
-          type: integer
-          format: int32
-          description: Total number of errors in the time period
-    UserCount:
-      type: object
-      required:
-      - count
-      - userId
-      properties:
-        count:
-          type: integer
-          format: int32
-          description: Number of calls made in the time period
-        userId:
-          type: string
-          description: Id of the user
-    UsageData:
-      type: object
-      required:
-      - date
-      properties:
-        date:
-          type: string
-          format: date-time
-          description: Date of the collected calls
-        total:
-          type: integer
-          format: int32
-          description: Total number of calls in the time period
-        users:
-          type: array
-          description: Counts for individual users
-          items:
-            $ref: '#/components/schemas/UserCount'
     ErrorCount:
       type: object
       required:
@@ -226,15 +187,54 @@ components:
         errorCode:
           type: string
           description: Integer error code of the error
-    Error:
+    ResponseOfUsageData:
       type: object
       required:
-      - code
-      - message
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
       properties:
-        code:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
           type: string
-          description: Message describing the cause of the error
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/UsageData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    UserCount:
+      type: object
+      required:
+      - count
+      - userId
+      properties:
+        count:
+          type: integer
+          format: int32
+          description: Number of calls made in the time period
+        userId:
+          type: string
+          description: Id of the user

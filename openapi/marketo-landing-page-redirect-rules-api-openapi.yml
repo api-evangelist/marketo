@@ -185,6 +185,34 @@ paths:
                 $ref: '#/components/schemas/ResponseOfLandingPageDomains'
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    RedirectTo:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: Type of redirect landing page
+          enum:
+          - landingPageId
+          - url
+        value:
+          type: string
+          description: Value for redirect landing page
+      description: JSON representation of 'to' redirect landing page rule
     LandingPageRedirectRule:
       type: object
       required:
@@ -224,44 +252,22 @@ components:
           type: string
           format: date-time
           description: Datetime the landing page redirect rule was most recently updated
-    ResponseOfLandingPageDomains:
+    RedirectFrom:
       type: object
+      required:
+      - type
+      - value
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        type:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/LandingPageDomain'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    ResponseOfLandingPageRedirectRules:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+          description: Type of redirect landing page
+          enum:
+          - landingPageId
+          - path
+        value:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/LandingPageRedirectRule'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          description: Value for redirect landing page. If type is 'path' this must not begin with forward slash
+      description: JSON representation of 'from' redirect landing page rule
     LandingPageDomain:
       type: object
       required:
@@ -277,18 +283,6 @@ components:
           enum:
           - domain
           - domain-alias
-    UpdateLandingPageRedirectRuleRequest:
-      type: object
-      properties:
-        hostname:
-          type: string
-          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
-        redirectFrom:
-          $ref: '#/components/schemas/RedirectFrom'
-          description: JSON representation of redirect from landing page, with members 'type' which may be 'landingPageId' or 'path', and 'value'
-        redirectTo:
-          $ref: '#/components/schemas/RedirectTo'
-          description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'
     ResponseOfIdResponse:
       type: object
       properties:
@@ -324,50 +318,6 @@ components:
         redirectTo:
           $ref: '#/components/schemas/RedirectTo'
           description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'
-    RedirectTo:
-      type: object
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          description: Type of redirect landing page
-          enum:
-          - landingPageId
-          - url
-        value:
-          type: string
-          description: Value for redirect landing page
-      description: JSON representation of 'to' redirect landing page rule
-    RedirectFrom:
-      type: object
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          description: Type of redirect landing page
-          enum:
-          - landingPageId
-          - path
-        value:
-          type: string
-          description: Value for redirect landing page. If type is 'path' this must not begin with forward slash
-      description: JSON representation of 'from' redirect landing page rule
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     IdResponse:
       type: object
       required:
@@ -377,3 +327,53 @@ components:
           type: integer
           format: int32
           description: Id of the asset
+    ResponseOfLandingPageDomains:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDomain'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateLandingPageRedirectRuleRequest:
+      type: object
+      properties:
+        hostname:
+          type: string
+          description: The hostname for the landing pages. Branding domain or alias. Max 255 characters
+        redirectFrom:
+          $ref: '#/components/schemas/RedirectFrom'
+          description: JSON representation of redirect from landing page, with members 'type' which may be 'landingPageId' or 'path', and 'value'
+        redirectTo:
+          $ref: '#/components/schemas/RedirectTo'
+          description: JSON representation of redirect to landing page, with members 'type' which may be 'landingPageId' or 'url', and 'value'
+    ResponseOfLandingPageRedirectRules:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageRedirectRule'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string

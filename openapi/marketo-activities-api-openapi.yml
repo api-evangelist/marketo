@@ -465,6 +465,54 @@ paths:
                 $ref: '#/components/schemas/ResponseOfActivityType'
 components:
   schemas:
+    LeadChangeField:
+      type: object
+      required:
+      - id
+      - name
+      - newValue
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the change record
+        name:
+          type: string
+          description: Name of the field which was changed
+        newValue:
+          type: string
+          description: New value after the change
+        oldValue:
+          type: string
+          description: Old value before the change
+      description: Activity record containing information on a data value change
+    Attribute:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        apiName:
+          type: string
+        name:
+          type: string
+          description: Name of the attribute
+        value:
+          type: object
+          description: Value of the attribute
+      description: Name-Value pair
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     CustomActivityTypeAttribute:
       type: object
       required:
@@ -499,238 +547,50 @@ components:
         name:
           type: string
           description: Human-readable display name of the attribute
-    CustomActivityTypeAttributeRequest:
-      type: object
-      properties:
-        attributes:
-          type: array
-          description: List of attributes to add to the activity type
-          items:
-            $ref: '#/components/schemas/CustomActivityTypeAttribute'
-    ResponseOfCustomActivityType:
+    Activity:
       type: object
       required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
+      - activityDate
+      - activityTypeId
+      - attributes
+      - id
+      - leadId
       properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
+        activityDate:
           type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/CustomActivityType'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    CustomActivityType:
-      type: object
-      properties:
-        apiName:
-          type: string
-          description: API Name of the type. The API name must be unique and alphanumeric, containing at least one letter. It is highly recommended to prepend a unique namespace of up to sixteen characters to the API name. Required on creation
+          format: date-time
+          description: Datetime of the activity
+        activityTypeId:
+          type: integer
+          format: int32
+          description: Id of the activity type
         attributes:
           type: array
-          description: List of attributes for the activity type. May only be added or update through Create or Update Custom Activity Type Attributes
+          description: List of secondary attributes
           items:
-            $ref: '#/components/schemas/CustomActivityTypeAttribute'
-        createdAt:
-          type: string
-          description: Datetime when the activity type was created
-        description:
-          type: string
-          description: Description of the activity type
-        filterName:
-          type: string
-          description: Human-readable name for the associated filter of the activity type. Required on creation
+            $ref: '#/components/schemas/Attribute'
+        campaignId:
+          type: integer
+          format: int64
+          description: Id of the associated Smart Campaign, if applicable
         id:
           type: integer
-          format: int32
-        name:
-          type: string
-          description: Human-readable display name of the type. Required on creation
-        primaryAttribute:
-          description: Primary Attribute of the activity type. Required on creation
-          $ref: '#/components/schemas/CustomActivityTypeAttribute'
-        status:
-          type: string
-          description: State of the activity type
-          enum:
-          - draft
-          - approved
-          - deleted
-          - approved with draft
-        triggerName:
-          type: string
-          description: Human-readable name for the associated trigger of the activity type. Required on creation
-        updatedAt:
-          type: string
-          description: Datetime when the activity type was most recently updated
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
+          format: int64
+          description: Integer id of the activity. This value could exceed Int.MAX. For instances which have been migrated to Activity Service, this field may not be present, and should not be treated as unique.
+        leadId:
           type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
+          format: int64
+          description: Id of the lead associated to the activity
+        marketoGUID:
           type: string
-          description: Message describing the warning
-    ResponseOfLeadChange:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
+          description: Unique id of the activity (128 character string)
+        primaryAttributeValue:
           type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadChange'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ActivityTypeAttribute:
-      type: object
-      required:
-      - dataType
-      - name
-      properties:
-        apiName:
-          type: string
-        dataType:
-          type: string
-          description: Datatype of the Attribute
-        name:
-          type: string
-          description: Name of the attribute
-    Attribute:
-      type: object
-      required:
-      - name
-      - value
-      properties:
-        apiName:
-          type: string
-        name:
-          type: string
-          description: Name of the attribute
-        value:
-          type: object
-          description: Value of the attribute
-      description: Name-Value pair
-    ResponseOfCustomActivity:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/CustomActivity'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    CustomActivityTypeRequest:
-      type: object
-      required:
-      - apiName
-      - name
-      - triggerName
-      - filterName
-      - primaryAttribute
-      properties:
-        apiName:
-          type: string
-        description:
-          type: string
-        filterName:
-          type: string
-          description: Human-readable name of the associated filter
-        name:
-          type: string
-          description: Human-readable display name of the activity type
-        primaryAttribute:
-          description: Primary attribute of the activity type
-          $ref: '#/components/schemas/CustomActivityTypeAttribute'
-        triggerName:
-          type: string
-          description: Human-readable name of the associated trigger
+          description: Value of the primary attribute
+        primaryAttributeValueId:
+          type: integer
+          format: int64
+          description: Id of the primary attribute field
     ActivityType:
       type: object
       required:
@@ -813,16 +673,157 @@ components:
           - skipped
           - added
           - removed
-    CustomActivityRequest:
+    ResponseOfVoid:
       type: object
       required:
-      - input
+      - errors
+      - requestId
+      - success
+      - warnings
       properties:
-        input:
+        errors:
           type: array
-          description: List of custom activities to insert
+          description: Array of errors that occurred if the request was unsuccessful
           items:
-            $ref: '#/components/schemas/CustomActivity'
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfLeadChange:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadChange'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    CustomActivityType:
+      type: object
+      properties:
+        apiName:
+          type: string
+          description: API Name of the type. The API name must be unique and alphanumeric, containing at least one letter. It is highly recommended to prepend a unique namespace of up to sixteen characters to the API name. Required on creation
+        attributes:
+          type: array
+          description: List of attributes for the activity type. May only be added or update through Create or Update Custom Activity Type Attributes
+          items:
+            $ref: '#/components/schemas/CustomActivityTypeAttribute'
+        createdAt:
+          type: string
+          description: Datetime when the activity type was created
+        description:
+          type: string
+          description: Description of the activity type
+        filterName:
+          type: string
+          description: Human-readable name for the associated filter of the activity type. Required on creation
+        id:
+          type: integer
+          format: int32
+        name:
+          type: string
+          description: Human-readable display name of the type. Required on creation
+        primaryAttribute:
+          description: Primary Attribute of the activity type. Required on creation
+          $ref: '#/components/schemas/CustomActivityTypeAttribute'
+        status:
+          type: string
+          description: State of the activity type
+          enum:
+          - draft
+          - approved
+          - deleted
+          - approved with draft
+        triggerName:
+          type: string
+          description: Human-readable name for the associated trigger of the activity type. Required on creation
+        updatedAt:
+          type: string
+          description: Datetime when the activity type was most recently updated
+    ResponseOfCustomActivityType:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/CustomActivityType'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ResponseOfActivityType:
       type: object
       required:
@@ -861,6 +862,138 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    CustomActivityTypeRequest:
+      type: object
+      required:
+      - apiName
+      - name
+      - triggerName
+      - filterName
+      - primaryAttribute
+      properties:
+        apiName:
+          type: string
+        description:
+          type: string
+        filterName:
+          type: string
+          description: Human-readable name of the associated filter
+        name:
+          type: string
+          description: Human-readable display name of the activity type
+        primaryAttribute:
+          description: Primary attribute of the activity type
+          $ref: '#/components/schemas/CustomActivityTypeAttribute'
+        triggerName:
+          type: string
+          description: Human-readable name of the associated trigger
+    ResponseOfActivity:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Activity'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    CustomActivityRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of custom activities to insert
+          items:
+            $ref: '#/components/schemas/CustomActivity'
+    ResponseOfCustomActivity:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/CustomActivity'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    CustomActivityTypeAttributeRequest:
+      type: object
+      properties:
+        attributes:
+          type: array
+          description: List of attributes to add to the activity type
+          items:
+            $ref: '#/components/schemas/CustomActivityTypeAttribute'
     LeadChange:
       type: object
       required:
@@ -901,150 +1034,17 @@ components:
         marketoGUID:
           type: string
           description: Unique id of the activity (128 character string)
-    Error:
+    ActivityTypeAttribute:
       type: object
       required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfActivity:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/Activity'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    LeadChangeField:
-      type: object
-      required:
-      - id
+      - dataType
       - name
-      - newValue
       properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of the change record
+        apiName:
+          type: string
+        dataType:
+          type: string
+          description: Datatype of the Attribute
         name:
           type: string
-          description: Name of the field which was changed
-        newValue:
-          type: string
-          description: New value after the change
-        oldValue:
-          type: string
-          description: Old value before the change
-      description: Activity record containing information on a data value change
-    Activity:
-      type: object
-      required:
-      - activityDate
-      - activityTypeId
-      - attributes
-      - id
-      - leadId
-      properties:
-        activityDate:
-          type: string
-          format: date-time
-          description: Datetime of the activity
-        activityTypeId:
-          type: integer
-          format: int32
-          description: Id of the activity type
-        attributes:
-          type: array
-          description: List of secondary attributes
-          items:
-            $ref: '#/components/schemas/Attribute'
-        campaignId:
-          type: integer
-          format: int64
-          description: Id of the associated Smart Campaign, if applicable
-        id:
-          type: integer
-          format: int64
-          description: Integer id of the activity. This value could exceed Int.MAX. For instances which have been migrated to Activity Service, this field may not be present, and should not be treated as unique.
-        leadId:
-          type: integer
-          format: int64
-          description: Id of the lead associated to the activity
-        marketoGUID:
-          type: string
-          description: Unique id of the activity (128 character string)
-        primaryAttributeValue:
-          type: string
-          description: Value of the primary attribute
-        primaryAttributeValueId:
-          type: integer
-          format: int64
-          description: Id of the primary attribute field
-    ResponseOfVoid:
-      type: object
-      required:
-      - errors
-      - requestId
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Name of the attribute

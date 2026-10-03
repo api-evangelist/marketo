@@ -579,89 +579,37 @@ paths:
         required: true
 components:
   schemas:
-    HtmlDataDTO:
+    ContentWaveErrorDTO:
       type: object
+      description: An entry in the errors array. The type field marks it as info, warning, or error — there is no separate warnings array; warnings appear here with type "warning".
       properties:
-        body:
+        key:
           type: string
-      title: HtmlDataDTO
-    UsedByRequestDto:
-      type: object
-      required:
-      - assetId
-      properties:
-        assetId:
+        message:
           type: string
-        pageIndex:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
+        code:
+          type: string
+        dynamicMessage:
+          type: string
         type:
           type: string
-      title: UsedByRequestDto
-    UpdateFragmentSettingsDTO:
-      type: object
-      properties:
-        fragmentType:
+          description: 'Severity of the entry: info, warning, or error.'
+        source:
           type: string
-        fragmentSubType:
+          description: Origin of the entry, e.g. validation, template, fragment, message_render, asset_publish.
+        errorMessage:
           type: string
-        supportedChannels:
-          type: array
-          items:
-            type: string
-      title: UpdateFragmentSettingsDTO
-    ThumbnailDTO:
-      type: object
-      properties:
-        url:
-          type: string
-          description: Thumbnail image, typically a base64-encoded data URI.
-      title: ThumbnailDTO
-    PageDetailsDTO:
-      type: object
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-      title: PageDetailsDTO
-    BulkDeleteRequest:
-      type: object
-      required:
-      - assetIds
-      properties:
-        assetIds:
-          type: array
-          description: Set of asset IDs to delete. Maximum 20 per request.
-          items:
-            type: string
-        ignoreUsedBy:
-          type: boolean
-          description: If true, deletes assets even if they are referenced by other assets.
-      title: BulkDeleteRequest
-    BulkUsedByItemDTO:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        count:
-          type: integer
-          format: int32
-          description: Number of places the asset is used.
-        used:
-          type: boolean
-          description: Whether the asset is used by any other asset.
-      title: BulkUsedByItemDTO
+        errorPosition:
+          type: object
+          description: Location in the content the entry refers to (for script/validation errors).
+          properties:
+            line:
+              type: integer
+              format: int32
+            column:
+              type: integer
+              format: int32
+      title: ContentWaveErrorDTO
     CloneNewAsset:
       type: object
       required:
@@ -672,92 +620,22 @@ components:
         description:
           type: string
       title: CloneNewAsset
-    FragmentSettingsDTO:
+    UsedByItemDTO:
       type: object
-      required:
-      - fragmentType
-      - supportedChannels
       properties:
-        fragmentType:
+        id:
           type: string
-        fragmentSubType:
+        name:
           type: string
-        supportedChannels:
-          type: array
-          items:
-            type: string
-      title: FragmentSettingsDTO
-    UsedByResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        channel:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsedByItemDTO'
-        pageDetails:
-          $ref: '#/components/schemas/PageDetailsDTO'
-      title: UsedByResponse
-    BulkGetRequest:
-      type: object
-      required:
-      - assetIds
-      properties:
-        assetIds:
-          type: array
-          description: Set of asset IDs to retrieve. Maximum 20 per request.
-          items:
-            type: string
-      title: BulkGetRequest
-    EditorContextDto:
-      type: object
-      properties:
-        dynamicContent:
-          type: object
-      title: EditorContextDto
-    StateTransitionRequest:
-      type: object
-      required:
-      - contentId
-      - action
-      properties:
-        contentId:
-          type: string
-        action:
-          type: string
-          description: The state transition action to perform on the asset
-          enum:
-          - approve
-          - unapprove
-          - discard
-          - create_draft
-      title: StateTransitionRequest
-    FragmentNewResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/FragmentDetailDTO'
-      title: FragmentNewResponse
-    AssociatedStateDTO:
-      type: object
-      description: A version/state of the asset (e.g. draft or approved).
-      properties:
-        contentId:
+        contentType:
           type: string
         externalId:
           type: string
-        state:
-          type: string
-      title: AssociatedStateDTO
+      title: UsedByItemDTO
     DataDTO:
       type: object
       properties:
@@ -777,71 +655,34 @@ components:
         newAsset:
           $ref: '#/components/schemas/CloneNewAsset'
       title: CloneAssetRequest
-    TextDataDTO:
-      type: object
-      properties:
-        body:
-          type: string
-        syncFromHtml:
-          type: boolean
-      title: TextDataDTO
-    FragmentFilterResult:
+    FragmentDetailDTO:
       allOf:
-      - $ref: '#/components/schemas/PageDetailsDTO'
+      - $ref: '#/components/schemas/FragmentContentDTO'
       - type: object
         properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/FragmentContentDTO'
-      title: FragmentFilterResult
-    CreateFragmentRequest:
+          data:
+            $ref: '#/components/schemas/DataDTO'
+      title: FragmentDetailDTO
+    UpdateFragmentSettingsDTO:
       type: object
-      required:
-      - name
-      - appData
-      - settings
-      description: 'Request body for creating a fragment. appData must include at least one of: folderId or workspaceId. settings must include fragmentType and supportedChannels.'
       properties:
-        name:
+        fragmentType:
           type: string
-        description:
+        fragmentSubType:
           type: string
-        appData:
-          $ref: '#/components/schemas/AppDataDTO'
-        data:
-          $ref: '#/components/schemas/DataDTO'
-        editorContext:
-          $ref: '#/components/schemas/EditorContextDto'
-        settings:
-          $ref: '#/components/schemas/FragmentSettingsDTO'
-      title: CreateFragmentRequest
-    BulkUsedByRequest:
-      type: object
-      required:
-      - assetIds
-      properties:
-        assetIds:
+        supportedChannels:
           type: array
-          description: Asset IDs to query. Maximum 50 per request.
           items:
             type: string
-      title: BulkUsedByRequest
-    UpdateFragmentRequest:
+      title: UpdateFragmentSettingsDTO
+    DeleteResponse:
       type: object
-      description: Request body for updating a fragment.
       properties:
-        name:
+        success:
+          type: boolean
+        requestId:
           type: string
-        description:
-          type: string
-        data:
-          $ref: '#/components/schemas/DataDTO'
-        editorContext:
-          $ref: '#/components/schemas/EditorContextDto'
-        settings:
-          $ref: '#/components/schemas/UpdateFragmentSettingsDTO'
-      title: UpdateFragmentRequest
+      title: DeleteResponse
     ContentMetadataDTO:
       type: object
       description: Audit information for the asset.
@@ -863,6 +704,132 @@ components:
         modifiedByAepId:
           type: string
       title: ContentMetadataDTO
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentWaveErrorDTO'
+      title: ErrorResponse
+    HtmlDataDTO:
+      type: object
+      properties:
+        body:
+          type: string
+      title: HtmlDataDTO
+    BulkDeleteRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Set of asset IDs to delete. Maximum 20 per request.
+          items:
+            type: string
+        ignoreUsedBy:
+          type: boolean
+          description: If true, deletes assets even if they are referenced by other assets.
+      title: BulkDeleteRequest
+    EditorContextDto:
+      type: object
+      properties:
+        dynamicContent:
+          type: object
+      title: EditorContextDto
+    UpdateFragmentRequest:
+      type: object
+      description: Request body for updating a fragment.
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+        settings:
+          $ref: '#/components/schemas/UpdateFragmentSettingsDTO'
+      title: UpdateFragmentRequest
+    AssociatedStateDTO:
+      type: object
+      description: A version/state of the asset (e.g. draft or approved).
+      properties:
+        contentId:
+          type: string
+        externalId:
+          type: string
+        state:
+          type: string
+      title: AssociatedStateDTO
+    FragmentNewResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/FragmentDetailDTO'
+      title: FragmentNewResponse
+    BulkGetRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Set of asset IDs to retrieve. Maximum 20 per request.
+          items:
+            type: string
+      title: BulkGetRequest
+    UsedByRequestDto:
+      type: object
+      required:
+      - assetId
+      properties:
+        assetId:
+          type: string
+        pageIndex:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        type:
+          type: string
+      title: UsedByRequestDto
+    PageDetailsDTO:
+      type: object
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+      title: PageDetailsDTO
+    FragmentFilterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          $ref: '#/components/schemas/FragmentFilterResult'
+      title: FragmentFilterResponse
     FragmentContentDTO:
       type: object
       properties:
@@ -901,6 +868,28 @@ components:
         themeId:
           type: string
       title: FragmentContentDTO
+    BulkUsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+          format: int32
+          description: Number of places the asset is used.
+        used:
+          type: boolean
+          description: Whether the asset is used by any other asset.
+      title: BulkUsedByItemDTO
+    ThumbnailDTO:
+      type: object
+      properties:
+        url:
+          type: string
+          description: Thumbnail image, typically a base64-encoded data URI.
+      title: ThumbnailDTO
     AppDataDTO:
       type: object
       properties:
@@ -911,15 +900,17 @@ components:
         workspaceId:
           type: string
       title: AppDataDTO
-    DeleteResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-      title: DeleteResponse
-    FragmentFilterResponse:
+    FragmentFilterResult:
+      allOf:
+      - $ref: '#/components/schemas/PageDetailsDTO'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/FragmentContentDTO'
+      title: FragmentFilterResult
+    UsedByResponse:
       type: object
       properties:
         success:
@@ -927,51 +918,46 @@ components:
         requestId:
           type: string
         result:
-          $ref: '#/components/schemas/FragmentFilterResult'
-      title: FragmentFilterResponse
-    ContentWaveErrorDTO:
-      type: object
-      description: An entry in the errors array. The type field marks it as info, warning, or error — there is no separate warnings array; warnings appear here with type "warning".
-      properties:
-        key:
-          type: string
-        message:
-          type: string
-        code:
-          type: string
-        dynamicMessage:
-          type: string
-        type:
-          type: string
-          description: 'Severity of the entry: info, warning, or error.'
-        source:
-          type: string
-          description: Origin of the entry, e.g. validation, template, fragment, message_render, asset_publish.
-        errorMessage:
-          type: string
-        errorPosition:
-          type: object
-          description: Location in the content the entry refers to (for script/validation errors).
-          properties:
-            line:
-              type: integer
-              format: int32
-            column:
-              type: integer
-              format: int32
-      title: ContentWaveErrorDTO
-    ErrorResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-        errors:
           type: array
           items:
-            $ref: '#/components/schemas/ContentWaveErrorDTO'
-      title: ErrorResponse
+            $ref: '#/components/schemas/UsedByItemDTO'
+        pageDetails:
+          $ref: '#/components/schemas/PageDetailsDTO'
+      title: UsedByResponse
+    BulkUsedByRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Asset IDs to query. Maximum 50 per request.
+          items:
+            type: string
+      title: BulkUsedByRequest
+    FragmentSettingsDTO:
+      type: object
+      required:
+      - fragmentType
+      - supportedChannels
+      properties:
+        fragmentType:
+          type: string
+        fragmentSubType:
+          type: string
+        supportedChannels:
+          type: array
+          items:
+            type: string
+      title: FragmentSettingsDTO
+    TextDataDTO:
+      type: object
+      properties:
+        body:
+          type: string
+        syncFromHtml:
+          type: boolean
+      title: TextDataDTO
     BulkUsedByResponse:
       type: object
       properties:
@@ -984,27 +970,41 @@ components:
           items:
             $ref: '#/components/schemas/BulkUsedByItemDTO'
       title: BulkUsedByResponse
-    FragmentDetailDTO:
-      allOf:
-      - $ref: '#/components/schemas/FragmentContentDTO'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/DataDTO'
-      title: FragmentDetailDTO
-    UsedByItemDTO:
+    StateTransitionRequest:
       type: object
+      required:
+      - contentId
+      - action
       properties:
-        id:
+        contentId:
           type: string
+        action:
+          type: string
+          description: The state transition action to perform on the asset
+          enum:
+          - approve
+          - unapprove
+          - discard
+          - create_draft
+      title: StateTransitionRequest
+    CreateFragmentRequest:
+      type: object
+      required:
+      - name
+      - appData
+      - settings
+      description: 'Request body for creating a fragment. appData must include at least one of: folderId or workspaceId. settings must include fragmentType and supportedChannels.'
+      properties:
         name:
+          type: string
+        description:
           type: string
         appData:
           $ref: '#/components/schemas/AppDataDTO'
-        channel:
-          type: string
-        contentType:
-          type: string
-        externalId:
-          type: string
-      title: UsedByItemDTO
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+        settings:
+          $ref: '#/components/schemas/FragmentSettingsDTO'
+      title: CreateFragmentRequest

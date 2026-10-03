@@ -381,6 +381,25 @@ paths:
                 $ref: '#/components/schemas/ResponseOfEmailTemplateUsedByResponse'
 components:
   schemas:
+    ResponseOfEmailTemplateContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     EmailTemplateContentResponse:
       type: object
       required:
@@ -401,87 +420,18 @@ components:
           enum:
           - approved
           - draft
-    UpdateEmailTemplateMetaDataRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        name:
-          type: string
-          description: Name of the Email Template
-    ResponseOfEmailTemplateResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailTemplateResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    ResponseOfEmailTemplateContentResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailTemplateContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    CreateEmailTemplateRequest:
+    Error:
       type: object
       required:
-      - name
-      - folder
-      - content
+      - code
+      - message
       properties:
-        name:
+        code:
           type: string
-          description: Name of the Email Template. Must be unique under the parent folder.
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        description:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Description of the email template
-        content:
-          type: string
-          description: HTML content for template. Multipart file.
-    CloneEmailTemplateRequest:
-      type: object
-      required:
-      - folder
-      - name
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        name:
-          type: string
-          description: Name of the Email Template
+          description: Message describing the cause of the error
     ResponseOfIdResponse:
       type: object
       properties:
@@ -555,23 +505,6 @@ components:
         content:
           type: string
           description: Content for the email template. Multipart file.
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
     EmailTemplateResponse:
       type: object
       required:
@@ -615,18 +548,23 @@ components:
         workspace:
           type: string
           description: Name of the workspace
-    Error:
+    Folder:
       type: object
       required:
-      - code
-      - message
+      - id
+      - type
       properties:
-        code:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
     IdResponse:
       type: object
       required:
@@ -636,3 +574,65 @@ components:
           type: integer
           format: int32
           description: Id of the asset
+    CreateEmailTemplateRequest:
+      type: object
+      required:
+      - name
+      - folder
+      - content
+      properties:
+        name:
+          type: string
+          description: Name of the Email Template. Must be unique under the parent folder.
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the email template
+        content:
+          type: string
+          description: HTML content for template. Multipart file.
+    UpdateEmailTemplateMetaDataRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Email Template
+    CloneEmailTemplateRequest:
+      type: object
+      required:
+      - folder
+      - name
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the Email Template
+    ResponseOfEmailTemplateResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailTemplateResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string

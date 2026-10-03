@@ -88,25 +88,18 @@ paths:
                 $ref: '#/components/schemas/ResponseOfSegmentsResponse'
 components:
   schemas:
-    ResponseOfSegmentsResponse:
+    Error:
       type: object
+      required:
+      - code
+      - message
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        code:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/SegmentsResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     ResponseOfSegmentationResponse:
       type: object
       properties:
@@ -120,6 +113,55 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SegmentationResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    SegmentsResponse:
+      type: object
+      required:
+      - segmentationId
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime the asset was created
+        description:
+          type: string
+          description: Description of the asset
+        id:
+          type: integer
+          format: int64
+          description: Id of the asset
+        name:
+          type: string
+          description: Name of the asset
+        segmentationId:
+          type: integer
+          format: int32
+          description: Id of the Segmentation
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime the asset was most recently updated
+        url:
+          type: string
+          description: Url of the asset in the Marketo UI
+    ResponseOfSegmentsResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SegmentsResponse'
         success:
           type: boolean
         warnings:
@@ -162,48 +204,6 @@ components:
         workspace:
           type: string
           description: Name of the workspace
-    SegmentsResponse:
-      type: object
-      required:
-      - segmentationId
-      properties:
-        createdAt:
-          type: string
-          format: date-time
-          description: Datetime the asset was created
-        description:
-          type: string
-          description: Description of the asset
-        id:
-          type: integer
-          format: int64
-          description: Id of the asset
-        name:
-          type: string
-          description: Name of the asset
-        segmentationId:
-          type: integer
-          format: int32
-          description: Id of the Segmentation
-        updatedAt:
-          type: string
-          format: date-time
-          description: Datetime the asset was most recently updated
-        url:
-          type: string
-          description: Url of the asset in the Marketo UI
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     Folder:
       type: object
       required:

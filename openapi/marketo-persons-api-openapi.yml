@@ -94,18 +94,15 @@ components:
         field2:
           type: string
           example: firstName
-    ErrorResponse:
+    Person:
       type: object
-      description: Error response body returned for non-202 responses.
-      properties:
-        error_code:
-          type: string
-          description: Error code.
-          example: '4000801'
-        message:
-          type: string
-          description: Error message.
-          example: Bad request
+      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
+      additionalProperties: true
+      example:
+        email: brooklyn.parker@karnv.com
+        firstName: Brooklyn
+        lastName: Parker
+        company: Karnv
     SyncPersonsRequest:
       required:
       - persons
@@ -129,12 +126,15 @@ components:
           description: List of attribute name-value pairs for the person.
           items:
             $ref: '#/components/schemas/Person'
-    Person:
+    ErrorResponse:
       type: object
-      description: Person/lead record. May contain any standard or custom lead field as key-value pairs.
-      additionalProperties: true
-      example:
-        email: brooklyn.parker@karnv.com
-        firstName: Brooklyn
-        lastName: Parker
-        company: Karnv
+      description: Error response body returned for non-202 responses.
+      properties:
+        error_code:
+          type: string
+          description: Error code.
+          example: '4000801'
+        message:
+          type: string
+          description: Error message.
+          example: Bad request

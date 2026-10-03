@@ -126,56 +126,7 @@ paths:
                 $ref: '#/components/schemas/ResponseOfObjectMetaData'
 components:
   schemas:
-    ObjectRelation:
-      type: object
-      required:
-      - field
-      - relatedTo
-      - type
-      properties:
-        field:
-          type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
-          type: string
-          description: Type of the relationship field
-    SyncSalesPersonRequest:
-      type: object
-      required:
-      - input
-      properties:
-        action:
-          type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/SalesPerson'
-    DeleteSalesPersonRequest:
-      type: object
-      required:
-      - input
-      properties:
-        deleteBy:
-          type: string
-          description: Key to use for deletion of the record
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/SalesPerson'
-    ResponseOfSalesPerson:
+    ResponseOfObjectMetaData:
       type: object
       required:
       - errors
@@ -203,7 +154,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/SalesPerson'
+            $ref: '#/components/schemas/ObjectMetaData'
         success:
           type: boolean
           example: false
@@ -213,43 +164,44 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
+    Error:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
         message:
           type: string
-          description: Message describing the warning
-    ObjectField:
+          description: Message describing the cause of the error
+    SalesPerson:
       type: object
       properties:
-        dataType:
-          type: string
-          description: Datatype of the field
-        displayName:
-          type: string
-          description: UI display-name of the field
-        length:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of the salesperson record
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
           type: integer
           format: int32
-          description: Max length of the field. Only applicable to text, string, and text area.
-        name:
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
           type: string
-          description: Name of the field
-        updateable:
-          type: boolean
-          example: false
-          description: Whether the field is updateable
-        crmManaged:
-          type: boolean
-          example: false
-          description: Whether the field is managed by CRM (native sync)
+          description: Status of the operation performed on the record
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
     ObjectMetaData:
       type: object
       required:
@@ -325,44 +277,68 @@ components:
           enum:
           - draft
           - approved
-    SalesPerson:
+    SyncSalesPersonRequest:
       type: object
+      required:
+      - input
       properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of the salesperson record
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-        status:
+        action:
           type: string
-          description: Status of the operation performed on the record
+          description: Type of sync operation to perform
           enum:
-          - created
-          - updated
-          - deleted
-          - skipped
-          - added
-          - removed
-    Reason:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/SalesPerson'
+    ObjectRelation:
+      type: object
+      required:
+      - field
+      - relatedTo
+      - type
+      properties:
+        field:
+          type: string
+          description: API Name of link field
+        relatedTo:
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
+          type: string
+          description: Type of the relationship field
+    Warning:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: string
-          description: Integer code of the reason
+          type: integer
+          format: int32
+          description: Integer code of the warning
         message:
           type: string
-          description: Message describing the reason for the status of the operation
+          description: Message describing the warning
+    DeleteSalesPersonRequest:
+      type: object
+      required:
+      - input
+      properties:
+        deleteBy:
+          type: string
+          description: Key to use for deletion of the record
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/SalesPerson'
     RelatedObject:
       type: object
       required:
@@ -375,19 +351,7 @@ components:
         name:
           type: string
           description: Name of the link object
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfObjectMetaData:
+    ResponseOfSalesPerson:
       type: object
       required:
       - errors
@@ -415,7 +379,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/ObjectMetaData'
+            $ref: '#/components/schemas/SalesPerson'
         success:
           type: boolean
           example: false
@@ -425,3 +389,39 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    ObjectField:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Datatype of the field
+        displayName:
+          type: string
+          description: UI display-name of the field
+        length:
+          type: integer
+          format: int32
+          description: Max length of the field. Only applicable to text, string, and text area.
+        name:
+          type: string
+          description: Name of the field
+        updateable:
+          type: boolean
+          example: false
+          description: Whether the field is updateable
+        crmManaged:
+          type: boolean
+          example: false
+          description: Whether the field is managed by CRM (native sync)
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation

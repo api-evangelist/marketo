@@ -166,7 +166,19 @@ paths:
         required: true
 components:
   schemas:
-    ResponseOfSmartListResponse:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfIdResponse:
       type: object
       properties:
         errors:
@@ -178,75 +190,28 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/SmartListResponse'
+            $ref: '#/components/schemas/IdResponse'
         success:
           type: boolean
         warnings:
           type: array
           items:
             type: string
-    IdResponse:
+    CloneSmartListRequest:
       type: object
       required:
-      - id
+      - name
+      - folder
       properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset
-    SmartListRules:
-      type: object
-      required:
-      - filterMatchType
-      - triggers
-      - filters
-      description: JSON representation of smart list rules
-      properties:
-        filterMatchType:
+        name:
           type: string
-          description: Smart list filter match type (rule logic)
-          enum:
-          - All
-          - Any
-          - Advanced
-        triggers:
-          type: array
-          description: List of smart list triggers
-          items:
-            type: string
-        filters:
-          type: array
-          description: List of smart list filters
-          items:
-            $ref: '#/components/schemas/SmartListFilters'
-    SmartListConditions:
-      type: object
-      required:
-      - activityAttributeId
-      - activityAttributeName
-      - operator
-      - values
-      - isPrimary
-      description: JSON representation of smart list conditions
-      properties:
-        activityAttributeId:
-          type: integer
-          format: int32
-          description: Id of the activity attribute
-        activityAttributeName:
+          description: Name for the cloned smart list
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        description:
           type: string
-          description: Name of activity attribute
-        operator:
-          type: string
-          description: Value of operator
-        values:
-          type: array
-          description: List of values
-          items:
-            type: string
-        isPrimary:
-          type: boolean
-          description: Whether the condition is primary or not (first condition of the smart list)
+          description: Description of the cloned smart list
     SmartListFilters:
       type: object
       required:
@@ -280,22 +245,91 @@ components:
           description: List of smart list conditions
           items:
             $ref: '#/components/schemas/SmartListConditions'
-    CloneSmartListRequest:
+    SmartListResponse:
       type: object
       required:
+      - id
       - name
+      - description
+      - createdAt
+      - updatedAt
+      - url
       - folder
+      - workspace
       properties:
+        id:
+          type: integer
+          format: int64
+          description: Id of the smart list
         name:
           type: string
-          description: Name for the cloned smart list
+          description: Name of the smart list
+        description:
+          type: string
+          description: Description of the smart list
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime the smart list was created
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime the smart list was most recently updated
+        url:
+          type: string
+          description: Url of the smart list in the Marketo UI
         folder:
           description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
           $ref: '#/components/schemas/Folder'
-        description:
+        workspace:
           type: string
-          description: Description of the cloned smart list
-    ResponseOfIdResponse:
+          description: Name of the workspace
+    SmartListConditions:
+      type: object
+      required:
+      - activityAttributeId
+      - activityAttributeName
+      - operator
+      - values
+      - isPrimary
+      description: JSON representation of smart list conditions
+      properties:
+        activityAttributeId:
+          type: integer
+          format: int32
+          description: Id of the activity attribute
+        activityAttributeName:
+          type: string
+          description: Name of activity attribute
+        operator:
+          type: string
+          description: Value of operator
+        values:
+          type: array
+          description: List of values
+          items:
+            type: string
+        isPrimary:
+          type: boolean
+          description: Whether the condition is primary or not (first condition of the smart list)
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    ResponseOfSmartListResponse:
       type: object
       properties:
         errors:
@@ -307,7 +341,26 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/IdResponse'
+            $ref: '#/components/schemas/SmartListResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfSmartListResponseWithRules:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SmartListResponseWithRules'
         success:
           type: boolean
         warnings:
@@ -356,90 +409,37 @@ components:
         rules:
           description: Rules contained in the smart list
           $ref: '#/components/schemas/SmartListRules'
-    ResponseOfSmartListResponseWithRules:
+    SmartListRules:
       type: object
+      required:
+      - filterMatchType
+      - triggers
+      - filters
+      description: JSON representation of smart list rules
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        filterMatchType:
           type: string
-        result:
+          description: Smart list filter match type (rule logic)
+          enum:
+          - All
+          - Any
+          - Advanced
+        triggers:
           type: array
-          items:
-            $ref: '#/components/schemas/SmartListResponseWithRules'
-        success:
-          type: boolean
-        warnings:
-          type: array
+          description: List of smart list triggers
           items:
             type: string
-    SmartListResponse:
+        filters:
+          type: array
+          description: List of smart list filters
+          items:
+            $ref: '#/components/schemas/SmartListFilters'
+    IdResponse:
       type: object
       required:
       - id
-      - name
-      - description
-      - createdAt
-      - updatedAt
-      - url
-      - folder
-      - workspace
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Id of the smart list
-        name:
-          type: string
-          description: Name of the smart list
-        description:
-          type: string
-          description: Description of the smart list
-        createdAt:
-          type: string
-          format: date-time
-          description: Datetime the smart list was created
-        updatedAt:
-          type: string
-          format: date-time
-          description: Datetime the smart list was most recently updated
-        url:
-          type: string
-          description: Url of the smart list in the Marketo UI
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        workspace:
-          type: string
-          description: Name of the workspace
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    Folder:
-      type: object
-      required:
-      - id
-      - type
       properties:
         id:
           type: integer
           format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
+          description: Id of the asset

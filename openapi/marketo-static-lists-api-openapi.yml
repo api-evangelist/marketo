@@ -494,85 +494,18 @@ paths:
     - url: https://localhost:8080/
 components:
   schemas:
-    UpdateStaticListRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the static list
-        name:
-          type: string
-          description: Name of the static list
-    CreateStaticListRequest:
+    Error:
       type: object
       required:
-      - name
-      - folder
+      - code
+      - message
       properties:
-        description:
+        code:
           type: string
-          description: Description of the static list
-        name:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Name of the static list
-        folder:
-          description: Folder object describing the parent folder
-          $ref: '#/components/schemas/Folder'
-    ResponseOfStaticListResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/StaticListResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    ResponseOfIdResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
+          description: Message describing the cause of the error
     StaticListResponse:
       type: object
       required:
@@ -614,18 +547,85 @@ components:
           description: Name of the workspace
         computedUrl:
           type: string
-    Error:
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateStaticListRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the static list
+        name:
+          type: string
+          description: Name of the static list
+    Folder:
       type: object
       required:
-      - code
-      - message
+      - id
+      - type
       properties:
-        code:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    CreateStaticListRequest:
+      type: object
+      required:
+      - name
+      - folder
+      properties:
+        description:
           type: string
-          description: Message describing the cause of the error
+          description: Description of the static list
+        name:
+          type: string
+          description: Name of the static list
+        folder:
+          description: Folder object describing the parent folder
+          $ref: '#/components/schemas/Folder'
+    ResponseOfStaticListResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/StaticListResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     IdResponse:
       type: object
       required:
@@ -635,6 +635,46 @@ components:
           type: integer
           format: int32
           description: Id of the asset
+    ListOperationRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/LeadInputData'
+    ProgramMembership:
+      type: object
+      required:
+      - membershipDate
+      - progressionStatus
+      properties:
+        acquiredBy:
+          type: boolean
+          example: false
+          description: Whether the lead was acquired by the parent program
+        isExhausted:
+          type: boolean
+          example: false
+          description: Whether the lead is currently exhausted in the stream, if applicable
+        membershipDate:
+          type: string
+          description: Date the lead first became a member of the program
+        nurtureCadence:
+          type: string
+          description: Cadence of the parent stream if applicable
+        progressionStatus:
+          type: string
+          description: Program status of the lead in the parent program
+        reachedSuccess:
+          type: boolean
+          example: false
+          description: Whether the lead is in a success-status in the parent program
+        stream:
+          type: string
+          description: Stream that the lead is a member of, if the parent program is an engagement program
     ListOperationOutputData:
       type: object
       required:
@@ -652,6 +692,165 @@ components:
         status:
           type: string
           description: Status of the operation performed on the record
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    LeadInputData:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
+    ResponseOfLeadByListId:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Lead'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ResponseOfListOperationOutputData:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ListOperationOutputData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    StaticList:
+      type: object
+      required:
+      - createdAt
+      - id
+      - name
+      - updatedAt
+      properties:
+        createdAt:
+          type: string
+          description: Datetime when the list was created
+        description:
+          type: string
+          description: Description of the static list
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the static list
+        name:
+          type: string
+          description: Name of the static list
+        programName:
+          type: string
+          description: Name of the program
+        updatedAt:
+          type: string
+          description: Datetime when the list was most recently updated
+        workspaceName:
+          type: string
+          description: Name of the parent workspace, if applicable
+    ResponseOfStaticList:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/StaticList'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     Lead:
       type: object
       properties:
@@ -707,175 +906,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    LeadInputData:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-      description: Lead record containing only lead id
-    ListOperationRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of leads for input
-          items:
-            $ref: '#/components/schemas/LeadInputData'
-    ResponseOfStaticList:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/StaticList'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ResponseOfListOperationOutputData:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ListOperationOutputData'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    ProgramMembership:
-      type: object
-      required:
-      - membershipDate
-      - progressionStatus
-      properties:
-        acquiredBy:
-          type: boolean
-          example: false
-          description: Whether the lead was acquired by the parent program
-        isExhausted:
-          type: boolean
-          example: false
-          description: Whether the lead is currently exhausted in the stream, if applicable
-        membershipDate:
-          type: string
-          description: Date the lead first became a member of the program
-        nurtureCadence:
-          type: string
-          description: Cadence of the parent stream if applicable
-        progressionStatus:
-          type: string
-          description: Program status of the lead in the parent program
-        reachedSuccess:
-          type: boolean
-          example: false
-          description: Whether the lead is in a success-status in the parent program
-        stream:
-          type: string
-          description: Stream that the lead is a member of, if the parent program is an engagement program
-    ResponseOfLeadByListId:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/Lead'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
     Reason:
       type: object
       required:
@@ -888,36 +918,6 @@ components:
         message:
           type: string
           description: Message describing the reason for the status of the operation
-    StaticList:
-      type: object
-      required:
-      - createdAt
-      - id
-      - name
-      - updatedAt
-      properties:
-        createdAt:
-          type: string
-          description: Datetime when the list was created
-        description:
-          type: string
-          description: Description of the static list
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of the static list
-        name:
-          type: string
-          description: Name of the static list
-        programName:
-          type: string
-          description: Name of the program
-        updatedAt:
-          type: string
-          description: Datetime when the list was most recently updated
-        workspaceName:
-          type: string
-          description: Name of the parent workspace, if applicable
 x-refined-from:
 - marketo-asset-openapi-original.json
 - marketo-lead-database-openapi-original.json

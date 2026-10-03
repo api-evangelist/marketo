@@ -812,25 +812,18 @@ paths:
         required: true
 components:
   schemas:
-    ResponseOfEmailModuleResponse:
+    Error:
       type: object
+      required:
+      - code
+      - message
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        code:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailModuleResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     EmailResponse:
       type: object
       required:
@@ -923,6 +916,117 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/EmailCCFields'
+    SendSampleResponse:
+      type: object
+      required:
+      - service
+      - result
+      properties:
+        service:
+          type: string
+          description: API call name
+          enum:
+          - sendTestEmail
+        result:
+          type: boolean
+          description: Whether call was successful
+    ResponseOfSendSampleResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SendSampleResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfEmailResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    EmailContentResponse:
+      type: object
+      required:
+      - contentType
+      - htmlId
+      - value
+      properties:
+        contentType:
+          type: string
+          description: Type of content to set for the section.
+        htmlId:
+          type: string
+          description: HTML id of the content section
+        index:
+          type: integer
+          format: int32
+        isLocked:
+          type: boolean
+        parentHtmlId:
+          type: string
+        value:
+          type: object
+          description: Contents of the section
+    ResponseOfEmailVariableResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailVariableResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailFullContentRequest:
+      type: object
+      required:
+      - content
+      properties:
+        content:
+          type: string
+          description: Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags.
+    UpdateEmailFullContentResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the email
     UpdateEmailDynamicContentRequest:
       type: object
       required:
@@ -966,357 +1070,6 @@ components:
           type: integer
           format: int32
           description: Overrides native width of the image. The resulting file will be resized to the given width
-    ResponseOfUpdateEmailFullContentResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/UpdateEmailFullContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    SendSampleEmailRequest:
-      type: object
-      required:
-      - emailAddress
-      properties:
-        emailAddress:
-          type: string
-          description: Email address to receive sample email
-        leadId:
-          type: string
-          description: Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.
-        textOnly:
-          type: boolean
-          description: Whether to send to text only version along with the HTML version. Default false.
-    EmailVariableResponse:
-      type: object
-      required:
-      - name
-      - value
-      - moduleScope
-      properties:
-        name:
-          type: string
-          description: Name of the email variable
-        value:
-          type: string
-          description: Value of the email variable
-        moduleScope:
-          type: boolean
-          description: Returns true for local variables else returns false
-        moduleId:
-          type: string
-          description: Returns the moduleId associated with the variable, only in case of local variable
-    GetEmailFullContentResponse:
-      type: object
-      required:
-      - content
-      - id
-      - status
-      properties:
-        content:
-          type: string
-          description: HTML content of the email
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of the email
-        status:
-          type: string
-          description: Status filter for draft or approved versions
-          enum:
-          - approved
-          - draft
-    EmailDynamicContentResponse:
-      type: object
-      properties:
-        content:
-          type: array
-          description: List of variations in the section
-          items:
-            $ref: '#/components/schemas/EmailDynamicContentItem'
-        createdAt:
-          type: string
-          format: date-time
-          description: Datetime when the section was created
-        id:
-          type: integer
-          format: int32
-          description: Id of the dnamic content section
-        segmentation:
-          type: integer
-          format: int32
-          description: Segmentation to which the section is linked
-        updatedAt:
-          type: string
-          format: date-time
-          description: Datetime when the section was last updated
-    CloneEmailRequest:
-      type: object
-      required:
-      - folder
-      - name
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        name:
-          type: string
-          description: Name of the new email asset
-        operational:
-          type: boolean
-          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
-    UpdateEmailComponentDataRequest:
-      type: object
-      properties:
-        fromEmail:
-          description: From-address of the Email
-          $ref: '#/components/schemas/EmailHeaderField'
-        fromName:
-          description: From-name of the Email
-          $ref: '#/components/schemas/EmailHeaderField'
-        replyTO:
-          description: Reply-To address of the Email
-          $ref: '#/components/schemas/EmailHeaderField'
-        subject:
-          description: Subject Line of the Email
-          $ref: '#/components/schemas/EmailHeaderField'
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    CreateEmailRequest:
-      type: object
-      required:
-      - folder
-      - fromEmail
-      - fromName
-      - name
-      - replyEmail
-      - subject
-      - template
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        fromEmail:
-          type: string
-          description: From-address of the Email
-        fromName:
-          type: string
-          description: From-name of the Email
-        name:
-          type: string
-          description: Name of the email
-        operational:
-          type: boolean
-          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
-        replyEmail:
-          type: string
-          description: Reply-To address of the Email
-        subject:
-          type: string
-          description: Subject Line of the Email
-        template:
-          type: integer
-          format: int32
-          description: Id of the parent template
-        textOnly:
-          type: boolean
-          description: Setting to include text-only version of email when sent
-        autoCopyToText:
-          type: boolean
-          description: Setting to automatically copy HTML version to Text version
-    EmailModuleResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the email module
-    UpdateEmailFullContentResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Unique integer id of the email
-    EmailDynamicContentItem:
-      type: object
-      properties:
-        content:
-          type: string
-        id:
-          type: string
-        segmentId:
-          type: string
-        segmentName:
-          type: string
-        type:
-          type: string
-    ResponseOfSendSampleResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/SendSampleResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    UpdateEmailMetaDataRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the asset
-        name:
-          type: string
-          description: Name of the Email
-        preHeader:
-          type: string
-          description: Preheader text for the email
-        operational:
-          type: boolean
-          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
-        published:
-          type: boolean
-          description: Whether the email has been published to Sales Insight. Default false
-        textOnly:
-          type: boolean
-          description: Setting to include text-only version of email when sent
-        webView:
-          type: boolean
-          description: Whether the email has been enabled to allow the 'View as Web Page' when received
-        autoCopyToText:
-          type: boolean
-          description: Setting to automatically copy HTML version to Text version
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    IdResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset
-    ResponseOfGetEmailFullContentResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/GetEmailFullContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    UpdateEmailFullContentRequest:
-      type: object
-      required:
-      - content
-      properties:
-        content:
-          type: string
-          description: Multipart file. File containing HTML document to update with. File cannot include JavaScript or script tags.
-    UpdateVariableRequest:
-      type: object
-      properties:
-        value:
-          type: string
-          description: Value to update variable with
-        moduleId:
-          type: string
-          description: Module that variable is associated with. Required for updating module variables. Not needed for global variables.
-    EmailHeaderField:
-      type: object
-      required:
-      - type
-      - value
-      properties:
-        type:
-          type: string
-          description: Field type
-        value:
-          type: string
-          description: Value of field
-    SendSampleResponse:
-      type: object
-      required:
-      - service
-      - result
-      properties:
-        service:
-          type: string
-          description: API call name
-          enum:
-          - sendTestEmail
-        result:
-          type: boolean
-          description: Whether call was successful
     UpdateEmailComponentContentRequest:
       type: object
       required:
@@ -1362,7 +1115,58 @@ components:
           type: integer
           format: int32
           description: Overrides native width of the image. The resulting file will be resized to the given width
-    ResponseOfEmailResponse:
+    SendSampleEmailRequest:
+      type: object
+      required:
+      - emailAddress
+      properties:
+        emailAddress:
+          type: string
+          description: Email address to receive sample email
+        leadId:
+          type: string
+          description: Id of a lead to impersonate. Tokens and dynamic content will be populated as though it were sent to the lead.
+        textOnly:
+          type: boolean
+          description: Whether to send to text only version along with the HTML version. Default false.
+    EmailCCFields:
+      type: object
+      required:
+      - attributeId
+      - objectName
+      - displayName
+      - apiName
+      properties:
+        attributeId:
+          type: string
+          description: Attribute identifier
+        objectName:
+          type: string
+          description: Object name. 'lead' or 'company'
+        displayName:
+          type: string
+          description: Display name
+        apiName:
+          type: string
+          description: API name
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    ResponseOfEmailModuleResponse:
       type: object
       properties:
         errors:
@@ -1374,14 +1178,60 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/EmailResponse'
+            $ref: '#/components/schemas/EmailModuleResponse'
         success:
           type: boolean
         warnings:
           type: array
           items:
             type: string
-    ResponseOfEmailCCFieldsResponse:
+    EmailDynamicContentResponse:
+      type: object
+      properties:
+        content:
+          type: array
+          description: List of variations in the section
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentItem'
+        createdAt:
+          type: string
+          format: date-time
+          description: Datetime when the section was created
+        id:
+          type: integer
+          format: int32
+          description: Id of the dnamic content section
+        segmentation:
+          type: integer
+          format: int32
+          description: Segmentation to which the section is linked
+        updatedAt:
+          type: string
+          format: date-time
+          description: Datetime when the section was last updated
+    EmailDynamicContentItem:
+      type: object
+      properties:
+        content:
+          type: string
+        id:
+          type: string
+        segmentId:
+          type: string
+        segmentName:
+          type: string
+        type:
+          type: string
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
+    ResponseOfUpdateEmailFullContentResponse:
       type: object
       properties:
         errors:
@@ -1393,13 +1243,74 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/EmailCCFields'
+            $ref: '#/components/schemas/UpdateEmailFullContentResponse'
         success:
           type: boolean
         warnings:
           type: array
           items:
             type: string
+    UpdateEmailMetaDataRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Email
+        preHeader:
+          type: string
+          description: Preheader text for the email
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+        published:
+          type: boolean
+          description: Whether the email has been published to Sales Insight. Default false
+        textOnly:
+          type: boolean
+          description: Setting to include text-only version of email when sent
+        webView:
+          type: boolean
+          description: Whether the email has been enabled to allow the 'View as Web Page' when received
+        autoCopyToText:
+          type: boolean
+          description: Setting to automatically copy HTML version to Text version
+    ResponseOfEmailDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateEmailComponentDataRequest:
+      type: object
+      properties:
+        fromEmail:
+          description: From-address of the Email
+          $ref: '#/components/schemas/EmailHeaderField'
+        fromName:
+          description: From-name of the Email
+          $ref: '#/components/schemas/EmailHeaderField'
+        replyTO:
+          description: Reply-To address of the Email
+          $ref: '#/components/schemas/EmailHeaderField'
+        subject:
+          description: Subject Line of the Email
+          $ref: '#/components/schemas/EmailHeaderField'
     ResponseOfIdResponse:
       type: object
       properties:
@@ -1419,7 +1330,7 @@ components:
           type: array
           items:
             type: string
-    ResponseOfEmailDynamicContentResponse:
+    ResponseOfGetEmailFullContentResponse:
       type: object
       properties:
         errors:
@@ -1431,7 +1342,7 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/EmailDynamicContentResponse'
+            $ref: '#/components/schemas/GetEmailFullContentResponse'
         success:
           type: boolean
         warnings:
@@ -1457,50 +1368,26 @@ components:
           type: array
           items:
             type: string
-    EmailCCFields:
+    EmailVariableResponse:
       type: object
       required:
-      - attributeId
-      - objectName
-      - displayName
-      - apiName
-      properties:
-        attributeId:
-          type: string
-          description: Attribute identifier
-        objectName:
-          type: string
-          description: Object name. 'lead' or 'company'
-        displayName:
-          type: string
-          description: Display name
-        apiName:
-          type: string
-          description: API name
-    EmailContentResponse:
-      type: object
-      required:
-      - contentType
-      - htmlId
+      - name
       - value
+      - moduleScope
       properties:
-        contentType:
+        name:
           type: string
-          description: Type of content to set for the section.
-        htmlId:
-          type: string
-          description: HTML id of the content section
-        index:
-          type: integer
-          format: int32
-        isLocked:
-          type: boolean
-        parentHtmlId:
-          type: string
+          description: Name of the email variable
         value:
-          type: object
-          description: Contents of the section
-    ResponseOfEmailVariableResponse:
+          type: string
+          description: Value of the email variable
+        moduleScope:
+          type: boolean
+          description: Returns true for local variables else returns false
+        moduleId:
+          type: string
+          description: Returns the moduleId associated with the variable, only in case of local variable
+    ResponseOfEmailCCFieldsResponse:
       type: object
       properties:
         errors:
@@ -1512,10 +1399,123 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/EmailVariableResponse'
+            $ref: '#/components/schemas/EmailCCFields'
         success:
           type: boolean
         warnings:
           type: array
           items:
             type: string
+    GetEmailFullContentResponse:
+      type: object
+      required:
+      - content
+      - id
+      - status
+      properties:
+        content:
+          type: string
+          description: HTML content of the email
+        id:
+          type: integer
+          format: int32
+          description: Unique integer id of the email
+        status:
+          type: string
+          description: Status filter for draft or approved versions
+          enum:
+          - approved
+          - draft
+    EmailModuleResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the email module
+    CreateEmailRequest:
+      type: object
+      required:
+      - folder
+      - fromEmail
+      - fromName
+      - name
+      - replyEmail
+      - subject
+      - template
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        fromEmail:
+          type: string
+          description: From-address of the Email
+        fromName:
+          type: string
+          description: From-name of the Email
+        name:
+          type: string
+          description: Name of the email
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false
+        replyEmail:
+          type: string
+          description: Reply-To address of the Email
+        subject:
+          type: string
+          description: Subject Line of the Email
+        template:
+          type: integer
+          format: int32
+          description: Id of the parent template
+        textOnly:
+          type: boolean
+          description: Setting to include text-only version of email when sent
+        autoCopyToText:
+          type: boolean
+          description: Setting to automatically copy HTML version to Text version
+    EmailHeaderField:
+      type: object
+      required:
+      - type
+      - value
+      properties:
+        type:
+          type: string
+          description: Field type
+        value:
+          type: string
+          description: Value of field
+    UpdateVariableRequest:
+      type: object
+      properties:
+        value:
+          type: string
+          description: Value to update variable with
+        moduleId:
+          type: string
+          description: Module that variable is associated with. Required for updating module variables. Not needed for global variables.
+    CloneEmailRequest:
+      type: object
+      required:
+      - folder
+      - name
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the new email asset
+        operational:
+          type: boolean
+          description: Whether the email is operational. Operational emails bypass unsubscribe status. Defaults to false

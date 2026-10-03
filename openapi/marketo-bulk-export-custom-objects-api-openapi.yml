@@ -219,20 +219,40 @@ paths:
                 $ref: '#/components/schemas/ResponseOfExportResponse'
 components:
   schemas:
-    ObservableOfInputStreamRangeContent:
-      type: object
-    ColumnHeaderNames:
+    Error:
       type: object
       required:
-      - name
-      - value
+      - code
+      - message
       properties:
-        name:
+        code:
           type: string
-          description: REST API name for header field
-        value:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Value for header field
+          description: Message describing the cause of the error
+    ObservableOfInputStreamRangeContent:
+      type: object
+    ExportCustomObjectRequest:
+      type: object
+      required:
+      - fields
+      - filter
+      properties:
+        columnHeaderNames:
+          description: File header field names override (corresponds with REST API name)
+          $ref: '#/components/schemas/ColumnHeaderNames'
+        fields:
+          type: array
+          description: Comma-separated list of custom object attributes to include in the file
+          items:
+            type: string
+        filter:
+          description: 'Custom object record selection criteria. Can be one of the following: "updatedAt", "staticListName", "staticListId", "smartListName", "smartListId"'
+          $ref: '#/components/schemas/ExportCustomObjectFilter'
+        format:
+          type: string
+          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
     ResponseOfExportResponse:
       type: object
       required:
@@ -277,26 +297,6 @@ components:
         message:
           type: string
           description: Message describing the warning
-    ExportCustomObjectRequest:
-      type: object
-      required:
-      - fields
-      - filter
-      properties:
-        columnHeaderNames:
-          description: File header field names override (corresponds with REST API name)
-          $ref: '#/components/schemas/ColumnHeaderNames'
-        fields:
-          type: array
-          description: Comma-separated list of custom object attributes to include in the file
-          items:
-            type: string
-        filter:
-          description: 'Custom object record selection criteria. Can be one of the following: "updatedAt", "staticListName", "staticListId", "smartListName", "smartListId"'
-          $ref: '#/components/schemas/ExportCustomObjectFilter'
-        format:
-          type: string
-          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
     ExportCustomObjectFilter:
       type: object
       properties:
@@ -326,6 +326,40 @@ components:
         startAt:
           type: string
           description: Start of date range filter (ISO-8601 format)
+    ResponseOfExportResponseWithToken:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ExportResponse:
       type: object
       required:
@@ -372,49 +406,15 @@ components:
           type: string
           description: Status of the export job ("Created","Queued","Processing","Canceled","Completed","Failed")
       description: Response containing export job status information
-    Error:
+    ColumnHeaderNames:
       type: object
       required:
-      - code
-      - message
+      - name
+      - value
       properties:
-        code:
+        name:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
+          description: REST API name for header field
+        value:
           type: string
-          description: Message describing the cause of the error
-    ResponseOfExportResponseWithToken:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Value for header field

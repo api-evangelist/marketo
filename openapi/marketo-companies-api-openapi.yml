@@ -254,18 +254,6 @@ paths:
     - url: https://localhost:8080/
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      description: Error response body returned for non-202 responses.
-      properties:
-        error_code:
-          type: string
-          description: Error code.
-          example: '4000801'
-        message:
-          type: string
-          description: Error message.
-          example: Bad request
     SyncCompaniesRequest:
       required:
       - input
@@ -306,34 +294,19 @@ components:
           type: string
           description: Company name.
       additionalProperties: true
-    ObjectRelation:
+    ErrorResponse:
       type: object
-      required:
-      - field
-      - relatedTo
-      - type
+      description: Error response body returned for non-202 responses.
       properties:
-        field:
+        error_code:
           type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
+          description: Error code.
+          example: '4000801'
+        message:
           type: string
-          description: Type of the relationship field
-    DeleteCompanyRequest:
-      type: object
-      properties:
-        deleteBy:
-          type: string
-          description: Field to delete company records by. Key may be "dedupeFields" or "idField"
-        input:
-          type: array
-          description: List of company objects. Companies in the list should only contain a member matching the dedupeBy value. Each 'Company' object contains a 'searchableField' for lookup purposes which can be retrieved using the Describe Companies endpoint
-          items:
-            $ref: '#/components/schemas/Company_2'
-    ResponseOfLeadField:
+          description: Error message.
+          example: Bad request
+    ResponseOfObjectMetaData:
       type: object
       required:
       - errors
@@ -361,7 +334,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/LeadField'
+            $ref: '#/components/schemas/ObjectMetaData'
         success:
           type: boolean
           example: false
@@ -371,123 +344,18 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    LeadField:
-      type: object
-      description: Lead field record
-      required:
-      - displayName
-      - name
-      - description
-      - dataType
-      - isHidden
-      - isHtmlEncodingInEmail
-      - isSensitive
-      - isCustom
-      - isApiCreated
-      properties:
-        displayName:
-          type: string
-          description: UI display-name of the field
-        name:
-          type: string
-          description: API name of the field
-        description:
-          type: string
-          description: Description of the field
-        dataType:
-          type: string
-          description: Datatype of the field
-        length:
-          type: integer
-          format: int32
-          description: Max length of the field. Only applicable to text, string, and text area.
-        isHidden:
-          type: boolean
-          example: false
-          description: If set to true, the field is hidden
-        isHtmlEncodingInEmail:
-          type: boolean
-          example: false
-          description: If set to true, field is encoded as HTML in email
-        isSensitive:
-          type: boolean
-          example: false
-          description: If set to true, field is marked as sensitive
-        isCustom:
-          type: boolean
-          example: false
-          description: If set to true, field is custom
-        isApiCreated:
-          type: boolean
-          example: false
-          description: If set to true, field was created using REST API
-    CompanyResponse:
-      type: object
-      required:
-      - id
-      - seq
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of the company record
-        reasons:
-          type: array
-          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
-          items:
-            $ref: '#/components/schemas/Reason'
-        seq:
-          type: integer
-          format: int32
-          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
-        status:
-          type: string
-          description: Status of the operation performed on the record
-          enum:
-          - created
-          - updated
-          - deleted
-          - skipped
-          - added
-          - removed
-      description: Company record. May include any additional fields listed in the corresponding describe method
-    Warning:
+    Error:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
         message:
           type: string
-          description: Message describing the warning
-    ObjectField:
-      type: object
-      properties:
-        dataType:
-          type: string
-          description: Datatype of the field
-        displayName:
-          type: string
-          description: UI display-name of the field
-        length:
-          type: integer
-          format: int32
-          description: Max length of the field. Only applicable to text, string, and text area.
-        name:
-          type: string
-          description: Name of the field
-        updateable:
-          type: boolean
-          example: false
-          description: Whether the field is updateable
-        crmManaged:
-          type: boolean
-          example: false
-          description: Whether the field is managed by CRM (native sync)
+          description: Message describing the cause of the error
     ObjectMetaData:
       type: object
       required:
@@ -563,6 +431,122 @@ components:
           enum:
           - draft
           - approved
+    ObjectField:
+      type: object
+      properties:
+        dataType:
+          type: string
+          description: Datatype of the field
+        displayName:
+          type: string
+          description: UI display-name of the field
+        length:
+          type: integer
+          format: int32
+          description: Max length of the field. Only applicable to text, string, and text area.
+        name:
+          type: string
+          description: Name of the field
+        updateable:
+          type: boolean
+          example: false
+          description: Whether the field is updateable
+        crmManaged:
+          type: boolean
+          example: false
+          description: Whether the field is managed by CRM (native sync)
+    ObjectRelation:
+      type: object
+      required:
+      - field
+      - relatedTo
+      - type
+      properties:
+        field:
+          type: string
+          description: API Name of link field
+        relatedTo:
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
+          type: string
+          description: Type of the relationship field
+    Company_2:
+      type: object
+      description: Company record. May include any additional 'fields' listed in the Describe Companies endpoint
+      properties:
+        externalCompanyId:
+          type: string
+          description: Unique id of the company record
+        id:
+          type: integer
+          description: Unique integer id of the company record
+        company:
+          type: string
+          description: Unique name of the company record
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    LeadField:
+      type: object
+      description: Lead field record
+      required:
+      - displayName
+      - name
+      - description
+      - dataType
+      - isHidden
+      - isHtmlEncodingInEmail
+      - isSensitive
+      - isCustom
+      - isApiCreated
+      properties:
+        displayName:
+          type: string
+          description: UI display-name of the field
+        name:
+          type: string
+          description: API name of the field
+        description:
+          type: string
+          description: Description of the field
+        dataType:
+          type: string
+          description: Datatype of the field
+        length:
+          type: integer
+          format: int32
+          description: Max length of the field. Only applicable to text, string, and text area.
+        isHidden:
+          type: boolean
+          example: false
+          description: If set to true, the field is hidden
+        isHtmlEncodingInEmail:
+          type: boolean
+          example: false
+          description: If set to true, field is encoded as HTML in email
+        isSensitive:
+          type: boolean
+          example: false
+          description: If set to true, field is marked as sensitive
+        isCustom:
+          type: boolean
+          example: false
+          description: If set to true, field is custom
+        isApiCreated:
+          type: boolean
+          example: false
+          description: If set to true, field was created using REST API
     ResponseOfCompany:
       type: object
       required:
@@ -597,31 +581,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    Reason:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Integer code of the reason
-        message:
-          type: string
-          description: Message describing the reason for the status of the operation
-    Company_2:
-      type: object
-      description: Company record. May include any additional 'fields' listed in the Describe Companies endpoint
-      properties:
-        externalCompanyId:
-          type: string
-          description: Unique id of the company record
-        id:
-          type: integer
-          description: Unique integer id of the company record
-        company:
-          type: string
-          description: Unique name of the company record
     SyncCompanyRequest:
       type: object
       required:
@@ -642,6 +601,17 @@ components:
           description: List of input records. Each 'Company' object contains a 'searchableField' for lookup purposes, and one or more 'fields' to create or update. Both can be retrieved using the Describe Companies endpoint
           items:
             $ref: '#/components/schemas/Company_2'
+    DeleteCompanyRequest:
+      type: object
+      properties:
+        deleteBy:
+          type: string
+          description: Field to delete company records by. Key may be "dedupeFields" or "idField"
+        input:
+          type: array
+          description: List of company objects. Companies in the list should only contain a member matching the dedupeBy value. Each 'Company' object contains a 'searchableField' for lookup purposes which can be retrieved using the Describe Companies endpoint
+          items:
+            $ref: '#/components/schemas/Company_2'
     RelatedObject:
       type: object
       required:
@@ -654,19 +624,7 @@ components:
         name:
           type: string
           description: Name of the link object
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ResponseOfObjectMetaData:
+    ResponseOfLeadField:
       type: object
       required:
       - errors
@@ -694,7 +652,7 @@ components:
           type: array
           description: Array of results for individual records in the operation, may be empty
           items:
-            $ref: '#/components/schemas/ObjectMetaData'
+            $ref: '#/components/schemas/LeadField'
         success:
           type: boolean
           example: false
@@ -704,6 +662,48 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    CompanyResponse:
+      type: object
+      required:
+      - id
+      - seq
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of the company record
+        reasons:
+          type: array
+          description: List of reasons why an operation did not succeed. Reasons are only present in API responses and should not be submitted
+          items:
+            $ref: '#/components/schemas/Reason'
+        seq:
+          type: integer
+          format: int32
+          description: Integer indicating the sequence of the record in response. This value is correlated to the order of the records included in the request input. Seq should only be part of responses and should not be submitted.
+        status:
+          type: string
+          description: Status of the operation performed on the record
+          enum:
+          - created
+          - updated
+          - deleted
+          - skipped
+          - added
+          - removed
+      description: Company record. May include any additional fields listed in the corresponding describe method
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
 x-refined-from:
 - marketo-data-ingestion-openapi-original.json
 - marketo-lead-database-openapi-original.json

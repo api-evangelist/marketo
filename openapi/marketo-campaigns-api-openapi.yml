@@ -178,6 +178,38 @@ paths:
         description: triggerCampaignRequest
 components:
   schemas:
+    Token:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Name of the token. Should be formatted as "{{my.name}}"
+        value:
+          type: string
+          description: Value of the token
+    TriggerCampaignRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          description: Object describing trigger configuration for the campaign
+          $ref: '#/components/schemas/TriggerCampaignData'
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
     Campaign:
       type: object
       required:
@@ -224,24 +256,19 @@ components:
           type: string
           description: Name of the parent workspace if applicable
       description: Record of a Marketo Smart Campaign
-    Token:
+    Warning:
       type: object
       required:
-      - name
-      - value
+      - code
+      - message
       properties:
-        name:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
           type: string
-          description: Name of the token. Should be formatted as "{{my.name}}"
-        value:
-          type: string
-          description: Value of the token
-    ScheduleCampaignRequest:
-      type: object
-      properties:
-        input:
-          $ref: '#/components/schemas/ScheduleCampaignData'
-      description: Record describe how to schedule the campaign
+          description: Message describing the warning
     ScheduleCampaignData:
       type: object
       properties:
@@ -257,29 +284,6 @@ components:
           description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
           items:
             $ref: '#/components/schemas/Token'
-    InputLead:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-      description: Lead record containing only lead id
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
     ResponseOfCampaign:
       type: object
       required:
@@ -314,14 +318,22 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    TriggerCampaignRequest:
+    InputLead:
       type: object
       required:
-      - input
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
+    ScheduleCampaignRequest:
+      type: object
       properties:
         input:
-          description: Object describing trigger configuration for the campaign
-          $ref: '#/components/schemas/TriggerCampaignData'
+          $ref: '#/components/schemas/ScheduleCampaignData'
+      description: Record describe how to schedule the campaign
     TriggerCampaignData:
       type: object
       required:
@@ -337,15 +349,3 @@ components:
           description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
           items:
             $ref: '#/components/schemas/Token'
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error

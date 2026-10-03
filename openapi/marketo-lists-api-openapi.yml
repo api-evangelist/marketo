@@ -137,6 +137,22 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
+    ListOperationRequest:
+      required:
+      - listId
+      - input
+      type: object
+      properties:
+        listId:
+          type: integer
+          format: int64
+          description: The Marketo static list ID. Must be a positive integer.
+          example: 1064
+        input:
+          type: array
+          description: List of lead references to add to or remove from the list.
+          items:
+            $ref: '#/components/schemas/Lead'
     ErrorResponse:
       type: object
       description: Error response body returned for non-202 responses.
@@ -160,19 +176,3 @@ components:
           format: int64
           description: The Marketo lead ID.
           example: 10001
-    ListOperationRequest:
-      required:
-      - listId
-      - input
-      type: object
-      properties:
-        listId:
-          type: integer
-          format: int64
-          description: The Marketo static list ID. Must be a positive integer.
-          example: 1064
-        input:
-          type: array
-          description: List of lead references to add to or remove from the list.
-          items:
-            $ref: '#/components/schemas/Lead'

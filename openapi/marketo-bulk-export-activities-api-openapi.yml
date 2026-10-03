@@ -182,20 +182,18 @@ paths:
                 $ref: '#/components/schemas/ResponseOfExportResponse'
 components:
   schemas:
-    ObservableOfInputStreamRangeContent:
-      type: object
-    ColumnHeaderNames:
+    Error:
       type: object
       required:
-      - name
-      - value
+      - code
+      - message
       properties:
-        name:
+        code:
           type: string
-          description: REST API name for header field
-        value:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Value for header field
+          description: Message describing the cause of the error
     ExportActivityFilter:
       type: object
       required:
@@ -221,6 +219,8 @@ components:
         createdAt:
           description: Date range to filter new activities on
           $ref: '#/components/schemas/DateRange'
+    ObservableOfInputStreamRangeContent:
+      type: object
     ResponseOfExportResponse:
       type: object
       required:
@@ -294,6 +294,40 @@ components:
         startAt:
           type: string
           description: Start of date range filter (ISO-8601 format)
+    ResponseOfExportResponseWithToken:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
     ExportResponse:
       type: object
       required:
@@ -340,49 +374,15 @@ components:
           type: string
           description: Status of the export job ("Created","Queued","Processing","Canceled","Completed","Failed")
       description: Response containing export job status information
-    Error:
+    ColumnHeaderNames:
       type: object
       required:
-      - code
-      - message
+      - name
+      - value
       properties:
-        code:
+        name:
           type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
+          description: REST API name for header field
+        value:
           type: string
-          description: Message describing the cause of the error
-    ResponseOfExportResponseWithToken:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Value for header field

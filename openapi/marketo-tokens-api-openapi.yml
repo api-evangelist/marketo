@@ -108,18 +108,70 @@ paths:
         required: true
 components:
   schemas:
-    DeleteTokenRequest:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfTokenResponse:
       type: object
       properties:
-        folderType:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
           type: string
-          enum:
-          - Program
-          - Folder
-        name:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
           type: string
-        type:
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    TokenResponse:
+      type: object
+      required:
+      - folder
+      properties:
+        folder:
           type: string
+          example: '{"id":1001,"type":"Program"}'
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        tokens:
+          type: array
+          description: List of tokens in the folder
+          items:
+            $ref: '#/components/schemas/TokenDTO'
     CreateTokenRequest:
       type: object
       required:
@@ -150,39 +202,18 @@ components:
         value:
           type: string
           description: Value of the token
-    TokenResponse:
-      type: object
-      required:
-      - folder
-      properties:
-        folder:
-          type: string
-          example: '{"id":1001,"type":"Program"}'
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-        tokens:
-          type: array
-          description: List of tokens in the folder
-          items:
-            $ref: '#/components/schemas/TokenDTO'
-    ResponseOfIdResponse:
+    DeleteTokenRequest:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        folderType:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          enum:
+          - Program
+          - Folder
+        name:
+          type: string
+        type:
+          type: string
     TokenDTO:
       type: object
       properties:
@@ -194,37 +225,6 @@ components:
           type: string
         value:
           type: string
-    ResponseOfTokenResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     IdResponse:
       type: object
       required:

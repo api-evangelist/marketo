@@ -226,7 +226,19 @@ components:
           type: string
           format: date-time
           description: Datetime when the section was last updated
-    ResponseOfLandingPageContentResponse:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
+          type: string
+          description: Message describing the cause of the error
+    ResponseOfIdResponse:
       type: object
       properties:
         errors:
@@ -238,57 +250,57 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/LandingPageContentResponse'
+            $ref: '#/components/schemas/IdResponse'
         success:
           type: boolean
         warnings:
           type: array
           items:
             type: string
-    LandingPageContentResponse:
+    SegmentContent:
       type: object
       required:
-      - id
+      - content
+      - segmentId
+      - segmentName
       - type
       properties:
         content:
           type: object
-          description: 'Content of the section. Expected values vary based on type. Image: An image URL. RichText: HTML Content. HTML: HTML Content. Form: A form id. Rectangle: Empty. Snippet: A snippet id.'
+          description: Type of content section
         followupType:
           type: string
-          description: Follow-up behavior of a form. Only available for form-type content sections. Defaults to form defined behavior.
-          enum:
-          - url
-          - lp
-          - formDefined
         followupValue:
           type: string
-          description: Where to follow-up on form submission. When followupType is lp, accepts the integer id of a landing page. For url, it accepts a url string.
-        formattingOptions:
-          $ref: '#/components/schemas/JsonNode'
-        id:
-          type: object
-          description: Id of the content section, may be a string or an int
-        index:
+        segmentId:
           type: integer
           format: int32
-          description: Index of the content section. Index orients the elements from lowest to highest
+          description: Segmentation to which the section is linked
+        segmentName:
+          type: string
+          description: Name of the segment to display content section for
         type:
           type: string
           description: Type of content section
-          enum:
-          - Image
-          - SocialButton
-          - Form
-          - DynamicContent
-          - Rectangle
-          - Snippet
-          - RichText
-          - HTML
-          - Video
-          - Poll
-          - ReferralOffer
-          - Sweepstakes
+    ResponseOfLandingPageDynamicContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     UpdateLandingPageDynamicContentRequest:
       type: object
       properties:
@@ -406,99 +418,6 @@ components:
         zIndex:
           type: string
           description: z-index property of the HTML section
-    ResponseOfLandingPageDynamicContentResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/LandingPageDynamicContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    JsonNode:
-      type: object
-      properties:
-        array:
-          type: boolean
-        bigDecimal:
-          type: boolean
-        bigInteger:
-          type: boolean
-        binary:
-          type: boolean
-        boolean:
-          type: boolean
-        containerNode:
-          type: boolean
-        double:
-          type: boolean
-        float:
-          type: boolean
-        floatingPointNumber:
-          type: boolean
-        int:
-          type: boolean
-        integralNumber:
-          type: boolean
-        long:
-          type: boolean
-        missingNode:
-          type: boolean
-        nodeType:
-          type: string
-          enum:
-          - ARRAY
-          - BINARY
-          - BOOLEAN
-          - MISSING
-          - 'NULL'
-          - NUMBER
-          - OBJECT
-          - POJO
-          - STRING
-        'null':
-          type: boolean
-        number:
-          type: boolean
-        object:
-          type: boolean
-        pojo:
-          type: boolean
-        short:
-          type: boolean
-        textual:
-          type: boolean
-        valueNode:
-          type: boolean
-    ResponseOfIdResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
     CreateLandingPageContentRequest:
       type: object
       required:
@@ -562,43 +481,124 @@ components:
         zIndex:
           type: string
           description: z-index property of the HTML section
-    SegmentContent:
+    JsonNode:
+      type: object
+      properties:
+        array:
+          type: boolean
+        bigDecimal:
+          type: boolean
+        bigInteger:
+          type: boolean
+        binary:
+          type: boolean
+        boolean:
+          type: boolean
+        containerNode:
+          type: boolean
+        double:
+          type: boolean
+        float:
+          type: boolean
+        floatingPointNumber:
+          type: boolean
+        int:
+          type: boolean
+        integralNumber:
+          type: boolean
+        long:
+          type: boolean
+        missingNode:
+          type: boolean
+        nodeType:
+          type: string
+          enum:
+          - ARRAY
+          - BINARY
+          - BOOLEAN
+          - MISSING
+          - 'NULL'
+          - NUMBER
+          - OBJECT
+          - POJO
+          - STRING
+        'null':
+          type: boolean
+        number:
+          type: boolean
+        object:
+          type: boolean
+        pojo:
+          type: boolean
+        short:
+          type: boolean
+        textual:
+          type: boolean
+        valueNode:
+          type: boolean
+    ResponseOfLandingPageContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/LandingPageContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    LandingPageContentResponse:
       type: object
       required:
-      - content
-      - segmentId
-      - segmentName
+      - id
       - type
       properties:
         content:
           type: object
-          description: Type of content section
+          description: 'Content of the section. Expected values vary based on type. Image: An image URL. RichText: HTML Content. HTML: HTML Content. Form: A form id. Rectangle: Empty. Snippet: A snippet id.'
         followupType:
           type: string
+          description: Follow-up behavior of a form. Only available for form-type content sections. Defaults to form defined behavior.
+          enum:
+          - url
+          - lp
+          - formDefined
         followupValue:
           type: string
-        segmentId:
+          description: Where to follow-up on form submission. When followupType is lp, accepts the integer id of a landing page. For url, it accepts a url string.
+        formattingOptions:
+          $ref: '#/components/schemas/JsonNode'
+        id:
+          type: object
+          description: Id of the content section, may be a string or an int
+        index:
           type: integer
           format: int32
-          description: Segmentation to which the section is linked
-        segmentName:
-          type: string
-          description: Name of the segment to display content section for
+          description: Index of the content section. Index orients the elements from lowest to highest
         type:
           type: string
           description: Type of content section
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
+          enum:
+          - Image
+          - SocialButton
+          - Form
+          - DynamicContent
+          - Rectangle
+          - Snippet
+          - RichText
+          - HTML
+          - Video
+          - Poll
+          - ReferralOffer
+          - Sweepstakes
     IdResponse:
       type: object
       required:
