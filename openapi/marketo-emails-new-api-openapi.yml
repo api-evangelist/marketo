@@ -582,26 +582,30 @@ paths:
         required: true
 components:
   schemas:
-    EmailHeadersDTO:
+    DeleteResponse:
       type: object
       properties:
-        ccEmails:
-          type: array
-          items:
-            type: string
-        fromEmail:
+        success:
+          type: boolean
+        requestId:
           type: string
-        fromName:
-          type: string
-        preheader:
-          type: string
-        replyEmail:
-          type: string
-        subject:
-          type: string
-      title: EmailHeadersDTO
+      title: DeleteResponse
+    UsedByRequestDto:
+      type: object
       required:
-      - subject
+      - assetId
+      properties:
+        assetId:
+          type: string
+        pageIndex:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        type:
+          type: string
+      title: UsedByRequestDto
     CloneNewAsset:
       type: object
       required:
@@ -612,6 +616,105 @@ components:
         description:
           type: string
       title: CloneNewAsset
+    EmailNewResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmailDetailDTO'
+      title: EmailNewResponse
+    EmailFilterResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          $ref: '#/components/schemas/EmailFilterResult'
+      title: EmailFilterResponse
+    ErrorResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContentWaveErrorDTO'
+      title: ErrorResponse
+    EmailAppDataDTO:
+      type: object
+      properties:
+        editorType:
+          type: string
+        folderId:
+          type: string
+        programId:
+          type: string
+        workspaceId:
+          type: string
+      title: EmailAppDataDTO
+    EmailSettingsResponseDTO:
+      type: object
+      properties:
+        isOperational:
+          type: boolean
+        isWebPageView:
+          type: boolean
+        isTextOnly:
+          type: boolean
+        disableOpenTracking:
+          type: boolean
+        enableUrlTracking:
+          type: boolean
+      title: EmailSettingsResponseDTO
+    BulkUsedByResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/BulkUsedByItemDTO'
+      title: BulkUsedByResponse
+    EmailFilterResult:
+      allOf:
+      - $ref: '#/components/schemas/PageDetailsDTO'
+      - type: object
+        properties:
+          items:
+            type: array
+            items:
+              $ref: '#/components/schemas/EmailContentDTO'
+      title: EmailFilterResult
+    EditorContextDto:
+      type: object
+      properties:
+        dynamicContent:
+          type: object
+      title: EditorContextDto
+    BulkUsedByRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Asset IDs to query. Maximum 50 per request.
+          items:
+            type: string
+      title: BulkUsedByRequest
     ContentWaveErrorDTO:
       type: object
       description: An entry in the errors array. The type field marks it as info, warning, or error — there is no separate warnings array; warnings appear here with type "warning".
@@ -643,97 +746,33 @@ components:
               type: integer
               format: int32
       title: ContentWaveErrorDTO
-    EmailAppDataDTO:
+    EmailAppDataResponseDTO:
+      type: object
+      description: Location and program context of the email. Program fields are only present when the email lives under a program.
+      properties:
+        editorType:
+          type: string
+        workspaceId:
+          type: string
+        folderId:
+          type: string
+        programId:
+          type: string
+        programName:
+          type: string
+        programType:
+          type: string
+      title: EmailAppDataResponseDTO
+    AppDataDTO:
       type: object
       properties:
         editorType:
           type: string
         folderId:
           type: string
-        programId:
-          type: string
         workspaceId:
           type: string
-      title: EmailAppDataDTO
-    UsedByItemDTO:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        appData:
-          $ref: '#/components/schemas/AppDataDTO'
-        channel:
-          type: string
-        contentType:
-          type: string
-        externalId:
-          type: string
-      title: UsedByItemDTO
-    CreateEmailV2Request:
-      type: object
-      required:
-      - name
-      - appData
-      - headers
-      description: 'Request body for creating an email. appData must include at least one of: folderId, workspaceId, or programId.'
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        appData:
-          $ref: '#/components/schemas/EmailAppDataDTO'
-        data:
-          $ref: '#/components/schemas/DataDTO'
-        headers:
-          $ref: '#/components/schemas/EmailHeadersDTO'
-        editorContext:
-          $ref: '#/components/schemas/EditorContextDto'
-        settings:
-          $ref: '#/components/schemas/EmailSettingsDTO'
-        templateId:
-          type: string
-          description: When provided, the template's content overwrites any data sent in the request.
-      title: CreateEmailRequest
-    EmailFilterResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-        result:
-          $ref: '#/components/schemas/EmailFilterResult'
-      title: EmailFilterResponse
-    DataDTO:
-      type: object
-      properties:
-        html:
-          $ref: '#/components/schemas/HtmlDataDTO'
-        text:
-          $ref: '#/components/schemas/TextDataDTO'
-      title: DataDTO
-    CloneAssetRequest:
-      type: object
-      required:
-      - assetId
-      - newAsset
-      properties:
-        assetId:
-          type: string
-        newAsset:
-          $ref: '#/components/schemas/CloneNewAsset'
-      title: CloneAssetRequest
-    DeleteResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
-          type: string
-      title: DeleteResponse
+      title: AppDataDTO
     ContentMetadataDTO:
       type: object
       description: Audit information for the asset.
@@ -755,109 +794,41 @@ components:
         modifiedByAepId:
           type: string
       title: ContentMetadataDTO
-    ErrorResponse:
+    BulkUsedByItemDTO:
       type: object
       properties:
-        success:
-          type: boolean
-        requestId:
+        id:
           type: string
-        errors:
+        name:
+          type: string
+        count:
+          type: integer
+          format: int32
+          description: Number of places the asset is used.
+        used:
+          type: boolean
+          description: Whether the asset is used by any other asset.
+      title: BulkUsedByItemDTO
+    EmailHeadersDTO:
+      type: object
+      properties:
+        ccEmails:
           type: array
-          items:
-            $ref: '#/components/schemas/ContentWaveErrorDTO'
-      title: ErrorResponse
-    HtmlDataDTO:
-      type: object
-      properties:
-        body:
-          type: string
-      title: HtmlDataDTO
-    EmailAppDataResponseDTO:
-      type: object
-      description: Location and program context of the email. Program fields are only present when the email lives under a program.
-      properties:
-        editorType:
-          type: string
-        workspaceId:
-          type: string
-        folderId:
-          type: string
-        programId:
-          type: string
-        programName:
-          type: string
-        programType:
-          type: string
-      title: EmailAppDataResponseDTO
-    EmailSettingsResponseDTO:
-      type: object
-      properties:
-        isOperational:
-          type: boolean
-        isWebPageView:
-          type: boolean
-        isTextOnly:
-          type: boolean
-        disableOpenTracking:
-          type: boolean
-        enableUrlTracking:
-          type: boolean
-      title: EmailSettingsResponseDTO
-    BulkDeleteRequest:
-      type: object
-      required:
-      - assetIds
-      properties:
-        assetIds:
-          type: array
-          description: Set of asset IDs to delete. Maximum 20 per request.
           items:
             type: string
-        ignoreUsedBy:
-          type: boolean
-          description: If true, deletes assets even if they are referenced by other assets.
-      title: BulkDeleteRequest
-    EmailNewResponse:
-      type: object
-      properties:
-        success:
-          type: boolean
-        requestId:
+        fromEmail:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/EmailDetailDTO'
-      title: EmailNewResponse
-    EditorContextDto:
-      type: object
-      properties:
-        dynamicContent:
-          type: object
-      title: EditorContextDto
-    AssociatedStateDTO:
-      type: object
-      description: A version/state of the asset (e.g. draft or approved).
-      properties:
-        contentId:
+        fromName:
           type: string
-        externalId:
+        preheader:
           type: string
-        state:
+        replyEmail:
           type: string
-      title: AssociatedStateDTO
-    BulkGetRequest:
-      type: object
+        subject:
+          type: string
+      title: EmailHeadersDTO
       required:
-      - assetIds
-      properties:
-        assetIds:
-          type: array
-          description: Set of asset IDs to retrieve. Maximum 20 per request.
-          items:
-            type: string
-      title: BulkGetRequest
+      - subject
     UpdateEmailHeadersDTO:
       type: object
       properties:
@@ -876,50 +847,69 @@ components:
         subject:
           type: string
       title: UpdateEmailHeadersDTO
-    UsedByRequestDto:
+    EmailSettingsDTO:
+      type: object
+      properties:
+        brandedDomain:
+          type: string
+        dedicatedIp:
+          type: string
+        enableUrlTracking:
+          type: boolean
+        isOperational:
+          type: boolean
+        isTextOnly:
+          type: boolean
+        isWebPageView:
+          type: boolean
+      title: EmailSettingsDTO
+    StateTransitionRequest:
       type: object
       required:
-      - assetId
+      - contentId
+      - action
       properties:
-        assetId:
+        contentId:
           type: string
-        pageIndex:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        type:
+        action:
           type: string
-      title: UsedByRequestDto
-    PageDetailsDTO:
+          description: The state transition action to perform on the asset
+          enum:
+          - approve
+          - unapprove
+          - discard
+          - create_draft
+      title: StateTransitionRequest
+    BulkGetRequest:
+      type: object
+      required:
+      - assetIds
+      properties:
+        assetIds:
+          type: array
+          description: Set of asset IDs to retrieve. Maximum 20 per request.
+          items:
+            type: string
+      title: BulkGetRequest
+    TextDataDTO:
       type: object
       properties:
-        totalItems:
-          type: integer
-          format: int32
-        pageSize:
-          type: integer
-          format: int32
-        currentPage:
-          type: integer
-          format: int32
-      title: PageDetailsDTO
-    BulkUsedByItemDTO:
-      type: object
-      properties:
-        id:
+        body:
           type: string
-        name:
-          type: string
-        count:
-          type: integer
-          format: int32
-          description: Number of places the asset is used.
-        used:
+        syncFromHtml:
           type: boolean
-          description: Whether the asset is used by any other asset.
-      title: BulkUsedByItemDTO
+      title: TextDataDTO
+    AssociatedStateDTO:
+      type: object
+      description: A version/state of the asset (e.g. draft or approved).
+      properties:
+        contentId:
+          type: string
+        externalId:
+          type: string
+        state:
+          type: string
+      title: AssociatedStateDTO
     EmailContentDTO:
       type: object
       properties:
@@ -958,65 +948,72 @@ components:
         scriptEngine:
           type: string
       title: EmailContentDTO
-    EmailDetailDTO:
-      allOf:
-      - $ref: '#/components/schemas/EmailContentDTO'
-      - type: object
-        properties:
-          data:
-            $ref: '#/components/schemas/DataDTO'
-      title: EmailDetailDTO
-    EmailSettingsDTO:
-      type: object
-      properties:
-        brandedDomain:
-          type: string
-        dedicatedIp:
-          type: string
-        enableUrlTracking:
-          type: boolean
-        isOperational:
-          type: boolean
-        isTextOnly:
-          type: boolean
-        isWebPageView:
-          type: boolean
-      title: EmailSettingsDTO
-    AppDataDTO:
-      type: object
-      properties:
-        editorType:
-          type: string
-        folderId:
-          type: string
-        workspaceId:
-          type: string
-      title: AppDataDTO
-    BulkUsedByRequest:
+    CreateEmailV2Request:
       type: object
       required:
-      - assetIds
+      - name
+      - appData
+      - headers
+      description: 'Request body for creating an email. appData must include at least one of: folderId, workspaceId, or programId.'
       properties:
-        assetIds:
-          type: array
-          description: Asset IDs to query. Maximum 50 per request.
-          items:
-            type: string
-      title: BulkUsedByRequest
-    UsedByResponse:
+        name:
+          type: string
+        description:
+          type: string
+        appData:
+          $ref: '#/components/schemas/EmailAppDataDTO'
+        data:
+          $ref: '#/components/schemas/DataDTO'
+        headers:
+          $ref: '#/components/schemas/EmailHeadersDTO'
+        editorContext:
+          $ref: '#/components/schemas/EditorContextDto'
+        settings:
+          $ref: '#/components/schemas/EmailSettingsDTO'
+        templateId:
+          type: string
+          description: When provided, the template's content overwrites any data sent in the request.
+      title: CreateEmailRequest
+    PageDetailsDTO:
       type: object
       properties:
-        success:
-          type: boolean
-        requestId:
+        totalItems:
+          type: integer
+          format: int32
+        pageSize:
+          type: integer
+          format: int32
+        currentPage:
+          type: integer
+          format: int32
+      title: PageDetailsDTO
+    CloneAssetRequest:
+      type: object
+      required:
+      - assetId
+      - newAsset
+      properties:
+        assetId:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/UsedByItemDTO'
-        pageDetails:
-          $ref: '#/components/schemas/PageDetailsDTO'
-      title: UsedByResponse
+        newAsset:
+          $ref: '#/components/schemas/CloneNewAsset'
+      title: CloneAssetRequest
+    UsedByItemDTO:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        appData:
+          $ref: '#/components/schemas/AppDataDTO'
+        channel:
+          type: string
+        contentType:
+          type: string
+        externalId:
+          type: string
+      title: UsedByItemDTO
     UpdateEmailRequest:
       type: object
       description: Request body for updating an email.
@@ -1037,25 +1034,7 @@ components:
           type: string
           description: When provided, the template's content overwrites both the email's existing content and any data sent in the request.
       title: UpdateEmailRequest
-    EmailFilterResult:
-      allOf:
-      - $ref: '#/components/schemas/PageDetailsDTO'
-      - type: object
-        properties:
-          items:
-            type: array
-            items:
-              $ref: '#/components/schemas/EmailContentDTO'
-      title: EmailFilterResult
-    TextDataDTO:
-      type: object
-      properties:
-        body:
-          type: string
-        syncFromHtml:
-          type: boolean
-      title: TextDataDTO
-    BulkUsedByResponse:
+    UsedByResponse:
       type: object
       properties:
         success:
@@ -1065,22 +1044,43 @@ components:
         result:
           type: array
           items:
-            $ref: '#/components/schemas/BulkUsedByItemDTO'
-      title: BulkUsedByResponse
-    StateTransitionRequest:
+            $ref: '#/components/schemas/UsedByItemDTO'
+        pageDetails:
+          $ref: '#/components/schemas/PageDetailsDTO'
+      title: UsedByResponse
+    DataDTO:
+      type: object
+      properties:
+        html:
+          $ref: '#/components/schemas/HtmlDataDTO'
+        text:
+          $ref: '#/components/schemas/TextDataDTO'
+      title: DataDTO
+    BulkDeleteRequest:
       type: object
       required:
-      - contentId
-      - action
+      - assetIds
       properties:
-        contentId:
+        assetIds:
+          type: array
+          description: Set of asset IDs to delete. Maximum 20 per request.
+          items:
+            type: string
+        ignoreUsedBy:
+          type: boolean
+          description: If true, deletes assets even if they are referenced by other assets.
+      title: BulkDeleteRequest
+    EmailDetailDTO:
+      allOf:
+      - $ref: '#/components/schemas/EmailContentDTO'
+      - type: object
+        properties:
+          data:
+            $ref: '#/components/schemas/DataDTO'
+      title: EmailDetailDTO
+    HtmlDataDTO:
+      type: object
+      properties:
+        body:
           type: string
-        action:
-          type: string
-          description: The state transition action to perform on the asset
-          enum:
-          - approve
-          - unapprove
-          - discard
-          - create_draft
-      title: StateTransitionRequest
+      title: HtmlDataDTO

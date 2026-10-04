@@ -148,19 +148,6 @@ components:
           description: Message describing the cause of the error
     ObservableOfInputStreamContent:
       type: object
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
     ImportProgramMemberResponse:
       type: object
       required:
@@ -210,3 +197,16 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning

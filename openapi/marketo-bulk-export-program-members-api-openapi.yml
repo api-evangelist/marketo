@@ -194,102 +194,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ObservableOfInputStreamRangeContent:
-      type: object
-    ExportProgramMemberFilter:
-      type: object
-      properties:
-        programId:
-          type: integer
-          format: int32
-          description: Id of program to retrieve members from. Cannot be used in combination with "programIds" filter
-        programIds:
-          type: array
-          description: Array of program ids to retrieve members from. Cannot be used in combination with "programId" filter
-          items:
-            type: integer
-            format: int32
-        isExhausted:
-          type: boolean
-          description: Filter program membership records for people who have exhausted content
-        nurtureCadence:
-          type: string
-          description: Filter program membership records for a given nurture cadence
-          enum:
-          - paused
-          - normal
-        statusNames:
-          type: array
-          description: Array of program member status names. Can be default and/or user-defined. Multiple status names are ORed together.
-          items:
-            type: string
-        updatedAt:
-          description: Date range to filter program members on
-          $ref: '#/components/schemas/DateRange'
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ExportProgramMemberRequest:
-      type: object
-      required:
-      - fields
-      - filter
-      properties:
-        columnHeaderNames:
-          description: File header field names override (corresponds with REST API name)
-          $ref: '#/components/schemas/ColumnHeaderNames'
-        fields:
-          type: array
-          description: Comma-separated list of fields to include in the file
-          items:
-            type: string
-        filter:
-          description: 'Program member record selection criteria. Must be the following: "programId"'
-          $ref: '#/components/schemas/ExportProgramMemberFilter'
-        format:
-          type: string
-          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
     DateRange:
       type: object
       properties:
@@ -299,6 +203,8 @@ components:
         startAt:
           type: string
           description: Start of date range filter (ISO-8601 format)
+    ObservableOfInputStreamRangeContent:
+      type: object
     ResponseOfExportResponseWithToken:
       type: object
       required:
@@ -391,3 +297,97 @@ components:
         value:
           type: string
           description: Value for header field
+    ExportProgramMemberFilter:
+      type: object
+      properties:
+        programId:
+          type: integer
+          format: int32
+          description: Id of program to retrieve members from. Cannot be used in combination with "programIds" filter
+        programIds:
+          type: array
+          description: Array of program ids to retrieve members from. Cannot be used in combination with "programId" filter
+          items:
+            type: integer
+            format: int32
+        isExhausted:
+          type: boolean
+          description: Filter program membership records for people who have exhausted content
+        nurtureCadence:
+          type: string
+          description: Filter program membership records for a given nurture cadence
+          enum:
+          - paused
+          - normal
+        statusNames:
+          type: array
+          description: Array of program member status names. Can be default and/or user-defined. Multiple status names are ORed together.
+          items:
+            type: string
+        updatedAt:
+          description: Date range to filter program members on
+          $ref: '#/components/schemas/DateRange'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ExportProgramMemberRequest:
+      type: object
+      required:
+      - fields
+      - filter
+      properties:
+        columnHeaderNames:
+          description: File header field names override (corresponds with REST API name)
+          $ref: '#/components/schemas/ColumnHeaderNames'
+        fields:
+          type: array
+          description: Comma-separated list of fields to include in the file
+          items:
+            type: string
+        filter:
+          description: 'Program member record selection criteria. Must be the following: "programId"'
+          $ref: '#/components/schemas/ExportProgramMemberFilter'
+        format:
+          type: string
+          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"

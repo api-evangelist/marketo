@@ -390,17 +390,6 @@ paths:
         required: true
 components:
   schemas:
-    UpdateSnippetDynamicContentRequest:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Type of dynamic content section
-          enum:
-          - Typeofcontent.Either'HTML'or'Text'
-        value:
-          type: string
-          description: Value of the dynamic content section
     Error:
       type: object
       required:
@@ -413,6 +402,157 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
+    SnippetFolder:
+      type: object
+      required:
+      - value
+      - type
+      - folderName
+      properties:
+        value:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+        folderName:
+          type: string
+          description: Name of folder
+      description: JSON representation of a folder
+    ResponseOfSnippetContentResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetContentResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    CreateSnippetRequest:
+      type: object
+      required:
+      - folder
+      - name
+      properties:
+        description:
+          type: string
+          description: Description of the snippet
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        name:
+          type: string
+          description: Name of the snippet
+    ModelResponse:
+      type: object
+    CloneSnippetRequest:
+      type: object
+      required:
+      - name
+      - folder
+      properties:
+        name:
+          type: string
+          description: Name for the cloned snippet
+        folder:
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+          $ref: '#/components/schemas/Folder'
+        description:
+          type: string
+          description: Description of the cloned snippet
+    ResponseOfSnippetResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/SnippetResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    UpdateSnippetDynamicContentRequest:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Type of dynamic content section
+          enum:
+          - Typeofcontent.Either'HTML'or'Text'
+        value:
+          type: string
+          description: Value of the dynamic content section
+    Folder:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
+          type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
+    UpdateSnippetRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the snippet
+        isArchive:
+          type: string
+          description: Archival status of the snippet
+        name:
+          type: string
+          description: Name of the snippet
+    SnippetContentResponse:
+      type: object
+      required:
+      - type
+      properties:
+        content:
+          type: string
+          description: Content of the snippet
+        type:
+          type: string
+          description: Type of snippet content
+    IdResponse:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: Id of the asset
     ResponseOfIdResponse:
       type: object
       properties:
@@ -432,34 +572,6 @@ components:
           type: array
           items:
             type: string
-    ModelResponse:
-      type: object
-    SnippetContentResponse:
-      type: object
-      required:
-      - type
-      properties:
-        content:
-          type: string
-          description: Content of the snippet
-        type:
-          type: string
-          description: Type of snippet content
-    CreateSnippetRequest:
-      type: object
-      required:
-      - folder
-      - name
-      properties:
-        description:
-          type: string
-          description: Description of the snippet
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        name:
-          type: string
-          description: Name of the snippet
     SnippetResponse:
       type: object
       required:
@@ -496,115 +608,3 @@ components:
         workspace:
           type: string
           description: Name of the workspace
-    ResponseOfSnippetResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/SnippetResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    UpdateSnippetRequest:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the snippet
-        isArchive:
-          type: string
-          description: Archival status of the snippet
-        name:
-          type: string
-          description: Name of the snippet
-    Folder:
-      type: object
-      required:
-      - id
-      - type
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    CloneSnippetRequest:
-      type: object
-      required:
-      - name
-      - folder
-      properties:
-        name:
-          type: string
-          description: Name for the cloned snippet
-        folder:
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-          $ref: '#/components/schemas/Folder'
-        description:
-          type: string
-          description: Description of the cloned snippet
-    ResponseOfSnippetContentResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/SnippetContentResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    SnippetFolder:
-      type: object
-      required:
-      - value
-      - type
-      - folderName
-      properties:
-        value:
-          type: integer
-          format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-        folderName:
-          type: string
-          description: Name of folder
-      description: JSON representation of a folder
-    IdResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset

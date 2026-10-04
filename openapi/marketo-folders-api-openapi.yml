@@ -288,6 +288,21 @@ components:
           format: int64
         type:
           type: string
+    CreateFolderRequest:
+      type: object
+      required:
+      - name
+      - parent
+      properties:
+        description:
+          type: string
+          description: Description of the asset
+        name:
+          type: string
+          description: Name of the Folder
+        parent:
+          description: Folder object describing the parent folder
+          $ref: '#/components/schemas/Folder'
     FolderResponse:
       type: object
       required:
@@ -362,25 +377,23 @@ components:
         workspace:
           type: string
           description: Name of the workspace
-    ResponseOfIdResponse:
+    Folder:
       type: object
+      required:
+      - id
+      - type
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        id:
+          type: integer
+          format: int32
+          description: Id of the folder
+        type:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
+          description: Type of folder
+          enum:
+          - Folder
+          - Program
+      description: JSON representation of a folder
     UpdateFolderRequest:
       type: object
       required:
@@ -401,38 +414,34 @@ components:
           enum:
           - Folder
           - Program
-    Folder:
+    IdResponse:
       type: object
       required:
       - id
-      - type
       properties:
         id:
           type: integer
           format: int32
-          description: Id of the folder
-        type:
-          type: string
-          description: Type of folder
-          enum:
-          - Folder
-          - Program
-      description: JSON representation of a folder
-    CreateFolderRequest:
+          description: Id of the asset
+    ResponseOfIdResponse:
       type: object
-      required:
-      - name
-      - parent
       properties:
-        description:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
           type: string
-          description: Description of the asset
-        name:
-          type: string
-          description: Name of the Folder
-        parent:
-          description: Folder object describing the parent folder
-          $ref: '#/components/schemas/Folder'
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     ResponseOfFolderResponse:
       type: object
       properties:
@@ -471,12 +480,3 @@ components:
           type: array
           items:
             type: string
-    IdResponse:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int32
-          description: Id of the asset

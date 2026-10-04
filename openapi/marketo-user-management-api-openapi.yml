@@ -382,6 +382,211 @@ paths:
       deprecated: false
 components:
   schemas:
+    Error:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer error code of the error
+        message:
+          type: string
+          description: Message describing the cause of the Error
+    ResponseOfInvitedUser:
+      type: object
+      required:
+      - id
+      - firstName
+      - lastName
+      - emailAddress
+      - userid
+      - subscriptionId
+      - status
+      - expiresAt
+      - createdAt
+      - updatedAt
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        id:
+          type: integer
+          description: User identifier
+          format: int32
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        emailAddress:
+          type: string
+          description: User email address
+        userid:
+          type: string
+          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
+        subscriptionId:
+          type: string
+          description: Subscription ID
+        status:
+          type: string
+          enum:
+          - pending
+          description: User status
+        expiresAt:
+          type: string
+          description: 'Date and time when user login expires.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
+          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
+        createdAt:
+          type: string
+          description: 'Date and time when user login was created.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
+          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
+        updatedAt:
+          type: string
+          description: 'Date and time when user login was last updated.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
+          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
+      title: ResponseOfInvitedUser
+    DeleteRolesRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of roles to delete
+          items:
+            $ref: '#/components/schemas/UserRoleWorkspaceId'
+    InviteUserRequest:
+      type: object
+      required:
+      - emailAddress
+      - firstName
+      - lastName
+      - userRoleWorkspaces
+      properties:
+        apiOnly:
+          type: boolean
+          description: Whether the user is API-Only.  Default is false
+        emailAddress:
+          type: string
+          description: User email address
+          minLength: 1
+          maxLength: 2147483647
+          pattern: ^("?)(?:[^"])(?:[-\w.!#$%&\'*+\/=?^_`{|}~])*\1@(\w[-\w]{0,62}\.)+[A-Za-z]{2,63}$
+        expiresAt:
+          type: string
+          description: Date and time when user login expires.  Must be valid ISO-8601 string.  See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+        userid:
+          type: string
+          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
+        reason:
+          type: string
+          description: Reason for user invitation
+        userRoleWorkspaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRoleWorkspaceId'
+      title: InviteUserRequest
+    UserRoleWorkspace:
+      type: object
+      required:
+      - accessRoleId
+      - workspaceId
+      properties:
+        accessRoleId:
+          type: integer
+          description: User role Id
+          format: int32
+        accessRoleName:
+          type: string
+          description: User role description
+        workspaceId:
+          type: integer
+          description: User workspace Id
+          format: int32
+        workspaceName:
+          type: string
+          description: User workspace name
+      title: UserRoleWorkspace
+    AddRolesRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          type: array
+          description: List of roles to add
+          items:
+            $ref: '#/components/schemas/UserRoleWorkspaceId'
+    ResponseOfAllUsers:
+      type: object
+      required:
+      - userid
+      - firstName
+      - lastName
+      - emailAddress
+      - id
+      - apiOnly
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        apiOnly:
+          type: boolean
+          description: Whether the user is API-Only
+        emailAddress:
+          type: string
+          description: User email address
+        firstName:
+          type: string
+          description: User first name
+        id:
+          type: integer
+          description: User identifier
+          format: int32
+        lastName:
+          type: string
+          description: User last name
+        userid:
+          type: string
+          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
+      title: ResponseOfAllUsers
+    UpdateUserAttributesRequest:
+      type: object
+      properties:
+        apiOnly:
+          type: boolean
+          description: Whether the user is API-Only.  Default is false
+        emailAddress:
+          type: string
+          description: User email address
+          minLength: 1
+          maxLength: 2147483647
+          pattern: ^("?)(?:[^"])(?:[-\w.!#$%&\'*+\/=?^_`{|}~])*\1@(\w[-\w]{0,62}\.)+[A-Za-z]{2,63}$
+        expiresAt:
+          type: string
+          description: 'Date and time when user login expires.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
+          example: yyyyMMdd'T'HH:mm:ss'.'S't'Z
+        firstName:
+          type: string
+          description: User first name
+        lastName:
+          type: string
+          description: User last name
+      title: UpdateUserAttributesRequest
     ResponseOfRole:
       type: object
       required:
@@ -425,19 +630,6 @@ components:
           type: string
           description: Role type
       title: ResponseOfRole
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer error code of the error
-        message:
-          type: string
-          description: Message describing the cause of the Error
     ResponseOfUser:
       type: object
       required:
@@ -510,165 +702,6 @@ components:
           type: string
           description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
       title: ResponseOfUser
-    ResponseOfAllUsers:
-      type: object
-      required:
-      - userid
-      - firstName
-      - lastName
-      - emailAddress
-      - id
-      - apiOnly
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        apiOnly:
-          type: boolean
-          description: Whether the user is API-Only
-        emailAddress:
-          type: string
-          description: User email address
-        firstName:
-          type: string
-          description: User first name
-        id:
-          type: integer
-          description: User identifier
-          format: int32
-        lastName:
-          type: string
-          description: User last name
-        userid:
-          type: string
-          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
-      title: ResponseOfAllUsers
-    AddRolesRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of roles to add
-          items:
-            $ref: '#/components/schemas/UserRoleWorkspaceId'
-    UserRoleWorkspace:
-      type: object
-      required:
-      - accessRoleId
-      - workspaceId
-      properties:
-        accessRoleId:
-          type: integer
-          description: User role Id
-          format: int32
-        accessRoleName:
-          type: string
-          description: User role description
-        workspaceId:
-          type: integer
-          description: User workspace Id
-          format: int32
-        workspaceName:
-          type: string
-          description: User workspace name
-      title: UserRoleWorkspace
-    ResponseOfInvitedUser:
-      type: object
-      required:
-      - id
-      - firstName
-      - lastName
-      - emailAddress
-      - userid
-      - subscriptionId
-      - status
-      - expiresAt
-      - createdAt
-      - updatedAt
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        id:
-          type: integer
-          description: User identifier
-          format: int32
-        firstName:
-          type: string
-          description: User first name
-        lastName:
-          type: string
-          description: User last name
-        emailAddress:
-          type: string
-          description: User email address
-        userid:
-          type: string
-          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
-        subscriptionId:
-          type: string
-          description: Subscription ID
-        status:
-          type: string
-          enum:
-          - pending
-          description: User status
-        expiresAt:
-          type: string
-          description: 'Date and time when user login expires.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
-          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
-        createdAt:
-          type: string
-          description: 'Date and time when user login was created.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
-          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
-        updatedAt:
-          type: string
-          description: 'Date and time when user login was last updated.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
-          example: yyyy-MM-dd'T'HH:mm:ss.SSS't'Z
-      title: ResponseOfInvitedUser
-    InviteUserRequest:
-      type: object
-      required:
-      - emailAddress
-      - firstName
-      - lastName
-      - userRoleWorkspaces
-      properties:
-        apiOnly:
-          type: boolean
-          description: Whether the user is API-Only.  Default is false
-        emailAddress:
-          type: string
-          description: User email address
-          minLength: 1
-          maxLength: 2147483647
-          pattern: ^("?)(?:[^"])(?:[-\w.!#$%&\'*+\/=?^_`{|}~])*\1@(\w[-\w]{0,62}\.)+[A-Za-z]{2,63}$
-        expiresAt:
-          type: string
-          description: Date and time when user login expires.  Must be valid ISO-8601 string.  See <a href="http://developers.marketo.com/rest-api/lead-database/fields/field-types/">Datetime</a> field type description.
-        firstName:
-          type: string
-          description: User first name
-        lastName:
-          type: string
-          description: User last name
-        userid:
-          type: string
-          description: Marketo Identity users should use an email address. Adobe Identity users should use the generated GUID.
-        reason:
-          type: string
-          description: Reason for user invitation
-        userRoleWorkspaces:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserRoleWorkspaceId'
-      title: InviteUserRequest
     ResponseOfWorkspace:
       type: object
       required:
@@ -711,16 +744,6 @@ components:
           type: string
           description: Workspace status
       title: ResponseOfWorkspace
-    DeleteRolesRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          type: array
-          description: List of roles to delete
-          items:
-            $ref: '#/components/schemas/UserRoleWorkspaceId'
     UserRoleWorkspaceId:
       type: object
       required:
@@ -735,26 +758,3 @@ components:
           type: integer
           format: int32
           description: User workspace id
-    UpdateUserAttributesRequest:
-      type: object
-      properties:
-        apiOnly:
-          type: boolean
-          description: Whether the user is API-Only.  Default is false
-        emailAddress:
-          type: string
-          description: User email address
-          minLength: 1
-          maxLength: 2147483647
-          pattern: ^("?)(?:[^"])(?:[-\w.!#$%&\'*+\/=?^_`{|}~])*\1@(\w[-\w]{0,62}\.)+[A-Za-z]{2,63}$
-        expiresAt:
-          type: string
-          description: 'Date and time when user login expires.  Example: yyyy-MM-dd''T''HH:mm:ss.SSS''t''Z'
-          example: yyyyMMdd'T'HH:mm:ss'.'S't'Z
-        firstName:
-          type: string
-          description: User first name
-        lastName:
-          type: string
-          description: User last name
-      title: UpdateUserAttributesRequest

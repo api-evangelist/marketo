@@ -194,97 +194,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ExportActivityFilter:
-      type: object
-      required:
-      - createdAt
-      properties:
-        activityTypeIds:
-          type: array
-          description: List of activity type ids to filter on
-          items:
-            type: integer
-            format: int32
-        primaryAttributeValueIds:
-          type: array
-          description: List of primary attribute ids to filter on
-          items:
-            type: integer
-            format: int32
-        primaryAttributeValues:
-          type: array
-          description: List of primary attribute values to filter on
-          items:
-            type: string
-        createdAt:
-          description: Date range to filter new activities on
-          $ref: '#/components/schemas/DateRange'
-    ObservableOfInputStreamRangeContent:
-      type: object
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ExportActivityRequest:
-      type: object
-      required:
-      - fields
-      - filter
-      properties:
-        columnHeaderNames:
-          description: File header field names override (corresponds with REST API name)
-          $ref: '#/components/schemas/ColumnHeaderNames'
-        fields:
-          type: array
-          description: 'Array of strings containing field values. Used to reduce the number of fields contained in export file. Select one or more of: marketoGUID, leadId, activityDate, activityTypeId, campaignId, primaryAttributeValueId, primaryAttributeValue, actionResult'
-          items:
-            type: string
-        filter:
-          description: Record selection criteria. "createdAt" is required, "activityTypeIds", "primaryAttributeValueIds", and "primaryAttributeValues" are optional
-          $ref: '#/components/schemas/ExportActivityFilter'
-        format:
-          type: string
-          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
     DateRange:
       type: object
       properties:
@@ -294,6 +203,8 @@ components:
         startAt:
           type: string
           description: Start of date range filter (ISO-8601 format)
+    ObservableOfInputStreamRangeContent:
+      type: object
     ResponseOfExportResponseWithToken:
       type: object
       required:
@@ -386,3 +297,92 @@ components:
         value:
           type: string
           description: Value for header field
+    ExportActivityRequest:
+      type: object
+      required:
+      - fields
+      - filter
+      properties:
+        columnHeaderNames:
+          description: File header field names override (corresponds with REST API name)
+          $ref: '#/components/schemas/ColumnHeaderNames'
+        fields:
+          type: array
+          description: 'Array of strings containing field values. Used to reduce the number of fields contained in export file. Select one or more of: marketoGUID, leadId, activityDate, activityTypeId, campaignId, primaryAttributeValueId, primaryAttributeValue, actionResult'
+          items:
+            type: string
+        filter:
+          description: Record selection criteria. "createdAt" is required, "activityTypeIds", "primaryAttributeValueIds", and "primaryAttributeValues" are optional
+          $ref: '#/components/schemas/ExportActivityFilter'
+        format:
+          type: string
+          description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
+    ExportActivityFilter:
+      type: object
+      required:
+      - createdAt
+      properties:
+        activityTypeIds:
+          type: array
+          description: List of activity type ids to filter on
+          items:
+            type: integer
+            format: int32
+        primaryAttributeValueIds:
+          type: array
+          description: List of primary attribute ids to filter on
+          items:
+            type: integer
+            format: int32
+        primaryAttributeValues:
+          type: array
+          description: List of primary attribute values to filter on
+          items:
+            type: string
+        createdAt:
+          description: Date range to filter new activities on
+          $ref: '#/components/schemas/DateRange'
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning

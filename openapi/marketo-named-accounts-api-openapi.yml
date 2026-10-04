@@ -177,44 +177,18 @@ paths:
                 $ref: '#/components/schemas/ResponseOfObjectMetaData'
 components:
   schemas:
-    ResponseOfObjectMetaData:
+    Error:
       type: object
       required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
+      - code
+      - message
       properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
+        code:
           type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
+        message:
           type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ObjectMetaData'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
+          description: Message describing the cause of the error
     NamedAccount:
       type: object
       required:
@@ -242,18 +216,6 @@ components:
           - skipped
           - added
           - removed
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
     ObjectMetaData:
       type: object
       required:
@@ -329,6 +291,155 @@ components:
           enum:
           - draft
           - approved
+    RelatedObject:
+      type: object
+      required:
+      - field
+      - name
+      properties:
+        field:
+          type: string
+          description: Name of link field (within link object)
+        name:
+          type: string
+          description: Name of the link object
+    DeleteNamedAccountRequest:
+      type: object
+      required:
+      - input
+      properties:
+        deleteBy:
+          type: string
+          description: Key to use for deletion of the record
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccount'
+    ResponseOfLeadField:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/LeadField'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ObjectRelation:
+      type: object
+      required:
+      - field
+      - relatedTo
+      - type
+      properties:
+        field:
+          type: string
+          description: API Name of link field
+        relatedTo:
+          description: Object to which the field is linked
+          $ref: '#/components/schemas/RelatedObject'
+        type:
+          type: string
+          description: Type of the relationship field
+    SyncNamedAccountRequest:
+      type: object
+      required:
+      - input
+      properties:
+        action:
+          type: string
+          description: Type of sync operation to perform
+          enum:
+          - createOnly
+          - updateOnly
+          - createOrUpdate
+        dedupeBy:
+          type: string
+          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
+        input:
+          type: array
+          description: List of input records
+          items:
+            $ref: '#/components/schemas/NamedAccount'
+    ResponseOfObjectMetaData:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        moreResult:
+          type: boolean
+          example: false
+          description: Boolean indicating if there are more results in subsequent pages
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ObjectMetaData'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Reason:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: string
+          description: Integer code of the reason
+        message:
+          type: string
+          description: Message describing the reason for the status of the operation
     ObjectField:
       type: object
       properties:
@@ -391,35 +502,6 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
-    ObjectRelation:
-      type: object
-      required:
-      - field
-      - relatedTo
-      - type
-      properties:
-        field:
-          type: string
-          description: API Name of link field
-        relatedTo:
-          description: Object to which the field is linked
-          $ref: '#/components/schemas/RelatedObject'
-        type:
-          type: string
-          description: Type of the relationship field
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
     LeadField:
       type: object
       description: Lead field record
@@ -470,98 +552,16 @@ components:
           type: boolean
           example: false
           description: If set to true, field was created using REST API
-    DeleteNamedAccountRequest:
-      type: object
-      required:
-      - input
-      properties:
-        deleteBy:
-          type: string
-          description: Key to use for deletion of the record
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/NamedAccount'
-    RelatedObject:
-      type: object
-      required:
-      - field
-      - name
-      properties:
-        field:
-          type: string
-          description: Name of link field (within link object)
-        name:
-          type: string
-          description: Name of the link object
-    ResponseOfLeadField:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        moreResult:
-          type: boolean
-          example: false
-          description: Boolean indicating if there are more results in subsequent pages
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/LeadField'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    SyncNamedAccountRequest:
-      type: object
-      required:
-      - input
-      properties:
-        action:
-          type: string
-          description: Type of sync operation to perform
-          enum:
-          - createOnly
-          - updateOnly
-          - createOrUpdate
-        dedupeBy:
-          type: string
-          description: Field to deduplicate on. If the value in the field for a given record is not unique, an error will be returned for the individual record.
-        input:
-          type: array
-          description: List of input records
-          items:
-            $ref: '#/components/schemas/NamedAccount'
-    Reason:
+    Warning:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: string
-          description: Integer code of the reason
+          type: integer
+          format: int32
+          description: Integer code of the warning
         message:
           type: string
-          description: Message describing the reason for the status of the operation
+          description: Message describing the warning

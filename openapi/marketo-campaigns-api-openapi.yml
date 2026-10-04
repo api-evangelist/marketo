@@ -178,26 +178,6 @@ paths:
         description: triggerCampaignRequest
 components:
   schemas:
-    Token:
-      type: object
-      required:
-      - name
-      - value
-      properties:
-        name:
-          type: string
-          description: Name of the token. Should be formatted as "{{my.name}}"
-        value:
-          type: string
-          description: Value of the token
-    TriggerCampaignRequest:
-      type: object
-      required:
-      - input
-      properties:
-        input:
-          description: Object describing trigger configuration for the campaign
-          $ref: '#/components/schemas/TriggerCampaignData'
     Error:
       type: object
       required:
@@ -210,6 +190,94 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
+    TriggerCampaignData:
+      type: object
+      required:
+      - leads
+      properties:
+        leads:
+          type: array
+          description: List of leads for input
+          items:
+            $ref: '#/components/schemas/InputLead'
+        tokens:
+          type: array
+          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
+          items:
+            $ref: '#/components/schemas/Token'
+    InputLead:
+      type: object
+      required:
+      - id
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique integer id of a lead record
+      description: Lead record containing only lead id
+    ResponseOfCampaign:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        nextPageToken:
+          type: string
+          description: Paging token given if the result set exceeded the allowed batch size
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/Campaign'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    ScheduleCampaignData:
+      type: object
+      properties:
+        cloneToProgramName:
+          type: string
+          description: Name of the resulting program. When set, this attribute will cause the campaign, parent program, and all of its assets, to be created with the resulting new name. The parent program will be cloned and the newly created campaign will be scheduled. The resulting program is created underneath the parent. Programs with snippets, push notifications, in-app messages, static lists, reports, and social assets may not be cloned in this way
+        runAt:
+          type: string
+          format: date-time
+          description: Datetime to run the campaign at. If unset, the campaign will be run five minutes after the call is made
+        tokens:
+          type: array
+          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
+          items:
+            $ref: '#/components/schemas/Token'
+    ScheduleCampaignRequest:
+      type: object
+      properties:
+        input:
+          $ref: '#/components/schemas/ScheduleCampaignData'
+      description: Record describe how to schedule the campaign
+    TriggerCampaignRequest:
+      type: object
+      required:
+      - input
+      properties:
+        input:
+          description: Object describing trigger configuration for the campaign
+          $ref: '#/components/schemas/TriggerCampaignData'
     Campaign:
       type: object
       required:
@@ -256,6 +324,18 @@ components:
           type: string
           description: Name of the parent workspace if applicable
       description: Record of a Marketo Smart Campaign
+    Token:
+      type: object
+      required:
+      - name
+      - value
+      properties:
+        name:
+          type: string
+          description: Name of the token. Should be formatted as "{{my.name}}"
+        value:
+          type: string
+          description: Value of the token
     Warning:
       type: object
       required:
@@ -269,83 +349,3 @@ components:
         message:
           type: string
           description: Message describing the warning
-    ScheduleCampaignData:
-      type: object
-      properties:
-        cloneToProgramName:
-          type: string
-          description: Name of the resulting program. When set, this attribute will cause the campaign, parent program, and all of its assets, to be created with the resulting new name. The parent program will be cloned and the newly created campaign will be scheduled. The resulting program is created underneath the parent. Programs with snippets, push notifications, in-app messages, static lists, reports, and social assets may not be cloned in this way
-        runAt:
-          type: string
-          format: date-time
-          description: Datetime to run the campaign at. If unset, the campaign will be run five minutes after the call is made
-        tokens:
-          type: array
-          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
-          items:
-            $ref: '#/components/schemas/Token'
-    ResponseOfCampaign:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        nextPageToken:
-          type: string
-          description: Paging token given if the result set exceeded the allowed batch size
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/Campaign'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    InputLead:
-      type: object
-      required:
-      - id
-      properties:
-        id:
-          type: integer
-          format: int64
-          description: Unique integer id of a lead record
-      description: Lead record containing only lead id
-    ScheduleCampaignRequest:
-      type: object
-      properties:
-        input:
-          $ref: '#/components/schemas/ScheduleCampaignData'
-      description: Record describe how to schedule the campaign
-    TriggerCampaignData:
-      type: object
-      required:
-      - leads
-      properties:
-        leads:
-          type: array
-          description: List of leads for input
-          items:
-            $ref: '#/components/schemas/InputLead'
-        tokens:
-          type: array
-          description: List of my tokens to replace during the run of the target campaign. The tokens must be available in a parent program or folder to be replaced during the run
-          items:
-            $ref: '#/components/schemas/Token'

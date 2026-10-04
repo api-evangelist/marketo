@@ -146,6 +146,8 @@ paths:
                 $ref: '#/components/schemas/ObservableOfInputStreamContent'
 components:
   schemas:
+    ObservableOfInputStreamContent:
+      type: object
     Error:
       type: object
       required:
@@ -158,21 +160,6 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ObservableOfInputStreamContent:
-      type: object
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
     ResponseOfImportCustomObjectResponse:
       type: object
       required:
@@ -251,3 +238,16 @@ components:
           type: string
           description: Status of the batch
       description: Response containing import status information
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning

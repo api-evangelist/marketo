@@ -194,75 +194,15 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ObservableOfInputStreamRangeContent:
-      type: object
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Warning:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
-        message:
-          type: string
-          description: Message describing the warning
-    ExportLeadFilter:
+    DateRange:
       type: object
       properties:
-        createdAt:
-          description: Date range to filter new leads on
-          $ref: '#/components/schemas/DateRange'
-        smartListId:
-          type: integer
-          format: int32
-          description: Id of smart list to retrieve leads from
-        smartListName:
+        endAt:
           type: string
-          description: Name of smart list to retrieve leads from
-        staticListId:
-          type: integer
-          format: int32
-          description: Id of static list to retrieve leads from
-        staticListName:
+          description: End of date range filter (ISO 8601-format)
+        startAt:
           type: string
-          description: Name of static list to retrieve leads from
-        updatedAt:
-          description: Date range to filter updated leads on
-          $ref: '#/components/schemas/DateRange'
+          description: Start of date range filter (ISO-8601 format)
     ExportLeadRequest:
       type: object
       required:
@@ -283,15 +223,6 @@ components:
         format:
           type: string
           description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
-    DateRange:
-      type: object
-      properties:
-        endAt:
-          type: string
-          description: End of date range filter (ISO 8601-format)
-        startAt:
-          type: string
-          description: Start of date range filter (ISO-8601 format)
     ResponseOfExportResponseWithToken:
       type: object
       required:
@@ -326,6 +257,29 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    ExportLeadFilter:
+      type: object
+      properties:
+        createdAt:
+          description: Date range to filter new leads on
+          $ref: '#/components/schemas/DateRange'
+        smartListId:
+          type: integer
+          format: int32
+          description: Id of smart list to retrieve leads from
+        smartListName:
+          type: string
+          description: Name of smart list to retrieve leads from
+        staticListId:
+          type: integer
+          format: int32
+          description: Id of static list to retrieve leads from
+        staticListName:
+          type: string
+          description: Name of static list to retrieve leads from
+        updatedAt:
+          description: Date range to filter updated leads on
+          $ref: '#/components/schemas/DateRange'
     ExportResponse:
       type: object
       required:
@@ -384,3 +338,49 @@ components:
         value:
           type: string
           description: Value for header field
+    ObservableOfInputStreamRangeContent:
+      type: object
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning

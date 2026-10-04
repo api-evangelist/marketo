@@ -69,28 +69,6 @@ paths:
                 $ref: '#/components/schemas/ResponseOfChannelResponse'
 components:
   schemas:
-    ChannelProgression:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Description of the program status
-        hidden:
-          type: boolean
-          description: Whether the status has been hidden
-        name:
-          type: string
-          description: Name of the status
-        type:
-          type: string
-          description: Type of the status
-        step:
-          type: integer
-          format: int32
-          description: Step number of the status
-        success:
-          type: boolean
-          description: Whether this status is a success step for program members
     ResponseOfChannelResponse:
       type: object
       properties:
@@ -154,3 +132,25 @@ components:
           type: string
           format: date-time
           description: Datetime when the channel was most recently updated
+    ChannelProgression:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Description of the program status
+        hidden:
+          type: boolean
+          description: Whether the status has been hidden
+        name:
+          type: string
+          description: Name of the status
+        type:
+          type: string
+          description: Type of the status
+        step:
+          type: integer
+          format: int32
+          description: Step number of the status
+        success:
+          type: boolean
+          description: Whether this status is a success step for program members

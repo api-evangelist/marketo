@@ -69,25 +69,6 @@ paths:
                 $ref: '#/components/schemas/ResponseOfTagResponseGetAll'
 components:
   schemas:
-    ResponseOfTagResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TagResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
     Error:
       type: object
       required:
@@ -135,6 +116,25 @@ components:
         tagType:
           type: string
           description: Name of the tag
+    ResponseOfTagResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
     TagResponse:
       type: object
       required:

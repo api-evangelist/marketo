@@ -219,20 +219,6 @@ paths:
                 $ref: '#/components/schemas/ResponseOfExportResponse'
 components:
   schemas:
-    Error:
-      type: object
-      required:
-      - code
-      - message
-      properties:
-        code:
-          type: string
-          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
-        message:
-          type: string
-          description: Message describing the cause of the error
-    ObservableOfInputStreamRangeContent:
-      type: object
     ExportCustomObjectRequest:
       type: object
       required:
@@ -253,70 +239,18 @@ components:
         format:
           type: string
           description: File format to create("CSV", "TSV", "SSV"). Default is "CSV"
-    ResponseOfExportResponse:
-      type: object
-      required:
-      - errors
-      - requestId
-      - result
-      - success
-      - warnings
-      properties:
-        errors:
-          type: array
-          description: Array of errors that occurred if the request was unsuccessful
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
-          type: string
-          description: Id of the request made
-        result:
-          type: array
-          description: Array of results for individual records in the operation, may be empty
-          items:
-            $ref: '#/components/schemas/ExportResponse'
-        success:
-          type: boolean
-          example: false
-          description: Whether the request succeeded
-        warnings:
-          type: array
-          description: Array of warnings given for the operation
-          items:
-            $ref: '#/components/schemas/Warning'
-    Warning:
+    Error:
       type: object
       required:
       - code
       - message
       properties:
         code:
-          type: integer
-          format: int32
-          description: Integer code of the warning
+          type: string
+          description: Error code of the error. See full list of error codes <a href="https://developers.marketo.com/rest-api/error-codes/">here</a>
         message:
           type: string
-          description: Message describing the warning
-    ExportCustomObjectFilter:
-      type: object
-      properties:
-        updatedAt:
-          description: Date range to filter updated custom objects on
-          $ref: '#/components/schemas/DateRange'
-        smartListId:
-          type: integer
-          format: int32
-          description: Id of smart list to retrieve leads from
-        smartListName:
-          type: string
-          description: Name of smart list to retrieve leads from
-        staticListId:
-          type: integer
-          format: int32
-          description: Id of static list to retrieve leads from
-        staticListName:
-          type: string
-          description: Name of static list to retrieve leads from
+          description: Message describing the cause of the error
     DateRange:
       type: object
       properties:
@@ -360,6 +294,26 @@ components:
           description: Array of warnings given for the operation
           items:
             $ref: '#/components/schemas/Warning'
+    ExportCustomObjectFilter:
+      type: object
+      properties:
+        updatedAt:
+          description: Date range to filter updated custom objects on
+          $ref: '#/components/schemas/DateRange'
+        smartListId:
+          type: integer
+          format: int32
+          description: Id of smart list to retrieve leads from
+        smartListName:
+          type: string
+          description: Name of smart list to retrieve leads from
+        staticListId:
+          type: integer
+          format: int32
+          description: Id of static list to retrieve leads from
+        staticListName:
+          type: string
+          description: Name of static list to retrieve leads from
     ExportResponse:
       type: object
       required:
@@ -418,3 +372,49 @@ components:
         value:
           type: string
           description: Value for header field
+    ObservableOfInputStreamRangeContent:
+      type: object
+    ResponseOfExportResponse:
+      type: object
+      required:
+      - errors
+      - requestId
+      - result
+      - success
+      - warnings
+      properties:
+        errors:
+          type: array
+          description: Array of errors that occurred if the request was unsuccessful
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+          description: Id of the request made
+        result:
+          type: array
+          description: Array of results for individual records in the operation, may be empty
+          items:
+            $ref: '#/components/schemas/ExportResponse'
+        success:
+          type: boolean
+          example: false
+          description: Whether the request succeeded
+        warnings:
+          type: array
+          description: Array of warnings given for the operation
+          items:
+            $ref: '#/components/schemas/Warning'
+    Warning:
+      type: object
+      required:
+      - code
+      - message
+      properties:
+        code:
+          type: integer
+          format: int32
+          description: Integer code of the warning
+        message:
+          type: string
+          description: Message describing the warning

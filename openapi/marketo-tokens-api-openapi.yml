@@ -120,58 +120,17 @@ components:
         message:
           type: string
           description: Message describing the cause of the error
-    ResponseOfTokenResponse:
+    TokenDTO:
       type: object
       properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        computedUrl:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/TokenResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    ResponseOfIdResponse:
-      type: object
-      properties:
-        errors:
-          type: array
-          items:
-            $ref: '#/components/schemas/Error'
-        requestId:
+        name:
           type: string
-        result:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdResponse'
-        success:
-          type: boolean
-        warnings:
-          type: array
-          items:
-            type: string
-    TokenResponse:
-      type: object
-      required:
-      - folder
-      properties:
-        folder:
+        type:
           type: string
-          example: '{"id":1001,"type":"Program"}'
-          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
-        tokens:
-          type: array
-          description: List of tokens in the folder
-          items:
-            $ref: '#/components/schemas/TokenDTO'
+        value:
+          type: string
     CreateTokenRequest:
       type: object
       required:
@@ -214,17 +173,6 @@ components:
           type: string
         type:
           type: string
-    TokenDTO:
-      type: object
-      properties:
-        computedUrl:
-          type: string
-        name:
-          type: string
-        type:
-          type: string
-        value:
-          type: string
     IdResponse:
       type: object
       required:
@@ -234,3 +182,55 @@ components:
           type: integer
           format: int32
           description: Id of the asset
+    ResponseOfIdResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/IdResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    ResponseOfTokenResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+        requestId:
+          type: string
+        result:
+          type: array
+          items:
+            $ref: '#/components/schemas/TokenResponse'
+        success:
+          type: boolean
+        warnings:
+          type: array
+          items:
+            type: string
+    TokenResponse:
+      type: object
+      required:
+      - folder
+      properties:
+        folder:
+          type: string
+          example: '{"id":1001,"type":"Program"}'
+          description: JSON representation of parent folder, with members 'id', and 'type' which may be 'Folder' or 'Program'
+        tokens:
+          type: array
+          description: List of tokens in the folder
+          items:
+            $ref: '#/components/schemas/TokenDTO'
