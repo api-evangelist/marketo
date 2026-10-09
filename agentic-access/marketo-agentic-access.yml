@@ -1,4 +1,4 @@
-generated: '2026-09-16'
+generated: '2026-09-23'
 method: generated
 source: openapi/marketo-activities-api-openapi.yml, openapi/marketo-bulk-export-activities-api-openapi.yml,
   openapi/marketo-bulk-export-custom-objects-api-openapi.yml, openapi/marketo-bulk-export-leads-api-openapi.yml,
@@ -25,11 +25,11 @@ description: Recommended x-agentic-access execution contracts, classified heuris
 summary:
   operations: 367
   by_action_class:
-    connected: 162
-    acting: 205
+    connected: 165
+    acting: 202
   by_consequence:
-    read: 162
-    write: 204
+    read: 165
+    write: 201
     physical: 1
   human_in_the_loop_required: 0
 operations:
@@ -1337,18 +1337,12 @@ operations:
   method: post
   operationId: getContentUsedByUsingPOST_emailtemplate
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v2/emailtemplate/{id}
   method: get
   operationId: getContentUsingGET_emailtemplate
@@ -1871,18 +1865,12 @@ operations:
   method: post
   operationId: getContentUsedByUsingPOST_email
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v2/email/{id}
   method: get
   operationId: getContentUsingGET_email
@@ -2521,18 +2509,12 @@ operations:
   method: post
   operationId: getContentUsedByUsingPOST_fragment
   x-agentic-access:
-    action-class: acting
-    consequence: write
-    subject: required
-    audience: null
+    action-class: connected
+    consequence: read
+    subject: optional
     token:
-      max-ttl: 900
-    escalation:
-      human-in-the-loop: conditional
-      triggers:
-      - abnormal
-      - high-value
-    audit: required
+      max-ttl: 3600
+    audit: none
 - path: /rest/asset/v2/fragment/{id}
   method: get
   operationId: getContentUsingGET_fragment
