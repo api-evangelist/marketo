@@ -1,0 +1,31 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/marketo/integrations
+- https://n8n.io/integrations/marketo/
+- https://composio.dev/toolkits/marketo
+- https://monid.ai/tools/marketo
+checked:
+- https://composio.dev/toolkits/marketo
+- https://monid.ai/tools/marketo
+- https://n8n.io/integrations/marketo/
+- https://zapier.com/apps/marketo/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: supaglue
+  partner: supaglue
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: processor-connection
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/supaglue/blob/main/openapi/supaglue-syncconfigs-api-openapi.yml
+  contract_reference:
+    repo: supaglue
+    spec_file: supaglue-syncconfigs-api-openapi.yml
+    value: marketo
+    property: components.schemas.provider_name
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+templates: []
