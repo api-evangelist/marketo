@@ -10,6 +10,10 @@ checked:
 - https://monid.ai/tools/marketo
 - https://n8n.io/integrations/marketo/
 - https://zapier.com/apps/marketo/integrations
+- https://exchange.adobe.com/apps
+- https://exchange.adobe.com/apps/browse/cc
+- https://exchange.adobe.com/apps/browse/ec
+- https://exchange.adobe.com/robots.txt
 summary: null
 marketplace_apps: []
 edges:
@@ -28,4 +32,487 @@ edges:
     property: components.schemas.provider_name
     detected_by: detect-payment-method-edges.py
     detected: '2026-10-12'
+- partner_name: 6sense
+  app: 6Sense Marketo Integration
+  apps:
+  - 6Sense Marketo Integration
+  listing_count: 1
+  partner: 6sense
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600270
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://6sense.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Accenture PLC
+  app: Accenture | Adobe ABM Accelerator
+  apps:
+  - Accenture | Adobe ABM Accelerator
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200059
+  category: Adobe Exchange Experience Cloud listing (Audience Manager, Campaign, Commerce, Experience Platform)
+  products:
+  - Audience Manager
+  - Campaign
+  - Commerce
+  - Experience Platform
+  - Experience Platform services
+  - Marketo Engage
+  - Target
+  partner_url: https://www.accenture.com/adobe
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: accenture
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Cvent Inc.
+  app: Cvent Event Marketing and Management
+  apps:
+  - Cvent Event Marketing and Management
+  listing_count: 1
+  partner: cvent
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106398
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: www.cvent.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: DataGrail
+  app: DataGrail
+  apps:
+  - DataGrail
+  listing_count: 1
+  partner: datagrail
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/105996
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: datagrail.io
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Deloitte Consulting
+  app: Deloitte Digital | Closed-Loop Marketing Solution
+  apps:
+  - Deloitte Digital | Closed-Loop Marketing Solution
+  - Deloitte Digital | Connected Studio Powered by Adobe
+  listing_count: 2
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200149
+  category: Adobe Exchange Experience Cloud listing (Advertising Cloud, Analytics, Campaign, Commerce)
+  products:
+  - Advertising Cloud
+  - Analytics
+  - Campaign
+  - Commerce
+  - Customer Journey Analytics
+  - Experience Platform apps
+  - Experience Platform services
+  - Journey Optimizer
+  - Marketo Engage
+  - Target
+  - Workfront
+  partner_url: www.deloitte.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: deloitte
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: Ernst & Young LLP U.S.
+  app: EY | Scalable Content Production with Adobe GenStudio for Performance Marketing
+  apps:
+  - EY | Audience Data Platform Powered by AEP
+  - EY | Scalable Content Production with Adobe GenStudio for Performance Marketing
+  listing_count: 2
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200022
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform, GenStudio, Marketo Engage)
+  products:
+  - Analytics
+  - Experience Platform
+  - GenStudio
+  - Marketo Engage
+  - Target
+  - Workfront
+  partner_url: ey.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  partner_held:
+    candidate: ey
+    why: systems integrator / consultancy (Adobe solution listing), not a publisher of its own product
+- partner_name: INFOBIP LTD
+  app: WhatsApp and SMS for Adobe Marketo Engage
+  apps:
+  - Infobip Marketo Engage Contact and Event Sync
+  - WhatsApp and SMS for Adobe Marketo Engage
+  listing_count: 2
+  partner: infobip
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600271
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://www.infobip.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Merge
+  app: Merge for Marketo Engage
+  apps:
+  - Merge for Marketo Engage
+  listing_count: 1
+  partner: null
+  partner_match: null
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109390
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://merge.dev/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+  partner_held:
+    candidate: merge
+    why: 'market-fit gate: partner''s own tags carry no creative / media / marketing / analytics / content / commerce
+      / e-sign / work-management term'
+- partner_name: Qualified.com, Inc.
+  app: Qualified.com — Live Chat and Chatbots
+  apps:
+  - Qualified.com
+  - Qualified.com — Live Chat and Chatbots
+  listing_count: 2
+  partner: qualified-com
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107589
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://www.qualified.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: RainFocus, LLC
+  app: RainFocus for Adobe Marketo Engage
+  apps:
+  - RainFocus for Adobe Marketo Engage
+  listing_count: 1
+  partner: rainfocus
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107472
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: rainfocus.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+- partner_name: Sendoso
+  app: Sendoso
+  apps:
+  - Sendoso
+  listing_count: 1
+  partner: sendoso
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106386
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://sendoso.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Showpad NV
+  app: Showpad Marketo Engage Connector
+  apps:
+  - Showpad Marketo Engage Connector
+  listing_count: 1
+  partner: showpad
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600127
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: www.showpad.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Survicate
+  app: Survicate
+  apps:
+  - Survicate
+  listing_count: 1
+  partner: survicate
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/104243
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://survicate.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Transcend Inc.
+  app: Transcend - Privacy Request Automation
+  apps:
+  - Transcend - Privacy Request Automation
+  listing_count: 1
+  partner: transcend-io
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103731
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: transcend.io
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: TransPerfect
+  app: GlobalLink for Adobe Marketo Engage
+  apps:
+  - GlobalLink for Adobe Marketo Engage
+  listing_count: 1
+  partner: transperfect
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103757
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://www.transperfect.com/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Gold partner
+- partner_name: Vibes
+  app: Vibes SMS for Adobe Marketo Engage
+  apps:
+  - Vibes SMS for Adobe Marketo Engage
+  listing_count: 1
+  partner: vibes-platform
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108203
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://vibes.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: Webflow
+  app: Webflow Optimize
+  apps:
+  - Webflow Optimize
+  listing_count: 1
+  partner: webflow
+  partner_match: domain+name-among-holders
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600128
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: www.webflow.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Platinum partner
+  publisher_verified:
+  - Adobe Exchange verified listing
+- partner_name: Wistia
+  app: Wistia
+  apps:
+  - Wistia
+  listing_count: 1
+  partner: wistia
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600230
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: www.wistia.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: ZeroBounce
+  app: ZeroBounce Marketo Integration
+  apps:
+  - ZeroBounce Marketo Integration
+  listing_count: 1
+  partner: zerobounce
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600232
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: https://www.zerobounce.net/
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
+- partner_name: ZoomInfo Technologies LLC
+  app: ZoomInfo for Sales and Marketo
+  apps:
+  - Chat by ZoomInfo
+  - RingLead Data Orchestration Platform
+  - ZoomInfo for Sales and Marketo
+  listing_count: 3
+  partner: zoominfo
+  partner_match: domain
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  relationship: platform-app
+  direction: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106227
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  products:
+  - Marketo Engage
+  partner_url: www.zoominfo.com
+  signal_note: Adobe Exchange listing (publisher website from the listing JSON the public browse page loads); listing
+    count and app names are context, never counted
+  detected_by: sweep-adobe-exchange.py
+  detected: '2026-10-23'
+  partner_tier: Adobe Silver partner
 templates: []

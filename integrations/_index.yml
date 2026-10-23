@@ -21,3 +21,259 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: marketo-6sense
+  label: 6sense
+  partner: 6sense
+  partner_name: 6sense
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600270
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-accenture-plc
+  label: Accenture PLC
+  partner_name: Accenture PLC
+  category: Adobe Exchange Experience Cloud listing (Audience Manager, Campaign, Commerce, Experience Platform)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200059
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-cvent-inc
+  label: Cvent Inc.
+  partner: cvent
+  partner_name: Cvent Inc.
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106398
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-datagrail
+  label: DataGrail
+  partner: datagrail
+  partner_name: DataGrail
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/105996
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-deloitte-consulting
+  label: Deloitte Consulting
+  partner_name: Deloitte Consulting
+  category: Adobe Exchange Experience Cloud listing (Advertising Cloud, Analytics, Campaign, Commerce)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200149
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-ernst-young-llp-u-s
+  label: Ernst & Young LLP U.S.
+  partner_name: Ernst & Young LLP U.S.
+  category: Adobe Exchange Experience Cloud listing (Analytics, Experience Platform, GenStudio, Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/1200022
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-infobip-ltd
+  label: INFOBIP LTD
+  partner: infobip
+  partner_name: INFOBIP LTD
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600271
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-merge
+  label: Merge
+  partner_name: Merge
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/109390
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-qualified-com-inc
+  label: Qualified.com, Inc.
+  partner: qualified-com
+  partner_name: Qualified.com, Inc.
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107589
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-rainfocus-llc
+  label: RainFocus, LLC
+  partner: rainfocus
+  partner_name: RainFocus, LLC
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/107472
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-sendoso
+  label: Sendoso
+  partner: sendoso
+  partner_name: Sendoso
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106386
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-showpad-nv
+  label: Showpad NV
+  partner: showpad
+  partner_name: Showpad NV
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600127
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-survicate
+  label: Survicate
+  partner: survicate
+  partner_name: Survicate
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/104243
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-transcend-inc
+  label: Transcend Inc.
+  partner: transcend-io
+  partner_name: Transcend Inc.
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103731
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-transperfect
+  label: TransPerfect
+  partner: transperfect
+  partner_name: TransPerfect
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/103757
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-vibes
+  label: Vibes
+  partner: vibes-platform
+  partner_name: Vibes
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/108203
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-webflow
+  label: Webflow
+  partner: webflow
+  partner_name: Webflow
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600128
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-wistia
+  label: Wistia
+  partner: wistia
+  partner_name: Wistia
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600230
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-zerobounce
+  label: ZeroBounce
+  partner: zerobounce
+  partner_name: ZeroBounce
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/600232
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: marketo-zoominfo-technologies-llc
+  label: ZoomInfo Technologies LLC
+  partner: zoominfo
+  partner_name: ZoomInfo Technologies LLC
+  category: Adobe Exchange Experience Cloud listing (Marketo Engage)
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://exchange.adobe.com/apps/ec/106227
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
